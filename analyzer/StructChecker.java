@@ -11,6 +11,8 @@ import ast.StructType;
 import ast.Type;
 import ast.TypeDeclaration;
 
+import common.ErrorPrinter;
+
 
 public class StructChecker
 {
@@ -23,15 +25,21 @@ public class StructChecker
    }
    
    
-   private static void check(List<TypeDeclaration> typeDecls)
+   static Type getFieldType(String struct, String field)
+   {
+      return structs.get(struct).get(field);
+   }
+   
+   
+   static void check(List<TypeDeclaration> typeDecls)
    {
       Map<String, TypeDeclaration> validTypes = new LinkedHashMap<>();
       
       
       for (TypeDeclaration typeDecl : typeDecls)
       {
-         if (validTypes.contains(typeDecl.name))
-            ErrorPrinter.duplicate(typeDecl.line, "struct " + typeDecl.name)
+         if (validTypes.containsKey(typeDecl.name))
+            ErrorPrinter.duplicate(typeDecl.line, "struct " + typeDecl.name);
          
          else
             validTypes.put(typeDecl.name, typeDecl);

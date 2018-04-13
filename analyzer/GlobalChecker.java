@@ -2,7 +2,6 @@ package analyzer;
 
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,8 @@ import ast.Declaration;
 import ast.StructType;
 import ast.Type;
 import ast.TypeDeclaration;
+
+import common.ErrorPrinter;
 
 
 public class GlobalChecker

@@ -1,11 +1,12 @@
 package main;
 
+
+import java.io.IOException;
+
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-
-import java.io.IOException;
 
 import analyzer.TypeChecker;
 
@@ -17,6 +18,8 @@ import ast.Function;
 import parser.MiniLexer;
 import parser.MiniParser;
 import parser.MiniToAstProgramVisitor;
+
+import common.ErrorPrinter;
 
 
 public class Main
@@ -78,7 +81,9 @@ public class Main
       
       Program program = parseProgram(opts);
       
-      if (!TypeChecker.staticTypeCheck(program, opts))
+      TypeChecker.staticTypeCheck(program);
+      
+      if (ErrorPrinter.getErrorCount() > 0)
       {
          System.err.println("Detected errors. Fix them and recompile.");
          System.exit(1);

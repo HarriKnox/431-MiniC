@@ -45,7 +45,7 @@ public class ErrorPrinter
    
    public static void unexpectedType(int line, String expected, String thing, String got)
    {
-      printLine(line, "expected " + expected + " value for " + thing + " but got " + got
+      printLine(line, "expected " + expected + " value for " + thing + " but got " + got);
    }
    
    

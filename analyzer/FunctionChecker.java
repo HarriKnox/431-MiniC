@@ -4,14 +4,16 @@ import ast.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.common.lang3.tuple.Pair;
+import common.ErrorPrinter;
 
 
 public class FunctionChecker
 {
    private static final Map<String, Pair<Type, List<Type>>> signatures = new HashMap<>();
+   
    
    
    static void check(List<Function> funcs)
@@ -58,10 +60,10 @@ public class FunctionChecker
          }
          
          
-         boolean returns = validStatement(func.body, func.retType);
+         boolean returns = validStatement(validFunc.body, validFunc.retType);
          
          if (!(validFunc.retType instanceof VoidType) && !returns)
-            ErrorPrinter.nonReturn(func.line, func.name);
+            ErrorPrinter.nonReturn(validFunc.line, validFunc.name);
       }
    }
    
@@ -126,7 +128,7 @@ public class FunctionChecker
       {
          if (returns)
          {
-            ErrorPrinter.printLine(((LinedElement)statement).line, "cannot have code after a return", true);
+            ErrorPrinter.printLine(((LinedElement)statement).line, "cannot have code after a return");
             break;
          }
          
@@ -190,7 +192,7 @@ public class FunctionChecker
       
       
       if (q != null && !(q instanceof IntType))
-         ErrorPrinter.unexpectedType(println.line, "int", "print", q.toString());
+         ErrorPrinter.unexpectedType(print.line, "int", "print", q.toString());
       
       return false;
    }
@@ -263,22 +265,13 @@ public class FunctionChecker
       
       
       StructType ss = (StructType)s;
-      Map<String, Type> structDecl = types.get(ss.name);
-      
-      if (structDecl == null)
-      {
-         ErrorPrinter.IDK("getLvalueDotType", "attempted to access struct " + ss.name);
-         return null;
-      }
+      Type field = StructChecker.getFieldType(ss.name);
       
       
-      if (!structDecl.containsKey(lvalue.id))
-      {
+      if (field == null)
          ErrorPrinter.noField(lvalue.line, ss.name, lvalue.id);
-         return null;
-      }
       
-      return structDecl.get(lvalue.id);
+      return field;
    }
    
    
