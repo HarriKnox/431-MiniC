@@ -6,114 +6,118 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+import org.apache.common.lang3.tuple.Pair;
+
 
 public class FunctionChecker
 {
+   private static final Map<String, Pair<Type, List<Type>>> signatures = new HashMap<>();
    
-   static void validFunction(Function func)
+   
+   static void check(List<Function> funcs)
    {
-      ok = true;
+      Map<String, Function> validFuncs = new LinkedHashMap<>();
       
       
-      /* check parameters */
-      Map<String, Type> localScope = new HashMap<>();
-      
-      for (Declaration param : func.params)
+      for (Function func : funcs)
       {
-         if (!TypeChecker.validType(types, param.type, param.line) || TypeChecker.contains(localScope, param.name, param.line, "parameter"))
-            ok = false;
+         if (validFuncs.containsKey(func.name))
+            ErrorPrinter.duplicate(func.line, "function " + func.name);
          
          else
-            localScope.put(param.name, param.type);
+            validFuncs.put(func.name, func);
       }
       
-      /* check locals */
-      for (Declaration local : func.locals)
+      
+      for (Function validFunc : validFuncs.values())
       {
-         if (!TypeChecker.validType(types, local.type, local.line) || TypeChecker.contains(localScope, local.name, local.line, "local"))
-            ok = false;
+         Map<String, Type> localScope = new HashMap<>();
          
-         else
-            localScope.put(local.name, local.type);
+         for (Declaration param : validFunc.params)
+         {
+            if (!StructChecker.validType(param.type))
+               ErrorPrinter.unknownStruct(param.line, ((StructType)param.type).name);
+            
+            else if (localScope.containsKey(param.name))
+               ErrorPrinter.duplicate(param.line, "parameter " + param.name);
+            
+            else
+               localScope.put(param.name, param.type);
+         }
+         
+         for (Declaration local : validFunc.locals)
+         {
+            if (!StructChecker.validType(local.type))
+               ErrorPrinter.unknownStruct(local.line, ((StructType)local.type).name);
+            
+            else if (localScope.containsKey(local.name))
+               ErrorPrinter.duplicate(local.line, "parameter " + local.name);
+            
+            else
+               localScope.put(local.name, local.type);
+         }
+         
+         
+         boolean returns = validStatement(func.body, func.retType);
+         
+         if (!(validFunc.retType instanceof VoidType) && !returns)
+            ErrorPrinter.nonReturn(func.line, func.name);
       }
-      
-      locals = localScope;
-      returnType = func.retType;
-      
-      boolean returns = validStatement(func.body);
-      
-      if (!(func.retType instanceof VoidType) && !returns)
-      {
-         System.err.println("line " + func.line + " function " + func.name + " does not return on all paths");
-         ok = false;
-      }
-      
-      
-      return ok;
    }
    
-   private static boolean validStatement(Statement body)
+   
+   private static boolean validStatement(Statement body, Type retType)
    {
       if (body instanceof AssignmentStatement)
-         return validAssignmentStatement((AssignmentStatement)body);
+         return validAssignmentStatement((AssignmentStatement)body, retType);
       
       if (body instanceof BlockStatement)
-         return validBlockStatement((BlockStatement)body);
+         return validBlockStatement((BlockStatement)body, retType);
       
       if (body instanceof ConditionalStatement)
-         return validConditionalStatement((ConditionalStatement)body);
+         return validConditionalStatement((ConditionalStatement)body, retType);
       
       if (body instanceof DeleteStatement)
-         return validDeleteStatement((DeleteStatement)body);
+         return validDeleteStatement((DeleteStatement)body, retType);
       
       if (body instanceof InvocationStatement)
-         return validInvocationStatement((InvocationStatement)body);
+         return validInvocationStatement((InvocationStatement)body, retType);
       
       if (body instanceof PrintLnStatement)
-         return validPrintLnStatement((PrintLnStatement)body);
+         return validPrintLnStatement((PrintLnStatement)body, retType);
       
       if (body instanceof PrintStatement)
-         return validPrintStatement((PrintStatement)body);
+         return validPrintStatement((PrintStatement)body, retType);
       
       if (body instanceof ReturnEmptyStatement)
-         return validReturnEmptyStatement((ReturnEmptyStatement)body);
+         return validReturnEmptyStatement((ReturnEmptyStatement)body, retType);
       
       if (body instanceof ReturnStatement)
-         return validReturnStatement((ReturnStatement)body);
+         return validReturnStatement((ReturnStatement)body, retType);
       
       if (body instanceof WhileStatement)
-         return validWhileStatement((WhileStatement)body);
+         return validWhileStatement((WhileStatement)body, retType);
       
-      System.err.println("I have no idea what went wrong in validFunction: " + body.getClass().getName());
-      ok = false;
+      ErrorPrinter.IDK("validFunction", body.getClass().getName());
       return false;
    }
    
    
-   private static boolean validAssignmentStatement(AssignmentStatement assignment)
+   private static boolean validAssignmentStatement(AssignmentStatement assignment, Type retType)
    {
       /* Left is same type as right */
       Type l = getLvalueType(assignment.target);
       Type r = getExpressionType(assignment.source);
       
       
-      if (l == null || r == null)
-      {
-         ok = false;
-      }
-      else if (!l.equals(r))
-      {
-         System.err.println("line " + assignment.line + " cannot assign " + r + " to " + l);
-         ok = false;
-      }
+      if (l != null && r != null && !l.equals(r))
+         ErrorPrinter.unexpectedType(assignment.line, l.toString(), "assignment", r.toString());
       
-      
-      /* assignments don't return */
       return false;
    }
    
    
-   private static boolean validBlockStatement(BlockStatement block)
+   private static boolean validBlockStatement(BlockStatement block, Type retType)
    {
       boolean returns = false;
       
@@ -122,156 +126,106 @@ public class FunctionChecker
       {
          if (returns)
          {
-            System.err.println("line " + ((LinedElement)statement).line + " WARNING: code after a return will not be examined nor executed");
+            ErrorPrinter.printLine(((LinedElement)statement).line, "cannot have code after a return", true);
             break;
          }
          
-         returns = validStatement(statement);
+         returns = validStatement(statement, retType);
       }
       
       return returns;
    }
    
    
-   private static boolean validConditionalStatement(ConditionalStatement conditional)
+   private static boolean validConditionalStatement(ConditionalStatement conditional, Type retType)
    {
       Type g = getExpressionType(conditional.guard);
       
       
-      if (g == null)
-      {
-         ok = false;
-      }
-      else if (!(g instanceof BoolType))
-      {
-         System.err.println("line " + conditional.line + " guard is of type " + g);
-         ok = false;
-      }
+      if (g != null && !(g instanceof BoolType))
+         ErrorPrinter.unexpectedType(conditional.line, "bool", "if-guard", g.toString());
       
       
-      boolean thenReturns = validStatement(conditional.thenBlock);
-      boolean elseReturns = validStatement(conditional.elseBlock);
+      boolean thenReturns = validStatement(conditional.thenBlock, retType);
+      boolean elseReturns = validStatement(conditional.elseBlock, retType);
       
       return thenReturns && elseReturns;
    }
    
    
-   private static boolean validDeleteStatement(DeleteStatement delete)
+   private static boolean validDeleteStatement(DeleteStatement delete, Type retType)
    {
       Type s = getExpressionType(delete.expression);
       
-      if (s == null)
-      {
-         ok = false;
-      }
-      else if (!(s instanceof StructType))
-      {
-         System.err.println("line " + delete.line + " cannot delete values of type " + s);
-         ok = false;
-      }
-      
+      if (s != null && !(s instanceof StructType))
+         ErrorPrinter.unexpectedType(delete.line, "struct", "delete", s.toString());
       
       return false;
    }
    
    
-   private static boolean validInvocationStatement(InvocationStatement invocation)
+   private static boolean validInvocationStatement(InvocationStatement invocation, Type retType)
    {
-      if (getExpressionType(invocation.expression) == null)
-         ok = false;
+      getExpressionType(invocation.expression);
       
       return false;
    }
    
    
-   private static boolean validPrintLnStatement(PrintLnStatement println)
+   private static boolean validPrintLnStatement(PrintLnStatement println, Type retType)
    {
       Type q = getExpressionType(println.expression);
       
       
-      if (q == null)
-      {
-         ok = false;
-      }
-      else if (!(q instanceof IntType))
-      {
-         System.err.println("line " + println.line + " cannot print value of type " + q);
-         ok = false;
-      }
+      if (q != null && !(q instanceof IntType))
+         ErrorPrinter.unexpectedType(println.line, "int", "print", q.toString());
       
       return false;
    }
    
    
-   private static boolean validPrintStatement(PrintStatement print)
+   private static boolean validPrintStatement(PrintStatement print, Type retType)
    {
       Type q = getExpressionType(print.expression);
       
       
-      if (q == null)
-      {
-         ok = false;
-      }
-      else if (!(q instanceof IntType))
-      {
-         System.err.println("line " + print.line + " cannot print value of type " + q);
-         ok = false;
-      }
+      if (q != null && !(q instanceof IntType))
+         ErrorPrinter.unexpectedType(println.line, "int", "print", q.toString());
       
       return false;
    }
    
    
-   private static boolean validReturnEmptyStatement(ReturnEmptyStatement returnEmpty)
+   private static boolean validReturnEmptyStatement(ReturnEmptyStatement returnEmpty, Type retType)
    {
-      if (!(returnType instanceof VoidType))
-      {
-         System.err.println("line " + returnEmpty.line + " cannot return void, expected " + returnType);
-         ok = false;
-      }
-      
+      if (!(retType instanceof VoidType))
+         ErrorPrinter.unexpectedType(returnEmpty.line, retType.toString(), "return", "void");
       
       return true;
    }
    
    
-   private static boolean validReturnStatement(ReturnStatement returnStatement)
+   private static boolean validReturnStatement(ReturnStatement returnStatement, Type retType)
    {
       Type r = getExpressionType(returnStatement.expression);
       
-      
-      if (r == null)
-      {
-         ok = false;
-      }
-      else if (!returnType.equals(r))
-      {
-         System.err.println("line " + returnStatement.line + " cannot return " + r + ", expected " + returnType);
-         ok = false;
-      }
-      
+      if (r != null && !retType.equals(r))
+         ErrorPrinter.unexpectedType(returnStatement.line, retType.toString(), "return", r.toString());
       
       return true;
    }
    
    
-   private static boolean validWhileStatement(WhileStatement whileStatement)
+   private static boolean validWhileStatement(WhileStatement whileStatement, Type retType)
    {
       Type g = getExpressionType(whileStatement.guard);
       
       
-      if (g == null)
-      {
-         ok = false;
-      }
-      else if (!(g instanceof BoolType))
-      {
-         System.err.println("line " + whileStatement.line + " guard is of type " + g);
-         ok = false;
-      }
+      if (g != null && !(g instanceof BoolType))
+         ErrorPrinter.unexpectedType(whileStatement.line, "bool", "while-guard", g.toString());
       
       
-      validStatement(whileStatement.body);
+      validStatement(whileStatement.body, retType);
       
       return false;
    }
@@ -287,7 +241,7 @@ public class FunctionChecker
          return getLvalueIdType((LvalueId)lvalue);
       
       
-      System.err.println("I have no idea what went wrong in getLvalueType: " + lvalue.getClass().getName());
+      ErrorPrinter.IDK("getLvalueType", lvalue.getClass().getName());
       return null;
    }
    
@@ -303,7 +257,7 @@ public class FunctionChecker
       
       if (!(s instanceof StructType))
       {
-         System.err.println("line " + lvalue.line + " attempt to index a(n) " + s);
+         ErrorPrinter.printLine(lvalue.line, "attempt to index a(n) " + s);
          return null;
       }
       
@@ -313,14 +267,14 @@ public class FunctionChecker
       
       if (structDecl == null)
       {
-         System.err.println("I have no idea what went wrong in getLvalueDotType: attempted to access struct " + ss.name);
+         ErrorPrinter.IDK("getLvalueDotType", "attempted to access struct " + ss.name);
          return null;
       }
       
       
       if (!structDecl.containsKey(lvalue.id))
       {
-         System.err.println("line " + lvalue.line + " struct " + ss.name + " does not contain field " + lvalue.id);
+         ErrorPrinter.noField(lvalue.line, ss.name, lvalue.id);
          return null;
       }
       
@@ -336,7 +290,7 @@ public class FunctionChecker
       if (globals.containsKey(lvalue.id))
          return globals.get(lvalue.id);
       
-      System.err.println("line " + lvalue.line + " variable " + lvalue.id + " not declared");
+      ErrorPrinter(lvalue.line, "variable " + lvalue.id);
       return null;
    }
    
@@ -377,7 +331,7 @@ public class FunctionChecker
       if (exp instanceof UnaryExpression)
          return getUnaryExpressionType((UnaryExpression)exp);
       
-      System.err.println("I have no idea what went wrong in getExpressionType: " + exp.getClass().getName());
+      ErrorPrinter.IDK("getExpressionType", exp.getClass().getName());
       return null;
    }
    
@@ -430,7 +384,7 @@ public class FunctionChecker
       
       
       if (b == null)
-         System.err.println("line " + exp.line + " attempt to perform " + op + " on " + l + " and " + r);
+         ErrorPrinter.printLine(exp.line, "attempt to perform " + op + " on " + l + " and " + r);
       
       return b;
    }
@@ -447,7 +401,7 @@ public class FunctionChecker
       
       if (!(s instanceof StructType))
       {
-         System.err.println("line " + exp.line + " attempt to index a(n) " + s);
+         ErrorPrinter.printLine(lvalue.line, "attempt to index a(n) " + s);
          return null;
       }
       
@@ -457,14 +411,14 @@ public class FunctionChecker
       
       if (structDecl == null)
       {
-         System.err.println("I have no idea what went wrong in getDotExpressionType: attempted to access struct " + ss.name);
+         ErrorPrinter.IDK("getDotExpressionType", "attempted to access struct " + ss.name);
          return null;
       }
       
       
       if (!structDecl.containsKey(exp.id))
       {
-         System.err.println("line " + exp.line + " struct " + ss.name + " does not contain field " + exp.id);
+         ErrorPrinter.noField(exp.line, ss.name, exp.id);
          return null;
       }
       
@@ -486,7 +440,7 @@ public class FunctionChecker
       if (globals.containsKey(exp.id))
          return globals.get(exp.id);
       
-      System.err.println("line " + exp.line + " variable " + exp.id + " not declared");
+      ErrorPrinter.undeclared(exp.line, "variable " + exp.id);
       return null;
    }
    
@@ -501,7 +455,7 @@ public class FunctionChecker
    {
       if (!functions.containsKey(exp.name))
       {
-         System.err.println("line " + exp.line + " function " + exp.name + " not declared");
+         ErrorPrinter.undeclared(exp.line, "function " + exp.name);
          return null;
       }
       
@@ -512,7 +466,7 @@ public class FunctionChecker
       
       if (f != e)
       {
-         System.err.println("line " + exp.line + " wrong arity: function " + exp.name + " expects " + f + ", received " + e);
+         ErrorPrinter.printLine(exp.line, "wrong arity: function " + exp.name + " expects " + f + ", received " + e);
          return null;
       }
       
@@ -526,16 +480,12 @@ public class FunctionChecker
          
          if (!fp.equals(ea))
          {
-            System.err.println("line " + exp.line + " wrong type for argument " + i + ", should be " + fp + " but is " + ea);
+            ErrorPrinter.unexpectedType(exp.line, fp.toString(), "argument " + i, ea.toString());
             ok = false;
          }
       }
       
-      if (!ok)
-         return null;
-      
-      
-      return func.retType;
+      return ok ? func.retType : null;
    }
    
    
@@ -544,7 +494,7 @@ public class FunctionChecker
       if (types.containsKey(exp.id))
          return new StructType(exp.id);
       
-      System.err.println("line " + exp.line + " struct " + exp.id + " not declared");
+      ErrorPrinter.unknownStruct(exp.line, exp.id);
       return null;
    }
    
@@ -577,7 +527,7 @@ public class FunctionChecker
          return o;
       
       
-      System.err.println("line " + exp.line + " attempt to perform " + op + " on " + o);
+      ErrorPrinter.printLine(exp.line, "attempt to perform " + op + " on " + o);
       return null;
    }
 }

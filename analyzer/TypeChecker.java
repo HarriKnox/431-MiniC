@@ -28,7 +28,6 @@ public class TypeChecker
    }
    
    
-   
    private static boolean checkFunctions(
          Map<String, Map<String, Type>> types,
          Map<String, Type> globals,
