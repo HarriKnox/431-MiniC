@@ -9,26 +9,8 @@ import java.util.List;
 
 public class FunctionChecker
 {
-   private static Map<String, Map<String, Type>> types;
-   private static Map<String, Type> globals;
-   private static Map<String, Function> functions;
    
-   private static Map<String, Type> locals;
-   private static Type returnType;
-   private static boolean ok;
-   
-   static void setScope(
-         Map<String, Map<String, Type>> _types,
-         Map<String, Type> _globals,
-         Map<String, Function> _functions)
-   {
-      types = _types;
-      globals = _globals;
-      functions = _functions;
-   }
-   
-   
-   static boolean validFunction(Function func)
+   static void validFunction(Function func)
    {
       ok = true;
       
