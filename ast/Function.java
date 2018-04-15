@@ -5,11 +5,11 @@ import java.util.List;
 public class Function
    extends LinedElement
 {
-   public final String name;
-   public final Type retType;
-   public final List<Declaration> params;
-   public final List<Declaration> locals;
-   public final Statement body;
+   private final String name;
+   private final Type retType;
+   private final List<Declaration> params;
+   private final List<Declaration> locals;
+   private final Statement body;
 
    public Function(int lineNum, String name, List<Declaration> params,
       Type retType, List<Declaration> locals, Statement body)

@@ -5,8 +5,8 @@ import java.util.List;
 public class InvocationExpression
    extends AbstractExpression
 {
-   public final String name;
-   public final List<Expression> arguments;
+   private final String name;
+   private final List<Expression> arguments;
 
    public InvocationExpression(int lineNum, String name,
       List<Expression> arguments)

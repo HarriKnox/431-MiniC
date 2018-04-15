@@ -3,9 +3,9 @@ package ast;
 public class ConditionalStatement
    extends AbstractStatement
 {
-   public final Expression guard;
-   public final Statement thenBlock;
-   public final Statement elseBlock;
+   private final Expression guard;
+   private final Statement thenBlock;
+   private final Statement elseBlock;
 
    public ConditionalStatement(int lineNum, Expression guard,
       Statement thenBlock, Statement elseBlock)

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Program
 {
-   public final List<TypeDeclaration> types;
-   public final List<Declaration> decls;
-   public final List<Function> funcs;
+   private final List<TypeDeclaration> types;
+   private final List<Declaration> decls;
+   private final List<Function> funcs;
 
    public Program(List<TypeDeclaration> types, List<Declaration> decls,
       List<Function> funcs)

@@ -3,7 +3,7 @@ package ast;
 public class PrintStatement
    extends AbstractStatement
 {
-   public final Expression expression;
+   private final Expression expression;
 
    public PrintStatement(int lineNum, Expression expression)
    {

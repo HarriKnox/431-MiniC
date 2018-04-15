@@ -3,7 +3,7 @@ package ast;
 public class StructType
    implements Type
 {
-   public final String name;
+   private final String name;
 
    public StructType(String name)
    {

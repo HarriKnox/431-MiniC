@@ -2,7 +2,7 @@ package ast;
 
 public abstract class LinedElement
 {
-   public final int line;
+   private final int line;
    
    public LinedElement(int line)
    {

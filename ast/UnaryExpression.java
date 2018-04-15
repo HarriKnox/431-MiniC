@@ -3,8 +3,8 @@ package ast;
 public class UnaryExpression
    extends AbstractExpression
 {
-   public final Operator operator;
-   public final Expression operand;
+   private final Operator operator;
+   private final Expression operand;
 
    public UnaryExpression(int lineNum, String opStr, Expression operand)
    {
@@ -12,6 +12,17 @@ public class UnaryExpression
       
       this.operator = decode(opStr);
       this.operand = operand;
+   }
+   
+   
+   public Operator getOperator()
+   {
+      return this.operator;
+   }
+   
+   public Expression getOperand()
+   {
+      return this.operand;
    }
    
    
@@ -24,7 +35,7 @@ public class UnaryExpression
       
       private final String opStr;
       
-      Operator(String opStr)
+      private Operator(String opStr)
       {
          this.opStr = opStr;
       }

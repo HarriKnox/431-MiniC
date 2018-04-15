@@ -4,7 +4,7 @@ public class LvalueId
    extends LinedElement
    implements Lvalue
 {
-   public final String id;
+   private final String id;
 
    public LvalueId(int lineNum, String id)
    {

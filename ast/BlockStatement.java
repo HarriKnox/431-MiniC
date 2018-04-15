@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class BlockStatement
    extends AbstractStatement
 {
-   public final List<Statement> statements;
+   private final List<Statement> statements;
 
    public BlockStatement(int lineNum, List<Statement> statements)
    {

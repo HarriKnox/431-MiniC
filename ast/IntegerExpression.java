@@ -3,7 +3,7 @@ package ast;
 public class IntegerExpression
    extends AbstractExpression
 {
-   public final String value;
+   private final String value;
 
    public IntegerExpression(int lineNum, String value)
    {

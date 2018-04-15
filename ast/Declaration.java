@@ -3,8 +3,8 @@ package ast;
 public class Declaration
    extends LinedElement
 {
-   public final Type type;
-   public final String name;
+   private final Type type;
+   private final String name;
 
    public Declaration(int lineNum, Type type, String name)
    {

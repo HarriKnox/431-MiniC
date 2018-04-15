@@ -3,9 +3,9 @@ package ast;
 public class BinaryExpression
    extends AbstractExpression
 {
-   public final Operator operator;
-   public final Expression left;
-   public final Expression right;
+   private final Operator operator;
+   private final Expression left;
+   private final Expression right;
 
    public BinaryExpression(int lineNum, String opStr,
       Expression left, Expression right)

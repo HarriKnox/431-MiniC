@@ -3,8 +3,8 @@ package ast;
 public class AssignmentStatement
    extends AbstractStatement
 {
-   public final Lvalue target;
-   public final Expression source;
+   private final Lvalue target;
+   private final Expression source;
 
    public AssignmentStatement(int lineNum, Lvalue target, Expression source)
    {

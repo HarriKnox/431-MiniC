@@ -3,7 +3,7 @@ package ast;
 public class NewExpression
    extends AbstractExpression
 {
-   public final String id;
+   private final String id;
 
    public NewExpression(int lineNum, String id)
    {
