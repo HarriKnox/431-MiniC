@@ -65,4 +65,17 @@ public class ErrorPrinter
    {
       return errors;
    }
+   
+   
+   public static class Issue
+   {
+      public final int line;
+      public final String message;
+      
+      public Issue(int line, String message)
+      {
+         this.line = line;
+         this.message = message;
+      }
+   }
 }
