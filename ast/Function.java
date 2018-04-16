@@ -1,6 +1,10 @@
 package ast;
 
+
 import java.util.List;
+
+import org.antlr.v4.runtime.Token;
+
 
 public class Function
    extends LinedElement
@@ -11,10 +15,10 @@ public class Function
    private final List<Declaration> locals;
    private final Statement body;
 
-   public Function(int lineNum, String name, List<Declaration> params,
+   public Function(Token token, String name, List<Declaration> params,
       Type retType, List<Declaration> locals, Statement body)
    {
-      super(lineNum);
+      super(token);
       this.name = name;
       this.params = params;
       this.retType = retType;

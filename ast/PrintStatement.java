@@ -1,13 +1,17 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public class PrintStatement
    extends AbstractStatement
 {
    private final Expression expression;
 
-   public PrintStatement(int lineNum, Expression expression)
+   public PrintStatement(Token token, Expression expression)
    {
-      super(lineNum);
+      super(token);
       this.expression = expression;
    }
 }

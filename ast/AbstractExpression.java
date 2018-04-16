@@ -1,11 +1,15 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public abstract class AbstractExpression
    extends LinedElement
    implements Expression
 {
-   public AbstractExpression(int lineNum)
+   public AbstractExpression(Token token)
    {
-      super(lineNum);
+      super(token);
    }
 }

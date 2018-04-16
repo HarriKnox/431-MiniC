@@ -1,10 +1,14 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public class ReturnEmptyStatement
    extends AbstractStatement
 {
-   public ReturnEmptyStatement(int lineNum)
+   public ReturnEmptyStatement(Token token)
    {
-      super(lineNum);
+      super(token);
    }
 }

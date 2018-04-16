@@ -1,13 +1,17 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public class DeleteStatement
    extends AbstractStatement
 {
    private final Expression expression;
 
-   public DeleteStatement(int lineNum, Expression expression)
+   public DeleteStatement(Token token, Expression expression)
    {
-      super(lineNum);
+      super(token);
       this.expression = expression;
    }
 }

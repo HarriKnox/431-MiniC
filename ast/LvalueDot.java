@@ -1,5 +1,9 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public class LvalueDot
    extends LinedElement
    implements Lvalue
@@ -7,9 +11,9 @@ public class LvalueDot
    private final Expression left;
    private final String id;
 
-   public LvalueDot(int lineNum, Expression left, String id)
+   public LvalueDot(Token token, Expression left, String id)
    {
-      super(lineNum);
+      super(token);
       this.left = left;
       this.id = id;
    }

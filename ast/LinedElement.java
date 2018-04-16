@@ -1,11 +1,20 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public abstract class LinedElement
 {
-   private final int line;
+   private final Token token;
    
-   public LinedElement(int line)
+   public LinedElement(Token token)
    {
-      this.line = line;
+      this.token = token;
+   }
+   
+   public Token getToken()
+   {
+      return this.token;
    }
 }

@@ -1,16 +1,20 @@
 package ast;
 
+
 import java.util.List;
 import java.util.ArrayList;
+
+import org.antlr.v4.runtime.Token;
+
 
 public class BlockStatement
    extends AbstractStatement
 {
    private final List<Statement> statements;
 
-   public BlockStatement(int lineNum, List<Statement> statements)
+   public BlockStatement(Token token, List<Statement> statements)
    {
-      super(lineNum);
+      super(token);
       this.statements = statements;
    }
 

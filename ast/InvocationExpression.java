@@ -1,6 +1,10 @@
 package ast;
 
+
 import java.util.List;
+
+import org.antlr.v4.runtime.Token;
+
 
 public class InvocationExpression
    extends AbstractExpression
@@ -8,10 +12,10 @@ public class InvocationExpression
    private final String name;
    private final List<Expression> arguments;
 
-   public InvocationExpression(int lineNum, String name,
+   public InvocationExpression(Token token, String name,
       List<Expression> arguments)
    {
-      super(lineNum);
+      super(token);
       this.name = name;
       this.arguments = arguments;
    }

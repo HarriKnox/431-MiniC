@@ -1,14 +1,18 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public class UnaryExpression
    extends AbstractExpression
 {
    private final Operator operator;
    private final Expression operand;
 
-   public UnaryExpression(int lineNum, String opStr, Expression operand)
+   public UnaryExpression(Token token, String opStr, Expression operand)
    {
-      super(lineNum);
+      super(token);
       
       this.operator = decode(opStr);
       this.operand = operand;

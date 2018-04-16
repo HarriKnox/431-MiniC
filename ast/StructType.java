@@ -1,5 +1,6 @@
 package ast;
 
+
 public class StructType
    implements Type
 {

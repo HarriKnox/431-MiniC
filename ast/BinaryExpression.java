@@ -1,5 +1,9 @@
 package ast;
 
+
+import org.antlr.v4.runtime.Token;
+
+
 public class BinaryExpression
    extends AbstractExpression
 {
@@ -7,10 +11,10 @@ public class BinaryExpression
    private final Expression left;
    private final Expression right;
 
-   public BinaryExpression(int lineNum, String opStr,
+   public BinaryExpression(Token token, String opStr,
       Expression left, Expression right)
    {
-      super(lineNum);
+      super(token);
       
       this.operator = decode(opStr);
       this.left = left;
