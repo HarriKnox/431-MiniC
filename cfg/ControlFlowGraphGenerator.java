@@ -58,7 +58,7 @@ public class ControlFlowGraphGenerator
    
    private static CFGNode generateAssignmentCFG(AssignmentStatement body, CFGNode node, CFGNode exit)
    {
-      
+      node.addInstruction(new LLVMAssignment());
    }
    
    
@@ -75,7 +75,7 @@ public class ControlFlowGraphGenerator
       
    private static CFGNode generateConditionalCFG(ConditionalStatement body, CFGNode node, CFGNode exit)
    {
-      /* get the conditional value ready for assessment */
+      writeExpressionInstructions(body.guard, node);
       
       CFGNode joinNode = new CFGNode();
       
@@ -96,28 +96,28 @@ public class ControlFlowGraphGenerator
       
    private static CFGNode generateDeleteCFG(DeleteStatement body, CFGNode node, CFGNode exit)
    {
-      
+      node.addInstruction(new LLVMDelete());
    }
    
    
       
    private static CFGNode generateInvocationCFG(InvocationStatement body, CFGNode node, CFGNode exit)
    {
-      
+      node.addInstruction(new LLVMInvocation());
    }
    
    
       
    private static CFGNode generatePrintLnCFG(PrintLnStatement body, CFGNode node, CFGNode exit)
    {
-      
+      node.addIntstruction(new LLVMPrintLn());
    }
    
    
       
    private static CFGNode generatePrintCFG(PrintStatement body, CFGNode node, CFGNode exit)
    {
-      
+      node.addIntstruction(new LLVMPrint());
    }
    
    
@@ -141,7 +141,18 @@ public class ControlFlowGraphGenerator
       
    private static CFGNode generateWhileCFG(WhileStatement body, CFGNode node, CFGNode exit)
    {
+      writeExpressionInstructions(body.guard, node);
       
+      CFGNode bodyNode = new CFGNode();
+      
+      node.link(bodyNode);
+      CFGNode bodyLast = generateStatementCFG(body.statements, bodyNode, exit);
+      bodyLast.link(node);
+      
+      CFGNode rerouteNode = new CFGNode();
+      node.link(rerouteNode);
+      
+      return rerouteNode;
    }
    
    
@@ -265,10 +276,4 @@ public class ControlFlowGraphGenerator
    {
       
    }
-   
-   
-      
-   }
-   
-}
 }
