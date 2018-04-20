@@ -214,7 +214,7 @@ public class ControlFlowGraphGenerator
       
       LLVMRegister result = new LLVMRegister();
       
-      node.addInstruction(new LLVMBinary(leftReg, rightReg, result, exp.operator));
+      node.addInstruction(new LLVMBinary(leftReg, rightReg, result, exp.operator, exp.type));
       return result;
    }
    

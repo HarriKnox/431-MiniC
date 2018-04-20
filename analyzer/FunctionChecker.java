@@ -450,6 +450,8 @@ public class FunctionChecker
       if (b == null)
          System.err.println("line " + exp.line + " attempt to perform " + op + " on " + l + " and " + r);
       
+      exp.type = l;
+      
       return b;
    }
    
