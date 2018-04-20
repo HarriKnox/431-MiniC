@@ -33,16 +33,23 @@ public class BinaryExpression
 
    public static enum Operator
    {
+      /* Int -> Int */
       TIMES(TIMES_OPERATOR),
       DIVIDE(DIVIDE_OPERATOR),
       PLUS(PLUS_OPERATOR),
       MINUS(MINUS_OPERATOR),
+      
+      /* Int -> Bool */
       LT(LT_OPERATOR),
       GT(GT_OPERATOR),
       LE(LE_OPERATOR),
       GE(GE_OPERATOR),
+      
+      /* 'a -> Bool */
       EQ(EQ_OPERATOR),
       NE(NE_OPERATOR),
+      
+      /* Bool -> Bool */
       AND(AND_OPERATOR),
       OR(OR_OPERATOR);
       

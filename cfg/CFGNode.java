@@ -7,23 +7,35 @@ import java.util.List;
 
 class CFGNode
 {
+   static int count = 0;
+   
+   String label;
    List<CFGNode> predecesors;
-   List<CFGNode> successors;
    List<LLVMInstruction> instructions;
+   LLVMBranchInstruction branch;
    
    
    CFGNode()
    {
+      this.label = "LU" + count++;
+      
       this.predecesors = new LinkedList<>();
-      this.successors = new LinkedList<>();
       this.instructions = new LinkedList<>();
+      this.branch = null;
    }
    
    
    void link(CFGNode descendent)
    {
-      this.successors.add(descendent);
       descendent.predecesors.add(this);
+      this.branch = new LLVMJump(descendent);
+   }
+   
+   void link(LLVMRegister condition, CFGNode thenDescendent, CFGNode elseDescendent)
+   {
+      thenDescendent.predecessors.add(this);
+      elseDescendent.predecessors.add(this);
+      this.branch = new LLVMConditional(condition, thenDescendent, elseDescendent);
    }
    
    
