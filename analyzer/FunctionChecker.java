@@ -513,6 +513,15 @@ public class FunctionChecker
    
    private static Type getIntegerExpressionType(IntegerExpression exp)
    {
+      try
+      {
+         Integer.parseInt(exp.value);
+      }
+      catch (NumberFormatException ne)
+      {
+         System.err.println("line " + exp.line + " integer out of range");
+         return null;
+      }
       return new IntType();
    }
    

@@ -2,6 +2,7 @@ package cfg;
 
 
 class LLVMRegister
+   implements LLVMValue
 {
    static int count = 0;
    
@@ -10,12 +11,18 @@ class LLVMRegister
    
    LLVMRegister()
    {
-      this.name = "%u" + count++;
+      this.name = "u" + count++;
    }
    
    
    LLVMRegister(String name)
    {
       this.name = name;
+   }
+   
+   
+   public toString()
+   {
+      return "%" + this.name;
    }
 }

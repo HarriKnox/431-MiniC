@@ -66,10 +66,10 @@ public class ControlFlowGraphGenerator
       
    private static CFGNode generateBlockCFG(BlockStatement body, CFGNode node, CFGNode exit)
    {
-      /*for (Statement statement : body.statements)
+      for (Statement statement : body.statements)
          node = generateStatementCFG(statement, node, exit);
       
-      return node;*/
+      return node;
    }
    
    
@@ -167,7 +167,7 @@ public class ControlFlowGraphGenerator
    
    
    
-   private static LLVMRegister writeExpressionInstructions(Expression exp, CFGNode node)
+   private static LLVMValue writeExpressionInstructions(Expression exp, CFGNode node)
    {
       if (exp instanceof BinaryExpression)
          return writeBinaryExpressionInstructions((BinaryExpression)exp, node);
@@ -207,83 +207,73 @@ public class ControlFlowGraphGenerator
    }
    
    
-   private static LLVMRegister writeBinaryExpressionInstructions(BinaryExpression exp, CFGNode node)
+   private static LLVMValue writeBinaryExpressionInstructions(BinaryExpression exp, CFGNode node)
    {
-      LLVMRegister leftReg = writeExpressionInstructions(exp.left, node);
-      LLVMRegister rightReg = writeExpressionInstructions(exp.right, node);
+      LLVMValue leftValue = writeExpressionInstructions(exp.left, node);
+      LLVMValue rightValue = writeExpressionInstructions(exp.right, node);
       
       LLVMRegister result = new LLVMRegister();
       
-      node.addInstruction(new LLVMBinary(leftReg, rightReg, result, exp.operator, exp.type));
+      node.addInstruction(new LLVMBinary(leftValue, rightValue, result, exp.operator, exp.type));
       return result;
    }
    
    
-      
-   private static LLVMRegister writeDotExpressionInstructions(DotExpression exp, CFGNode node)
+   private static LLVMValue writeDotExpressionInstructions(DotExpression exp, CFGNode node)
    {
       
    }
    
    
-      
-   private static LLVMRegister writeFalseExpressionInstructions(FalseExpression exp, CFGNode node)
+   private static LLVMValue writeFalseExpressionInstructions(FalseExpression exp, CFGNode node)
+   {
+      return new LLVMInteger(0);
+   }
+   
+   
+   private static LLVMValue writeIdentifierExpressionInstructions(IdentifierExpression exp, CFGNode node)
    {
       
    }
    
    
-      
-   private static LLVMRegister writeIdentifierExpressionInstructions(IdentifierExpression exp, CFGNode node)
+   private static LLVMValue writeIntegerExpressionInstructions(IntegerExpression exp, CFGNode node)
+   {
+      return new LLVMInteger(exp.value);
+   }
+   
+   
+   private static LLVMValue writeInvocationExpressionInstructions(InvocationExpression exp, CFGNode node)
    {
       
    }
    
    
-      
-   private static LLVMRegister writeIntegerExpressionInstructions(IntegerExpression exp, CFGNode node)
+   private static LLVMValue writeNewExpressionInstructions(NewExpression exp, CFGNode node)
    {
       
    }
    
    
-      
-   private static LLVMRegister writeInvocationExpressionInstructions(InvocationExpression exp, CFGNode node)
+   private static LLVMValue writeNullExpressionInstructions(NullExpression exp, CFGNode node)
    {
       
    }
    
    
-      
-   private static LLVMRegister writeNewExpressionInstructions(NewExpression exp, CFGNode node)
+   private static LLVMValue writeReadExpressionInstructions(ReadExpression exp, CFGNode node)
    {
       
    }
    
    
-      
-   private static LLVMRegister writeNullExpressionInstructions(NullExpression exp, CFGNode node)
+   private static LLVMValue writeTrueExpressionInstructions(TrueExpression exp, CFGNode node)
    {
-      
+      return new LLVMInteger(1);
    }
    
    
-      
-   private static LLVMRegister writeReadExpressionInstructions(ReadExpression exp, CFGNode node)
-   {
-      
-   }
-   
-   
-      
-   private static LLVMRegister writeTrueExpressionInstructions(TrueExpression exp, CFGNode node)
-   {
-      
-   }
-   
-   
-      
-   private static LLVMRegister writeUnaryExpressionInstructions(UnaryExpression exp, CFGNode node)
+   private static LLVMValue writeUnaryExpressionInstructions(UnaryExpression exp, CFGNode node)
    {
       
    }

@@ -31,6 +31,14 @@ class CFGNode
       this.branch = new LLVMJump(descendent);
    }
    
+   
+   void link(CFGNode descendent, boolean loopback)
+   {
+      descendent.predecesors.addFirst(this);
+      this.branch = new LLVMJump(descendent, loopback);
+   }
+   
+   
    void link(LLVMRegister condition, CFGNode thenDescendent, CFGNode elseDescendent)
    {
       thenDescendent.predecessors.add(this);

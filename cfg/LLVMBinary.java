@@ -11,16 +11,16 @@ class LLVMBinary
    implements LLVMInstruction
 {
    LLVMRegister result;
-   LLVMRegister leftOperand;
-   LLVMRegister rightOperand;
+   LLVMValue leftValue;
+   LLVMValue rightValue;
    BinaryExpression.Operator operation;
-   Type type
+   Type type;
    
-   LLVMBinary(LLVMRegister leftOp, LLVMRegister rightOp, LLVMRegister result, BinaryExpression.Operator op, Type type)
+   LLVMBinary(LLVMValue leftValue, LLVMValue rightValue, LLVMRegister result, BinaryExpression.Operator op, Type type)
    {
       this.result = result;
-      this.leftOperand = leftOp;
-      this.rightOperand = rightOp;
+      this.leftValue = leftOp;
+      this.rightValue = rightOp;
       this.operation = op;
       this.type = type;
    }
@@ -71,10 +71,13 @@ class LLVMBinary
    
    private String typeString()
    {
-      if ((this.type instanceof IntType) || (this.type.instanceof BoolType))
+      if (this.type instanceof IntType)
          return "i32";
       
-      return "%struct." + ((StructType)this.type).name;
+      if (this.type.instanceof BoolType)
+         return "i1";
+      
+      return "%struct." + ((StructType)this.type).name + "*";
    }
    
    
