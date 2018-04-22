@@ -12,7 +12,7 @@ class LLVMInteger
    }
    
    
-   public toString()
+   public String toString()
    {
       return Integer.toString(this.value);
    }

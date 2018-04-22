@@ -1,6 +1,8 @@
 package cfg;
 
 
+import java.util.LinkedList;
+import java.util.List;
 import ast.*;
 
 
@@ -227,7 +229,7 @@ public class ControlFlowGraphGenerator
    
    private static LLVMValue writeFalseExpressionInstructions(FalseExpression exp, CFGNode node)
    {
-      return new LLVMInteger(0);
+      return LLVMBoolean.FALSE;
    }
    
    
@@ -245,36 +247,58 @@ public class ControlFlowGraphGenerator
    
    private static LLVMValue writeInvocationExpressionInstructions(InvocationExpression exp, CFGNode node)
    {
+      List<LLVMValue> arguments = new LinkedList<>();
       
+      for (Expression e : exp.arguments)
+      {
+         arguments.add(writeExpressionInstructions(e, node));
+      }
+      
+      LLVMRegister result = new LLVMRegister();
+      node.addInstruction(new LLVMInvocation(arguments, exp.name, result));
+      return result;
    }
    
    
    private static LLVMValue writeNewExpressionInstructions(NewExpression exp, CFGNode node)
    {
       
+      LLVMRegister mallocked = new LLVMRegister();
+      node.addInstruction(new LLVMMalloc(exp.id, mallocked));
+      
+      LLVMRegister bitcasted = new LLVMRegister();
+      node.addInstruction(new LLVMBitcast(mallocked, bitcasted, exp.id));
+      
+      return bitcasted;
    }
    
    
    private static LLVMValue writeNullExpressionInstructions(NullExpression exp, CFGNode node)
    {
-      
+      return LLVMNull.NULL;
    }
    
    
    private static LLVMValue writeReadExpressionInstructions(ReadExpression exp, CFGNode node)
    {
-      
+      node.addInstruction(LLVMScanf.SCANF);
+      return LLVMGlobal.READ_SCRATCH;
    }
    
    
    private static LLVMValue writeTrueExpressionInstructions(TrueExpression exp, CFGNode node)
    {
-      return new LLVMInteger(1);
+      return LLVMBoolean.TRUE;
    }
    
    
    private static LLVMValue writeUnaryExpressionInstructions(UnaryExpression exp, CFGNode node)
    {
+      LLVMValue value = writeExpressionInstructions(exp.operand, node);
       
+      LLVMRegister result = new LLVMRegister();
+      
+      node.addInstruction(new LLVMUnary(value, result, exp.operator));
+      return result;
    }
 }

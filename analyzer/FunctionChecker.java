@@ -9,23 +9,9 @@ import java.util.List;
 
 public class FunctionChecker
 {
-   private static Map<String, Map<String, Type>> types;
-   private static Map<String, Type> globals;
-   private static Map<String, Function> functions;
-   
    private static Map<String, Type> locals;
    private static Type returnType;
    private static boolean ok;
-   
-   static void setScope(
-         Map<String, Map<String, Type>> _types,
-         Map<String, Type> _globals,
-         Map<String, Function> _functions)
-   {
-      types = _types;
-      globals = _globals;
-      functions = _functions;
-   }
    
    
    static boolean validFunction(Function func)
@@ -38,7 +24,7 @@ public class FunctionChecker
       
       for (Declaration param : func.params)
       {
-         if (!TypeChecker.validType(types, param.type, param.line) || TypeChecker.contains(localScope, param.name, param.line, "parameter"))
+         if (!TypeChecker.validType(param.type, param.line) || TypeChecker.contains(localScope, param.name, param.line, "parameter"))
             ok = false;
          
          else
@@ -48,7 +34,7 @@ public class FunctionChecker
       /* check locals */
       for (Declaration local : func.locals)
       {
-         if (!TypeChecker.validType(types, local.type, local.line) || TypeChecker.contains(localScope, local.name, local.line, "local"))
+         if (!TypeChecker.validType(local.type, local.line) || TypeChecker.contains(localScope, local.name, local.line, "local"))
             ok = false;
          
          else
@@ -327,7 +313,7 @@ public class FunctionChecker
       
       
       StructType ss = (StructType)s;
-      Map<String, Type> structDecl = types.get(ss.name);
+      Map<String, Type> structDecl = TypeChecker.types.get(ss.name);
       
       if (structDecl == null)
       {
@@ -351,8 +337,8 @@ public class FunctionChecker
       if (locals.containsKey(lvalue.id))
          return locals.get(lvalue.id);
       
-      if (globals.containsKey(lvalue.id))
-         return globals.get(lvalue.id);
+      if (TypeChecker.globals.containsKey(lvalue.id))
+         return TypeChecker.globals.get(lvalue.id);
       
       System.err.println("line " + lvalue.line + " variable " + lvalue.id + " not declared");
       return null;
@@ -473,7 +459,7 @@ public class FunctionChecker
       
       
       StructType ss = (StructType)s;
-      Map<String, Type> structDecl = types.get(ss.name);
+      Map<String, Type> structDecl = TypeChecker.types.get(ss.name);
       
       if (structDecl == null)
       {
@@ -503,8 +489,8 @@ public class FunctionChecker
       if (locals.containsKey(exp.id))
          return locals.get(exp.id);
       
-      if (globals.containsKey(exp.id))
-         return globals.get(exp.id);
+      if (TypeChecker.globals.containsKey(exp.id))
+         return TypeChecker.globals.get(exp.id);
       
       System.err.println("line " + exp.line + " variable " + exp.id + " not declared");
       return null;
@@ -528,14 +514,14 @@ public class FunctionChecker
    
    private static Type getInvocationExpressionType(InvocationExpression exp)
    {
-      if (!functions.containsKey(exp.name))
+      if (!TypeChecker.functions.containsKey(exp.name))
       {
          System.err.println("line " + exp.line + " function " + exp.name + " not declared");
          return null;
       }
       
       
-      Function func = functions.get(exp.name);
+      Function func = TypeChecker.functions.get(exp.name);
       int f = func.params.size();
       int e = exp.arguments.size();
       
@@ -570,7 +556,7 @@ public class FunctionChecker
    
    private static Type getNewExpressionType(NewExpression exp)
    {
-      if (types.containsKey(exp.id))
+      if (TypeChecker.types.containsKey(exp.id))
          return new StructType(exp.id);
       
       System.err.println("line " + exp.line + " struct " + exp.id + " not declared");

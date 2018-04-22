@@ -20,25 +20,20 @@ import main.Options;
 
 public class TypeChecker
 {
+   public static final Map<String, Map<String, Type>> types = new HashMap<>();
+   public static final Map<String, Type> globals = new HashMap<>();
+   public static final Map<String, Function> functions = new HashMap<>();
+   
    public static boolean staticTypeCheck(Program program, Options opts)
    {
       boolean ok = true;
       
       
-      Map<String, Map<String, Type>> types = new HashMap<>();
+      ok &= checkStructs(program.types);
       
-      ok &= checkStructs(types, program.types);
+      ok &= checkGlobals(program.decls);
       
-      
-      HashMap<String, Type> globals = new HashMap<>();
-      
-      ok &= checkGlobals(types, globals, program.decls);
-      
-      
-      
-      HashMap<String, HashMap<String, Type>> functions = new HashMap<>();
-      
-      ok &= checkFunctions(types, globals, functions, program.funcs);
+      ok &= checkFunctions(program.funcs);
       
       
       return ok;
@@ -55,7 +50,7 @@ public class TypeChecker
       return contains;
    }
    
-   static boolean validType(Map<String, ?> types, Type type, int line)
+   static boolean validType(Type type, int line)
    {
       if (type instanceof StructType)
       {
@@ -72,7 +67,7 @@ public class TypeChecker
    }
    
    
-   private static boolean checkStructs(Map<String, Map<String, Type>> types, List <TypeDeclaration> typeDecls)
+   private static boolean checkStructs(List <TypeDeclaration> typeDecls)
    {
       boolean ok = true;
       
@@ -98,7 +93,7 @@ public class TypeChecker
          
          for (Declaration decl : validTypeDecl.fields)
          {
-            if (!validType(types, decl.type, decl.line) || contains(fields, decl.name, decl.line, "field"))
+            if (!validType(decl.type, decl.line) || contains(fields, decl.name, decl.line, "field"))
                ok = false;
             
             else
@@ -112,14 +107,14 @@ public class TypeChecker
    
    
    
-   private static boolean checkGlobals(Map<String, ?> types, Map<String, Type> globals, List<Declaration> decls)
+   private static boolean checkGlobals(List<Declaration> decls)
    {
       boolean ok = true;
       
       
       for (Declaration decl : decls)
       {
-         if (!validType(types, decl.type, decl.line) || contains(globals, decl.name, decl.line, "global variable"))
+         if (!validType(decl.type, decl.line) || contains(globals, decl.name, decl.line, "global variable"))
             ok = false;
          
          else
@@ -132,11 +127,7 @@ public class TypeChecker
    
    
    
-   private static boolean checkFunctions(
-         Map<String, Map<String, Type>> types,
-         Map<String, Type> globals,
-         Map<String, ?> functions,
-         List<Function> funcs)
+   private static boolean checkFunctions(List<Function> funcs)
    {
       boolean ok = true;
       

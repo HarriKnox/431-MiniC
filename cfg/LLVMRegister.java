@@ -21,7 +21,7 @@ class LLVMRegister
    }
    
    
-   public toString()
+   public String toString()
    {
       return "%" + this.name;
    }

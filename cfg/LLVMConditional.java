@@ -15,7 +15,7 @@ class LLVMConditional
       this.elseDestination = elseDest;
    }
    
-   public toString()
+   public String toString()
    {
       return "br i1 " + this.condition.name +
             ", label " + this.thenDestination.label +
