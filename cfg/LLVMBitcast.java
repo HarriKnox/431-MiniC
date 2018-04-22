@@ -4,22 +4,24 @@ package cfg;
 class LLVMBitcast
    implements LLVMInstruction
 {
-   LLVMRegister mallocked;
+   LLVMRegister from;
    LLVMRegister result;
    String struct;
+   String fromType;
    
    
-   LLVMBitcast(LLVMRegister mallocked, LLVMRegister result, String struct)
+   LLVMBitcast(LLVMRegister from, LLVMRegister result, String fromType, String struct)
    {
-      this.mallocked = mallocked;
+      this.from = from;
       this.result = result;
       this.struct = struct;
+      this.fromType = fromType;
    }
    
    
    public String toString()
    {
-      return this.result.toString() + " = bitcast i8* " +
-            this.mallocked.toString() + " to %struct." + this.struct;
+      return this.result.toString() + " = bitcast " + this.fromType + " " +
+            this.from.toString() + " to %struct." + this.struct;
    }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 public class FunctionChecker
 {
    private static Map<String, Type> locals;
+   private static String functionName;
    private static Type returnType;
    private static boolean ok;
    
@@ -43,6 +44,7 @@ public class FunctionChecker
       
       locals = localScope;
       returnType = func.retType;
+      functionName = func.name;
       
       boolean returns = validStatement(func.body);
       
@@ -111,6 +113,7 @@ public class FunctionChecker
          ok = false;
       }
       
+      assignment.type = l;
       
       /* assignments don't return */
       return false;
@@ -174,6 +177,7 @@ public class FunctionChecker
          ok = false;
       }
       
+      delete.type = s;
       
       return false;
    }
@@ -255,6 +259,8 @@ public class FunctionChecker
       }
       
       
+      returnStatement.type = r;
+      
       return true;
    }
    
@@ -314,6 +320,8 @@ public class FunctionChecker
       
       StructType ss = (StructType)s;
       Map<String, Type> structDecl = TypeChecker.types.get(ss.name);
+      lvalue.type = ss;
+      
       
       if (structDecl == null)
       {
@@ -334,11 +342,13 @@ public class FunctionChecker
    
    private static Type getLvalueIdType(LvalueId lvalue)
    {
+      lvalue.funcName = functionName;
+      
       if (locals.containsKey(lvalue.id))
-         return locals.get(lvalue.id);
+         return lvalue.type = locals.get(lvalue.id);
       
       if (TypeChecker.globals.containsKey(lvalue.id))
-         return TypeChecker.globals.get(lvalue.id);
+         return lvalue.type = TypeChecker.globals.get(lvalue.id);
       
       System.err.println("line " + lvalue.line + " variable " + lvalue.id + " not declared");
       return null;
@@ -460,6 +470,7 @@ public class FunctionChecker
       
       StructType ss = (StructType)s;
       Map<String, Type> structDecl = TypeChecker.types.get(ss.name);
+      exp.type= ss;
       
       if (structDecl == null)
       {
@@ -486,11 +497,13 @@ public class FunctionChecker
    
    private static Type getIdentifierExpressionType(IdentifierExpression exp)
    {
+      exp.funcName = functionName;
+      
       if (locals.containsKey(exp.id))
-         return locals.get(exp.id);
+         return exp.type = locals.get(exp.id);
       
       if (TypeChecker.globals.containsKey(exp.id))
-         return TypeChecker.globals.get(exp.id);
+         return exp.type = TypeChecker.globals.get(exp.id);
       
       System.err.println("line " + exp.line + " variable " + exp.id + " not declared");
       return null;

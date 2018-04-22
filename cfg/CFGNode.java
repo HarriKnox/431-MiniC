@@ -39,7 +39,7 @@ class CFGNode
    }
    
    
-   void link(LLVMRegister condition, CFGNode thenDescendent, CFGNode elseDescendent)
+   void link(LLVMValue condition, CFGNode thenDescendent, CFGNode elseDescendent)
    {
       thenDescendent.predecessors.add(this);
       elseDescendent.predecessors.add(this);

@@ -58,14 +58,32 @@ public class ControlFlowGraphGenerator
    }
    
    
-   private static CFGNode generateAssignmentCFG(AssignmentStatement body, CFGNode node, CFGNode exit)
+   private static LLVMValue writeLvalueInstructions(Lvalue target, CFGNode node)
    {
-      /*node.addInstruction(new LLVMAssignment());
-      return node;*/
+      if (target instanceof LvalueDot)
+      {
+         LLVMValue left = writeExpressionInstructions(target.left, node);
+         
+         LLVMRegister result = new LLVMRegister();
+         
+         node.addInstruction(new LLVMElementptr(left, result, target.type, target.id));
+         return result;
+      }
+      
+      return new LLVMIdentifier(target.funcName, target.type);
    }
    
    
+   private static CFGNode generateAssignmentCFG(AssignmentStatement body, CFGNode node, CFGNode exit)
+   {
+      LLVMValue left = writeLvalueInstructions(body.left, node);
+      LLVMValue right = writeExpressionInstructions(body.source, node);
       
+      node.addInstruction(new LLVMAssignment(left, right, body.type));
+      return node;
+   }
+   
+   
    private static CFGNode generateBlockCFG(BlockStatement body, CFGNode node, CFGNode exit)
    {
       for (Statement statement : body.statements)
@@ -75,97 +93,107 @@ public class ControlFlowGraphGenerator
    }
    
    
-      
    private static CFGNode generateConditionalCFG(ConditionalStatement body, CFGNode node, CFGNode exit)
    {
-      /*writeExpressionInstructions(body.guard, node);
+      LLVMValue guard = writeExpressionInstructions(body.guard, node);
       
-      CFGNode joinNode = new CFGNode();
       
       CFGNode thenNode = new CFGNode();
-      node.link(thenNode);
-      CFGNode thenLast = generateStatementCFG(body.thenBlock, thenNode, exit);
-      thenLast.link(joinNode);
-      
       CFGNode elseNode = new CFGNode();
-      node.link(elseNode);
+      node.link(guard, thenNode, elseNode);
+      
+      
+      CFGNode thenLast = generateStatementCFG(body.thenBlock, thenNode, exit);
       CFGNode elseLast = generateStatementCFG(body.elseBlock, elseNode, exit);
+      
+      
+      CFGNode joinNode = new CFGNode();
+      thenLast.link(joinNode);
       elseLast.link(joinNode);
       
-      return joinNode;*/
+      return joinNode;
    }
    
    
-      
    private static CFGNode generateDeleteCFG(DeleteStatement body, CFGNode node, CFGNode exit)
    {
-      /*node.addInstruction(new LLVMDelete());
-      return node;*/
+      LLVMValue object = writeExpressionInstructions(body.expression);
+      LLVMRegister pointer = new LLVMRegister();
+      
+      node.addInstruction(new LLVMBitcast(object, pointer, body.type.name, "i8*"));
+      node.addInstruction(new LLVMFree(pointer));
+      
+      return node;
    }
    
    
-      
    private static CFGNode generateInvocationCFG(InvocationStatement body, CFGNode node, CFGNode exit)
    {
-      /*node.addInstruction(new LLVMInvocation());
-      return node;*/
+      List<LLVMValue> arguments = new LinkedList<>();
+      
+      for (Expression e : exp.arguments)
+      {
+         arguments.add(writeExpressionInstructions(e, node));
+      }
+      
+      LLVMRegister result = new LLVMRegister();
+      node.addInstruction(new LLVMInvocation(arguments, exp.name, result));
+      return node;
    }
    
    
-      
    private static CFGNode generatePrintLnCFG(PrintLnStatement body, CFGNode node, CFGNode exit)
    {
-      /*node.addIntstruction(new LLVMPrintLn());
-      return node;*/
+      LLVMValue exp = writeExpressionInstructions(body.expression, node);
+      
+      node.addInstruction(new LLVMPrint(LLVMGlobal.PRINTLN_FORMAT, exp));
+      
+      return node;
    }
    
    
-      
    private static CFGNode generatePrintCFG(PrintStatement body, CFGNode node, CFGNode exit)
    {
-      /*node.addIntstruction(new LLVMPrint());
-      return node;*/
+      LLVMValue exp = writeExpressionInstructions(body.expression, node);
+      
+      node.addInstruction(new LLVMPrint(LLVMGlobal.PRINT_FORMAT, exp));
+      
+      return node;
    }
    
    
-      
    private static CFGNode generateReturnEmptyCFG(ReturnEmptyStatement body, CFGNode node, CFGNode exit)
    {
-      /*node.link(exit);
-      return new CFGNode();*/
+      node.addInstruction(new LLVMReturn());
+      
+      return new CFGNode();
    }
    
    
-      
    private static CFGNode generateReturnCFG(ReturnStatement body, CFGNode node, CFGNode exit)
    {
-      /* write return function */
-      /*node.link(exit);
-      return new CFGNode();*/
+      LLVMValue value = writeExpressionInstructions(body.expression, node);
+      
+      node.addInstruction(new LLVMReturn(value, body.type));
    }
    
    
-      
    private static CFGNode generateWhileCFG(WhileStatement body, CFGNode node, CFGNode exit)
    {
-      /*writeExpressionInstructions(body.guard, node);
+      LLVMValue guard = writeExpressionInstructions(body.guard, node);
+      
       
       CFGNode bodyNode = new CFGNode();
-      
-      node.link(bodyNode);
-      CFGNode bodyLast = generateStatementCFG(body.statements, bodyNode, exit);
-      bodyLast.link(node);
-      
       CFGNode rerouteNode = new CFGNode();
-      node.link(rerouteNode);
+      node.link(guard, bodyNode, rerouteNode);
       
-      return rerouteNode;*/
+      
+      CFGNode bodyLast = generateStatementCFG(body.statements, bodyNode, exit);
+      bodyLast.link(node, true);
+      
+      
+      return rerouteNode;
    }
-   
-   
-   
-   
-   
    
    
    
@@ -223,7 +251,12 @@ public class ControlFlowGraphGenerator
    
    private static LLVMValue writeDotExpressionInstructions(DotExpression exp, CFGNode node)
    {
+      LLVMValue left = writeExpressionInstructions(exp.left, node);
       
+      LLVMRegister result = new LLVMRegister();
+      
+      node.addInstruction(new LLVMElementptr(left, result, exp.type, exp.id));
+      return result;
    }
    
    
@@ -235,7 +268,7 @@ public class ControlFlowGraphGenerator
    
    private static LLVMValue writeIdentifierExpressionInstructions(IdentifierExpression exp, CFGNode node)
    {
-      
+      return new LLVMIdentifier(exp.funcName, exp.type);
    }
    
    
@@ -267,7 +300,7 @@ public class ControlFlowGraphGenerator
       node.addInstruction(new LLVMMalloc(exp.id, mallocked));
       
       LLVMRegister bitcasted = new LLVMRegister();
-      node.addInstruction(new LLVMBitcast(mallocked, bitcasted, exp.id));
+      node.addInstruction(new LLVMBitcast(mallocked, bitcasted, "i8*", exp.id));
       
       return bitcasted;
    }

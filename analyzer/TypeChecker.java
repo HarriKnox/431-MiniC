@@ -21,6 +21,7 @@ import main.Options;
 public class TypeChecker
 {
    public static final Map<String, Map<String, Type>> types = new HashMap<>();
+   public static final Map<String, TypeDeclaration> validTypeDecls = new LinkedHashMap<>();
    public static final Map<String, Type> globals = new HashMap<>();
    public static final Map<String, Function> functions = new HashMap<>();
    
@@ -70,8 +71,6 @@ public class TypeChecker
    private static boolean checkStructs(List <TypeDeclaration> typeDecls)
    {
       boolean ok = true;
-      
-      Map<String, TypeDeclaration> validTypeDecls = new LinkedHashMap<>();
       
       
       for (TypeDeclaration typeDecl : typeDecls)

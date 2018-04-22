@@ -4,11 +4,11 @@ package cfg;
 class LLVMConditional
    implements LLVMBranchInstruction
 {
-   LLVMVariable condition;
+   LLVMValue condition;
    CFGNode thenDestination;
    CFGNode elseDestination;
    
-   LLVMConditional(LLVMVariable condition, CFGNode thenDest, CFGNode elseDest)
+   LLVMConditional(LLVMValue condition, CFGNode thenDest, CFGNode elseDest)
    {
       this.condition = condition;
       this.thenDestination = thenDest;
@@ -17,8 +17,8 @@ class LLVMConditional
    
    public String toString()
    {
-      return "br i1 " + this.condition.name +
-            ", label " + this.thenDestination.label +
-            ", label " + this.elseDestination.label;
+      return "br i1 " + this.condition.toString() +
+            ", label %" + this.thenDestination.label +
+            ", label %" + this.elseDestination.label;
    }
 }

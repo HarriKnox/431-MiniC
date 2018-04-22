@@ -5,6 +5,8 @@ public class LvalueId
    implements Lvalue
 {
    public final String id;
+   public String funcName;
+   public Type type;
 
    public LvalueId(int lineNum, String id)
    {

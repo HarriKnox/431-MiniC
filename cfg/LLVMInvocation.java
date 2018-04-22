@@ -43,8 +43,11 @@ class LLVMInvocation
       else if (func.retType instanceof BoolType)
          this.retType = "i1";
       
-      else
+      else if (func.retType instanceof StructType)
          this.retType = "%struct." + ((StructType)func.retType).name + "*";
+      
+      else
+         this.retType = "void";
    }
    
    
@@ -72,7 +75,10 @@ class LLVMInvocation
       }
       
       
-      return this.result.toString() + " = call " + this.retType. + "@" +
+      String resultString = (this.retType.equals("void")) ? "" : (this.result.toString() + " = ");
+      
+      
+      return resultString + "call " + this.retType. + "@" +
             this.function + "(" + args.toString() + ")";
    }
 }

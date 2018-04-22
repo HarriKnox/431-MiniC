@@ -5,6 +5,7 @@ public class AssignmentStatement
 {
    public final Lvalue target;
    public final Expression source;
+   public Type type;
 
    public AssignmentStatement(int lineNum, Lvalue target, Expression source)
    {

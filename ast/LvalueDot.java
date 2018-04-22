@@ -6,6 +6,7 @@ public class LvalueDot
 {
    public final Expression left;
    public final String id;
+   public StructType type;
 
    public LvalueDot(int lineNum, Expression left, String id)
    {
