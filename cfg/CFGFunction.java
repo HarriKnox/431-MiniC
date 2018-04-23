@@ -375,7 +375,7 @@ class CFGFunction
       
       LLVMRegister result = new LLVMRegister();
       
-      node.addInstruction(new LLVMLoad(result, pointer, exp.left.type.toLLVMTypeString()));
+      node.addInstruction(new LLVMLoad(result, pointer, exp.type.toLLVMTypeString()));
       return result;
    }
    
