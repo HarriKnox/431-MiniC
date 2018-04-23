@@ -14,6 +14,8 @@ import ast.TypeDeclaration;
 import ast.Declaration;
 import ast.Function;
 
+import cfg.ControlFlowGraphGenerator;
+
 import parser.MiniLexer;
 import parser.MiniParser;
 import parser.MiniToAstProgramVisitor;
@@ -83,6 +85,8 @@ public class Main
          System.err.println("Detected errors. Fix them and recompile.");
          System.exit(1);
       }
+      
+      ControlFlowGraphGenerator.buildProgramCFG(program);
       
       System.exit(0);
    }
