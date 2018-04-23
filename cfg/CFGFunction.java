@@ -14,13 +14,15 @@ class CFGFunction
    public final CFGNode entry;
    public final CFGNode exit;
    public final String signature;
+   public final List<CFGNode> toposort;
    
    
-   CFGFunction(CFGNode entry, CFGNode exit, String sig)
+   CFGFunction(CFGNode entry, CFGNode exit, String sig, List<CFGNode> toposort)
    {
       this.entry = entry;
       this.exit = exit;
       this.signature = sig;
+      this.toposort = toposort;
    }
    
    
@@ -29,7 +31,8 @@ class CFGFunction
       System.out.println("define " + this.signature);
       System.out.println("{");
       
-      this.entry.printNode(new HashSet<CFGNode>());
+      for (CFGNode node : this.toposort)
+         node.printNode();
       
       System.out.println("}");
    }
@@ -44,6 +47,7 @@ class CFGFunction
             .append("(");
       
       
+      /* Get parameter list */
       Iterator<Declaration> decliter = func.params.iterator();
       
       if (decliter.hasNext())
@@ -65,11 +69,14 @@ class CFGFunction
       sig.append(")");
       
       
+      /* Create entry and exit nodes */
       CFGNode entry = new CFGNode(true);
       
       CFGNode exit = new CFGNode();
-      LLVMRegister retValue = new LLVMRegister();
       
+      
+      /* Add return value and instructions */
+      LLVMRegister retValue = new LLVMRegister();
       
       if (!(func.retType instanceof VoidType))
       {
@@ -87,11 +94,17 @@ class CFGFunction
       exit.addInstruction(new LLVMReturn(func.retType, retValue));
       
       
+      /* Build the CFG */
       CFGNode last = generateStatementCFG(func.body, entry, exit);
       last.link(exit);
       
       
-      return new CFGFunction(entry, exit, sig.toString());
+      /* Sort the nodes into a topological sort */
+      List<CFGNode> toposort = new LinkedList<>();
+      exit.addNodeTopo(new HashSet<CFGNode>(), toposort);
+      
+      
+      return new CFGFunction(entry, exit, sig.toString(), toposort);
    }
    
    
@@ -277,10 +290,13 @@ class CFGFunction
    
    private static CFGNode generateWhileCFG(WhileStatement body, CFGNode node, CFGNode exit)
    {
-      LLVMValue guard = writeExpressionInstructions(body.guard, node);
       
       CFGNode guardNode = new CFGNode();
+      
       node.link(guardNode);
+      
+      LLVMValue guard = writeExpressionInstructions(body.guard, guardNode);
+      
       
       CFGNode bodyNode = new CFGNode();
       CFGNode rerouteNode = new CFGNode();

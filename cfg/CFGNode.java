@@ -13,6 +13,7 @@ class CFGNode
    boolean entry;
    String label;
    List<CFGNode> predecessors;
+   List<CFGNode> loopbacks;
    List<LLVMInstruction> instructions;
    LLVMBranchInstruction branch;
    
@@ -23,6 +24,7 @@ class CFGNode
       
       this.entry = false;
       this.predecessors = new LinkedList<>();
+      this.loopbacks = new LinkedList<>();
       this.instructions = new LinkedList<>();
       this.branch = null;
    }
@@ -41,9 +43,10 @@ class CFGNode
    }
    
    
-   void link(CFGNode descendent, boolean loopback)
+   void link(CFGNode guard, boolean loopback)
    {
-      this.branch = new LLVMJump(descendent, loopback);
+      guard.loopbacks.add(this);
+      this.branch = new LLVMJump(guard, loopback);
    }
    
    
@@ -61,23 +64,28 @@ class CFGNode
    }
    
    
-   void printNode(Set<CFGNode> visited)
+   void addNodeTopo(Set<CFGNode> visited, List<CFGNode> toposort)
    {
+      if (visited.contains(this))
+         return;
+      
+      
+      for (CFGNode parent : this.predecessors)
+         parent.addNodeTopo(visited, toposort);
+      
+      toposort.add(this);
+      visited.add(this);
+      
+      for (CFGNode looped : this.loopbacks)
+         looped.addNodeTopo(visited, toposort);
+      
+      
+      
+      /*
       if (!visited.containsAll(this.predecessors) || visited.contains(this))
          return;
       
       visited.add(this);
-      
-      
-      System.out.println(this.label + ":");
-      
-      for (LLVMInstruction instruction : this.instructions)
-         System.out.println("   " + instruction.toString());
-      
-      if (this.branch != null)
-      {
-         System.out.println("   " + this.branch.toString());
-         
          if (this.branch instanceof LLVMConditional)
          {
             LLVMConditional condBranch = (LLVMConditional)this.branch;
@@ -89,20 +97,12 @@ class CFGNode
             LLVMJump jump = (LLVMJump)this.branch;
             jump.destination.printNode(visited);
          }
-      }
-      
-      
-      
-      
-      /*
-      if (visited.contains(this))
-         return;
-      
-      visited.add(this);
-      
-      for (CFGNode parent : this.predecessors)
-         parent.printNode(visited);
-      
+      */
+   }
+   
+   
+   void printNode()
+   {
       System.out.println(this.label + ":");
       
       for (LLVMInstruction instruction : this.instructions)
@@ -110,6 +110,5 @@ class CFGNode
       
       if (this.branch != null)
          System.out.println("   " + this.branch.toString());
-      */
    }
 }
