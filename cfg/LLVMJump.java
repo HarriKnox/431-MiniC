@@ -22,7 +22,7 @@ class LLVMJump
    }
    
    
-   public toString()
+   public String toString()
    {
       return "br label " + this.destination.label;
    }

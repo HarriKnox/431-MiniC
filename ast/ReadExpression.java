@@ -1,7 +1,7 @@
 package ast;
 
 public class ReadExpression
-   extends AbstractExpression
+   extends Expression
 {
    public ReadExpression(int lineNum)
    {

@@ -1,7 +1,7 @@
 package ast;
 
 public class IntegerExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final String value;
 

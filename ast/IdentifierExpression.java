@@ -1,11 +1,10 @@
 package ast;
 
 public class IdentifierExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final String id;
    public String funcName;
-   public Type type;
 
    public IdentifierExpression(int lineNum, String id)
    {

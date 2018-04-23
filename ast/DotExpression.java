@@ -1,11 +1,10 @@
 package ast;
 
 public class DotExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final Expression left;
    public final String id;
-   public StructType type;
 
    public DotExpression(int lineNum, Expression left, String id)
    {

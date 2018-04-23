@@ -5,6 +5,7 @@ public class ReturnStatement
 {
    public final Expression expression;
    public Type type;
+   public String funcName;
 
    public ReturnStatement(int lineNum, Expression expression)
    {

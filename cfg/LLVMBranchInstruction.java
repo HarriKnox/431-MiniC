@@ -8,5 +8,5 @@ package cfg;
  */
 interface LLVMBranchInstruction
 {
-   public toString();
+   public String toString();
 }

@@ -177,7 +177,7 @@ public class FunctionChecker
          ok = false;
       }
       
-      delete.type = s;
+      delete.type = (StructType)s;
       
       return false;
    }
@@ -260,6 +260,7 @@ public class FunctionChecker
       
       
       returnStatement.type = r;
+      returnStatement.funcName = functionName;
       
       return true;
    }
@@ -358,6 +359,11 @@ public class FunctionChecker
    
    private static Type getExpressionType(Expression exp)
    {
+      return exp.type = getExpressionTypeSelect(exp);
+   }
+   
+   private static Type getExpressionTypeSelect(Expression exp)
+   {
       if (exp instanceof BinaryExpression)
          return getBinaryExpressionType((BinaryExpression)exp);
       
@@ -446,8 +452,6 @@ public class FunctionChecker
       if (b == null)
          System.err.println("line " + exp.line + " attempt to perform " + op + " on " + l + " and " + r);
       
-      exp.type = l;
-      
       return b;
    }
    
@@ -470,7 +474,6 @@ public class FunctionChecker
       
       StructType ss = (StructType)s;
       Map<String, Type> structDecl = TypeChecker.types.get(ss.name);
-      exp.type= ss;
       
       if (structDecl == null)
       {
@@ -500,10 +503,10 @@ public class FunctionChecker
       exp.funcName = functionName;
       
       if (locals.containsKey(exp.id))
-         return exp.type = locals.get(exp.id);
+         return locals.get(exp.id);
       
       if (TypeChecker.globals.containsKey(exp.id))
-         return exp.type = TypeChecker.globals.get(exp.id);
+         return TypeChecker.globals.get(exp.id);
       
       System.err.println("line " + exp.line + " variable " + exp.id + " not declared");
       return null;

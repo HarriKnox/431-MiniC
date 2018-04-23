@@ -12,4 +12,10 @@ public class BoolType
    {
       return "bool";
    }
+   
+   
+   public String toLLVMTypeString()
+   {
+      return "i1";
+   }
 }

@@ -1,7 +1,7 @@
 package ast;
 
 public class FalseExpression
-   extends AbstractExpression
+   extends Expression
 {
    public FalseExpression(int lineNum)
    {

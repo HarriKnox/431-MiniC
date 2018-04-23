@@ -1,12 +1,11 @@
 package ast;
 
 public class BinaryExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final Operator operator;
    public final Expression left;
    public final Expression right;
-   public Type type;
 
    public BinaryExpression(int lineNum, String opStr,
       Expression left, Expression right)

@@ -3,7 +3,7 @@ package ast;
 import java.util.List;
 
 public class InvocationExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final String name;
    public final List<Expression> arguments;

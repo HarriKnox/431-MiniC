@@ -6,7 +6,7 @@ ANTLR_LIB=:../lib/antlr-4.7.1-complete.jar
 CLASSPATH=.:../out:../lib/*
 
 
-JAVA_FILES=main/*.java ast/*.java parser/*.java analyzer/*.java
+JAVA_FILES=main/*.java ast/*.java parser/*.java analyzer/*.java cfg/*.java
 
 
 all : ../out out/main/Main.class
@@ -15,7 +15,7 @@ all : ../out out/main/Main.class
 	mkdir -p ../out
 
 out/main/Main.class : $(JAVA_FILES)
-	$(JAVAC) -cp $(CLASSPATH) -d ../out main/Main.java
+	$(JAVAC) -cp $(CLASSPATH) -d ../out main/Main.java -Xlint:unchecked
 
 clean:
 	-rm -rf ../out

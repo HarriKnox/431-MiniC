@@ -1,7 +1,7 @@
 package ast;
 
 public class NullExpression
-   extends AbstractExpression
+   extends Expression
 {
    public NullExpression(int lineNum)
    {

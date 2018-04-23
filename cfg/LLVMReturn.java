@@ -5,6 +5,7 @@ import ast.BoolType;
 import ast.IntType;
 import ast.StructType;
 import ast.Type;
+import ast.VoidType;
 
 
 class LLVMReturn
@@ -14,25 +15,15 @@ class LLVMReturn
    String retType;
    
    
-   LLVMReturn()
+   LLVMReturn(Type type, LLVMValue value)
    {
-      this.retType = "void";
-      this.returnValue = null;
-   }
-   
-   
-   LLVMReturn(LLVMValue value, Type type)
-   {
-      this.returnValue = value;
-      
-      if (type instanceof IntType)
-         this.retType = "i32";
-      
-      else if (type instanceof BoolType)
-         this.retType = "i1";
+      if (type instanceof VoidType)
+         this.returnValue = null;
       
       else
-         this.retType = "%struct." + ((StructType)type).name + "*";
+         this.returnValue = value;
+      
+      this.retType = type.toLLVMTypeString();
    }
    
    

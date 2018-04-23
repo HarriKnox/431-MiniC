@@ -13,7 +13,7 @@ class LLVMNull
    }
    
    
-   public toString()
+   public String toString()
    {
       return "null";
    }

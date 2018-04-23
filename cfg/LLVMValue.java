@@ -6,5 +6,5 @@ package cfg;
  */
 interface LLVMValue
 {
-   public toString();
+   public String toString();
 }

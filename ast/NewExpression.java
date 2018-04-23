@@ -1,7 +1,7 @@
 package ast;
 
 public class NewExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final String id;
 

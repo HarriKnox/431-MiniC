@@ -11,7 +11,7 @@ class LLVMRegister
    
    LLVMRegister()
    {
-      this.name = "u" + count++;
+      this.name = "h" + count++;
    }
    
    

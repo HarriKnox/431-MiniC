@@ -1,10 +1,12 @@
 package cfg;
 
 
+import java.util.List;
+
 import analyzer.TypeChecker;
 
 import ast.StructType;
-import ast.TypeDeclaration;
+import ast.Declaration;
 
 
 class LLVMElementptr
@@ -25,9 +27,9 @@ class LLVMElementptr
       
       List<Declaration> fields = TypeChecker.validTypeDecls.get(type.name).fields;
       
-      for (int i = 0; len = fields.size(); i < len; i++)
+      for (int i = 0, len = fields.size(); i < len; i++)
       {
-         if (fields.name.equals(id))
+         if (fields.get(i).name.equals(id))
          {
             this.index = i;
             break;
@@ -38,7 +40,7 @@ class LLVMElementptr
    
    public String toString()
    {
-      return this.result.toString() + " = getelementptr %struct." + this.type.name
-            + "* " + this.source.toString() + ", i1 0, i32 " + Integer.toString(this.index);
+      return this.result.toString() + " = getelementptr " + this.type.toLLVMTypeString()
+            + " " + this.source.toString() + ", i1 0, i32 " + Integer.toString(this.index);
    }
 }

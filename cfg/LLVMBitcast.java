@@ -4,17 +4,17 @@ package cfg;
 class LLVMBitcast
    implements LLVMInstruction
 {
-   LLVMRegister from;
+   LLVMValue from;
    LLVMRegister result;
-   String struct;
+   String toType;
    String fromType;
    
    
-   LLVMBitcast(LLVMRegister from, LLVMRegister result, String fromType, String struct)
+   LLVMBitcast(LLVMValue from, LLVMRegister result, String fromType, String toType)
    {
       this.from = from;
       this.result = result;
-      this.struct = struct;
+      this.toType = toType;
       this.fromType = fromType;
    }
    
@@ -22,6 +22,6 @@ class LLVMBitcast
    public String toString()
    {
       return this.result.toString() + " = bitcast " + this.fromType + " " +
-            this.from.toString() + " to %struct." + this.struct;
+            this.from.toString() + " to " + this.toType;
    }
 }

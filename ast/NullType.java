@@ -7,4 +7,9 @@ public class NullType
    {
       return (o instanceof NullType) || (o instanceof StructType);
    }
+   
+   public String toLLVMTypeString()
+   {
+      return "null";
+   }
 }

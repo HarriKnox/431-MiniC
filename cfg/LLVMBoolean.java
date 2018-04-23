@@ -13,12 +13,12 @@ class LLVMBoolean
    }
    
    
-   public toString()
+   public String toString()
    {
       return Boolean.toString(this.value);
    }
    
    
-   static final LLVMBoolean TRUE  = new LLVMValue(true);
-   static final LLVMBoolean FALSE = new LLVMValue(false);
+   static final LLVMBoolean TRUE  = new LLVMBoolean(true);
+   static final LLVMBoolean FALSE = new LLVMBoolean(false);
 }

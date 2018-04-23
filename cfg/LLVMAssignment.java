@@ -2,9 +2,6 @@ package cfg;
 
 
 import ast.Type;
-import ast.StructType;
-import ast.IntType;
-import ast.BoolType;
 
 
 class LLVMAssignment
@@ -15,7 +12,7 @@ class LLVMAssignment
    Type type;
    
    
-   LLVMAssignment(LLVMValue source, LLVMValue target, Type type)
+   LLVMAssignment(LLVMValue target, LLVMValue source, Type type)
    {
       this.source = source;
       this.target = target;
@@ -23,21 +20,9 @@ class LLVMAssignment
    }
    
    
-   private String typeToString()
-   {
-      if (this.type instanceof IntType)
-         return "i32";
-      
-      else if (this.type instanceof BoolType)
-         return "i1";
-      
-      return "%struct." + ((StructType)this.type).name + "*";
-   }
-   
-   
    public String toString()
    {
-      return "store " + this.typeToString() + " " + this.source.toString() +
-            ", " + this.typeToString() + "* " + this.target.toString();
+      return "store " + this.type.toLLVMTypeString() + " " + this.source.toString() +
+            ", " + this.type.toLLVMTypeString() + "* " + this.target.toString();
    }
 }

@@ -2,7 +2,7 @@ package cfg;
 
 
 class LLVMFree
-   implements LLVMInstruction;
+   implements LLVMInstruction
 {
    LLVMRegister pointer;
    

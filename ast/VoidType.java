@@ -12,4 +12,10 @@ public class VoidType
    {
       return "void";
    }
+   
+   
+   public String toLLVMTypeString()
+   {
+      return this.toString();
+   }
 }

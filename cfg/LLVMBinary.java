@@ -19,8 +19,8 @@ class LLVMBinary
    LLVMBinary(LLVMValue leftValue, LLVMValue rightValue, LLVMRegister result, BinaryExpression.Operator op, Type type)
    {
       this.result = result;
-      this.leftValue = leftOp;
-      this.rightValue = rightOp;
+      this.leftValue = leftValue;
+      this.rightValue = rightValue;
       this.operation = op;
       this.type = type;
    }
@@ -30,60 +30,51 @@ class LLVMBinary
    {
       switch (this.operation)
       {
-         case BinaryExpression.Operator.TIMES:
+         case TIMES:
             return "mul";
          
-         case BinaryExpression.Operator.DIVIDE:
+         case DIVIDE:
             return "sdiv";
          
-         case BinaryExpression.Operator.PLUS:
+         case PLUS:
             return "add";
          
-         case BinaryExpression.Operator.MINUS:
+         case MINUS:
             return "sub";
          
-         case BinaryExpression.Operator.LT:
-            return "icmp lt";
+         case LT:
+            return "icmp slt";
          
-         case BinaryExpression.Operator.GT:
-            return "icmp gt";
+         case GT:
+            return "icmp sgt";
          
-         case BinaryExpression.Operator.LE:
-            return "icmp le";
+         case LE:
+            return "icmp sle";
          
-         case BinaryExpression.Operator.GE:
-            return "icmp ge";
+         case GE:
+            return "icmp sge";
          
-         case BinaryExpression.Operator.EQ:
+         case EQ:
             return "icmp eq";
          
-         case BinaryExpression.Operator.NE:
+         case NE:
             return "icmp ne";
          
-         case BinaryExpression.Operator.AND:
+         case AND:
             return "and";
          
-         case BinaryExpression.Operator.OR:
+         case OR:
             return "or";
       }
+      
+      return null;
    }
    
    
-   private String typeString()
+   public String toString()
    {
-      if (this.type instanceof IntType)
-         return "i32";
-      
-      if (this.type.instanceof BoolType)
-         return "i1";
-      
-      return "%struct." + ((StructType)this.type).name + "*";
-   }
-   
-   
-   public toString()
-   {
-      return this.result.toString() " = " + this.operationString() + " " + this.typeString()
-            + this.leftOperand.toString() + ", " + this.rightOperand.toString();
+      return this.result.toString() + " = " + this.operationString() + " "
+            + this.type.toLLVMTypeString() + " " + this.leftValue.toString()
+            + ", " + this.rightValue.toString();
    }
 }

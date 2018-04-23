@@ -131,33 +131,29 @@ public class TypeChecker
       boolean ok = true;
       
       
-      Map<String, Function> validFunctionDecls = new LinkedHashMap<>();
-      
-      
       for (Function func : funcs)
       {
-         if (contains(validFunctionDecls, func.name, func.line, "function"))
+         if (contains(functions, func.name, func.line, "function"))
             ok = false;
          
          else
-            validFunctionDecls.put(func.name, func);
+            functions.put(func.name, func);
       }
       
       
-      FunctionChecker.setScope(types, globals, validFunctionDecls);
       
-      for (Function func : validFunctionDecls.values())
+      for (Function func : functions.values())
          ok &= FunctionChecker.validFunction(func);
       
       
-      if (!validFunctionDecls.containsKey("main"))
+      if (!functions.containsKey("main"))
       {
          System.err.println("ERROR: no 'main' function declared");
          ok = false;
       }
       else
       {
-         Function main = validFunctionDecls.get("main");
+         Function main = functions.get("main");
          
          if (main.params.size() != 0)
          {

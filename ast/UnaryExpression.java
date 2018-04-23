@@ -1,7 +1,7 @@
 package ast;
 
 public class UnaryExpression
-   extends AbstractExpression
+   extends Expression
 {
    public final Operator operator;
    public final Expression operand;

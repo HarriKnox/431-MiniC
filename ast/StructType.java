@@ -16,8 +16,15 @@ public class StructType
       return (o instanceof NullType) || ((o instanceof StructType) && this.name.equals(((StructType)o).name));
    }
    
+   
    public String toString()
    {
       return "struct " + this.name;
+   }
+   
+   
+   public String toLLVMTypeString()
+   {
+      return "%struct." + this.name + "*";
    }
 }

@@ -1,8 +1,14 @@
 package cfg;
 
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import analyzer.TypeChecker;
+
+import ast.Declaration;
+import ast.Function;
 
 
 class LLVMInvocation
@@ -26,28 +32,11 @@ class LLVMInvocation
       
       for (Declaration param : func.params)
       {
-         if (param.type instanceof IntType)
-            this.types.add("i32");
-         
-         else if (param.type instanceof BoolType)
-            this.types.add("i1");
-         
-         else
-            this.types.add("%struct." + ((StructType)param.type).name + "*");
+         this.types.add(param.type.toLLVMTypeString());
       }
       
       
-      if (func.retType instanceof IntType)
-         this.retType = "i32";
-      
-      else if (func.retType instanceof BoolType)
-         this.retType = "i1";
-      
-      else if (func.retType instanceof StructType)
-         this.retType = "%struct." + ((StructType)func.retType).name + "*";
-      
-      else
-         this.retType = "void";
+      this.retType = func.retType.toLLVMTypeString();
    }
    
    
@@ -78,7 +67,7 @@ class LLVMInvocation
       String resultString = (this.retType.equals("void")) ? "" : (this.result.toString() + " = ");
       
       
-      return resultString + "call " + this.retType. + "@" +
+      return resultString + "call " + this.retType + "@" +
             this.function + "(" + args.toString() + ")";
    }
 }

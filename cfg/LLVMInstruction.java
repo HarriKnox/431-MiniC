@@ -3,5 +3,5 @@ package cfg;
 
 interface LLVMInstruction
 {
-   public toString();
+   public String toString();
 }
