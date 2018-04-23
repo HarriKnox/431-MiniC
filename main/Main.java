@@ -10,6 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import analyzer.TypeChecker;
 
 import ast.Program;
@@ -95,11 +98,28 @@ public class Main
    }
    
    
-   private static void runClang(String fname)
+   private static void runClang(String fname, boolean m32)
    {
+      List<String> command = new LinkedList<>();
+      
+      command.add("clang");
+      command.add(fname + ".ll");
+      command.add("-o");
+      command.add(fname);
+      
+      if (m32)
+         command.add("-m32");
+      
       try
       {
-         new ProcessBuilder("clang", fname + ".ll", "-o", fname, "-m32").start().waitFor();
+         Process clang = new ProcessBuilder(command).inheritIO().start();
+         
+         int status = clang.waitFor();
+         
+         if (status != 0)
+         {
+            System.exit(status);
+         }
       }
       catch (Exception e)
       {
@@ -125,7 +145,7 @@ public class Main
       
       writeToFile(opts.filename, programCFG);
       
-      runClang(opts.filename);
+      runClang(opts.filename, opts.m32);
       
       System.exit(0);
    }

@@ -4,18 +4,20 @@ public class Options
 {
    public final String filename;
    public final boolean stack;
+   public final boolean m32;
    
    
-   Options(String fname, boolean stack)
+   Options(OptionsBuilder ob)
    {
-      this.filename = fname;
-      this.stack = stack;
+      this.filename = ob.filename;
+      this.stack = ob.stack;
+      this.m32 = ob.m32;
    }
    
    
    static Options parseOptions(String[] args)
    {
-      OptionsBuilder optsBuilder = new OptionsBuilder();
+      OptionsBuilder ob = new OptionsBuilder();
       
       
       for (int i = 0; i < args.length; i++)
@@ -25,14 +27,18 @@ public class Options
          
          if (arg.equals("-stack"))
          {
-            optsBuilder.stack = true;
+            ob.stack = true;
+         }
+         else if (arg.equals("-m32"))
+         {
+            ob.m32 = true;
          }
          else if (arg.charAt(0) == '-')
          {
             System.err.println("unexpected option: " + arg);
             System.exit(6);
          }
-         else if (optsBuilder.filename != null)
+         else if (ob.filename != null)
          {
             System.err.println("too many files specified");
             System.exit(7);
@@ -44,12 +50,12 @@ public class Options
          }
          else
          {
-            optsBuilder.filename = arg.substring(0, len - 5);
+            ob.filename = arg.substring(0, len - 5);
          }
       }
       
       
-      return optsBuilder.create();
+      return ob.create();
    }
    
    
@@ -57,10 +63,11 @@ public class Options
    {
       String filename = null;
       boolean stack = false;
+      boolean m32 = false;
       
       Options create()
       {
-         return new Options(this.filename, this.stack);
+         return new Options(this);
       }
    }
 }
