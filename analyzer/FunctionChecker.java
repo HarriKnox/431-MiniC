@@ -259,7 +259,7 @@ public class FunctionChecker
       }
       
       
-      returnStatement.type = r;
+      returnStatement.type = TypeChecker.functions.get(functionName).retType;
       returnStatement.funcName = functionName;
       
       return true;
