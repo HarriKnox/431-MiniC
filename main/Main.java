@@ -5,7 +5,10 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import analyzer.TypeChecker;
 
@@ -14,7 +17,7 @@ import ast.TypeDeclaration;
 import ast.Declaration;
 import ast.Function;
 
-import cfg.ControlFlowGraphGenerator;
+import cfg.ControlFlowGraph;
 
 import parser.MiniLexer;
 import parser.MiniParser;
@@ -54,7 +57,7 @@ public class Main
             input = CharStreams.fromStream(System.in);
          
          else
-            input = CharStreams.fromFileName(opts.filename);
+            input = CharStreams.fromFileName(opts.filename + ".mini");
       }
       catch (IOException e)
       {
@@ -74,6 +77,38 @@ public class Main
    }
    
    
+   private static void writeToFile(String fname, ControlFlowGraph program)
+   {
+      PrintStream stdout = System.out;
+      try (PrintStream output = new PrintStream(new BufferedOutputStream(new FileOutputStream(fname + ".ll"))))
+      {
+         System.setOut(output);
+         program.printProgram();
+         output.close();
+      }
+      catch (Exception e)
+      {
+         System.err.println(e);
+      }
+      
+      System.setOut(stdout);
+   }
+   
+   
+   private static void runClang(String fname)
+   {
+      try
+      {
+         new ProcessBuilder("clang", fname + ".ll", "-o", fname).start().waitFor();
+      }
+      catch (Exception e)
+      {
+         System.err.println(e);
+         System.exit(1);
+      }
+   }
+   
+   
    public static void main(String[] args)
    {
       Options opts = Options.parseOptions(args);
@@ -86,7 +121,11 @@ public class Main
          System.exit(1);
       }
       
-      ControlFlowGraphGenerator.buildProgramCFG(program);
+      ControlFlowGraph programCFG = ControlFlowGraph.buildProgramCFG(program);
+      
+      writeToFile(opts.filename, programCFG);
+      
+      runClang(opts.filename);
       
       System.exit(0);
    }

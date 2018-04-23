@@ -349,7 +349,10 @@ public class FunctionChecker
          return lvalue.type = locals.get(lvalue.id);
       
       if (TypeChecker.globals.containsKey(lvalue.id))
+      {
+         lvalue.global = true;
          return lvalue.type = TypeChecker.globals.get(lvalue.id);
+      }
       
       System.err.println("line " + lvalue.line + " variable " + lvalue.id + " not declared");
       return null;
@@ -404,7 +407,7 @@ public class FunctionChecker
    
    private static Type getBinaryExpressionType(BinaryExpression exp)
    {
-      Type l = getExpressionType(exp.left);
+      Type l = exp.operandType = getExpressionType(exp.left);
       Type r = getExpressionType(exp.right);
       
       BinaryExpression.Operator op = exp.operator;
@@ -506,7 +509,10 @@ public class FunctionChecker
          return locals.get(exp.id);
       
       if (TypeChecker.globals.containsKey(exp.id))
+      {
+         exp.global = true;
          return TypeChecker.globals.get(exp.id);
+      }
       
       System.err.println("line " + exp.line + " variable " + exp.id + " not declared");
       return null;

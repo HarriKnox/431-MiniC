@@ -24,6 +24,6 @@ class LLVMJump
    
    public String toString()
    {
-      return "br label " + this.destination.label;
+      return "br label %" + this.destination.label;
    }
 }

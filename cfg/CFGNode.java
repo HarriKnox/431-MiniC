@@ -20,7 +20,7 @@ class CFGNode
    
    CFGNode()
    {
-      this.label = "LU" + count++;
+      this.label = "LH" + count++;
       
       this.entry = false;
       this.predecessors = new LinkedList<>();
@@ -78,26 +78,6 @@ class CFGNode
       
       for (CFGNode looped : this.loopbacks)
          looped.addNodeTopo(visited, toposort);
-      
-      
-      
-      /*
-      if (!visited.containsAll(this.predecessors) || visited.contains(this))
-         return;
-      
-      visited.add(this);
-         if (this.branch instanceof LLVMConditional)
-         {
-            LLVMConditional condBranch = (LLVMConditional)this.branch;
-            condBranch.thenNode.printNode(visited);
-            condBranch.elseNode.printNode(visited);
-         }
-         else
-         {
-            LLVMJump jump = (LLVMJump)this.branch;
-            jump.destination.printNode(visited);
-         }
-      */
    }
    
    

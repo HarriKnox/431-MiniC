@@ -17,7 +17,7 @@ class LLVMPrint
    
    public String toString()
    {
-      return "call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([5 x i8]* "
+      return "call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([4 x i8]* "
             + this.format.toString() + ", i32 0, i32 0), i32 "
             + this.expression.toString() + ")";
    }

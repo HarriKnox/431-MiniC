@@ -3,11 +3,13 @@ package main;
 public class Options
 {
    public final String filename;
+   public final boolean stack;
    
    
-   Options(String fname)
+   Options(String fname, boolean stack)
    {
       this.filename = fname;
+      this.stack = stack;
    }
    
    
@@ -18,9 +20,16 @@ public class Options
       
       for (int i = 0; i < args.length; i++)
       {
-         if (args[i].charAt(0) == '-')
+         String arg = args[i];
+         int len = arg.length();
+         
+         if (arg.equals("-stack"))
          {
-            System.err.println("unexpected option: " + args[i]);
+            optsBuilder.stack = true;
+         }
+         else if (arg.charAt(0) == '-')
+         {
+            System.err.println("unexpected option: " + arg);
             System.exit(1);
          }
          else if (optsBuilder.filename != null)
@@ -28,9 +37,14 @@ public class Options
             System.err.println("too many files specified");
             System.exit(1);
          }
+         else if ((len <= 5) || !arg.endsWith(".mini"))
+         {
+            System.err.println("must be a .mini file");
+            System.exit(1);
+         }
          else
          {
-            optsBuilder.filename = args[i];
+            optsBuilder.filename = arg.substring(0, len - 5);
          }
       }
       
@@ -42,10 +56,11 @@ public class Options
    private static class OptionsBuilder
    {
       String filename = null;
+      boolean stack = false;
       
       Options create()
       {
-         return new Options(this.filename);
+         return new Options(this.filename, this.stack);
       }
    }
 }

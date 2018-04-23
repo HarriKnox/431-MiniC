@@ -5,6 +5,7 @@ public class IdentifierExpression
 {
    public final String id;
    public String funcName;
+   public boolean global = false;
 
    public IdentifierExpression(int lineNum, String id)
    {

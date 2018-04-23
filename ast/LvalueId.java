@@ -7,6 +7,7 @@ public class LvalueId
    public final String id;
    public String funcName;
    public Type type;
+   public boolean global = false;;
 
    public LvalueId(int lineNum, String id)
    {

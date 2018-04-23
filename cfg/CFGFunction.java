@@ -179,6 +179,9 @@ class CFGFunction
          return result;
       }
       
+      if (((LvalueId)target).global)
+         return new LLVMGlobal(((LvalueId)target).id);
+      
       return new LLVMIdentifier(((LvalueId)target).funcName, ((LvalueId)target).id);
    }
    
@@ -359,7 +362,7 @@ class CFGFunction
       
       LLVMRegister result = new LLVMRegister();
       
-      node.addInstruction(new LLVMBinary(leftValue, rightValue, result, exp.operator, exp.type));
+      node.addInstruction(new LLVMBinary(leftValue, rightValue, result, exp.operator, exp.operandType));
       return result;
    }
    
@@ -389,13 +392,16 @@ class CFGFunction
    private static LLVMValue writeIdentifierExpressionInstructions(IdentifierExpression exp, CFGNode node)
    {
       LLVMRegister loaded = new LLVMRegister();
-      node.addInstruction(
-         new LLVMLoad(
-            loaded,
-            new LLVMIdentifier(
-               exp.funcName,
-               exp.id),
-            exp.type.toLLVMTypeString()));
+      
+      LLVMValue source;
+      
+      if (exp.global)
+         source = new LLVMGlobal(exp.id);
+      
+      else
+         source = new LLVMIdentifier(exp.funcName, exp.id);
+      
+      node.addInstruction(new LLVMLoad(loaded, source, exp.type.toLLVMTypeString()));
       
       return loaded;
    }
@@ -444,7 +450,12 @@ class CFGFunction
    private static LLVMValue writeReadExpressionInstructions(ReadExpression exp, CFGNode node)
    {
       node.addInstruction(LLVMScanf.SCANF);
-      return LLVMGlobal.READ_SCRATCH;
+      
+      LLVMRegister result = new LLVMRegister();
+      
+      node.addInstruction(new LLVMLoad(result, LLVMGlobal.READ_SCRATCH, "i32"));
+      
+      return result;
    }
    
    
