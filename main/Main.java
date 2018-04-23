@@ -64,7 +64,7 @@ public class Main
       }
       catch (IOException e)
       {
-         System.err.println(e.getMessage());
+         System.err.println(e);
          System.exit(2);
       }
       
