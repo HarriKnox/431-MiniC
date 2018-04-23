@@ -25,7 +25,7 @@ class LLVMUnary
       if (this.operator == UnaryExpression.Operator.MINUS)
          return "sub i32 0, " + this.value.toString();
       
-      return "xor i1, " + this.value.toString() + ", " + LLVMBoolean.TRUE.toString();
+      return "xor i1 " + this.value.toString() + ", " + LLVMBoolean.TRUE.toString();
    }
    
    
