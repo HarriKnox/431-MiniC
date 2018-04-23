@@ -99,7 +99,7 @@ public class Main
    {
       try
       {
-         new ProcessBuilder("clang", fname + ".ll", "-o", fname).start().waitFor();
+         new ProcessBuilder("clang", fname + ".ll", "-o", fname, "-m32").start().waitFor();
       }
       catch (Exception e)
       {
