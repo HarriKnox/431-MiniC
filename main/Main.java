@@ -62,14 +62,14 @@ public class Main
       catch (IOException e)
       {
          System.err.println(e.getMessage());
-         System.exit(1);
+         System.exit(2);
       }
       
       
       if (input == null)
       {
          System.err.println("Some error occurred and I don't know why.");
-         System.exit(1);
+         System.exit(3);
       }
       
       
@@ -104,7 +104,7 @@ public class Main
       catch (Exception e)
       {
          System.err.println(e);
-         System.exit(1);
+         System.exit(4);
       }
    }
    
@@ -118,7 +118,7 @@ public class Main
       if (!TypeChecker.staticTypeCheck(program, opts))
       {
          System.err.println("Detected errors. Fix them and recompile.");
-         System.exit(1);
+         System.exit(5);
       }
       
       ControlFlowGraph programCFG = ControlFlowGraph.buildProgramCFG(program);

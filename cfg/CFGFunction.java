@@ -161,7 +161,7 @@ class CFGFunction
          return generateWhileCFG((WhileStatement)body, node, exit);
       
       System.err.println("I have no idea what went wrong in validFunction: " + body.getClass().getName());
-      System.exit(1);
+      System.exit(9);
       return null;
    }
    

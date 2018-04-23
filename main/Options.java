@@ -30,17 +30,17 @@ public class Options
          else if (arg.charAt(0) == '-')
          {
             System.err.println("unexpected option: " + arg);
-            System.exit(1);
+            System.exit(6);
          }
          else if (optsBuilder.filename != null)
          {
             System.err.println("too many files specified");
-            System.exit(1);
+            System.exit(7);
          }
          else if ((len <= 5) || !arg.endsWith(".mini"))
          {
             System.err.println("must be a .mini file");
-            System.exit(1);
+            System.exit(8);
          }
          else
          {
