@@ -72,7 +72,7 @@ public class MiniToAstStatementVisitor
       return new WhileStatement(
          ctx.getStart().getLine(),
          expressionVisitor.visit(ctx.expression()),
-         visit(ctx.block()));
+         visit(ctx.statement()));
    }
 
    @Override
