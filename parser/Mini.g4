@@ -54,9 +54,9 @@ statement
    |  lvalue '=' (expression | 'read') ';'            # Assignment
    |  'print' expression ';'                          # Print
    |  'print' expression 'endl' ';'                   # PrintLn
-   |  'if' '(' expression ')' thenBlock=block
-         ('else' elseBlock=block)?                    # Conditional
-   |  'while' '(' expression ')' block                # While
+   |  'if' '(' expression ')' thenBlock=statement
+         ('else' elseBlock=statement)?                # Conditional
+   |  'while' '(' expression ')' statement            # While
    |  'delete' expression ';'                         # Delete
    |  'return' (expression)? ';'                      # Return
    |  ID '(' arguments ')' ';'                        # Invocation
