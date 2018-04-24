@@ -73,8 +73,13 @@ class CFGNode
       for (CFGNode parent : this.predecessors)
          parent.addNodeTopo(visited, toposort);
       
-      toposort.add(this);
-      visited.add(this);
+      
+      if (!visited.contains(this))
+      {
+         toposort.add(this);
+         visited.add(this);
+      }
+      
       
       for (CFGNode looped : this.loopbacks)
          looped.addNodeTopo(visited, toposort);
