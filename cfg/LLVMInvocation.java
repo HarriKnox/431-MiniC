@@ -67,7 +67,7 @@ class LLVMInvocation
       String resultString = (this.retType.equals("void")) ? "" : (this.result.toString() + " = ");
       
       
-      return resultString + "call " + this.retType + "@" +
+      return resultString + "call " + this.retType + " @" +
             this.function + "(" + args.toString() + ")";
    }
 }
