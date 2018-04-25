@@ -6,9 +6,9 @@ public class TypeDeclaration
    extends LinedElement
 {
    public final String name;
-   public final List<Declaration> fields;
+   public final Declarations fields;
 
-   public TypeDeclaration(int lineNum, String name, List<Declaration> fields)
+   public TypeDeclaration(int lineNum, String name, Declarations fields)
    {
       super(lineNum);
       this.name = name;

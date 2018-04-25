@@ -8,12 +8,12 @@ import ast.*;
 public class MiniToAstProgramVisitor
    extends MiniBaseVisitor<Program>
 {
-   private final MiniToAstTypeDeclarationVisitor typeDeclarationVisitor =
-      new MiniToAstTypeDeclarationVisitor();
+   private final MiniToAstTypesVisitor typesVisitor =
+      new MiniToAstTypesVisitor();
    private final MiniToAstDeclarationsVisitor declarationsVisitor =
       new MiniToAstDeclarationsVisitor();
-   private final MiniToAstFunctionVisitor functionVisitor =
-      new MiniToAstFunctionVisitor();
+   private final MiniToAstFunctionsVisitor functionsVisitor =
+      new MiniToAstFunctionsVisitor();
 
    @Override
    public Program visitProgram(MiniParser.ProgramContext ctx)
@@ -24,40 +24,28 @@ public class MiniToAstProgramVisitor
           gatherFunctions(ctx.functions()));
    }
 
-   private List<TypeDeclaration> gatherTypes(MiniParser.TypesContext ctx)
+   private Types gatherTypes(MiniParser.TypesContext ctx)
    {
-      List<TypeDeclaration> types = new ArrayList<>();
-
-      for (MiniParser.TypeDeclarationContext tctx : ctx.typeDeclaration())
-      {
-         types.add(typeDeclarationVisitor.visit(tctx));
-      }
-
-      return types;
+      return typesVisitor.visit(ctx);
    }
 
-   private List<Declaration> gatherDeclarations(
+   private Declarations gatherDeclarations(
       MiniParser.DeclarationsContext ctx)
    {
       return declarationsVisitor.visit(ctx);
    }
 
-   private List<Function> gatherFunctions(MiniParser.FunctionsContext ctx)
+   private Functions gatherFunctions(MiniParser.FunctionsContext ctx)
    {
-      List<Function> funcs = new ArrayList<>();
-
-      for (MiniParser.FunctionContext fctx : ctx.function())
-      {
-         funcs.add(functionVisitor.visit(fctx));
-      }
-
-      return funcs;
+      return functionsVisitor.visit(ctx);
    }
 
    @Override
    protected Program defaultResult()
    {
       return new Program(
-         new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+         typesVisitor.defaultResult(),
+         declarationsVisitor.defaultResult(),
+         functionsVisitor.defaultResult());
    }
 }

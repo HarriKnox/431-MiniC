@@ -130,6 +130,11 @@ public class MiniToAstStatementVisitor
       {
          statements.add(visit(sctx));
       }
+      
+      if (statements.size() == 1)
+      {
+         return statements.get(0);
+      }
 
       return new BlockStatement(ctx.getStart().getLine(), statements);
    }

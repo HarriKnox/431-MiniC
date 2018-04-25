@@ -8,7 +8,7 @@ import ast.*;
 public class MiniToAstTypeDeclarationVisitor
    extends MiniBaseVisitor<TypeDeclaration>
 {
-   private final MiniToAstTypeVisitor typeVisitor = new MiniToAstTypeVisitor();
+   private final MiniToAstDeclVisitor declVisitor = new MiniToAstDeclVisitor();
 
    @Override
    public TypeDeclaration visitTypeDeclaration(
@@ -17,27 +17,12 @@ public class MiniToAstTypeDeclarationVisitor
       return new TypeDeclaration(
          ctx.getStart().getLine(),
          ctx.ID().getText(),
-         gatherFieldDeclarations(ctx.nestedDecl()));
+         declVisitor.visit(ctx.nestedDecl()));
    }
-
-   private List<Declaration> gatherFieldDeclarations(
-      MiniParser.NestedDeclContext ctx)
-   {
-      List<Declaration> fields = new ArrayList<>();
-
-      for (MiniParser.DeclContext dctx : ctx.decl())
-      {
-         fields.add(new Declaration(dctx.getStart().getLine(),
-            typeVisitor.visit(dctx.type()),
-            dctx.ID().getText()));
-      }
-
-      return fields;
-   }
-
+   
    @Override
    protected TypeDeclaration defaultResult()
    {
-      return new TypeDeclaration(-1, "invalid", new ArrayList<>());
+      return new TypeDeclaration(-1, "invalid", new Declarations(new ArrayList<>()));
    }
 }

@@ -11,6 +11,7 @@ public class MiniToAstFunctionVisitor
    extends MiniBaseVisitor<Function>
 {
    private final MiniToAstTypeVisitor typeVisitor = new MiniToAstTypeVisitor();
+   private final MiniToAstDeclVisitor declVisitor = new MiniToAstDeclVisitor();
    private final MiniToAstDeclarationsVisitor declarationsVisitor =
       new MiniToAstDeclarationsVisitor();
    private final MiniToAstStatementVisitor statementVisitor =
@@ -22,31 +23,17 @@ public class MiniToAstFunctionVisitor
       return new Function(
          ctx.getStart().getLine(),
          ctx.ID().getText(),
-         gatherParameters(ctx.parameters()),
+         declVisitor.visit(ctx.parameters()),
          typeVisitor.visit(ctx.returnType()),
          declarationsVisitor.visit(ctx.declarations()),
          statementVisitor.visit(ctx.statementList()));
    }
 
-   private List<Declaration> gatherParameters(
-      MiniParser.ParametersContext ctx)
-   {
-      List<Declaration> params = new ArrayList<>();
-
-      for (MiniParser.DeclContext dctx : ctx.decl())
-      {
-         params.add(new Declaration(dctx.getStart().getLine(),
-            typeVisitor.visit(dctx.type()), dctx.ID().getText()));
-      }
-
-      return params;
-   }
-
    @Override
    protected Function defaultResult()
    {
-      return new Function(-1, "invalid", new ArrayList<>(),
-         new VoidType(), new ArrayList<>(),
+      return new Function(-1, "invalid", declarationsVisitor.defaultResult(),
+         new VoidType(), declarationsVisitor.defaultResult(),
          BlockStatement.emptyBlock());
    }
 }

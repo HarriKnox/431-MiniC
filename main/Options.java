@@ -15,7 +15,7 @@ public class Options
    }
    
    
-   static Options parseOptions(String[] args)
+   public static Options parseOptions(String[] args)
    {
       OptionsBuilder ob = new OptionsBuilder();
       

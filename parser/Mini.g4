@@ -25,9 +25,9 @@ decl
    :  type ID
    ;
 type
-   :  'int'             # IntType
-   |  'bool'            # BoolType
-   |  'struct' ID       # StructType
+   :  'int'                                              # IntType
+   |  'bool'                                             # BoolType
+   |  'struct' ID                                        # StructType
    ;
 declarations
    :  declaration*
@@ -45,20 +45,20 @@ parameters
    :  '(' (decl (',' decl)*)? ')'
    ;
 returnType
-   :  type           # ReturnTypeReal
-   |  'void'         # ReturnTypeVoid
+   :  type                                               # ReturnTypeReal
+   |  'void'                                             # ReturnTypeVoid
    ;
 statement
-   :  block                                           # NestedBlock
-   |  lvalue '=' (expression | 'read') ';'            # Assignment
-   |  'print' expression ';'                          # Print
-   |  'print' expression 'endl' ';'                   # PrintLn
+   :  block                                              # NestedBlock
+   |  lvalue '=' (expression | 'read') ';'               # Assignment
+   |  'print' expression ';'                             # Print
+   |  'print' expression 'endl' ';'                      # PrintLn
    |  'if' '(' expression ')' thenBlock=statement
-         ('else' elseBlock=statement)?                # Conditional
-   |  'while' '(' expression ')' statement            # While
-   |  'delete' expression ';'                         # Delete
-   |  'return' (expression)? ';'                      # Return
-   |  ID '(' arguments ')' ';'                        # Invocation
+         ('else' elseBlock=statement)?                   # Conditional
+   |  'while' '(' expression ')' statement               # While
+   |  'delete' expression ';'                            # Delete
+   |  'return' (expression)? ';'                         # Return
+   |  ID '(' arguments ')' ';'                           # Invocation
    ;
 block
    :  '{' statementList '}'
@@ -67,8 +67,8 @@ statementList
    :  statement*
    ;
 lvalue
-   :  ID                                              # LvalueId
-   |  lvalue '.' ID                                   # LvalueDot
+   :  ID                                                 # LvalueId
+   |  lvalue '.' ID                                      # LvalueDot
    ;
 expression
    :  ID '(' arguments ')'                               # InvocationExpr

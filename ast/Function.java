@@ -7,12 +7,12 @@ public class Function
 {
    public final String name;
    public final Type retType;
-   public final List<Declaration> params;
-   public final List<Declaration> locals;
+   public final Declarations params;
+   public final Declarations locals;
    public final Statement body;
 
-   public Function(int lineNum, String name, List<Declaration> params,
-      Type retType, List<Declaration> locals, Statement body)
+   public Function(int lineNum, String name, Declarations params,
+      Type retType, Declarations locals, Statement body)
    {
       super(lineNum);
       this.name = name;

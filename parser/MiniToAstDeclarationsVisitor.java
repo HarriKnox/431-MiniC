@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import ast.*;
 
 public class MiniToAstDeclarationsVisitor
-   extends MiniBaseVisitor<List<Declaration>>
+   extends MiniBaseVisitor<Declarations>
 {
    private final MiniToAstTypeVisitor typeVisitor = new MiniToAstTypeVisitor();
 
    @Override
-   public List<Declaration> visitDeclarations(
+   public Declarations visitDeclarations(
       MiniParser.DeclarationsContext ctx)
    {
       List<Declaration> decls = new ArrayList<>();
@@ -22,7 +22,7 @@ public class MiniToAstDeclarationsVisitor
          addDeclarationsTo(dctx, decls);
       }
 
-      return decls;
+      return new Declarations(decls);
    }
 
    private void addDeclarationsTo(MiniParser.DeclarationContext ctx,
@@ -38,8 +38,8 @@ public class MiniToAstDeclarationsVisitor
    }
 
    @Override
-   protected List<Declaration> defaultResult()
+   protected Declarations defaultResult()
    {
-      return new ArrayList<>();
+      return new Declarations(new ArrayList<>());
    }
 }
