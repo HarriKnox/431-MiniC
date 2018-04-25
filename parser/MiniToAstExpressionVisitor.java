@@ -34,9 +34,39 @@ public class MiniToAstExpressionVisitor
    }
 
    @Override
-   public Expression visitBinaryExpr(MiniParser.BinaryExprContext ctx)
+   public Expression visitArithmeticExpr(MiniParser.ArithmeticExprContext ctx)
    {
-      return new BinaryExpression(
+      return new ArithmeticExpression(
+         ctx.op.getLine(),
+         ctx.op.getText(),
+         visit(ctx.lft),
+         visit(ctx.rht));
+   }
+
+   @Override
+   public Expression visitRelationalExpr(MiniParser.RelationalExprContext ctx)
+   {
+      return new RelationalExpression(
+         ctx.op.getLine(),
+         ctx.op.getText(),
+         visit(ctx.lft),
+         visit(ctx.rht));
+   }
+
+   @Override
+   public Expression visitEqualityExpr(MiniParser.EqualityExprContext ctx)
+   {
+      return new EqualityExpression(
+         ctx.op.getLine(),
+         ctx.op.getText(),
+         visit(ctx.lft),
+         visit(ctx.rht));
+   }
+
+   @Override
+   public Expression visitLogicalExpr(MiniParser.LogicalExprContext ctx)
+   {
+      return new LogicalExpression(
          ctx.op.getLine(),
          ctx.op.getText(),
          visit(ctx.lft),
