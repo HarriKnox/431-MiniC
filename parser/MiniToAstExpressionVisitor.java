@@ -34,43 +34,89 @@ public class MiniToAstExpressionVisitor
    }
 
    @Override
-   public Expression visitArithmeticExpr(MiniParser.ArithmeticExprContext ctx)
+   public Expression visitArithmeticExpr(MiniParser.BinaryExprContext ctx)
    {
-      return new ArithmeticExpression(
-         ctx.op.getLine(),
-         ctx.op.getText(),
-         visit(ctx.lft),
-         visit(ctx.rht));
-   }
-
-   @Override
-   public Expression visitRelationalExpr(MiniParser.RelationalExprContext ctx)
-   {
-      return new RelationalExpression(
-         ctx.op.getLine(),
-         ctx.op.getText(),
-         visit(ctx.lft),
-         visit(ctx.rht));
-   }
-
-   @Override
-   public Expression visitEqualityExpr(MiniParser.EqualityExprContext ctx)
-   {
-      return new EqualityExpression(
-         ctx.op.getLine(),
-         ctx.op.getText(),
-         visit(ctx.lft),
-         visit(ctx.rht));
-   }
-
-   @Override
-   public Expression visitLogicalExpr(MiniParser.LogicalExprContext ctx)
-   {
-      return new LogicalExpression(
-         ctx.op.getLine(),
-         ctx.op.getText(),
-         visit(ctx.lft),
-         visit(ctx.rht));
+      switch (ctx.op.getText())
+      {
+         /* Arithmetic */
+         case "*":
+            return new TimesExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         
+         case "/":
+            return new DivideExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case "+":
+            return new PlusExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case "-":
+            return new MinusExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         /* Relational */
+         case "<":
+            return new LessThanExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case ">":
+            return new GreaterThanExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case "<=":
+            return new LessEqualsExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case ">=":
+            return new GreaterEqualsExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         /* Equality */
+         case "==":
+            return new EqualsExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case "!=":
+            return new NotEqualsExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         /* Logical */
+         case "&&":
+            return new AndExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+         
+         case "||":
+            return new OrExpression(
+               ctx.op.getLine(),
+               visit(ctx.lft),
+               visit(ctx.rht));
+      }
+      
+      return null;
    }
 
    @Override

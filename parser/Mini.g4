@@ -74,13 +74,13 @@ expression
    :  ID '(' arguments ')'                               # InvocationExpr
    |  expression ('.' ID)                                # DotExpr
    |  op=('-' | '!') expression                          # UnaryExpr
-   |  lft=expression op=('*' | '/') rht=expression       # ArithmeticExpr
-   |  lft=expression op=('+' | '-') rht=expression       # ArithmeticExpr
+   |  lft=expression op=('*' | '/') rht=expression       # BinaryExpr
+   |  lft=expression op=('+' | '-') rht=expression       # BinaryExpr
    |  lft=expression op=('<' | '>' | '<=' | '>=')
-         rht=expression                                  # RelationalExpr
-   |  lft=expression op=('==' | '!=') rht=expression     # EqualityExpr
-   |  lft=expression op='&&' rht=expression              # LogicalExpr
-   |  lft=expression op='||' rht=expression              # LogicalExpr
+         rht=expression                                  # BinaryExpr
+   |  lft=expression op=('==' | '!=') rht=expression     # BinaryExpr
+   |  lft=expression op='&&' rht=expression              # BinaryExpr
+   |  lft=expression op='||' rht=expression              # BinaryExpr
    |  ID                                                 # IdentifierExpr
    |  INTEGER                                            # IntegerExpr
    |  'true'                                             # TrueExpr
