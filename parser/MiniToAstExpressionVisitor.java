@@ -137,11 +137,29 @@ public class MiniToAstExpressionVisitor
    }
 
    @Override
-   public Expression visitUnaryExpr(MiniParser.UnaryExprContext ctx)
+   public Expression visitNegateExpr(MiniParser.UnaryExprContext ctx)
    {
-      return new UnaryExpression(
+      switch (ctx.op.getText())
+      {
+         case "!":
+            return new NegateExpression(
+               ctx.op.getLine(),
+               visit(ctx.expression));
+         
+         case "-":
+            return new NotExpression(
+               ctx.op.getLine(),
+               visit(ctx.expression));
+      }
+      
+      return null;
+   }
+
+   @Override
+   public Expression visitNotExpr(MiniParser.NotExprContext ctx)
+   {
+      return new NotExpression(
          ctx.op.getLine(),
-         ctx.op.getText(),
          visit(ctx.expression()));
    }
 
