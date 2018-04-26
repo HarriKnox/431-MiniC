@@ -11,6 +11,7 @@ import ast.expression.binary.arithmetic.*;
 import ast.expression.binary.equality.*;
 import ast.expression.binary.logical.*;
 import ast.expression.binary.relational.*;
+import ast.expression.unary.*;
 
 
 public class MiniToAstExpressionVisitor

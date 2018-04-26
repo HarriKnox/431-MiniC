@@ -1,4 +1,6 @@
-package ast.expression;
+package ast.expression.unary;
+
+import ast.expression.Expression;
 
 public class NotExpression
    extends UnaryExpression
