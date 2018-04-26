@@ -7,7 +7,7 @@ CLASSPATH=.:../out:../lib/*
 
 
 JAVA_FILES=main/*.java ast/*.java parser/*.java analyzer/*.java cfg/*.java
-ANTLR_FILES=./parser/MiniBaseVisitor.java ./parser/MiniLexer.java ./parser/MiniVisitor.java ./parser/MiniParser.java ./parser/MiniBaseListener.java ./parser/MiniListener.java
+ANTLR_FILES=./parser/MiniBaseVisitor.java ./parser/MiniVisitor.java ./parser/MiniLexer.java ./parser/MiniParser.java ./parser/MiniBaseListener.java ./parser/MiniListener.java
 
 all : ../out out/main/Main.class
 
@@ -20,16 +20,14 @@ out/main/Main.class : $(JAVA_FILES)
 clean:
 	-rm -rf ../out
 
-clean-antlr:
-	-rm $(ANTLR_FILES) ./parser/MiniLexer.tokens ./parser/Mini.tokens
-
 
 remake : clean all
 
-antlr : parser/Mini.g4
+antlr :
+	-rm $(ANTLR_FILES) ./parser/MiniLexer.tokens ./parser/Mini.tokens ./parser/Mini.interp ./parser/MiniLexer.interp
 	$(JAVA) -cp $(CLASSPATH) org.antlr.v4.Tool -visitor parser/Mini.g4
 	sed -e 's/\t/   /g' -i $(ANTLR_FILES)
 
 
-test: ../out
+test: clean ../out
 	$(JAVAC) -cp $(CLASSPATH) -d ../out Main.java
