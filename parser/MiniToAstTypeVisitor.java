@@ -1,6 +1,10 @@
 package parser;
 
-import ast.*;
+import ast.type.BoolType;
+import ast.type.IntType;
+import ast.type.StructType;
+import ast.type.Type;
+import ast.type.VoidType;
 
 public class MiniToAstTypeVisitor
    extends MiniBaseVisitor<Type>

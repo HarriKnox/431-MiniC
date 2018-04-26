@@ -5,7 +5,10 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
 import java.util.ArrayList;
 
-import ast.*;
+import ast.statement.*;
+import ast.lvalue.*;
+import ast.expression.Expression;
+import ast.expression.InvocationExpression;
 
 public class MiniToAstStatementVisitor
    extends MiniBaseVisitor<Statement>
@@ -22,21 +25,10 @@ public class MiniToAstStatementVisitor
    @Override
    public Statement visitAssignment(MiniParser.AssignmentContext ctx)
    {
-      Expression expression;
-
-      if (ctx.expression() != null)
-      {
-         expression = expressionVisitor.visit(ctx.expression());
-      }
-      else
-      {
-         expression = new ReadExpression(ctx.getStart().getLine());
-      }
-
       return new AssignmentStatement(
          ctx.getStart().getLine(),
          visitLvalue(ctx.lvalue()),
-         expression);
+         expressionVisitor.visit(ctx.expression()));
    }
 
    @Override
@@ -151,23 +143,7 @@ public class MiniToAstStatementVisitor
       {
          MiniParser.LvalueDotContext lctx = (MiniParser.LvalueDotContext)ctx;
          return new LvalueDot(lctx.getStart().getLine(),
-            visitLvalueNested(lctx.lvalue()), lctx.ID().getText());
-      }
-   }
-
-   private Expression visitLvalueNested(MiniParser.LvalueContext ctx)
-   {
-      if (ctx instanceof MiniParser.LvalueIdContext)
-      {
-         MiniParser.LvalueIdContext lctx = (MiniParser.LvalueIdContext)ctx;
-         return new IdentifierExpression(lctx.getStart().getLine(),
-            lctx.ID().getText());
-      }
-      else
-      {
-         MiniParser.LvalueDotContext lctx = (MiniParser.LvalueDotContext)ctx;
-         return new DotExpression(lctx.getStart().getLine(),
-            visitLvalueNested(lctx.lvalue()), lctx.ID().getText());
+            visitLvalue(lctx.lvalue()), lctx.ID().getText());
       }
    }
 

@@ -12,9 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ast.Program;
-import ast.TypeDeclaration;
-import ast.Declaration;
-import ast.Function;
 
 import main.Options;
 

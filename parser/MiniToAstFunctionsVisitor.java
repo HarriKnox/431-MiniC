@@ -5,7 +5,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
 import java.util.ArrayList;
 
-import ast.*;
+import ast.declaration.Function;
+import ast.declaration.Functions;
+
 
 public class MiniToAstFunctionsVisitor
    extends MiniBaseVisitor<Functions>

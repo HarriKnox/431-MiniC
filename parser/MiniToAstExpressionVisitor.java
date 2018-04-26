@@ -5,7 +5,13 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
 import java.util.ArrayList;
 
-import ast.*;
+import ast.expression.*;
+import ast.expression.binary.*;
+import ast.expression.binary.arithmetic.*;
+import ast.expression.binary.equality.*;
+import ast.expression.binary.logical.*;
+import ast.expression.binary.relational.*;
+
 
 public class MiniToAstExpressionVisitor
    extends MiniBaseVisitor<Expression>
@@ -34,7 +40,7 @@ public class MiniToAstExpressionVisitor
    }
 
    @Override
-   public Expression visitArithmeticExpr(MiniParser.BinaryExprContext ctx)
+   public Expression visitBinaryExpr(MiniParser.BinaryExprContext ctx)
    {
       switch (ctx.op.getText())
       {
@@ -137,30 +143,28 @@ public class MiniToAstExpressionVisitor
    }
 
    @Override
-   public Expression visitNegateExpr(MiniParser.UnaryExprContext ctx)
+   public Expression visitReadExpr(MiniParser.ReadExprContext ctx)
+   {
+      return new ReadExpression(ctx.getStart().getLine());
+   }
+
+   @Override
+   public Expression visitUnaryExpr(MiniParser.UnaryExprContext ctx)
    {
       switch (ctx.op.getText())
       {
          case "!":
             return new NegateExpression(
                ctx.op.getLine(),
-               visit(ctx.expression));
+               visit(ctx.expression()));
          
          case "-":
             return new NotExpression(
                ctx.op.getLine(),
-               visit(ctx.expression));
+               visit(ctx.expression()));
       }
       
       return null;
-   }
-
-   @Override
-   public Expression visitNotExpr(MiniParser.NotExprContext ctx)
-   {
-      return new NotExpression(
-         ctx.op.getLine(),
-         visit(ctx.expression()));
    }
 
    @Override

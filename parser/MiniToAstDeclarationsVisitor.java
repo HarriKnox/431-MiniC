@@ -4,7 +4,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
 import java.util.ArrayList;
 
-import ast.*;
+import ast.declaration.Declaration;
+import ast.declaration.Declarations;
+import ast.type.Type;
 
 public class MiniToAstDeclarationsVisitor
    extends MiniBaseVisitor<Declarations>

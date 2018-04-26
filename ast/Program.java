@@ -1,5 +1,8 @@
 package ast;
 
+import ast.declaration.Types;
+import ast.declaration.Declarations;
+import ast.declaration.Functions;
 
 public class Program
 {

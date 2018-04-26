@@ -3,7 +3,8 @@ package parser;
 import java.util.List;
 import java.util.ArrayList;
 
-import ast.*;
+import ast.declaration.Declaration;
+import ast.declaration.Declarations;
 
 public class MiniToAstDeclVisitor
    extends MiniBaseVisitor<Declarations>
