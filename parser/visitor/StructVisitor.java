@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,10 +9,10 @@ import java.util.ArrayList;
 import ast.declaration.Declarations;
 import ast.declaration.Struct;
 
-public class MiniToAstStructVisitor
+public class StructVisitor
    extends MiniBaseVisitor<Struct>
 {
-   private final MiniToAstDeclVisitor declVisitor = new MiniToAstDeclVisitor();
+   private final DeclVisitor declVisitor = new DeclVisitor();
 
    @Override
    public Struct visitStruct(

@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
@@ -8,10 +11,10 @@ import ast.declaration.Declaration;
 import ast.declaration.Declarations;
 import ast.type.Type;
 
-public class MiniToAstDeclarationsVisitor
+public class DeclarationsVisitor
    extends MiniBaseVisitor<Declarations>
 {
-   private final MiniToAstTypeVisitor typeVisitor = new MiniToAstTypeVisitor();
+   private final TypeVisitor typeVisitor = new TypeVisitor();
 
    @Override
    public Declarations visitDeclarations(

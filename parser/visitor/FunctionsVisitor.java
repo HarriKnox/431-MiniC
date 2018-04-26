@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -9,11 +12,11 @@ import ast.declaration.Function;
 import ast.declaration.Functions;
 
 
-public class MiniToAstFunctionsVisitor
+public class FunctionsVisitor
    extends MiniBaseVisitor<Functions>
 {
-   private final MiniToAstFunctionVisitor functionVisitor =
-      new MiniToAstFunctionVisitor();
+   private final FunctionVisitor functionVisitor =
+      new FunctionVisitor();
    
    @Override
    public Functions visitFunctions(MiniParser.FunctionsContext ctx)

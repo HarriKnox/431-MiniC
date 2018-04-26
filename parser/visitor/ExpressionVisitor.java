@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -14,7 +17,7 @@ import ast.expression.binary.relational.*;
 import ast.expression.unary.*;
 
 
-public class MiniToAstExpressionVisitor
+public class ExpressionVisitor
    extends MiniBaseVisitor<Expression>
 {
    @Override

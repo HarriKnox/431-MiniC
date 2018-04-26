@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -10,11 +13,11 @@ import ast.lvalue.*;
 import ast.expression.Expression;
 import ast.expression.InvocationExpression;
 
-public class MiniToAstStatementVisitor
+public class StatementVisitor
    extends MiniBaseVisitor<Statement>
 {
-   private final MiniToAstExpressionVisitor expressionVisitor =
-      new MiniToAstExpressionVisitor();
+   private final ExpressionVisitor expressionVisitor =
+      new ExpressionVisitor();
 
    @Override
    public Statement visitNestedBlock(MiniParser.NestedBlockContext ctx)

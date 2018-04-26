@@ -17,7 +17,7 @@ import main.Options;
 
 import parser.MiniLexer;
 import parser.MiniParser;
-import parser.MiniToAstProgramVisitor;
+import parser.visitor.ProgramVisitor;
 
 
 public class Main
@@ -39,7 +39,7 @@ public class Main
       }
       
       
-      return new MiniToAstProgramVisitor().visit(tree);
+      return new ProgramVisitor().visit(tree);
    }
    
    

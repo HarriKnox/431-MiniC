@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,10 +9,10 @@ import java.util.ArrayList;
 import ast.declaration.Declaration;
 import ast.declaration.Declarations;
 
-public class MiniToAstDeclVisitor
+public class DeclVisitor
    extends MiniBaseVisitor<Declarations>
 {
-   private final MiniToAstTypeVisitor typeVisitor = new MiniToAstTypeVisitor();
+   private final TypeVisitor typeVisitor = new TypeVisitor();
 
    @Override
    public Declarations visitNestedDecl(MiniParser.NestedDeclContext ctx)

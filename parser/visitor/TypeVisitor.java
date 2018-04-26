@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import ast.type.BoolType;
 import ast.type.IntType;
@@ -6,7 +9,7 @@ import ast.type.StructType;
 import ast.type.Type;
 import ast.type.VoidType;
 
-public class MiniToAstTypeVisitor
+public class TypeVisitor
    extends MiniBaseVisitor<Type>
 {
    @Override

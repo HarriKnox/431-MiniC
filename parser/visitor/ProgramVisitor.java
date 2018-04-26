@@ -1,4 +1,7 @@
-package parser;
+package parser.visitor;
+
+import parser.MiniBaseVisitor;
+import parser.MiniParser;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -8,15 +11,15 @@ import ast.declaration.Declarations;
 import ast.declaration.Functions;
 import ast.declaration.Structs;
 
-public class MiniToAstProgramVisitor
+public class ProgramVisitor
    extends MiniBaseVisitor<Program>
 {
-   private final MiniToAstStructsVisitor structsVisitor =
-      new MiniToAstStructsVisitor();
-   private final MiniToAstDeclarationsVisitor declarationsVisitor =
-      new MiniToAstDeclarationsVisitor();
-   private final MiniToAstFunctionsVisitor functionsVisitor =
-      new MiniToAstFunctionsVisitor();
+   private final StructsVisitor structsVisitor =
+      new StructsVisitor();
+   private final DeclarationsVisitor declarationsVisitor =
+      new DeclarationsVisitor();
+   private final FunctionsVisitor functionsVisitor =
+      new FunctionsVisitor();
 
    @Override
    public Program visitProgram(MiniParser.ProgramContext ctx)
