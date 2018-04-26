@@ -50,7 +50,7 @@ returnType
    ;
 statement
    :  block                                              # NestedBlock
-   |  lvalue '=' (expression | 'read') ';'               # Assignment
+   |  lvalue '=' expression  ';'                         # Assignment
    |  'print' expression ';'                             # Print
    |  'print' expression 'endl' ';'                      # PrintLn
    |  'if' '(' expression ')' thenBlock=statement
@@ -72,7 +72,7 @@ lvalue
    ;
 expression
    :  ID '(' arguments ')'                               # InvocationExpr
-   |  expression ('.' ID)                                # DotExpr
+   |  expression '.' ID                                  # DotExpr
    |  op=('-' | '!') expression                          # UnaryExpr
    |  lft=expression op=('*' | '/') rht=expression       # BinaryExpr
    |  lft=expression op=('+' | '-') rht=expression       # BinaryExpr
@@ -87,6 +87,7 @@ expression
    |  'false'                                            # FalseExpr
    |  'new' ID                                           # NewExpr
    |  'null'                                             # NullExpr
+   |  'read'                                             # ReadExpr
    |  '(' expression ')'                                 # NestedExpr
    ;
 arguments

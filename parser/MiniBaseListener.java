@@ -378,6 +378,18 @@ public class MiniBaseListener implements MiniListener {
     *
     * <p>The default implementation does nothing.</p>
     */
+   @Override public void enterReadExpr(MiniParser.ReadExprContext ctx) { }
+   /**
+    * {@inheritDoc}
+    *
+    * <p>The default implementation does nothing.</p>
+    */
+   @Override public void exitReadExpr(MiniParser.ReadExprContext ctx) { }
+   /**
+    * {@inheritDoc}
+    *
+    * <p>The default implementation does nothing.</p>
+    */
    @Override public void enterIdentifierExpr(MiniParser.IdentifierExprContext ctx) { }
    /**
     * {@inheritDoc}

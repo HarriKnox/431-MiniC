@@ -211,6 +211,13 @@ public interface MiniVisitor<T> extends ParseTreeVisitor<T> {
     */
    T visitTrueExpr(MiniParser.TrueExprContext ctx);
    /**
+    * Visit a parse tree produced by the {@code ReadExpr}
+    * labeled alternative in {@link MiniParser#expression}.
+    * @param ctx the parse tree
+    * @return the visitor result
+    */
+   T visitReadExpr(MiniParser.ReadExprContext ctx);
+   /**
     * Visit a parse tree produced by the {@code IdentifierExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree

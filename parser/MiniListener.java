@@ -346,6 +346,18 @@ public interface MiniListener extends ParseTreeListener {
     */
    void exitTrueExpr(MiniParser.TrueExprContext ctx);
    /**
+    * Enter a parse tree produced by the {@code ReadExpr}
+    * labeled alternative in {@link MiniParser#expression}.
+    * @param ctx the parse tree
+    */
+   void enterReadExpr(MiniParser.ReadExprContext ctx);
+   /**
+    * Exit a parse tree produced by the {@code ReadExpr}
+    * labeled alternative in {@link MiniParser#expression}.
+    * @param ctx the parse tree
+    */
+   void exitReadExpr(MiniParser.ReadExprContext ctx);
+   /**
     * Enter a parse tree produced by the {@code IdentifierExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree
