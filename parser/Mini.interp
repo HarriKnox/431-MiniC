@@ -90,8 +90,8 @@ COMMENT
 
 rule names:
 program
-types
-typeDeclaration
+structs
+struct
 nestedDecl
 decl
 type

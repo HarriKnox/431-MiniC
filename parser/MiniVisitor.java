@@ -19,17 +19,17 @@ public interface MiniVisitor<T> extends ParseTreeVisitor<T> {
     */
    T visitProgram(MiniParser.ProgramContext ctx);
    /**
-    * Visit a parse tree produced by {@link MiniParser#types}.
+    * Visit a parse tree produced by {@link MiniParser#structs}.
     * @param ctx the parse tree
     * @return the visitor result
     */
-   T visitTypes(MiniParser.TypesContext ctx);
+   T visitStructs(MiniParser.StructsContext ctx);
    /**
-    * Visit a parse tree produced by {@link MiniParser#typeDeclaration}.
+    * Visit a parse tree produced by {@link MiniParser#struct}.
     * @param ctx the parse tree
     * @return the visitor result
     */
-   T visitTypeDeclaration(MiniParser.TypeDeclarationContext ctx);
+   T visitStruct(MiniParser.StructContext ctx);
    /**
     * Visit a parse tree produced by {@link MiniParser#nestedDecl}.
     * @param ctx the parse tree

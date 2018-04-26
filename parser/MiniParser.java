@@ -26,13 +26,13 @@ public class MiniParser extends Parser {
       T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
       ID=39, INTEGER=40, WS=41, COMMENT=42;
    public static final int
-      RULE_program = 0, RULE_types = 1, RULE_typeDeclaration = 2, RULE_nestedDecl = 3, 
+      RULE_program = 0, RULE_structs = 1, RULE_struct = 2, RULE_nestedDecl = 3, 
       RULE_decl = 4, RULE_type = 5, RULE_declarations = 6, RULE_declaration = 7, 
       RULE_functions = 8, RULE_function = 9, RULE_parameters = 10, RULE_returnType = 11, 
       RULE_statement = 12, RULE_block = 13, RULE_statementList = 14, RULE_lvalue = 15, 
       RULE_expression = 16, RULE_arguments = 17;
    public static final String[] ruleNames = {
-      "program", "types", "typeDeclaration", "nestedDecl", "decl", "type", "declarations", 
+      "program", "structs", "struct", "nestedDecl", "decl", "type", "declarations", 
       "declaration", "functions", "function", "parameters", "returnType", "statement", 
       "block", "statementList", "lvalue", "expression", "arguments"
    };
@@ -100,8 +100,8 @@ public class MiniParser extends Parser {
       _interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
    }
    public static class ProgramContext extends ParserRuleContext {
-      public TypesContext types() {
-         return getRuleContext(TypesContext.class,0);
+      public StructsContext structs() {
+         return getRuleContext(StructsContext.class,0);
       }
       public DeclarationsContext declarations() {
          return getRuleContext(DeclarationsContext.class,0);
@@ -136,7 +136,7 @@ public class MiniParser extends Parser {
          enterOuterAlt(_localctx, 1);
          {
          setState(36);
-         types();
+         structs();
          setState(37);
          declarations();
          setState(38);
@@ -156,35 +156,35 @@ public class MiniParser extends Parser {
       return _localctx;
    }
 
-   public static class TypesContext extends ParserRuleContext {
-      public List<TypeDeclarationContext> typeDeclaration() {
-         return getRuleContexts(TypeDeclarationContext.class);
+   public static class StructsContext extends ParserRuleContext {
+      public List<StructContext> struct() {
+         return getRuleContexts(StructContext.class);
       }
-      public TypeDeclarationContext typeDeclaration(int i) {
-         return getRuleContext(TypeDeclarationContext.class,i);
+      public StructContext struct(int i) {
+         return getRuleContext(StructContext.class,i);
       }
-      public TypesContext(ParserRuleContext parent, int invokingState) {
+      public StructsContext(ParserRuleContext parent, int invokingState) {
          super(parent, invokingState);
       }
-      @Override public int getRuleIndex() { return RULE_types; }
+      @Override public int getRuleIndex() { return RULE_structs; }
       @Override
       public void enterRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterTypes(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterStructs(this);
       }
       @Override
       public void exitRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitTypes(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitStructs(this);
       }
       @Override
       public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitTypes(this);
+         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitStructs(this);
          else return visitor.visitChildren(this);
       }
    }
 
-   public final TypesContext types() throws RecognitionException {
-      TypesContext _localctx = new TypesContext(_ctx, getState());
-      enterRule(_localctx, 2, RULE_types);
+   public final StructsContext structs() throws RecognitionException {
+      StructsContext _localctx = new StructsContext(_ctx, getState());
+      enterRule(_localctx, 2, RULE_structs);
       try {
          int _alt;
          enterOuterAlt(_localctx, 1);
@@ -197,7 +197,7 @@ public class MiniParser extends Parser {
                {
                {
                setState(41);
-               typeDeclaration();
+               struct();
                }
                } 
             }
@@ -218,33 +218,33 @@ public class MiniParser extends Parser {
       return _localctx;
    }
 
-   public static class TypeDeclarationContext extends ParserRuleContext {
+   public static class StructContext extends ParserRuleContext {
       public TerminalNode ID() { return getToken(MiniParser.ID, 0); }
       public NestedDeclContext nestedDecl() {
          return getRuleContext(NestedDeclContext.class,0);
       }
-      public TypeDeclarationContext(ParserRuleContext parent, int invokingState) {
+      public StructContext(ParserRuleContext parent, int invokingState) {
          super(parent, invokingState);
       }
-      @Override public int getRuleIndex() { return RULE_typeDeclaration; }
+      @Override public int getRuleIndex() { return RULE_struct; }
       @Override
       public void enterRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterTypeDeclaration(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterStruct(this);
       }
       @Override
       public void exitRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitTypeDeclaration(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitStruct(this);
       }
       @Override
       public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitTypeDeclaration(this);
+         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitStruct(this);
          else return visitor.visitChildren(this);
       }
    }
 
-   public final TypeDeclarationContext typeDeclaration() throws RecognitionException {
-      TypeDeclarationContext _localctx = new TypeDeclarationContext(_ctx, getState());
-      enterRule(_localctx, 4, RULE_typeDeclaration);
+   public final StructContext struct() throws RecognitionException {
+      StructContext _localctx = new StructContext(_ctx, getState());
+      enterRule(_localctx, 4, RULE_struct);
       try {
          enterOuterAlt(_localctx, 1);
          {

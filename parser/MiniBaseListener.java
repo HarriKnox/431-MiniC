@@ -30,25 +30,25 @@ public class MiniBaseListener implements MiniListener {
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void enterTypes(MiniParser.TypesContext ctx) { }
+   @Override public void enterStructs(MiniParser.StructsContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void exitTypes(MiniParser.TypesContext ctx) { }
+   @Override public void exitStructs(MiniParser.StructsContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void enterTypeDeclaration(MiniParser.TypeDeclarationContext ctx) { }
+   @Override public void enterStruct(MiniParser.StructContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void exitTypeDeclaration(MiniParser.TypeDeclarationContext ctx) { }
+   @Override public void exitStruct(MiniParser.StructContext ctx) { }
    /**
     * {@inheritDoc}
     *

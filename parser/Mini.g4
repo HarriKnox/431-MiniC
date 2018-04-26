@@ -10,12 +10,12 @@ package parser;
 */
 
 program
-   :  types declarations functions EOF
+   :  structs declarations functions EOF
    ;
-types
-   :  typeDeclaration*
+structs
+   :  struct*
    ;
-typeDeclaration
+struct
    :  'struct' ID '{' nestedDecl '}' ';'
    ;
 nestedDecl

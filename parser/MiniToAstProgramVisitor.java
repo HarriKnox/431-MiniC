@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 import ast.Program;
 import ast.declaration.Declarations;
-import ast.declaration.Types;
 import ast.declaration.Functions;
+import ast.declaration.Structs;
 
 public class MiniToAstProgramVisitor
    extends MiniBaseVisitor<Program>
 {
-   private final MiniToAstTypesVisitor typesVisitor =
-      new MiniToAstTypesVisitor();
+   private final MiniToAstStructsVisitor structsVisitor =
+      new MiniToAstStructsVisitor();
    private final MiniToAstDeclarationsVisitor declarationsVisitor =
       new MiniToAstDeclarationsVisitor();
    private final MiniToAstFunctionsVisitor functionsVisitor =
@@ -22,14 +22,14 @@ public class MiniToAstProgramVisitor
    public Program visitProgram(MiniParser.ProgramContext ctx)
    {
       return new Program(
-          gatherTypes(ctx.types()),
+          gatherStructs(ctx.structs()),
           gatherDeclarations(ctx.declarations()),
           gatherFunctions(ctx.functions()));
    }
 
-   private Types gatherTypes(MiniParser.TypesContext ctx)
+   private Structs gatherStructs(MiniParser.StructsContext ctx)
    {
-      return typesVisitor.visit(ctx);
+      return structsVisitor.visit(ctx);
    }
 
    private Declarations gatherDeclarations(
@@ -47,7 +47,7 @@ public class MiniToAstProgramVisitor
    protected Program defaultResult()
    {
       return new Program(
-         typesVisitor.defaultResult(),
+         structsVisitor.defaultResult(),
          declarationsVisitor.defaultResult(),
          functionsVisitor.defaultResult());
    }

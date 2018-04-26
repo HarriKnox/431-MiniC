@@ -26,14 +26,14 @@ public class MiniBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements M
     * <p>The default implementation returns the result of calling
     * {@link #visitChildren} on {@code ctx}.</p>
     */
-   @Override public T visitTypes(MiniParser.TypesContext ctx) { return visitChildren(ctx); }
+   @Override public T visitStructs(MiniParser.StructsContext ctx) { return visitChildren(ctx); }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation returns the result of calling
     * {@link #visitChildren} on {@code ctx}.</p>
     */
-   @Override public T visitTypeDeclaration(MiniParser.TypeDeclarationContext ctx) { return visitChildren(ctx); }
+   @Override public T visitStruct(MiniParser.StructContext ctx) { return visitChildren(ctx); }
    /**
     * {@inheritDoc}
     *

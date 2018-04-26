@@ -1,19 +1,19 @@
 package ast;
 
-import ast.declaration.Types;
+import ast.declaration.Structs;
 import ast.declaration.Declarations;
 import ast.declaration.Functions;
 
 public class Program
 {
-   public final Types types;
-   public final Declarations decls;
-   public final Functions funcs;
+   public final Structs structs;
+   public final Declarations globals;
+   public final Functions functions;
 
-   public Program(Types types, Declarations decls, Functions funcs)
+   public Program(Structs structs, Declarations globals, Functions functions)
    {
-      this.types = types;
-      this.decls = decls;
-      this.funcs = funcs;
+      this.structs = structs;
+      this.globals = globals;
+      this.functions = functions;
    }
 }
