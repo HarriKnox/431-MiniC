@@ -19,10 +19,10 @@ import static parser.MiniParser.StructsContext;
 public class ProgramVisitor extends MiniBaseVisitor<Program>
 {
    private final StructsVisitor structsVisitor = new StructsVisitor();
-   
+
    private final DeclarationsVisitor declarationsVisitor =
       new DeclarationsVisitor();
-   
+
    private final FunctionsVisitor functionsVisitor = new FunctionsVisitor();
 
 

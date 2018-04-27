@@ -17,18 +17,18 @@ import static parser.MiniParser.FunctionsContext;
 public class FunctionsVisitor extends MiniBaseVisitor<Functions>
 {
    private final FunctionVisitor functionVisitor = new FunctionVisitor();
-   
-   
+
+
    @Override
    public Functions visitFunctions(FunctionsContext ctx)
    {
       List<Function> funcs = new LinkedList<>();
-      
-      
+
+
       for (FunctionContext fctx : ctx.function())
          funcs.add(functionVisitor.visit(fctx));
-      
-      
+
+
       return new Functions(funcs);
    }
 }

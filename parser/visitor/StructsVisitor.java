@@ -17,18 +17,18 @@ import static parser.MiniParser.StructsContext;
 public class StructsVisitor extends MiniBaseVisitor<Structs>
 {
    private final StructVisitor structVisitor = new StructVisitor();
-   
-   
+
+
    @Override
    public Structs visitStructs(StructsContext ctx)
    {
       List<Struct> structs = new LinkedList<>();
-      
-      
+
+
       for (StructContext sctx : ctx.struct())
          structs.add(structVisitor.visit(sctx));
-      
-      
+
+
       return new Structs(structs);
    }
 }

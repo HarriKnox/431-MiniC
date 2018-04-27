@@ -23,8 +23,8 @@ public class TypeVisitor extends MiniBaseVisitor<Type>
    {
       return new BoolType();
    }
-   
-   
+
+
    @Override
    public Type visitIntType(IntTypeContext ctx)
    {

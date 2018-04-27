@@ -25,15 +25,15 @@ public class DeclVisitor extends MiniBaseVisitor<Declarations>
    {
       return gatherDecls(ctx.decl());
    }
-   
-   
+
+
    @Override
    public Declarations visitParameters(ParametersContext ctx)
    {
       return gatherDecls(ctx.decl());
    }
-   
-   
+
+
    private Declarations gatherDecls(List<DeclContext> decls)
    {
       List<Declaration> fields = new LinkedList<>();

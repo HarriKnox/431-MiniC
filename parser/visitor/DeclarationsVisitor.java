@@ -32,7 +32,7 @@ public class DeclarationsVisitor extends MiniBaseVisitor<Declarations>
       for (DeclarationContext dctx : ctx.declaration())
       {
          Type type = typeVisitor.visit(dctx.type());
-         
+
          for (TerminalNode node : dctx.ID())
          {
             decls.add(new Declaration(

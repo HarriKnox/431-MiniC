@@ -95,8 +95,8 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
 
       for (ExpressionContext ectx : ctx.arguments().expression())
          arguments.add(expressionVisitor.visit(ectx));
-      
-      
+
+
       return new InvocationStatement(
             ctx.getStart().getLine(),
             new InvocationExpression(
@@ -137,7 +137,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
       if (ctx.expression() != null)
          return new ReturnStatement(ctx.getStart().getLine(),
                expressionVisitor.visit(ctx.expression()));
-      
+
       else
          return new ReturnEmptyStatement(ctx.getStart().getLine());
    }
@@ -153,8 +153,8 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
       for (StatementContext sctx : ctx.statement())
       {
          Statement stmt = visit(sctx);
-         
-         
+
+
          /* If a statement is an empty block, ignore it */
          if (!(stmt instanceof BlockStatement)
                || !((BlockStatement)stmt).isEmpty())
@@ -162,8 +162,8 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
             statements.add(stmt);
          }
       }
-      
-      
+
+
       /* If there's only one thing in the block, return that thing */
       if (statements.size() == 1)
          return statements.get(0);
@@ -171,7 +171,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
 
       return new BlockStatement(ctx.getStart().getLine(), statements);
    }
-   
+
 
    @Override
    public Statement visitWhile(WhileContext ctx)
