@@ -322,29 +322,17 @@ public interface MiniListener extends ParseTreeListener {
     */
    void exitLvalueDot(MiniParser.LvalueDotContext ctx);
    /**
-    * Enter a parse tree produced by the {@code IntegerExpr}
+    * Enter a parse tree produced by the {@code BoolExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree
     */
-   void enterIntegerExpr(MiniParser.IntegerExprContext ctx);
+   void enterBoolExpr(MiniParser.BoolExprContext ctx);
    /**
-    * Exit a parse tree produced by the {@code IntegerExpr}
+    * Exit a parse tree produced by the {@code BoolExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree
     */
-   void exitIntegerExpr(MiniParser.IntegerExprContext ctx);
-   /**
-    * Enter a parse tree produced by the {@code TrueExpr}
-    * labeled alternative in {@link MiniParser#expression}.
-    * @param ctx the parse tree
-    */
-   void enterTrueExpr(MiniParser.TrueExprContext ctx);
-   /**
-    * Exit a parse tree produced by the {@code TrueExpr}
-    * labeled alternative in {@link MiniParser#expression}.
-    * @param ctx the parse tree
-    */
-   void exitTrueExpr(MiniParser.TrueExprContext ctx);
+   void exitBoolExpr(MiniParser.BoolExprContext ctx);
    /**
     * Enter a parse tree produced by the {@code ReadExpr}
     * labeled alternative in {@link MiniParser#expression}.
@@ -406,6 +394,18 @@ public interface MiniListener extends ParseTreeListener {
     */
    void exitNestedExpr(MiniParser.NestedExprContext ctx);
    /**
+    * Enter a parse tree produced by the {@code IntExpr}
+    * labeled alternative in {@link MiniParser#expression}.
+    * @param ctx the parse tree
+    */
+   void enterIntExpr(MiniParser.IntExprContext ctx);
+   /**
+    * Exit a parse tree produced by the {@code IntExpr}
+    * labeled alternative in {@link MiniParser#expression}.
+    * @param ctx the parse tree
+    */
+   void exitIntExpr(MiniParser.IntExprContext ctx);
+   /**
     * Enter a parse tree produced by the {@code DotExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree
@@ -441,18 +441,6 @@ public interface MiniListener extends ParseTreeListener {
     * @param ctx the parse tree
     */
    void exitInvocationExpr(MiniParser.InvocationExprContext ctx);
-   /**
-    * Enter a parse tree produced by the {@code FalseExpr}
-    * labeled alternative in {@link MiniParser#expression}.
-    * @param ctx the parse tree
-    */
-   void enterFalseExpr(MiniParser.FalseExprContext ctx);
-   /**
-    * Exit a parse tree produced by the {@code FalseExpr}
-    * labeled alternative in {@link MiniParser#expression}.
-    * @param ctx the parse tree
-    */
-   void exitFalseExpr(MiniParser.FalseExprContext ctx);
    /**
     * Enter a parse tree produced by the {@code NullExpr}
     * labeled alternative in {@link MiniParser#expression}.

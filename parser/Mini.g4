@@ -82,9 +82,8 @@ expression
    |  lft=expression op='&&' rht=expression              # BinaryExpr
    |  lft=expression op='||' rht=expression              # BinaryExpr
    |  ID                                                 # IdentifierExpr
-   |  INTEGER                                            # IntegerExpr
-   |  'true'                                             # TrueExpr
-   |  'false'                                            # FalseExpr
+   |  INTEGER                                            # IntExpr
+   |  ( 'true' | 'false' )                               # BoolExpr
    |  'new' ID                                           # NewExpr
    |  'null'                                             # NullExpr
    |  'read'                                             # ReadExpr

@@ -1,11 +1,11 @@
 package ast.expression;
 
-public class IntegerExpression
+public class IntExpression
    extends Expression
 {
    public final String value;
 
-   public IntegerExpression(int lineNum, String value)
+   public IntExpression(int lineNum, String value)
    {
       super(lineNum);
       this.value = value;

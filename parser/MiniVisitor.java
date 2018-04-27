@@ -197,19 +197,12 @@ public interface MiniVisitor<T> extends ParseTreeVisitor<T> {
     */
    T visitLvalueDot(MiniParser.LvalueDotContext ctx);
    /**
-    * Visit a parse tree produced by the {@code IntegerExpr}
+    * Visit a parse tree produced by the {@code BoolExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree
     * @return the visitor result
     */
-   T visitIntegerExpr(MiniParser.IntegerExprContext ctx);
-   /**
-    * Visit a parse tree produced by the {@code TrueExpr}
-    * labeled alternative in {@link MiniParser#expression}.
-    * @param ctx the parse tree
-    * @return the visitor result
-    */
-   T visitTrueExpr(MiniParser.TrueExprContext ctx);
+   T visitBoolExpr(MiniParser.BoolExprContext ctx);
    /**
     * Visit a parse tree produced by the {@code ReadExpr}
     * labeled alternative in {@link MiniParser#expression}.
@@ -246,6 +239,13 @@ public interface MiniVisitor<T> extends ParseTreeVisitor<T> {
     */
    T visitNestedExpr(MiniParser.NestedExprContext ctx);
    /**
+    * Visit a parse tree produced by the {@code IntExpr}
+    * labeled alternative in {@link MiniParser#expression}.
+    * @param ctx the parse tree
+    * @return the visitor result
+    */
+   T visitIntExpr(MiniParser.IntExprContext ctx);
+   /**
     * Visit a parse tree produced by the {@code DotExpr}
     * labeled alternative in {@link MiniParser#expression}.
     * @param ctx the parse tree
@@ -266,13 +266,6 @@ public interface MiniVisitor<T> extends ParseTreeVisitor<T> {
     * @return the visitor result
     */
    T visitInvocationExpr(MiniParser.InvocationExprContext ctx);
-   /**
-    * Visit a parse tree produced by the {@code FalseExpr}
-    * labeled alternative in {@link MiniParser#expression}.
-    * @param ctx the parse tree
-    * @return the visitor result
-    */
-   T visitFalseExpr(MiniParser.FalseExprContext ctx);
    /**
     * Visit a parse tree produced by the {@code NullExpr}
     * labeled alternative in {@link MiniParser#expression}.

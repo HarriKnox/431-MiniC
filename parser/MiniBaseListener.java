@@ -354,25 +354,13 @@ public class MiniBaseListener implements MiniListener {
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void enterIntegerExpr(MiniParser.IntegerExprContext ctx) { }
+   @Override public void enterBoolExpr(MiniParser.BoolExprContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void exitIntegerExpr(MiniParser.IntegerExprContext ctx) { }
-   /**
-    * {@inheritDoc}
-    *
-    * <p>The default implementation does nothing.</p>
-    */
-   @Override public void enterTrueExpr(MiniParser.TrueExprContext ctx) { }
-   /**
-    * {@inheritDoc}
-    *
-    * <p>The default implementation does nothing.</p>
-    */
-   @Override public void exitTrueExpr(MiniParser.TrueExprContext ctx) { }
+   @Override public void exitBoolExpr(MiniParser.BoolExprContext ctx) { }
    /**
     * {@inheritDoc}
     *
@@ -438,6 +426,18 @@ public class MiniBaseListener implements MiniListener {
     *
     * <p>The default implementation does nothing.</p>
     */
+   @Override public void enterIntExpr(MiniParser.IntExprContext ctx) { }
+   /**
+    * {@inheritDoc}
+    *
+    * <p>The default implementation does nothing.</p>
+    */
+   @Override public void exitIntExpr(MiniParser.IntExprContext ctx) { }
+   /**
+    * {@inheritDoc}
+    *
+    * <p>The default implementation does nothing.</p>
+    */
    @Override public void enterDotExpr(MiniParser.DotExprContext ctx) { }
    /**
     * {@inheritDoc}
@@ -469,18 +469,6 @@ public class MiniBaseListener implements MiniListener {
     * <p>The default implementation does nothing.</p>
     */
    @Override public void exitInvocationExpr(MiniParser.InvocationExprContext ctx) { }
-   /**
-    * {@inheritDoc}
-    *
-    * <p>The default implementation does nothing.</p>
-    */
-   @Override public void enterFalseExpr(MiniParser.FalseExprContext ctx) { }
-   /**
-    * {@inheritDoc}
-    *
-    * <p>The default implementation does nothing.</p>
-    */
-   @Override public void exitFalseExpr(MiniParser.FalseExprContext ctx) { }
    /**
     * {@inheritDoc}
     *

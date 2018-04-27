@@ -21,18 +21,19 @@ public class ExpressionVisitor
    extends MiniBaseVisitor<Expression>
 {
    @Override
-   public Expression visitIntegerExpr(MiniParser.IntegerExprContext ctx)
+   public Expression visitIntExpr(MiniParser.IntExprContext ctx)
    {
-      return new IntegerExpression(
+      return new IntExpression(
          ctx.getStart().getLine(),
          ctx.INTEGER().getText());
    }
 
    @Override
-   public Expression visitTrueExpr(MiniParser.TrueExprContext ctx)
+   public Expression visitBoolExpr(MiniParser.BoolExprContext ctx)
    {
-      return new TrueExpression(
-         ctx.getStart().getLine());
+      return new BoolExpression(
+         ctx.getStart().getLine(),
+         ctx.getStart().getText().equals("true"));
    }
 
    @Override
@@ -179,13 +180,6 @@ public class ExpressionVisitor
          ctx.getStart().getLine(),
          ctx.ID().getText(),
          gatherArguments(ctx.arguments()));
-   }
-
-   @Override
-   public Expression visitFalseExpr(MiniParser.FalseExprContext ctx)
-   {
-      return new FalseExpression(
-         ctx.getStart().getLine());
    }
 
    @Override

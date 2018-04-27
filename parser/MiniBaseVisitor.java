@@ -215,14 +215,7 @@ public class MiniBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements M
     * <p>The default implementation returns the result of calling
     * {@link #visitChildren} on {@code ctx}.</p>
     */
-   @Override public T visitIntegerExpr(MiniParser.IntegerExprContext ctx) { return visitChildren(ctx); }
-   /**
-    * {@inheritDoc}
-    *
-    * <p>The default implementation returns the result of calling
-    * {@link #visitChildren} on {@code ctx}.</p>
-    */
-   @Override public T visitTrueExpr(MiniParser.TrueExprContext ctx) { return visitChildren(ctx); }
+   @Override public T visitBoolExpr(MiniParser.BoolExprContext ctx) { return visitChildren(ctx); }
    /**
     * {@inheritDoc}
     *
@@ -264,6 +257,13 @@ public class MiniBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements M
     * <p>The default implementation returns the result of calling
     * {@link #visitChildren} on {@code ctx}.</p>
     */
+   @Override public T visitIntExpr(MiniParser.IntExprContext ctx) { return visitChildren(ctx); }
+   /**
+    * {@inheritDoc}
+    *
+    * <p>The default implementation returns the result of calling
+    * {@link #visitChildren} on {@code ctx}.</p>
+    */
    @Override public T visitDotExpr(MiniParser.DotExprContext ctx) { return visitChildren(ctx); }
    /**
     * {@inheritDoc}
@@ -279,13 +279,6 @@ public class MiniBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements M
     * {@link #visitChildren} on {@code ctx}.</p>
     */
    @Override public T visitInvocationExpr(MiniParser.InvocationExprContext ctx) { return visitChildren(ctx); }
-   /**
-    * {@inheritDoc}
-    *
-    * <p>The default implementation returns the result of calling
-    * {@link #visitChildren} on {@code ctx}.</p>
-    */
-   @Override public T visitFalseExpr(MiniParser.FalseExprContext ctx) { return visitChildren(ctx); }
    /**
     * {@inheritDoc}
     *
