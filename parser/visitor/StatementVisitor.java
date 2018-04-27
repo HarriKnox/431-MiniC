@@ -18,9 +18,7 @@ import ast.statement.BlockStatement;
 import ast.statement.ConditionalStatement;
 import ast.statement.DeleteStatement;
 import ast.statement.InvocationStatement;
-import ast.statement.PrintLnStatement;
 import ast.statement.PrintStatement;
-import ast.statement.ReturnEmptyStatement;
 import ast.statement.ReturnStatement;
 import ast.statement.Statement;
 import ast.statement.WhileStatement;
@@ -77,7 +75,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
                   ? visit(ctx.elseBlock)
                   : new BlockStatement(
                         -1,
-                        new LinkedList<>());
+                        new LinkedList<>()));
    }
 
 
@@ -139,13 +137,13 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    @Override
    public Statement visitReturn(ReturnContext ctx)
    {
-      Expression returnExpression;
+      ExpressionContext returnExpression = ctx.expression();
       
       
       return new ReturnStatement(
             ctx.getStart().getLine(),
             returnExpression != null
-                  ? expressionVisitor.visit(ctx.expression())
+                  ? expressionVisitor.visit(returnExpression)
                   : null);
    }
 
