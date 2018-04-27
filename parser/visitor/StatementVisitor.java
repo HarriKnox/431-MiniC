@@ -119,9 +119,10 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    @Override
    public Statement visitPrintLn(PrintLnContext ctx)
    {
-      return new PrintLnStatement(
+      return new PrintStatement(
             ctx.getStart().getLine(),
-            expressionVisitor.visit(ctx.expression()));
+            expressionVisitor.visit(ctx.expression()),
+            true);
    }
 
 
@@ -130,19 +131,22 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    {
       return new PrintStatement(
             ctx.getStart().getLine(),
-            expressionVisitor.visit(ctx.expression()));
+            expressionVisitor.visit(ctx.expression()),
+            false);
    }
 
 
    @Override
    public Statement visitReturn(ReturnContext ctx)
    {
-      if (ctx.expression() != null)
-         return new ReturnStatement(ctx.getStart().getLine(),
-               expressionVisitor.visit(ctx.expression()));
-
-      else
-         return new ReturnEmptyStatement(ctx.getStart().getLine());
+      Expression returnExpression;
+      
+      
+      return new ReturnStatement(
+            ctx.getStart().getLine(),
+            returnExpression != null
+                  ? expressionVisitor.visit(ctx.expression())
+                  : null);
    }
 
 
