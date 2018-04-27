@@ -73,8 +73,11 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
             ctx.getStart().getLine(),
             expressionVisitor.visit(ctx.expression()),
             visit(ctx.thenBlock),
-            ctx.elseBlock != null ?
-                  visit(ctx.elseBlock) : BlockStatement.emptyBlock());
+            ctx.elseBlock != null
+                  ? visit(ctx.elseBlock)
+                  : new BlockStatement(
+                        -1,
+                        new LinkedList<>());
    }
 
 

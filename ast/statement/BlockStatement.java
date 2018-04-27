@@ -14,12 +14,6 @@ public class BlockStatement extends Statement
    }
    
 
-   public static BlockStatement emptyBlock()
-   {
-      return new BlockStatement(-1, new LinkedList<>());
-   }
-   
-   
    public boolean isEmpty()
    {
       return this.statements.isEmpty();
