@@ -6,8 +6,7 @@ import java.util.List;
 import ast.LinedElement;
 
 
-public class Struct
-   extends LinedElement
+public class Struct extends LinedElement
 {
    public final String name;
    public final Declarations fields;
@@ -15,6 +14,7 @@ public class Struct
    public Struct(int lineNum, String name, Declarations fields)
    {
       super(lineNum);
+
       this.name = name;
       this.fields = fields;
    }
