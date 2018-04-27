@@ -18,13 +18,13 @@ out/main/Main.class : $(JAVA_FILES)
 	$(JAVAC) -cp $(CLASSPATH) -d ../out main/Main.java -Xlint:unchecked
 
 clean:
-	-rm -rf ../out
+	-rm -rf ../out 2>/dev/null
 
 
 remake : clean all
 
 antlr :
-	-rm $(ANTLR_FILES) ./parser/MiniLexer.tokens ./parser/Mini.tokens ./parser/Mini.interp ./parser/MiniLexer.interp
+	-rm $(ANTLR_FILES) ./parser/MiniLexer.tokens ./parser/Mini.tokens ./parser/Mini.interp ./parser/MiniLexer.interp 2>/dev/null
 	$(JAVA) -cp $(CLASSPATH) org.antlr.v4.Tool -visitor parser/Mini.g4
 	sed -e 's/\t/   /g' -i $(ANTLR_FILES)
 
