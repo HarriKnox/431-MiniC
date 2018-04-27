@@ -1,48 +1,53 @@
 package parser.visitor;
 
-import parser.MiniBaseVisitor;
-import parser.MiniParser;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
+
+import parser.MiniBaseVisitor;
 
 import ast.declaration.Declaration;
 import ast.declaration.Declarations;
 
-public class DeclVisitor
-   extends MiniBaseVisitor<Declarations>
+
+import static parser.MiniParser.DeclContext;
+import static parser.MiniParser.NestedDeclContext;
+import static parser.MiniParser.ParametersContext;
+
+
+public class DeclVisitor extends MiniBaseVisitor<Declarations>
 {
    private final TypeVisitor typeVisitor = new TypeVisitor();
 
-   @Override
-   public Declarations visitNestedDecl(MiniParser.NestedDeclContext ctx)
-   {
-      return gatherDecls(ctx.decl());
-   }
-   
-   @Override
-   public Declarations visitParameters(MiniParser.ParametersContext ctx)
-   {
-      return gatherDecls(ctx.decl());
-   }
-   
-   private Declarations gatherDecls(List<MiniParser.DeclContext> decls)
-   {
-      List<Declaration> fields = new ArrayList<>();
 
-      for (MiniParser.DeclContext dctx : decls)
+   @Override
+   public Declarations visitNestedDecl(NestedDeclContext ctx)
+   {
+      return gatherDecls(ctx.decl());
+   }
+   
+   
+   @Override
+   public Declarations visitParameters(ParametersContext ctx)
+   {
+      return gatherDecls(ctx.decl());
+   }
+   
+   
+   private Declarations gatherDecls(List<DeclContext> decls)
+   {
+      List<Declaration> fields = new LinkedList<>();
+
+
+      for (DeclContext dctx : decls)
       {
-         fields.add(new Declaration(dctx.getStart().getLine(),
-            typeVisitor.visit(dctx.type()),
-            dctx.ID().getText()));
+         fields.add(new Declaration(
+               dctx.getStart().getLine(),
+               typeVisitor.visit(dctx.type()),
+               dctx.ID().getText()));
       }
 
-      return new Declarations(fields);
-   }
 
-   @Override
-   protected Declarations defaultResult()
-   {
-      return new Declarations(new ArrayList<>());
+      return new Declarations(fields);
    }
 }

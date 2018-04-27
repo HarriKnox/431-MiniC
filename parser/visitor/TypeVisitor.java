@@ -1,7 +1,6 @@
 package parser.visitor;
 
 import parser.MiniBaseVisitor;
-import parser.MiniParser;
 
 import ast.type.BoolType;
 import ast.type.IntType;
@@ -9,41 +8,46 @@ import ast.type.StructType;
 import ast.type.Type;
 import ast.type.VoidType;
 
-public class TypeVisitor
-   extends MiniBaseVisitor<Type>
+
+import static parser.MiniParser.BoolTypeContext;
+import static parser.MiniParser.IntTypeContext;
+import static parser.MiniParser.StructTypeContext;
+import static parser.MiniParser.ReturnTypeRealContext;
+import static parser.MiniParser.ReturnTypeVoidContext;
+
+
+public class TypeVisitor extends MiniBaseVisitor<Type>
 {
    @Override
-   public Type visitIntType(MiniParser.IntTypeContext ctx)
+   public Type visitBoolType(BoolTypeContext ctx)
+   {
+      return new BoolType();
+   }
+   
+   
+   @Override
+   public Type visitIntType(IntTypeContext ctx)
    {
       return new IntType();
    }
 
-   @Override
-   public Type visitBoolType(MiniParser.BoolTypeContext ctx)
-   {
-      return new BoolType();
-   }
 
    @Override
-   public Type visitStructType(MiniParser.StructTypeContext ctx)
+   public Type visitStructType(StructTypeContext ctx)
    {
       return new StructType(ctx.ID().getText());
    }
 
+
    @Override
-   public Type visitReturnTypeReal(MiniParser.ReturnTypeRealContext ctx)
+   public Type visitReturnTypeReal(ReturnTypeRealContext ctx)
    {
       return visit(ctx.type());
    }
 
-   @Override
-   public Type visitReturnTypeVoid(MiniParser.ReturnTypeVoidContext ctx)
-   {
-      return new VoidType();
-   }
 
    @Override
-   protected Type defaultResult()
+   public Type visitReturnTypeVoid(ReturnTypeVoidContext ctx)
    {
       return new VoidType();
    }

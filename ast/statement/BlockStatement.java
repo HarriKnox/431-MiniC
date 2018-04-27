@@ -1,10 +1,9 @@
 package ast.statement;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
 
-public class BlockStatement
-   extends Statement
+public class BlockStatement extends Statement
 {
    public final List<Statement> statements;
 
@@ -13,9 +12,16 @@ public class BlockStatement
       super(lineNum);
       this.statements = statements;
    }
+   
 
    public static BlockStatement emptyBlock()
    {
-      return new BlockStatement(-1, new ArrayList<>());
+      return new BlockStatement(-1, new LinkedList<>());
+   }
+   
+   
+   public boolean isEmpty()
+   {
+      return this.statements.isEmpty();
    }
 }

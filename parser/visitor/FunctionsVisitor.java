@@ -1,39 +1,34 @@
 package parser.visitor;
 
-import parser.MiniBaseVisitor;
-import parser.MiniParser;
 
-import org.antlr.v4.runtime.tree.TerminalNode;
-
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
+
+import parser.MiniBaseVisitor;
 
 import ast.declaration.Function;
 import ast.declaration.Functions;
 
 
-public class FunctionsVisitor
-   extends MiniBaseVisitor<Functions>
+import static parser.MiniParser.FunctionContext;
+import static parser.MiniParser.FunctionsContext;
+
+
+public class FunctionsVisitor extends MiniBaseVisitor<Functions>
 {
-   private final FunctionVisitor functionVisitor =
-      new FunctionVisitor();
+   private final FunctionVisitor functionVisitor = new FunctionVisitor();
+   
    
    @Override
-   public Functions visitFunctions(MiniParser.FunctionsContext ctx)
+   public Functions visitFunctions(FunctionsContext ctx)
    {
-      List<Function> funcs = new ArrayList<>();
+      List<Function> funcs = new LinkedList<>();
       
-      for (MiniParser.FunctionContext fctx : ctx.function())
-      {
+      
+      for (FunctionContext fctx : ctx.function())
          funcs.add(functionVisitor.visit(fctx));
-      }
+      
       
       return new Functions(funcs);
-   }
-   
-   @Override
-   protected Functions defaultResult()
-   {
-      return new Functions(new ArrayList<>());
    }
 }
