@@ -10,7 +10,7 @@ package parser;
 */
 
 program
-   :  structs declarations functions EOF
+   :  structs variables functions EOF
    ;
 structs
    :  struct*
@@ -29,17 +29,17 @@ type
    |  'bool'                                             # BoolType
    |  'struct' ID                                        # StructType
    ;
-declarations
-   :  declaration*
+variables
+   :  variable*
    ;
-declaration
+variable
    :  type ID (',' ID)* ';'
    ;
 functions
    :  function*
    ;
 function
-   :  'fun' ID parameters returnType '{' declarations statementList '}'
+   :  'fun' ID parameters returnType '{' variables statementList '}'
    ;
 parameters
    :  '(' (decl (',' decl)*)? ')'

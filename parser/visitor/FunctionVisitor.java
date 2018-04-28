@@ -13,10 +13,7 @@ public class FunctionVisitor extends MiniBaseVisitor<Function>
 {
    private final TypeVisitor typeVisitor = new TypeVisitor();
    private final DeclVisitor declVisitor = new DeclVisitor();
-
-   private final DeclarationsVisitor declarationsVisitor =
-         new DeclarationsVisitor();
-
+   private final VariablesVisitor variablesVisitor = new VariablesVisitor();
    private final StatementVisitor statementVisitor = new StatementVisitor();
 
 
@@ -28,7 +25,7 @@ public class FunctionVisitor extends MiniBaseVisitor<Function>
             ctx.ID().getText(),
             declVisitor.visit(ctx.parameters()),
             typeVisitor.visit(ctx.returnType()),
-            declarationsVisitor.visit(ctx.declarations()),
+            variablesVisitor.visit(ctx.variables()),
             statementVisitor.visit(ctx.statementList()));
    }
 }

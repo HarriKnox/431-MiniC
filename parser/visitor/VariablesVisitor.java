@@ -14,26 +14,26 @@ import ast.declaration.Declarations;
 import ast.type.Type;
 
 
-import static parser.MiniParser.DeclarationContext;
-import static parser.MiniParser.DeclarationsContext;
+import static parser.MiniParser.VariableContext;
+import static parser.MiniParser.VariablesContext;
 
 
-public class DeclarationsVisitor extends MiniBaseVisitor<Declarations>
+public class VariablesVisitor extends MiniBaseVisitor<Declarations>
 {
    private final TypeVisitor typeVisitor = new TypeVisitor();
 
 
    @Override
-   public Declarations visitDeclarations(DeclarationsContext ctx)
+   public Declarations visitVariables(VariablesContext ctx)
    {
       List<Declaration> decls = new LinkedList<>();
 
 
-      for (DeclarationContext dctx : ctx.declaration())
+      for (VariableContext vctx : ctx.variable())
       {
-         Type type = typeVisitor.visit(dctx.type());
+         Type type = typeVisitor.visit(vctx.type());
 
-         for (TerminalNode node : dctx.ID())
+         for (TerminalNode node : vctx.ID())
          {
             decls.add(new Declaration(
                   node.getSymbol().getLine(),

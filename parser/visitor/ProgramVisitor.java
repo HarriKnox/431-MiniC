@@ -10,7 +10,7 @@ import ast.declaration.Functions;
 import ast.declaration.Structs;
 
 
-import static parser.MiniParser.DeclarationsContext;
+import static parser.MiniParser.VariablesContext;
 import static parser.MiniParser.FunctionsContext;
 import static parser.MiniParser.ProgramContext;
 import static parser.MiniParser.StructsContext;
@@ -19,10 +19,7 @@ import static parser.MiniParser.StructsContext;
 public class ProgramVisitor extends MiniBaseVisitor<Program>
 {
    private final StructsVisitor structsVisitor = new StructsVisitor();
-
-   private final DeclarationsVisitor declarationsVisitor =
-      new DeclarationsVisitor();
-
+   private final VariablesVisitor variablesVisitor = new VariablesVisitor();
    private final FunctionsVisitor functionsVisitor = new FunctionsVisitor();
 
 
@@ -31,7 +28,7 @@ public class ProgramVisitor extends MiniBaseVisitor<Program>
    {
       return new Program(
             structsVisitor.visit(ctx.structs()),
-            declarationsVisitor.visit(ctx.declarations()),
+            variablesVisitor.visit(ctx.variables()),
             functionsVisitor.visit(ctx.functions()));
    }
 }

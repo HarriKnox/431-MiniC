@@ -114,25 +114,25 @@ public class MiniBaseListener implements MiniListener {
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void enterDeclarations(MiniParser.DeclarationsContext ctx) { }
+   @Override public void enterVariables(MiniParser.VariablesContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void exitDeclarations(MiniParser.DeclarationsContext ctx) { }
+   @Override public void exitVariables(MiniParser.VariablesContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void enterDeclaration(MiniParser.DeclarationContext ctx) { }
+   @Override public void enterVariable(MiniParser.VariableContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void exitDeclaration(MiniParser.DeclarationContext ctx) { }
+   @Override public void exitVariable(MiniParser.VariableContext ctx) { }
    /**
     * {@inheritDoc}
     *

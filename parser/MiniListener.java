@@ -96,25 +96,25 @@ public interface MiniListener extends ParseTreeListener {
     */
    void exitStructType(MiniParser.StructTypeContext ctx);
    /**
-    * Enter a parse tree produced by {@link MiniParser#declarations}.
+    * Enter a parse tree produced by {@link MiniParser#variables}.
     * @param ctx the parse tree
     */
-   void enterDeclarations(MiniParser.DeclarationsContext ctx);
+   void enterVariables(MiniParser.VariablesContext ctx);
    /**
-    * Exit a parse tree produced by {@link MiniParser#declarations}.
+    * Exit a parse tree produced by {@link MiniParser#variables}.
     * @param ctx the parse tree
     */
-   void exitDeclarations(MiniParser.DeclarationsContext ctx);
+   void exitVariables(MiniParser.VariablesContext ctx);
    /**
-    * Enter a parse tree produced by {@link MiniParser#declaration}.
+    * Enter a parse tree produced by {@link MiniParser#variable}.
     * @param ctx the parse tree
     */
-   void enterDeclaration(MiniParser.DeclarationContext ctx);
+   void enterVariable(MiniParser.VariableContext ctx);
    /**
-    * Exit a parse tree produced by {@link MiniParser#declaration}.
+    * Exit a parse tree produced by {@link MiniParser#variable}.
     * @param ctx the parse tree
     */
-   void exitDeclaration(MiniParser.DeclarationContext ctx);
+   void exitVariable(MiniParser.VariableContext ctx);
    /**
     * Enter a parse tree produced by {@link MiniParser#functions}.
     * @param ctx the parse tree

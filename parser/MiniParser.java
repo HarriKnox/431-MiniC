@@ -27,13 +27,13 @@ public class MiniParser extends Parser {
       ID=39, INTEGER=40, WS=41, COMMENT=42;
    public static final int
       RULE_program = 0, RULE_structs = 1, RULE_struct = 2, RULE_nestedDecl = 3, 
-      RULE_decl = 4, RULE_type = 5, RULE_declarations = 6, RULE_declaration = 7, 
-      RULE_functions = 8, RULE_function = 9, RULE_parameters = 10, RULE_returnType = 11, 
-      RULE_statement = 12, RULE_block = 13, RULE_statementList = 14, RULE_lvalue = 15, 
-      RULE_expression = 16, RULE_arguments = 17;
+      RULE_decl = 4, RULE_type = 5, RULE_variables = 6, RULE_variable = 7, RULE_functions = 8, 
+      RULE_function = 9, RULE_parameters = 10, RULE_returnType = 11, RULE_statement = 12, 
+      RULE_block = 13, RULE_statementList = 14, RULE_lvalue = 15, RULE_expression = 16, 
+      RULE_arguments = 17;
    public static final String[] ruleNames = {
-      "program", "structs", "struct", "nestedDecl", "decl", "type", "declarations", 
-      "declaration", "functions", "function", "parameters", "returnType", "statement", 
+      "program", "structs", "struct", "nestedDecl", "decl", "type", "variables", 
+      "variable", "functions", "function", "parameters", "returnType", "statement", 
       "block", "statementList", "lvalue", "expression", "arguments"
    };
 
@@ -103,8 +103,8 @@ public class MiniParser extends Parser {
       public StructsContext structs() {
          return getRuleContext(StructsContext.class,0);
       }
-      public DeclarationsContext declarations() {
-         return getRuleContext(DeclarationsContext.class,0);
+      public VariablesContext variables() {
+         return getRuleContext(VariablesContext.class,0);
       }
       public FunctionsContext functions() {
          return getRuleContext(FunctionsContext.class,0);
@@ -138,7 +138,7 @@ public class MiniParser extends Parser {
          setState(36);
          structs();
          setState(37);
-         declarations();
+         variables();
          setState(38);
          functions();
          setState(39);
@@ -491,35 +491,35 @@ public class MiniParser extends Parser {
       return _localctx;
    }
 
-   public static class DeclarationsContext extends ParserRuleContext {
-      public List<DeclarationContext> declaration() {
-         return getRuleContexts(DeclarationContext.class);
+   public static class VariablesContext extends ParserRuleContext {
+      public List<VariableContext> variable() {
+         return getRuleContexts(VariableContext.class);
       }
-      public DeclarationContext declaration(int i) {
-         return getRuleContext(DeclarationContext.class,i);
+      public VariableContext variable(int i) {
+         return getRuleContext(VariableContext.class,i);
       }
-      public DeclarationsContext(ParserRuleContext parent, int invokingState) {
+      public VariablesContext(ParserRuleContext parent, int invokingState) {
          super(parent, invokingState);
       }
-      @Override public int getRuleIndex() { return RULE_declarations; }
+      @Override public int getRuleIndex() { return RULE_variables; }
       @Override
       public void enterRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterDeclarations(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterVariables(this);
       }
       @Override
       public void exitRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitDeclarations(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitVariables(this);
       }
       @Override
       public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitDeclarations(this);
+         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitVariables(this);
          else return visitor.visitChildren(this);
       }
    }
 
-   public final DeclarationsContext declarations() throws RecognitionException {
-      DeclarationsContext _localctx = new DeclarationsContext(_ctx, getState());
-      enterRule(_localctx, 12, RULE_declarations);
+   public final VariablesContext variables() throws RecognitionException {
+      VariablesContext _localctx = new VariablesContext(_ctx, getState());
+      enterRule(_localctx, 12, RULE_variables);
       int _la;
       try {
          enterOuterAlt(_localctx, 1);
@@ -531,7 +531,7 @@ public class MiniParser extends Parser {
             {
             {
             setState(70);
-            declaration();
+            variable();
             }
             }
             setState(75);
@@ -551,7 +551,7 @@ public class MiniParser extends Parser {
       return _localctx;
    }
 
-   public static class DeclarationContext extends ParserRuleContext {
+   public static class VariableContext extends ParserRuleContext {
       public TypeContext type() {
          return getRuleContext(TypeContext.class,0);
       }
@@ -559,28 +559,28 @@ public class MiniParser extends Parser {
       public TerminalNode ID(int i) {
          return getToken(MiniParser.ID, i);
       }
-      public DeclarationContext(ParserRuleContext parent, int invokingState) {
+      public VariableContext(ParserRuleContext parent, int invokingState) {
          super(parent, invokingState);
       }
-      @Override public int getRuleIndex() { return RULE_declaration; }
+      @Override public int getRuleIndex() { return RULE_variable; }
       @Override
       public void enterRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterDeclaration(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterVariable(this);
       }
       @Override
       public void exitRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitDeclaration(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitVariable(this);
       }
       @Override
       public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitDeclaration(this);
+         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitVariable(this);
          else return visitor.visitChildren(this);
       }
    }
 
-   public final DeclarationContext declaration() throws RecognitionException {
-      DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
-      enterRule(_localctx, 14, RULE_declaration);
+   public final VariableContext variable() throws RecognitionException {
+      VariableContext _localctx = new VariableContext(_ctx, getState());
+      enterRule(_localctx, 14, RULE_variable);
       int _la;
       try {
          enterOuterAlt(_localctx, 1);
@@ -688,8 +688,8 @@ public class MiniParser extends Parser {
       public ReturnTypeContext returnType() {
          return getRuleContext(ReturnTypeContext.class,0);
       }
-      public DeclarationsContext declarations() {
-         return getRuleContext(DeclarationsContext.class,0);
+      public VariablesContext variables() {
+         return getRuleContext(VariablesContext.class,0);
       }
       public StatementListContext statementList() {
          return getRuleContext(StatementListContext.class,0);
@@ -730,7 +730,7 @@ public class MiniParser extends Parser {
          setState(97);
          match(T__1);
          setState(98);
-         declarations();
+         variables();
          setState(99);
          statementList();
          setState(100);
