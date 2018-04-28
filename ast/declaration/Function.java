@@ -30,7 +30,7 @@ public class Function extends LinedElement
    }
    
    
-   public void validate(Structs structs, Declarations globals)
+   public void validate(Structs structs, Declarations globals, Functions functions)
    {
       if (!this.retType.isValid(structs))
          System.err.println("Invalid type");

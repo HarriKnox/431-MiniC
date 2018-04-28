@@ -44,6 +44,6 @@ public class Functions
       
       /* Validate all uniquely named functions */
       for (Function function : this.functions)
-         function.validate(structs, globals);
+         function.validate(structs, globals, this);
    }
 }
