@@ -23,6 +23,6 @@ public class StructVisitor extends MiniBaseVisitor<Struct>
       return new Struct(
             ctx.getStart().getLine(),
             ctx.ID().getText(),
-            declVisitor.visit(ctx.nestedDecl()));
+            declVisitor.visit(ctx.fields()));
    }
 }

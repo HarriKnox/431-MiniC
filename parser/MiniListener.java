@@ -40,15 +40,15 @@ public interface MiniListener extends ParseTreeListener {
     */
    void exitStruct(MiniParser.StructContext ctx);
    /**
-    * Enter a parse tree produced by {@link MiniParser#nestedDecl}.
+    * Enter a parse tree produced by {@link MiniParser#fields}.
     * @param ctx the parse tree
     */
-   void enterNestedDecl(MiniParser.NestedDeclContext ctx);
+   void enterFields(MiniParser.FieldsContext ctx);
    /**
-    * Exit a parse tree produced by {@link MiniParser#nestedDecl}.
+    * Exit a parse tree produced by {@link MiniParser#fields}.
     * @param ctx the parse tree
     */
-   void exitNestedDecl(MiniParser.NestedDeclContext ctx);
+   void exitFields(MiniParser.FieldsContext ctx);
    /**
     * Enter a parse tree produced by {@link MiniParser#decl}.
     * @param ctx the parse tree

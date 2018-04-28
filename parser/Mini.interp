@@ -92,7 +92,7 @@ rule names:
 program
 structs
 struct
-nestedDecl
+fields
 decl
 type
 variables

@@ -11,7 +11,7 @@ import ast.declaration.Declarations;
 
 
 import static parser.MiniParser.DeclContext;
-import static parser.MiniParser.NestedDeclContext;
+import static parser.MiniParser.FieldsContext;
 import static parser.MiniParser.ParametersContext;
 
 
@@ -21,7 +21,7 @@ public class DeclVisitor extends MiniBaseVisitor<Declarations>
 
 
    @Override
-   public Declarations visitNestedDecl(NestedDeclContext ctx)
+   public Declarations visitFields(FieldsContext ctx)
    {
       return gatherDecls(ctx.decl());
    }
@@ -36,18 +36,18 @@ public class DeclVisitor extends MiniBaseVisitor<Declarations>
 
    private Declarations gatherDecls(List<DeclContext> decls)
    {
-      List<Declaration> fields = new LinkedList<>();
+      List<Declaration> variables = new LinkedList<>();
 
 
       for (DeclContext dctx : decls)
       {
-         fields.add(new Declaration(
+         variables.add(new Declaration(
                dctx.getStart().getLine(),
                typeVisitor.visit(dctx.type()),
                dctx.ID().getText()));
       }
 
 
-      return new Declarations(fields);
+      return new Declarations(variables);
    }
 }

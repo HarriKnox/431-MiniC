@@ -16,9 +16,9 @@ structs
    :  struct*
    ;
 struct
-   :  'struct' ID '{' nestedDecl '}' ';'
+   :  'struct' ID '{' fields '}' ';'
    ;
-nestedDecl
+fields
    :  (decl ';')+
    ;
 decl

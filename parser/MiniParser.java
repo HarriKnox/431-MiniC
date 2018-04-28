@@ -26,13 +26,13 @@ public class MiniParser extends Parser {
       T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
       ID=39, INTEGER=40, WS=41, COMMENT=42;
    public static final int
-      RULE_program = 0, RULE_structs = 1, RULE_struct = 2, RULE_nestedDecl = 3, 
+      RULE_program = 0, RULE_structs = 1, RULE_struct = 2, RULE_fields = 3, 
       RULE_decl = 4, RULE_type = 5, RULE_variables = 6, RULE_variable = 7, RULE_functions = 8, 
       RULE_function = 9, RULE_parameters = 10, RULE_returnType = 11, RULE_statement = 12, 
       RULE_block = 13, RULE_statementList = 14, RULE_lvalue = 15, RULE_expression = 16, 
       RULE_arguments = 17;
    public static final String[] ruleNames = {
-      "program", "structs", "struct", "nestedDecl", "decl", "type", "variables", 
+      "program", "structs", "struct", "fields", "decl", "type", "variables", 
       "variable", "functions", "function", "parameters", "returnType", "statement", 
       "block", "statementList", "lvalue", "expression", "arguments"
    };
@@ -220,8 +220,8 @@ public class MiniParser extends Parser {
 
    public static class StructContext extends ParserRuleContext {
       public TerminalNode ID() { return getToken(MiniParser.ID, 0); }
-      public NestedDeclContext nestedDecl() {
-         return getRuleContext(NestedDeclContext.class,0);
+      public FieldsContext fields() {
+         return getRuleContext(FieldsContext.class,0);
       }
       public StructContext(ParserRuleContext parent, int invokingState) {
          super(parent, invokingState);
@@ -255,7 +255,7 @@ public class MiniParser extends Parser {
          setState(49);
          match(T__1);
          setState(50);
-         nestedDecl();
+         fields();
          setState(51);
          match(T__2);
          setState(52);
@@ -273,35 +273,35 @@ public class MiniParser extends Parser {
       return _localctx;
    }
 
-   public static class NestedDeclContext extends ParserRuleContext {
+   public static class FieldsContext extends ParserRuleContext {
       public List<DeclContext> decl() {
          return getRuleContexts(DeclContext.class);
       }
       public DeclContext decl(int i) {
          return getRuleContext(DeclContext.class,i);
       }
-      public NestedDeclContext(ParserRuleContext parent, int invokingState) {
+      public FieldsContext(ParserRuleContext parent, int invokingState) {
          super(parent, invokingState);
       }
-      @Override public int getRuleIndex() { return RULE_nestedDecl; }
+      @Override public int getRuleIndex() { return RULE_fields; }
       @Override
       public void enterRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterNestedDecl(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).enterFields(this);
       }
       @Override
       public void exitRule(ParseTreeListener listener) {
-         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitNestedDecl(this);
+         if ( listener instanceof MiniListener ) ((MiniListener)listener).exitFields(this);
       }
       @Override
       public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitNestedDecl(this);
+         if ( visitor instanceof MiniVisitor ) return ((MiniVisitor<? extends T>)visitor).visitFields(this);
          else return visitor.visitChildren(this);
       }
    }
 
-   public final NestedDeclContext nestedDecl() throws RecognitionException {
-      NestedDeclContext _localctx = new NestedDeclContext(_ctx, getState());
-      enterRule(_localctx, 6, RULE_nestedDecl);
+   public final FieldsContext fields() throws RecognitionException {
+      FieldsContext _localctx = new FieldsContext(_ctx, getState());
+      enterRule(_localctx, 6, RULE_fields);
       int _la;
       try {
          enterOuterAlt(_localctx, 1);

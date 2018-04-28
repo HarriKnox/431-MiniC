@@ -54,13 +54,13 @@ public class MiniBaseListener implements MiniListener {
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void enterNestedDecl(MiniParser.NestedDeclContext ctx) { }
+   @Override public void enterFields(MiniParser.FieldsContext ctx) { }
    /**
     * {@inheritDoc}
     *
     * <p>The default implementation does nothing.</p>
     */
-   @Override public void exitNestedDecl(MiniParser.NestedDeclContext ctx) { }
+   @Override public void exitFields(MiniParser.FieldsContext ctx) { }
    /**
     * {@inheritDoc}
     *

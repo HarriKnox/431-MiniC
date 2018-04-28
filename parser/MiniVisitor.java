@@ -31,11 +31,11 @@ public interface MiniVisitor<T> extends ParseTreeVisitor<T> {
     */
    T visitStruct(MiniParser.StructContext ctx);
    /**
-    * Visit a parse tree produced by {@link MiniParser#nestedDecl}.
+    * Visit a parse tree produced by {@link MiniParser#fields}.
     * @param ctx the parse tree
     * @return the visitor result
     */
-   T visitNestedDecl(MiniParser.NestedDeclContext ctx);
+   T visitFields(MiniParser.FieldsContext ctx);
    /**
     * Visit a parse tree produced by {@link MiniParser#decl}.
     * @param ctx the parse tree
