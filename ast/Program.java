@@ -1,9 +1,9 @@
 package ast;
 
 
-import ast.declaration.Variables;
 import ast.declaration.Functions;
 import ast.declaration.Structs;
+import ast.declaration.Variables;
 
 
 public class Program

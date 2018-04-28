@@ -5,9 +5,9 @@ import parser.MiniBaseVisitor;
 
 import ast.Program;
 
-import ast.declaration.Variables;
 import ast.declaration.Functions;
 import ast.declaration.Structs;
+import ast.declaration.Variables;
 
 
 import static parser.MiniParser.VariablesContext;
