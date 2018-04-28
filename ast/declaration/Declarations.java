@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import ast.type.Type;
+
 
 public class Declarations
 {
@@ -15,6 +17,17 @@ public class Declarations
    public Declarations(List<Declaration> declarations)
    {
       this.declarations = declarations;
+   }
+   
+   
+   public Type getDeclarationType(String declarationName)
+   {
+      for (Declaration declaration : this.declarations)
+         if (declaration.name.equals(declarationName))
+            return declaration.type;
+      
+      
+      return null;
    }
    
    
@@ -51,7 +64,7 @@ public class Declarations
    public void validate(Structs structs, Declarations also)
    {
       Iterator<Declaration> declarator = this.declarations.iterator();
-      Iterator<Declaration> alsorator = also.iterator();
+      Iterator<Declaration> alsorator = also.declarations.iterator();
       Set<String> declarationNames = new HashSet<>();
       
       
@@ -96,7 +109,7 @@ public class Declarations
       
       
       /* Validate all uniquely named declarations */
-      for (Declaration declaration : also)
+      for (Declaration declaration : also.declarations)
          declaration.validate(structs);
    }
 }

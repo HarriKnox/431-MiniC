@@ -5,6 +5,8 @@ import java.util.List;
 
 import ast.LinedElement;
 
+import ast.type.Type;
+
 
 public class Struct extends LinedElement
 {
@@ -23,26 +25,13 @@ public class Struct extends LinedElement
    
    public boolean isField(String fieldName)
    {
-      return findField(fieldName) != null;
+      return getFieldType(fieldName) != null;
    }
    
    
    public Type getFieldType(String fieldName)
    {
-      Declaration field = findField(fieldName);
-      
-      return (field == null) ? null : field.type;
-   }
-   
-   
-   private Declaration findField(String fieldName)
-   {
-      for (Declaration field : this.fields)
-         if (field.name.equals(fieldName))
-            return field;
-      
-      
-      return null;
+      return this.fields.getDeclarationType(fieldName);
    }
    
    

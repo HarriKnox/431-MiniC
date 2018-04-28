@@ -63,7 +63,7 @@ public class Structs
       /* Get all unique struct names */
       while (structerator.hasNext())
       {
-         Struct structName = structerator.next().name;
+         String structName = structerator.next().name;
          
          
          if (structNames.contains(structName))
