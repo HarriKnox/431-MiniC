@@ -3,8 +3,8 @@ package ast.type;
 
 public class NullType extends Type
 {
-   public boolean equals(Object o)
+   public boolean equivalent(Type t)
    {
-      return (o instanceof NullType) || (o instanceof StructType);
+      return (t instanceof NullType) || (t instanceof StructType);
    }
 }

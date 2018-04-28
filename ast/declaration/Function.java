@@ -17,13 +17,8 @@ public class Function extends LinedElement
    public final Statement body;
 
 
-   public Function(
-         int lineNum,
-         String name,
-         Declarations params,
-         Type retType,
-         Declarations locals,
-         Statement body)
+   public Function(int lineNum, String name, Declarations params,
+         Type retType, Declarations locals, Statement body)
    {
       super(lineNum);
 
@@ -32,5 +27,14 @@ public class Function extends LinedElement
       this.retType = retType;
       this.locals = locals;
       this.body = body;
+   }
+   
+   
+   public void validate(Structs structs, Declarations globals)
+   {
+      if (!this.retType.isValid(structs))
+         System.err.println("Invalid type");
+      
+      
    }
 }

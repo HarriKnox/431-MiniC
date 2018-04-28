@@ -3,8 +3,8 @@ package ast.type;
 
 public class BoolType extends Type
 {
-   public boolean equals(Object o)
+   public boolean equivalent(Type t)
    {
-      return o instanceof BoolType;
+      return t instanceof BoolType;
    }
 }

@@ -19,4 +19,11 @@ public class Declaration extends LinedElement
       this.type = type;
       this.name = name;
    }
+   
+   
+   public void validate(Structs structs)
+   {
+      if (!this.type.isValid(structs))
+         System.err.println("Invalid type");
+   }
 }
