@@ -6,8 +6,8 @@ import java.util.List;
 
 import parser.MiniBaseVisitor;
 
-import ast.declaration.Declaration;
-import ast.declaration.Declarations;
+import ast.declaration.Variable;
+import ast.declaration.Variables;
 
 
 import static parser.MiniParser.DeclContext;
@@ -15,39 +15,39 @@ import static parser.MiniParser.FieldsContext;
 import static parser.MiniParser.ParametersContext;
 
 
-public class DeclVisitor extends MiniBaseVisitor<Declarations>
+public class DeclVisitor extends MiniBaseVisitor<Variables>
 {
    private final TypeVisitor typeVisitor = new TypeVisitor();
 
 
    @Override
-   public Declarations visitFields(FieldsContext ctx)
+   public Variables visitFields(FieldsContext ctx)
    {
       return gatherDecls(ctx.decl());
    }
 
 
    @Override
-   public Declarations visitParameters(ParametersContext ctx)
+   public Variables visitParameters(ParametersContext ctx)
    {
       return gatherDecls(ctx.decl());
    }
 
 
-   private Declarations gatherDecls(List<DeclContext> decls)
+   private Variables gatherDecls(List<DeclContext> decls)
    {
-      List<Declaration> variables = new LinkedList<>();
+      List<Variable> variables = new LinkedList<>();
 
 
       for (DeclContext dctx : decls)
       {
-         variables.add(new Declaration(
+         variables.add(new Variable(
                dctx.getStart().getLine(),
                typeVisitor.visit(dctx.type()),
                dctx.ID().getText()));
       }
 
 
-      return new Declarations(variables);
+      return new Variables(variables);
    }
 }

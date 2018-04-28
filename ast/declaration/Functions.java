@@ -18,7 +18,7 @@ public class Functions
    }
    
    
-   public void validate(Structs structs, Declarations globals)
+   public void validate(Structs structs, Variables globals)
    {
       Iterator<Function> functerator = this.functions.iterator();
       Set<String> functionNames = new HashSet<>();

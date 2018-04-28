@@ -8,8 +8,8 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import parser.MiniBaseVisitor;
 
-import ast.declaration.Declaration;
-import ast.declaration.Declarations;
+import ast.declaration.Variable;
+import ast.declaration.Variables;
 
 import ast.type.Type;
 
@@ -18,15 +18,15 @@ import static parser.MiniParser.VariableContext;
 import static parser.MiniParser.VariablesContext;
 
 
-public class VariablesVisitor extends MiniBaseVisitor<Declarations>
+public class VariablesVisitor extends MiniBaseVisitor<Variables>
 {
    private final TypeVisitor typeVisitor = new TypeVisitor();
 
 
    @Override
-   public Declarations visitVariables(VariablesContext ctx)
+   public Variables visitVariables(VariablesContext ctx)
    {
-      List<Declaration> decls = new LinkedList<>();
+      List<Variable> decls = new LinkedList<>();
 
 
       for (VariableContext vctx : ctx.variable())
@@ -35,7 +35,7 @@ public class VariablesVisitor extends MiniBaseVisitor<Declarations>
 
          for (TerminalNode node : vctx.ID())
          {
-            decls.add(new Declaration(
+            decls.add(new Variable(
                   node.getSymbol().getLine(),
                   type,
                   node.getText()));
@@ -43,6 +43,6 @@ public class VariablesVisitor extends MiniBaseVisitor<Declarations>
       }
 
 
-      return new Declarations(decls);
+      return new Variables(decls);
    }
 }

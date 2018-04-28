@@ -11,10 +11,10 @@ import ast.type.Type;
 public class Struct extends LinedElement
 {
    public final String name;
-   public final Declarations fields;
+   public final Variables fields;
    
 
-   public Struct(int lineNum, String name, Declarations fields)
+   public Struct(int lineNum, String name, Variables fields)
    {
       super(lineNum);
 
@@ -31,7 +31,7 @@ public class Struct extends LinedElement
    
    public Type getFieldType(String fieldName)
    {
-      return this.fields.getDeclarationType(fieldName);
+      return this.fields.getVariableType(fieldName);
    }
    
    

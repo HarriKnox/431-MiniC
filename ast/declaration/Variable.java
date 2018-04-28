@@ -6,13 +6,13 @@ import ast.LinedElement;
 import ast.type.Type;
 
 
-public class Declaration extends LinedElement
+public class Variable extends LinedElement
 {
    public final Type type;
    public final String name;
 
 
-   public Declaration(int lineNum, Type type, String name)
+   public Variable(int lineNum, Type type, String name)
    {
       super(lineNum);
 
