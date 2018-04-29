@@ -3,7 +3,7 @@ package parser.visitor;
 
 import parser.MiniBaseVisitor;
 
-import ast.Program;
+import ast.ProgramAST;
 
 import ast.declaration.Functions;
 import ast.declaration.Structs;
@@ -16,7 +16,7 @@ import static parser.MiniParser.ProgramContext;
 import static parser.MiniParser.StructsContext;
 
 
-public class ProgramVisitor extends MiniBaseVisitor<Program>
+public class ProgramVisitor extends MiniBaseVisitor<ProgramAST>
 {
    private final StructsVisitor structsVisitor = new StructsVisitor();
    private final VariablesVisitor variablesVisitor = new VariablesVisitor();
@@ -24,9 +24,9 @@ public class ProgramVisitor extends MiniBaseVisitor<Program>
 
 
    @Override
-   public Program visitProgram(ProgramContext ctx)
+   public ProgramAST visitProgram(ProgramContext ctx)
    {
-      return new Program(
+      return new ProgramAST(
             structsVisitor.visit(ctx.structs()),
             variablesVisitor.visit(ctx.variables()),
             functionsVisitor.visit(ctx.functions()));

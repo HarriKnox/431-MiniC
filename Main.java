@@ -11,7 +11,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import ast.Program;
+import ast.ProgramAST;
 
 import main.Options;
 
@@ -77,7 +77,7 @@ public class Main
    {
       Options opts = Options.parseOptions(args);
       
-      Program program = parseProgram(opts);
+      ProgramAST program = parseProgram(opts);
       
       System.exit(0);
    }
