@@ -1,29 +1,31 @@
 package ast.declaration;
 
 
-import ast.LinedElement;
-
 import ast.type.Type;
 
 
-public class Variable extends LinedElement
+public class Variable extends Declaration
 {
    public final Type type;
-   public final String name;
 
 
    public Variable(int lineNum, Type type, String name)
    {
-      super(lineNum);
+      super(lineNum, name);
 
       this.type = type;
-      this.name = name;
    }
    
    
-   public void validate(Structs structs)
+   public boolean validate(Structs structs)
    {
       if (!this.type.isValid(structs))
+      {
          System.err.println("Invalid type");
+         return false;
+      }
+      
+      
+      return true;
    }
 }
