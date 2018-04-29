@@ -37,8 +37,8 @@ public class VariablesVisitor extends MiniBaseVisitor<Variables>
          {
             decls.add(new Variable(
                   node.getSymbol().getLine(),
-                  type,
-                  node.getText()));
+                  node.getText(),
+                  type));
          }
       }
 

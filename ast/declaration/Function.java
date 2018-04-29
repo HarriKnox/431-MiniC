@@ -19,13 +19,13 @@ public class Function extends Declaration
    public final Variables locals; /* = params U vars */
 
 
-   public Function(int lineNum, String name, Variables params,
-         Type type, Variables vars, Statement body)
+   public Function(int lineNum, String name, Type type,
+         Variables params, Variables vars, Statement body)
    {
       super(lineNum, name);
 
-      this.parameters = params;
       this.type = type;
+      this.parameters = params;
       this.body = body;
       
       

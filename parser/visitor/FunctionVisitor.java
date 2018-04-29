@@ -23,8 +23,8 @@ public class FunctionVisitor extends MiniBaseVisitor<Function>
       return new Function(
             ctx.getStart().getLine(),
             ctx.ID().getText(),
-            declVisitor.visit(ctx.parameters()),
             typeVisitor.visit(ctx.returnType()),
+            declVisitor.visit(ctx.parameters()),
             variablesVisitor.visit(ctx.variables()),
             statementVisitor.visit(ctx.statementList()));
    }

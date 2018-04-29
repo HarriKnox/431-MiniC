@@ -9,7 +9,7 @@ public class Variable extends Declaration
    public final Type type;
 
 
-   public Variable(int lineNum, Type type, String name)
+   public Variable(int lineNum, String name, Type type)
    {
       super(lineNum, name);
 
