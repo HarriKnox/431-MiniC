@@ -15,6 +15,7 @@ public class StructType extends Type
    }
 
 
+   @Override
    public boolean equivalent(Type t)
    {
       return (t instanceof NullType)
@@ -23,6 +24,7 @@ public class StructType extends Type
    }
    
    
+   @Override
    public boolean isValid(Structs structs)
    {
       return structs.getDeclaration(this.name) != null;
