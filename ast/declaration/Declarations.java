@@ -35,7 +35,7 @@ public abstract class Declarations<T extends Declaration>
    }
    
    
-   public void removeDuplicates()
+   public void removeInvalids(Structs structs)
    {
       Iterator<T> iter = this.declarations.iterator();
       Set<String> names = new HashSet<>();
@@ -44,33 +44,27 @@ public abstract class Declarations<T extends Declaration>
       /* Get all unique function names */
       while (iter.hasNext())
       {
-         String name = iter.next().name;
+         T declaration = iter.next();
          
          
-         if (names.contains(name))
+         if (names.contains(declaration.name))
          {
             iter.remove();
             System.err.println("Already got it");
          }
          else
          {
-            names.add(name);
-         }
-      }
-   }
-   
-   
-   public void removeInvalids(Structs structs, Variables globals)
-   {
-      Iterator<T> iter = this.declarations.iterator();
-      
-      while (iter.hasNext())
-      {
-         T declaration = iter.next();
-         
-         if (!t.isValid(structs, globals))
-         {
-            iter.remove();
+            names.add(declaration.name);
+            
+            if (!declaration.hasValidType(structs))
+            {
+               iter.remove();
+               System.err.println("Invalid type");
+            }
+            else
+            {
+               declaration.removeInvalids(structs);
+            }
          }
       }
    }

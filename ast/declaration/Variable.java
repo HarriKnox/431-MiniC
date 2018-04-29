@@ -17,15 +17,16 @@ public class Variable extends Declaration
    }
    
    
-   public boolean validate(Structs structs)
+   @Override
+   public boolean hasValidType(Structs structs)
    {
-      if (!this.type.isValid(structs))
-      {
-         System.err.println("Invalid type");
-         return false;
-      }
-      
-      
-      return true;
+      return this.type.isValid(structs);
+   }
+   
+   
+   @Override
+   public void removeInvalids(Structs structs)
+   {
+      /* do nothing: this does not contain a declaration collection */
    }
 }

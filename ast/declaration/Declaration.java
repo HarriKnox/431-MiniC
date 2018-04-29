@@ -15,4 +15,9 @@ public abstract class Declaration extends LinedElement
       
       this.name = name;
    }
+   
+   
+   public abstract boolean hasValidType(Structs structs);
+   
+   public abstract void removeInvalids(Structs structs);
 }

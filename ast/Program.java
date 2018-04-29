@@ -19,10 +19,4 @@ public class Program
       this.globals = globals;
       this.functions = functions;
    }
-   
-   
-   public CFG generateCFG()
-   {
-      
-   }
 }

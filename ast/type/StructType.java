@@ -25,18 +25,6 @@ public class StructType extends Type
    
    public boolean isValid(Structs structs)
    {
-      return structs.isValid(this.name);
-   }
-   
-   
-   public boolean isField(Structs structs, String fieldName)
-   {
-      return structs.isField(this.name, fieldName);
-   }
-   
-   
-   public Type getFieldType(Structs structs, String fieldName)
-   {
-      return structs.getFieldType(this.name, fieldName);
+      return structs.getDeclaration(this.name) != null;
    }
 }

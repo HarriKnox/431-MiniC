@@ -17,8 +17,16 @@ public class Struct extends Declaration
    }
    
    
-   public void validate(Structs structs)
+   @Override
+   public boolean hasValidType(Structs structs)
    {
-      return this.fields.validate(structs);
+      return true;
+   }
+   
+   
+   @Override
+   public void removeInvalids(Structs structs)
+   {
+      this.fields.removeInvalids(structs);
    }
 }
