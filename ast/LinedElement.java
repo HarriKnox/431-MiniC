@@ -3,11 +3,11 @@ package ast;
 
 public abstract class LinedElement
 {
-   public final int line;
+   public final int lineNum;
 
 
-   public LinedElement(int line)
+   public LinedElement(int lineNum)
    {
-      this.line = line;
+      this.lineNum = lineNum;
    }
 }

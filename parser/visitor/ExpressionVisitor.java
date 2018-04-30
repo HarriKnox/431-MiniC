@@ -253,9 +253,14 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
 
 
          case "-":
+            Expression exp = visit(ctx.expression());
+            
+            if (exp instanceof IntExpression)
+               return ((IntExpression)exp).negate();
+            
             return new NotExpression(
                   ctx.op.getLine(),
-                  visit(ctx.expression()));
+                  exp);
       }
 
 
