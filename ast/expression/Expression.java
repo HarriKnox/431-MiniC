@@ -2,6 +2,10 @@ package ast.expression;
 
 
 import ast.LinedElement;
+import ast.ProgramAST;
+
+import llvm.value.LLVMValue;
+import llvm.LLVMCFGNode;
 
 
 public abstract class Expression extends LinedElement
@@ -15,4 +19,8 @@ public abstract class Expression extends LinedElement
       
       this.height = height;
    }
+   
+   
+   public abstract LLVMValue buildLLVM(
+         ProgramAST program, Function current, LLVMCFGNode node);
 }
