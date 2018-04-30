@@ -4,7 +4,7 @@ package ast.declaration;
 import ast.type.Type;
 
 
-public class Variable extends Declaration
+public class Variable extends Declaration<LLVMGlobal>
 {
    public final Type type;
 

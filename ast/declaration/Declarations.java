@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 
-public abstract class Declarations<T extends Declaration>
+public abstract class Declarations<T extends Declaration,
+      R extends LLVMDeclaration>
 {
    final List<T> declarations;
    
@@ -67,5 +68,23 @@ public abstract class Declarations<T extends Declaration>
             }
          }
       }
+   }
+   
+   
+   private List<R> buildLLVM(Structs structs,
+         Variables globals, Functions functions)
+   {
+      this.removeInvalids(structs);
+      
+      
+      List<R> llvmDeclarations = new LinkedList<>()
+      
+      for (T declaration : this.declarations)
+         llvmDeclarations.add(declaration.buildLLVM(
+               structs,
+               globals,
+               functions));
+      
+      return llvmDeclarations;
    }
 }
