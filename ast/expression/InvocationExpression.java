@@ -15,7 +15,7 @@ public class InvocationExpression extends Expression
          String name,
          List<Expression> arguments)
    {
-      super(lineNum);
+      super(lineNum, 0);
 
       this.name = name;
       this.arguments = arguments;

@@ -8,7 +8,7 @@ public class IdentifierExpression extends Expression
 
    public IdentifierExpression(int lineNum, String id)
    {
-      super(lineNum);
+      super(lineNum, 0);
 
       this.id = id;
    }

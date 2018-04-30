@@ -8,7 +8,7 @@ public class NewExpression extends Expression
 
    public NewExpression(int lineNum, String id)
    {
-      super(lineNum);
+      super(lineNum, 0);
       this.id = id;
    }
 }

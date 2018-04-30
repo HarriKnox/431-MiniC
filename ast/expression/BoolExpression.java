@@ -8,7 +8,7 @@ public class BoolExpression extends Expression
 
    public BoolExpression(int lineNum, boolean value)
    {
-      super(lineNum);
+      super(lineNum, 0);
 
       this.value = value;
    }

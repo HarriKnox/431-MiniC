@@ -15,7 +15,7 @@ public class IntExpression extends Expression
    
    private IntExpression(int lineNum, String value, boolean negative)
    {
-      super(lineNum);
+      super(lineNum, 0);
 
       this.value = value;
       this.negative = negative;

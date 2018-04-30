@@ -5,6 +5,6 @@ public class NullExpression extends Expression
 {
    public NullExpression(int lineNum)
    {
-      super(lineNum);
+      super(lineNum, 0);
    }
 }

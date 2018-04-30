@@ -5,6 +5,6 @@ public class ReadExpression extends Expression
 {
    public ReadExpression(int lineNum)
    {
-      super(lineNum);
+      super(lineNum, 0);
    }
 }

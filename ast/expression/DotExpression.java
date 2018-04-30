@@ -9,7 +9,7 @@ public class DotExpression extends Expression
 
    public DotExpression(int lineNum, Expression left, String id)
    {
-      super(lineNum);
+      super(lineNum, left.height + 1);
 
       this.left = left;
       this.id = id;

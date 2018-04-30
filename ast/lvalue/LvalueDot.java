@@ -9,7 +9,7 @@ public class LvalueDot extends Lvalue
 
    public LvalueDot(int lineNum, Lvalue left, String id)
    {
-      super(lineNum);
+      super(lineNum, left.height + 1);
 
       this.left = left;
       this.id = id;

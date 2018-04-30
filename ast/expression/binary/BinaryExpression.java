@@ -12,7 +12,9 @@ public abstract class BinaryExpression extends Expression
 
    public BinaryExpression(int lineNum, Expression left, Expression right)
    {
-      super(lineNum);
+      super(lineNum, ((left.height > right.height)
+            ? left.height
+            : right.height) + 1);
 
       this.left = left;
       this.right = right;
