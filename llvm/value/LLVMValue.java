@@ -4,7 +4,7 @@ package llvm.value;
 import llvm.type.Type;
 
 
-public abstract LLVMValue
+public abstract class LLVMValue
 {
    public final LLVMType type;
    
