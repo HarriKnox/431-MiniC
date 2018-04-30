@@ -10,6 +10,7 @@ public class Struct
 {
    public final String name;
    public final Variables fields;
+   public final int size;
    
 
    public Struct(int lineNum, String name, Variables fields)
@@ -18,6 +19,7 @@ public class Struct
 
       this.name = name;
       this.fields = fields;
+      this.size = fields.declarations.size();
    }
    
    
