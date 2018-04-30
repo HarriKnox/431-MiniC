@@ -7,4 +7,12 @@ public class ReadExpression extends Expression
    {
       super(lineNum, 0);
    }
+   
+   
+   @Override
+   public LLVMValue buildLLVM(
+         ProgramAST program, Function current, LLVMCFGNode node)
+   {
+      node.addInstruction(
+   }
 }

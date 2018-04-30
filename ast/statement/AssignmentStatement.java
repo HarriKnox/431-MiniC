@@ -31,9 +31,30 @@ public class AssignmentStatement extends Statement
    
    
    public LLVMCFGNode buildLLVM(Structs structs, Variables globals,
-         Functions functions, Function currentFunction,
+         Functions functions, Function current,
          LLVMCFGNode node, LLVMCFGNode exit)
    {
+      LLVMRegister register;
+      LLVMValue value;
       
+      
+      if (source.height >= target.height)
+      {
+         value = this.source.buildLLVM(
+               structs, globals, functions,
+               current, node, exit);
+         register = this.target.buildLLVM(
+               structs, globals, functions,
+               current, node, exit);
+      }
+      else
+      {
+         register = this.target.buildLLVM(
+               structs, globals, functions,
+               current, node, exit);
+         value = this.source.buildLLVM(
+               structs, globals, functions,
+               current, node, exit);
+      }
    }
 }
