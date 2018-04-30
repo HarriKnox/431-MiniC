@@ -3,6 +3,8 @@ package ast.type;
 
 import ast.declaration.Structs;
 
+import llvm.type.LLVMType;
+
 
 public abstract class Type
 {
@@ -13,4 +15,7 @@ public abstract class Type
    {
       return true;
    }
+   
+   
+   public abstract LLVMType getLLVMType();
 }

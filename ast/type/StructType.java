@@ -1,6 +1,10 @@
 package ast.type;
 
 
+import llvm.type.LLVMStructType;
+import llvm.type.LLVMType;
+
+
 import ast.declaration.Structs;
 
 
@@ -28,5 +32,12 @@ public class StructType extends Type
    public boolean isValid(Structs structs)
    {
       return structs.getDeclaration(this.name) != null;
+   }
+   
+   
+   @Override
+   public LLVMType getLLVMType()
+   {
+      return new LLVMStructType(this.name);
    }
 }
