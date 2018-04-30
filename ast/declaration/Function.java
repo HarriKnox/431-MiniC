@@ -9,23 +9,24 @@ import ast.type.Type;
 import ast.statement.Statement;
 
 
-public class Function extends Declaration
+public class Function extends Declaration<LLVMFunction>
 {
    public final Type type;
-   public final Variables parameters; /* = only the params */
+   public final Variables parameters;
+   public final Variables locals;
    public final Statement body;
    
    public final List<Type> parameterTypes;
-   public final Variables locals; /* = params U vars */
 
 
    public Function(int lineNum, String name, Type type,
-         Variables params, Variables vars, Statement body)
+         Variables params, Variables locals, Statement body)
    {
       super(lineNum, name);
 
       this.type = type;
       this.parameters = params;
+      this.locals = locals;
       this.body = body;
       
       
@@ -34,16 +35,6 @@ public class Function extends Declaration
       
       for (Variable parameter : params.declarations)
          this.parameterTypes.add(parameter.type);
-      
-      
-      /* Get a union of all locally-scoped params and vars */
-      List<Variable> localScope = new ArrayList<>(
-            params.declarations.size() + vars.declarations.size());
-      
-      localScope.addAll(params.declarations);
-      localScope.addAll(vars.declarations);
-      
-      this.locals = new Variables(localScope);
    }
    
    
