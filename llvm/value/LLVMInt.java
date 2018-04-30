@@ -12,13 +12,8 @@ public class LLVMInt extends LLVMValue
    
    public LLVMInt(String value)
    {
+      super(new LLVMIntType());
+      
       this.value = value;
-   }
-   
-   
-   @Override
-   public LLVMType getType()
-   {
-      return new LLVMIntType();
    }
 }

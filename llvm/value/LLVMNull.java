@@ -7,9 +7,8 @@ import llvm.type.Type;
 
 public class LLVMNull extends LLVMValue
 {
-   @Override
-   public LLVMType getType()
+   public LLVMNull()
    {
-      return new LLVMNullType();
+      super(new LLVMNullType());
    }
 }

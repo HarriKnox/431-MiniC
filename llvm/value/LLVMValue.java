@@ -6,5 +6,11 @@ import llvm.type.Type;
 
 public abstract LLVMValue
 {
-   public abstract Type getType();
+   public final LLVMType type;
+   
+   
+   public LLVMValue(LLVMType type)
+   {
+      this.type = type;
+   }
 }

@@ -12,13 +12,8 @@ public class LLVMBool extends LLVMValue
    
    public LLVMBool(boolean value)
    {
+      super(new LLVMBoolType());
+      
       this.value = value;
-   }
-   
-   
-   @Override
-   public LLVMType getType()
-   {
-      return new LLVMBoolType();
    }
 }
