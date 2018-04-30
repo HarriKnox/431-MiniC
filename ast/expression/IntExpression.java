@@ -1,6 +1,14 @@
 package ast.expression;
 
 
+import ast.ProgramAST;
+
+import llvm.LLVMCFGNode;
+
+import llvm.value.LLVMInteger;
+import llvm.value.LLVMValue;
+
+
 public class IntExpression extends Expression
 {
    public final String value;
@@ -25,5 +33,27 @@ public class IntExpression extends Expression
    public IntExpression negate()
    {
       return new IntExpression(this.lineNum, this.value, !this.negative);
+   }
+   
+   
+   @Override
+   public LLVMValue buildLLVM(
+         ProgramAST program, Function current, LLVMCFGNode node)
+   {
+      String val = this.negative ? ("-" + this.value) : this.value;
+      
+      
+      try
+      {
+         Integer.parseInt(val);
+      }
+      catch (NumberFormatException ne)
+      {
+         System.err.println("line " + this.lineNum + " integer out of range");
+         return null;
+      }
+      
+      
+      return new LLVMInt(val);
    }
 }
