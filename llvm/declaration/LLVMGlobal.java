@@ -1,6 +1,6 @@
 package llvm.declaration;
 
 
-public class LLVMGlobal extends LLVMDeclaration
+public class LLVMGlobal
 {
 }

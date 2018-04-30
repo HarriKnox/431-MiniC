@@ -6,39 +6,35 @@ import ast.type.Type;
 import llvm.type.LLVMType;
 
 
-public class Struct extends Declaration<LLVMStruct>
+public class Struct
 {
+   public final String name;
    public final Variables fields;
    
 
    public Struct(int lineNum, String name, Variables fields)
    {
-      super(lineNum, name);
+      super(lineNum);
 
+      this.name = name;
       this.fields = fields;
    }
    
    
-   @Override
-   public boolean hasValidType(Structs structs)
-   {
-      return true;
-   }
-   
-   
-   @Override
    public void removeInvalids(Structs structs)
    {
       this.fields.removeInvalids(structs);
    }
    
    
-   @Override
-   public LLVMStruct buildLLVM(Structs structs,
-         Variables globals, Functions functions)
+   public LLVMStruct buildLLVM()
    {
-      List<LLVMType> new LinkedList<>();
+      List<LLVMType> llvmTypes = new LinkedList<>();
+      
+      for (Variable field : this.fields.variables)
+         llvmTypes.add(field.type);
       
       
+      return new LLVMStruct(this.name, llvmTypes);
    }
 }

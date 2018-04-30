@@ -1,13 +1,84 @@
 package ast.declaration;
 
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
+import llvm.declaration.LLVMFunction;
+import llvm.declaration.LLVMFunctions;
 
 
-public class Functions extends Declarations<Function, LLVMFunction>
+public class Functions
 {
+   public final List<Function> functions;
+   
+   
    public Functions(List<Function> functions)
    {
-      super(functions);
+      this.functions = functions;
+   }
+   
+   
+   public Function getFunction(String name)
+   {
+      for (Function function : this.functions)
+         if (function.name.equals(name))
+            return function;
+      
+      return null;
+   }
+   
+   
+   public boolean isValid(String name)
+   {
+      return this.getFunction(name) != null;
+   }
+   
+   
+   public void removeInvalids(Structs structs)
+   {
+      Iterator<Function> functerator = this.functions.iterator();
+      Set<String> names = new HashSet<>();
+      
+      
+      while (functerator.hasNext())
+      {
+         Function function = functerator.next();
+         
+         
+         if (names.contains(function.name));
+         {
+            functerator.remove();
+            System.err.println("Already got it");
+         }
+         else
+         {
+            names.add(function.name);
+            
+            if (!function.hasValidType(structs))
+            {
+               iter.remove();
+               System.err.println("Invalid type");
+            }
+         }
+      }
+   }
+   
+   
+   private LLVMFunctions buildLLVM(Structs structs,
+         Variables globals, Functions funcs)
+   {
+      this.removeInvalids(structs);
+      
+      
+      List<LLVMFunction> llvmfuncs = new LinkedList<>()
+      
+      for (Function function : this.functions)
+         llvmfuncs.add(function.buildLLVM(structs, globals, funcs));
+      
+      
+      return new LLVMFunctions(llvmfuncs);
    }
 }

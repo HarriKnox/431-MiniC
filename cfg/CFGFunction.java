@@ -145,14 +145,8 @@ class CFGFunction
       if (body instanceof InvocationStatement)
          return generateInvocationCFG((InvocationStatement)body, node, exit);
       
-      if (body instanceof PrintLnStatement)
-         return generatePrintLnCFG((PrintLnStatement)body, node, exit);
-      
       if (body instanceof PrintStatement)
          return generatePrintCFG((PrintStatement)body, node, exit);
-      
-      if (body instanceof ReturnEmptyStatement)
-         return generateReturnEmptyCFG((ReturnEmptyStatement)body, node, exit);
       
       if (body instanceof ReturnStatement)
          return generateReturnCFG((ReturnStatement)body, node, exit);

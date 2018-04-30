@@ -1,10 +1,14 @@
 package llvm.declaration;
 
 
-public class LLVMStruct extends LLVMDeclaration
+import java.util.List;
+
+
+public class LLVMStruct
 {
-   public LLVMStruct()
+   public LLVMStruct(String name, List<LLVMType> types)
    {
-      
+      this.name = name;
+      this.types = types;
    }
 }

@@ -9,8 +9,9 @@ import ast.type.Type;
 import ast.statement.Statement;
 
 
-public class Function extends Declaration<LLVMFunction>
+public class Function
 {
+   public final String name;
    public final Type type;
    public final Variables parameters;
    public final Variables locals;
@@ -22,8 +23,9 @@ public class Function extends Declaration<LLVMFunction>
    public Function(int lineNum, String name, Type type,
          Variables params, Variables locals, Statement body)
    {
-      super(lineNum, name);
+      super(lineNum);
 
+      this.name = name;
       this.type = type;
       this.parameters = params;
       this.locals = locals;
@@ -38,7 +40,6 @@ public class Function extends Declaration<LLVMFunction>
    }
    
    
-   @Override
    public boolean hasValidType(Structs structs)
    {
       for (Type type : this.parameterTypes)
@@ -50,9 +51,9 @@ public class Function extends Declaration<LLVMFunction>
    }
    
    
-   @Override
-   public void removeInvalids(Structs structs)
+   public LLVMFunction buildLLVm(Structs structs,
+      Variables globals, Functions functions)
    {
-      this.locals.removeInvalids(structs);
+      
    }
 }

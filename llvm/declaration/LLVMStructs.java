@@ -4,10 +4,13 @@ package llvm.declaration;
 import java.util.List;
 
 
-public class LLVMStructs extends LLVMDeclarations
+public class LLVMStructs
 {
+   public final List<LLVMStruct> structs;
+   
+   
    public LLVMStructs(List<LLVMStruct> structs)
    {
-      super(structs);
+      this.structs = structs;
    }
 }

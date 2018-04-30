@@ -4,10 +4,13 @@ package llvm.declaration;
 import java.util.List;
 
 
-public class LLVMGlobals extends LLVMDeclarations<LLVMGlobal>
+public class LLVMGlobals
 {
+   public final List<LLVMGlobal> globals;
+   
+   
    public LLVMGlobals(List<LLVMGlobal> globals)
    {
-      super(globals);
+      this.globals = globals;
    }
 }

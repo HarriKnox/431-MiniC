@@ -1,6 +1,6 @@
 package llvm.declaration;
 
 
-public class LLVMFunction extends LLVMDeclaration
+public class LLVMFunction
 {
 }
