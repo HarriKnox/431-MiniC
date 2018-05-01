@@ -37,6 +37,7 @@ public class DeclVisitor extends MiniBaseVisitor<Variables>
    private Variables gatherDecls(List<DeclContext> decls)
    {
       List<Variable> variables = new LinkedList<>();
+      int index = 0;
 
 
       for (DeclContext dctx : decls)
@@ -44,7 +45,8 @@ public class DeclVisitor extends MiniBaseVisitor<Variables>
          variables.add(new Variable(
                dctx.getStart().getLine(),
                dctx.ID().getText(),
-               typeVisitor.visit(dctx.type())));
+               typeVisitor.visit(dctx.type()),
+               index++));
       }
 
 

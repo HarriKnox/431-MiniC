@@ -27,6 +27,7 @@ public class VariablesVisitor extends MiniBaseVisitor<Variables>
    public Variables visitVariables(VariablesContext ctx)
    {
       List<Variable> decls = new LinkedList<>();
+      int index = 0;
 
 
       for (VariableContext vctx : ctx.variable())
@@ -38,7 +39,8 @@ public class VariablesVisitor extends MiniBaseVisitor<Variables>
             decls.add(new Variable(
                   node.getSymbol().getLine(),
                   node.getText(),
-                  type));
+                  type,
+                  index++));
          }
       }
 
