@@ -1,14 +1,19 @@
-package llvm.value;
+package llvm.value.variable;
 
 
-public class LLVMLocal
+import llvm.type.LLVMType;
+
+
+public class LLVMLocal extends LLVMVariable
 {
    public final String functionName;
    public final String identifier;
    
    
-   public LLVMLocal(String funcName, String id)
+   public LLVMLocal(String funcName, String id, LLVMType type)
    {
+      super(type);
+      
       this.functionName = funcName;
       this.identifier = id;
    }
