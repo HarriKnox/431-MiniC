@@ -52,10 +52,8 @@ public class DotExpression extends Expression
       
       /* At this point leftValue refers to a valid struct */
       Variable field = program
-            .structs
             .getStruct(((LLVMStructType)leftValue.type).name)
-            .declarations
-            .getVariable(this.id);
+            .getField(this.id);
       
       if (field == null)
       {

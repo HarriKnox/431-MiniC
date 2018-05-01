@@ -29,6 +29,12 @@ public class Struct
    }
    
    
+   public Variable getField(String name)
+   {
+      return this.fields.getVariable(name);
+   }
+   
+   
    public LLVMStruct buildLLVM()
    {
       List<LLVMType> llvmTypes = new LinkedList<>();

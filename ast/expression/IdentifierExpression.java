@@ -42,7 +42,7 @@ public class IdentifierExpression extends Expression
       
       
       /* Find in locals */
-      variable = current.locals.getVariable(this.id);
+      variable = current.getLocal(this.id);
       
       if (variable != null)
          return new LLVMLocal(
@@ -52,7 +52,7 @@ public class IdentifierExpression extends Expression
       
       
       /* Find in parameters */
-      variable = current.parameters.getVariable(this.id);
+      variable = current.getParameter(this.id);
       
       if (variable != null)
          return new LLVMParameter(

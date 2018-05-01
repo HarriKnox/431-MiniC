@@ -42,4 +42,22 @@ public class ProgramAST
                this.globals,
                this.functions)));
    }
+   
+   
+   public Struct getStruct(String name)
+   {
+      return this.structs.getStruct(name);
+   }
+   
+   
+   public Variable getGlobal(String name)
+   {
+      return this.globals.getVariable(name);
+   }
+   
+   
+   public Function getFunction(String name)
+   {
+      return this.functions.getFunction(name);
+   }
 }

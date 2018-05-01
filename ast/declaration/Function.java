@@ -51,6 +51,18 @@ public class Function
    }
    
    
+   public Variable getLocal(String name)
+   {
+      return this.locals.getVariale(name);
+   }
+   
+   
+   public Variable getParameter(String name)
+   {
+      return this.parameters.getVariable(name);
+   }
+   
+   
    public LLVMFunction buildLLVm(Structs structs,
       Variables globals, Functions functions)
    {
