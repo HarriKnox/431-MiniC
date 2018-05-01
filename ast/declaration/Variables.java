@@ -40,6 +40,22 @@ public class Variables
    }
    
    
+   public int getVariableIndex(String name)
+   {
+      int i = 0;
+      
+      for (Variable variable : this.variables)
+      {
+         if (variable.name.equals(name))
+            return i;
+         
+         i++;
+      }
+      
+      return -1;
+   }
+   
+   
    public void removeInvalids(Structs structs)
    {
       Iterator<Variable> variter = this.variables.iterator();
