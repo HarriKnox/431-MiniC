@@ -10,7 +10,7 @@ import llvm.LLVMCFGNode;
 import llvm.instruction.LLVMLoad;
 import llvm.instruction.LLVMScanf;
 
-import llvm.value.variable.LLVMRegister;
+import llvm.value.LLVMValue;
 
 
 public class ReadExpression extends Expression
