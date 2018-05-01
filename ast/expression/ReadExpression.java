@@ -1,10 +1,16 @@
 package ast.expression;
 
 
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
+import llvm.LLVMCFGNode;
+
 import llvm.instruction.LLVMLoad;
 import llvm.instruction.LLVMScanf;
 
-import llvm.value.LLVMRegister;
+import llvm.value.variable.LLVMRegister;
 
 
 public class ReadExpression extends Expression

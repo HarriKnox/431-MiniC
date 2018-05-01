@@ -3,10 +3,13 @@ package ast.expression;
 
 import ast.ProgramAST;
 
+import ast.declaration.Function;
+
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMInteger;
 import llvm.value.LLVMValue;
+
+import llvm.value.constant.LLVMInteger;
 
 
 public class IntExpression extends Expression

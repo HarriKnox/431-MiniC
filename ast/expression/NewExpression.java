@@ -1,6 +1,18 @@
 package ast.expression;
 
 
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
+import llvm.LLVMCFGNode;
+
+import llvm.instruction.LLVMBitcast;
+import llvm.instruction.LLVMMalloc;
+
+import llvm.value.LLVMValue;
+
+
 public class NewExpression extends Expression
 {
    public final String id;

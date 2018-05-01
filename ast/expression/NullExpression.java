@@ -3,10 +3,13 @@ package ast.expression;
 
 import ast.ProgramAST;
 
+import ast.declaration.Function;
+
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMNull;
 import llvm.value.LLVMValue;
+
+import llvm.value.constant.LLVMNull;
 
 
 public class NullExpression extends Expression
