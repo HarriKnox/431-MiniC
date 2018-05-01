@@ -9,7 +9,7 @@ public class LLVMGlobal extends LLVMVariable
    public final String identifier;
    
    
-   public LLVMParameter(String id, LLVMType type)
+   public LLVMGlobal(String id, LLVMType type)
    {
       super(type);
       
