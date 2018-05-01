@@ -25,12 +25,13 @@ public class NewExpression extends Expression
          return null;
       }
       
-      LLVMRegister mallocked = new LLVMRegister(new LLVMPointerType());
-      node.addInstruction(new LLVMMalloc(mallocked, struct.size));
+      LLVMMalloc malloc = new LLVMMalloc(struct.size);
+      LLVMBitcast bitcast = new LLVMBitcast(
+            malloc.target,
+            new StructType(struct.name).getLLVMType());
       
-      LLVMRegister bitcasted = new LLVMRegister(new StructType(struct.name).getLLVMType());
-      node.addInstruction(new LLVMBitcast(bitcasted, mallocked));
+      node.add(malloc).add(bitcast);
       
-      return bitcasted;
+      return bitcast.target;
    }
 }
