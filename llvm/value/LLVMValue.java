@@ -1,7 +1,7 @@
 package llvm.value;
 
 
-import llvm.type.Type;
+import llvm.type.LLVMType;
 
 
 public abstract class LLVMValue
