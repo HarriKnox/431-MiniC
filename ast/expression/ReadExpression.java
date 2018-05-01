@@ -1,6 +1,12 @@
 package ast.expression;
 
 
+import llvm.instruction.LLVMLoad;
+import llvm.instruction.LLVMScanf;
+
+import llvm.value.LLVMRegister;
+
+
 public class ReadExpression extends Expression
 {
    public ReadExpression(int lineNum)
@@ -13,6 +19,11 @@ public class ReadExpression extends Expression
    public LLVMValue buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      node.addInstruction(
+      LLVMScanf scanf = new LLVMScanf();
+      LLVMLoad load = new LLVMLoad(scanf.target)
+      
+      node.add(scanf).add(load);
+      
+      return scanf.target;
    }
 }
