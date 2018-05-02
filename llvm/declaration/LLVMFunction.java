@@ -1,6 +1,15 @@
 package llvm.declaration;
 
 
+import java.util.List;
+
+import llvm.LLVMCFGNode;
+
+import llvm.type.LLVMType;
+
+import llvm.value.variable.LLVMParameter;
+
+
 public class LLVMFunction
 {
    public final String name;

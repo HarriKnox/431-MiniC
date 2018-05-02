@@ -13,6 +13,8 @@ import ast.type.VoidType;
 
 import ast.statement.Statement;
 
+import llvm.LLVMCFGNode;
+
 import llvm.declaration.LLVMFunction;
 
 import llvm.value.variable.LLVMParameter;

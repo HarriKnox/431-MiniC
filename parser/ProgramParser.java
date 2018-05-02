@@ -12,6 +12,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import ast.ProgramAST;
+
 import common.Options;
 
 import parser.MiniLexer;
