@@ -144,7 +144,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
             ctx.getStart().getLine(),
             returnExpression != null
                   ? expressionVisitor.visit(returnExpression)
-                  : null);
+                  : new VoidExpression(ctx.getStart().getLine());
    }
 
 
