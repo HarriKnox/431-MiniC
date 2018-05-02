@@ -3,7 +3,7 @@ package llvm.type;
 
 public abstract class LLVMType
 {
-   public abstract boolean equivalent(Type type);
+   public abstract boolean equivalent(LLVMType type);
    
    public abstract String astString();
    
