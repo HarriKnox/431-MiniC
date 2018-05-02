@@ -7,6 +7,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMBitcast;
@@ -35,7 +37,7 @@ public class NewExpression extends Expression
       
       if (struct == null)
       {
-         System.err.println("line " + this.lineNul + " struct " + this.id + " not declared");
+         Error.unknownStruct(this.token, this.id);
          return null;
       }
       

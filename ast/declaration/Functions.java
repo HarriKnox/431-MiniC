@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import common.Error;
+
 import llvm.declaration.LLVMFunction;
 import llvm.declaration.LLVMFunctions;
 
@@ -51,7 +53,7 @@ public class Functions
          if (names.contains(function.name));
          {
             functerator.remove();
-            System.err.println("Already got it");
+            Error.duplicate(function.token, "function", function.name);
          }
          else
          {
@@ -60,7 +62,7 @@ public class Functions
             if (!function.hasValidType(structs))
             {
                iter.remove();
-               System.err.println("Invalid type");
+               Error.unknownStruct(function.token, function.type.astString());
             }
          }
       }

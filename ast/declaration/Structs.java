@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import common.Error;
+
 import llvm.declaration.LLVMStruct;
 import llvm.declaration.LLVMStructs;
 
@@ -53,7 +55,7 @@ public class Structs
          if (names.contains(struct.name))
          {
             structerator.remove();
-            System.err.println("Already got it");
+            Error.duplicate(struct.token, "struct", struct.name);
          }
          else
          {

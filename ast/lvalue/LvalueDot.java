@@ -8,6 +8,8 @@ import ast.ProgramAST;
 import ast.declaration.Function;
 import ast.declaration.Variable;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMGetelementptr;
@@ -46,7 +48,7 @@ public class LvalueDot extends Lvalue
       
       if (!(leftValue.type instanceof LLVMStructType))
       {
-         System.err.println("line " + exp.line + " attempt to index a(n) " + s);
+         Error.badIndex(this.token, leftValue.type.astString());
          return null;
       }
       
@@ -58,9 +60,11 @@ public class LvalueDot extends Lvalue
       
       if (field == null)
       {
-         System.err.println("line " + this.line + " struct "
-               + ((LLVMStructType)leftValue.type).name
-               + " does not contain field " + this.id);
+         Error.noField(
+               this.token,
+               ((LLVMStructType)leftValue.type).name,
+               this.id);
+         
          return null;
       }
       

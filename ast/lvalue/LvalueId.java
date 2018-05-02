@@ -9,6 +9,8 @@ import ast.declaration.Function;
 import ast.declaration.Variable;
 import ast.declaration.Variables;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.value.variable.LLVMVariable;
@@ -35,7 +37,7 @@ public class LvalueId extends Lvalue
       
       if (source == null)
       {
-         System.err.println("line " + this.token + " variable " + this.id + " not declared");
+         Error.undeclared(this.token, "variable", this.id);
          return null;
       }
       

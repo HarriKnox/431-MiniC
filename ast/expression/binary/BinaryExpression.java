@@ -5,6 +5,8 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
+import common.Error;
+
 import llvm.type.Type;
 
 import llvm.value.LLVMValue;
@@ -40,8 +42,11 @@ public abstract class BinaryExpression extends Expression
       
       if (!this.areValidTypes(left, right))
       {
-         System.err.println("line " + this.line + " attempt to perform "
-               + this.getOperation() + " on " + l + " and " + r);
+         Error.binaryMistype(
+               this.getOperation(),
+               left.type.astString(),
+               right.type.astString());
+         
          return null;
       }
       

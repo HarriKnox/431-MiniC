@@ -8,6 +8,8 @@ import java.util.Set;
 
 import ast.type.Type;
 
+import common.Error;
+
 import llvm.declaration.LLVMGlobal;
 import llvm.declaration.LLVMGlobals;
 
@@ -57,7 +59,7 @@ public class Variables
          if (names.contains(variable.name))
          {
             variter.remove();
-            System.err.println("Already got it");
+            Error.duplicate(variable.token, "variable", variable.name);
          }
          else
          {
@@ -66,7 +68,7 @@ public class Variables
             if (!variable.hasValidType(structs))
             {
                variter.remove();
-               System.err.println("Invalid type");
+               Error.unknownStruct(variable.token, variable.type.astString());
             }
          }
       }
@@ -87,7 +89,7 @@ public class Variables
          if (names.contains(parameter.name))
          {
             paramerator.remove();
-            System.err.println("Already got it");
+            Error.duplicate(parameter.token, "variable", parameter.name);
          }
          else
          {
@@ -96,7 +98,9 @@ public class Variables
             if (!parameter.hasValidType(structs))
             {
                paramerator.remove();
-               System.err.println("Invalid type");
+               Error.unknownStruct(
+                     parameter.token,
+                     parameter.type.astString());
             }
          }
       }
@@ -111,7 +115,7 @@ public class Variables
          if (names.contains(local.name))
          {
             localerator.remove();
-            System.err.println("Already got it");
+            Error.duplicate(local.token, "variable", local.name);
          }
          else
          {
@@ -120,7 +124,7 @@ public class Variables
             if (!localerator.hasValidType(structs))
             {
                localerator.remove();
-               System.err.println("InvalidType");
+               Error.unknownStruct(local.token, local.type.astString());
             }
          }
       }

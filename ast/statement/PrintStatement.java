@@ -9,6 +9,8 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMPrint;
@@ -45,11 +47,7 @@ public class PrintStatement extends Statement
       
       
       if (!(value.type instanceof LLVMIntType))
-      {
-         System.err.println("line " + this.token
-               + " cannot print value of type " + q);
-         ok = false;
-      }
+         Error.badPrint(this.expression.token, value.type.astString());
       
       
       LLVMPrint print = new LLVMPrint(value, this.println);

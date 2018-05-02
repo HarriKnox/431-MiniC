@@ -9,6 +9,8 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.type.LLVMType;
@@ -42,8 +44,11 @@ public abstract class UnaryExpression extends Expression
       
       if (!this.isValidType(value.type))
       {
-         System.err.println("line " + this.line + " attempt to perform "
-            + this.getOperation() + " on " + o);
+         Error.unaryMistype(
+               this.token,
+               this.getOperation(),
+               value.type.astString());
+         
          return null;
       }
       

@@ -9,6 +9,8 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.value.LLVMValue;
@@ -40,10 +42,8 @@ public class WhileStatement extends Statement
       
       
       if ((llvmGuard != null)
-         && (!(llvmGuard.type instanceof LLVMBoolType)))
-      {
-         System.err.println("line " + conditional.line + " guard is of type " + g);
-      }
+            && (!(llvmGuard.type instanceof LLVMBoolType)))
+         Error.badGuard(this.guard.token, llvmGuard.type.astString())l
       
       
       LLVMCFGNode bodyNode = new LLVMCFGNode();

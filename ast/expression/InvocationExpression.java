@@ -1,9 +1,25 @@
 package ast.expression;
 
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
+import common.Error;
+
+import llvm.LLVMCFGNode;
+
+import llvm.instruction.LLVMInvocation;
+
+import llvm.type.LLVMType;
+
+import llvm.value.LLVMValue;
 
 
 public class InvocationExpression extends Expression
@@ -45,8 +61,7 @@ public class InvocationExpression extends Expression
       
       if (function == null)
       {
-         System.err.println("line " + exp.line + " function " + exp.name
-               + " not declared");
+         Error.undeclared(this.token, "function", this.name);
          return null;
       }
       
@@ -56,9 +71,9 @@ public class InvocationExpression extends Expression
       
       if (function.parameters.length != arglen)
       {
-         System.err.println("line " + this.line + " wrong arity: function "
-               + this.name + " expects " + function.parameters.length
-               + " arguments, received " + arglen);
+         Error.wrongArity(this.token, this.name,
+               function.parameters.length, arglen);
+         
          return null;
       }
       
@@ -86,9 +101,9 @@ public class InvocationExpression extends Expression
          
          if (!llvmArg.type.equals(paramType))
          {
-            System.err.println("line " + this.token
-                  + " wrong type for argument " + i + ", should be " + fp
-                  + " but is " + ea);
+            Error.unexpectedType(this.token, paramType.astString(),
+                  "argument " + i, llvmArg.type.astString());
+            
             ok = false;
          }
       }

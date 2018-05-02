@@ -9,6 +9,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 
@@ -38,8 +40,7 @@ public class BlockStatement extends Statement
       {
          if (node == null)
          {
-            System.err.println("line " + statement.token
-                  + " WARNING: code after a return will not be examined nor executed");
+            Error.codeAfterReturn(statement.token);
             break;
          }
          

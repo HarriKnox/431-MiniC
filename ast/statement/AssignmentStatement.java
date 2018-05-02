@@ -11,6 +11,8 @@ import ast.expression.Expression;
 
 import ast.lvalue.Lvalue;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMStore;
@@ -47,11 +49,10 @@ public class AssignmentStatement extends Statement
       
       
       if (!(target.type.equivalent(value.type)))
-      {
-         
-         System.err.println("line " + this.token + " cannot assign "
-               + r + " to " + l);
-      }
+         Error.assignMistype(
+               this.source.token,
+               this.target.type.astString(),
+               this.value.type.astString());
       
       
       LLVMStore store = new LLVMStore(target, value);

@@ -11,6 +11,8 @@ import ast.expression.Expression;
 
 import ast.type.StructType;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMBitcast;
@@ -45,14 +47,12 @@ public class DeleteStatement extends Statement
       
       
       if (!(value.type instanceof LLVMStructType))
-      {
-         System.err.println("line " + delete.line + " cannot delete values of type " + s);
-      }
+         Error.badDelete(this.expression.token, value.type.astString());
       
       
       if (!(value instanceof LLVMRegister))
       {
-         System.err.println("I have no idea what went wrong because this should never run.");
+         Error.IDK("DeleteStatement.buildLLVM:55", value.getClass().getName());
          return node;
       }
       

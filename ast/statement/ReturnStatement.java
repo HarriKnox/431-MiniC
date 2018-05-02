@@ -9,6 +9,8 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
+import common.Error;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMStore;
@@ -38,14 +40,16 @@ public class ReturnStatement extends Statement
    {
       LLVMValue value = this.expression.buildLLVM(program, current, node);
       
+      LLVMType retType = current.type.getLLVMType();
+      
       
       if (value != null)
       {
-         if (!value.type.equivalent(current.type.getLLVMType())))
-         {
-            System.err.println("line " + this.token + " cannot return "
-                  + r + ", expected " + returnType);
-         }
+         if (!value.type.equivalent(retType)))
+            Error.badReturn(
+                  this.expression.token,
+                  retType.astString(),
+                  value.type.astString());
          
          
          if (!(value.type instanceof LLVMVoidType))
