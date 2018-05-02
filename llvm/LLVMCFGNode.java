@@ -46,4 +46,23 @@ public class LLVMCFGNode
    {
       this.link = new LLVMRet(returnValue);
    }
+   
+   
+   public void recursivisit(List<LLVMCFGNode> nodes)
+   {
+      if (nodes.contains(this))
+         return;
+      
+      
+      for (LLVMCFGNode parent : this.predecessors)
+         parent.recursivisit(nodes);
+      
+      
+      if (!nodes.contains(this))
+         nodes.add(this);
+      
+      
+      if (this.loopback != null)
+         this.loopback.recursivisit(nodes);
+   }
 }
