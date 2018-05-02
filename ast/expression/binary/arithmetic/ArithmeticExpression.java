@@ -11,4 +11,12 @@ public abstract class ArithmeticExpression extends BinaryExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected boolean areValidTypes(LLVMValue left, LLVMValue right)
+   {
+      return (left.type instanceof LLVMIntType)
+            && (right.type instanceof LLVMIntType)
+   }
 }

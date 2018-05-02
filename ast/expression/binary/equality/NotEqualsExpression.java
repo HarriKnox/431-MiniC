@@ -10,4 +10,18 @@ public class NotEqualsExpression extends EqualityExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "not-equals";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMNotEquals(l, r);
+   }
 }

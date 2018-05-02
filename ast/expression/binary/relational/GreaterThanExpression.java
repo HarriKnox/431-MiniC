@@ -10,4 +10,18 @@ public class GreaterThanExpression extends RelationalExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "greater-than";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMGreaterThan(l, r);
+   }
 }

@@ -10,4 +10,18 @@ public class TimesExpression extends ArithmeticExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "times";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMTimes(l, r);
+   }
 }

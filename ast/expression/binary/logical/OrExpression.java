@@ -10,4 +10,18 @@ public class OrExpression extends LogicalExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "logical-or";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMOr(l, r);
+   }
 }

@@ -10,4 +10,18 @@ public class PlusExpression extends ArithmeticExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "plus";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMPlus(l, r);
+   }
 }

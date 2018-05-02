@@ -11,4 +11,11 @@ public abstract class EqualityExpression extends BinaryExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected boolean areValidTypes(LLVMValue left, LLVMValue right)
+   {
+      return left.type.equivalent(right.type);
+   }
 }

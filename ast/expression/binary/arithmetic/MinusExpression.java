@@ -10,4 +10,18 @@ public class MinusExpression extends ArithmeticExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "minus";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMMinus(l, r);
+   }
 }

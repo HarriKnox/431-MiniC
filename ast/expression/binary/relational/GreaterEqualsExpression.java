@@ -13,4 +13,18 @@ public class GreaterEqualsExpression extends RelationalExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "greater-equals";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMGreaterEquals(l, r);
+   }
 }

@@ -10,4 +10,18 @@ public class LessEqualsExpression extends RelationalExpression
    {
       super(lineNum, left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "less-equals"
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   {
+      return new LLVMLessEquals(l, r);
+   }
 }
