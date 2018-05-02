@@ -3,10 +3,10 @@ package llvm.instruction;
 
 public abstract class LLVMInstruction
 {
-   public final LLVMRegister target;
+   public final LLVMVariable target;
    
    
-   public LLVMInstruction(LLVMRegister target)
+   public LLVMInstruction(LLVMVariable target)
    {
       this.target = target;
    }
