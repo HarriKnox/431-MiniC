@@ -1,8 +1,11 @@
 package ast;
 
 
+import ast.declaration.Function;
 import ast.declaration.Functions;
+import ast.declaration.Struct;
 import ast.declaration.Structs;
+import ast.declaration.Variable;
 import ast.declaration.Variables;
 
 import common.Options;
@@ -34,7 +37,7 @@ public class ProgramAST
       return new ProgramLLVM(
          new LLVMStructs(this.structs.buildLLVM()),
          new LLVMGlobals(this.globals.buildLLVM(this.structs)),
-         new LLVMFunctions(this.functions.buildLLVM(this));
+         new LLVMFunctions(this.functions.buildLLVM(this)));
    }
    
    
