@@ -10,4 +10,25 @@ public class NotExpression extends UnaryExpression
    {
       super(lineNum, operand);
    }
+   
+   
+   @Override
+   protected boolean isValidType(LLVMType type)
+   {
+      return type instanceof LLVMBoolType;
+   }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "unary-not";
+   }
+   
+   
+   @Override
+   protected LLVMInstruction getInstruction(LLVMValue value)
+   {
+      return new LLVMNot(value);
+   }
 }

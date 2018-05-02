@@ -1,7 +1,17 @@
 package ast.expression.unary;
 
 
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
 import ast.expression.Expression;
+
+import llvm.LLVMCFGNode;
+
+import llvm.type.LLVMType;
+
+import llvm.value.LLVMValue;
 
 
 public abstract class UnaryExpression extends Expression
@@ -15,4 +25,38 @@ public abstract class UnaryExpression extends Expression
 
       this.operand = operand;
    }
+   
+   
+   @Override
+   public LLVMValue buildLLVM(
+         ProgramAST program, Function current, LLVMCFGNode node)
+   {
+      LLVMValue value = this.operand.buildLLVM(program, current, node);
+      
+      
+      if (value == null)
+         return null;
+      
+      
+      if (!this.isValidType(value.type))
+      {
+         System.err.println("line " + this.line + " attempt to perform "
+            + this.getOperation() + " on " + o);
+         return null;
+      }
+      
+      
+      LLVMInstruction instruction = this.getInstruction(value);
+      
+      node.add(instruction);
+      
+      return instruction.target;
+   }
+   
+   
+   protected abstract boolean isValidType(LLVMType type);
+   
+   protected abstract String getOperation();
+   
+   protected abstract LLVMInstruction getInstruction(LLVMValue value);
 }
