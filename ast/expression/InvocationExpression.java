@@ -84,7 +84,7 @@ public class InvocationExpression extends Expression
          
          if (!llvmArg.type.equals(paramType))
          {
-            System.err.println("line " + this.line
+            System.err.println("line " + this.lineNum
                   + " wrong type for argument " + i + ", should be " + fp
                   + " but is " + ea);
             ok = false;
