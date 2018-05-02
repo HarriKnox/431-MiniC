@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import ast.ProgramAST;
+
 import common.Error;
 
 import llvm.declaration.LLVMFunction;
@@ -69,8 +71,7 @@ public class Functions
    }
    
    
-   private LLVMFunctions buildLLVM(Structs structs,
-         Variables globals, Functions funcs)
+   private LLVMFunctions buildLLVM(ProgramAST program)
    {
       this.removeInvalids(structs);
       
@@ -78,7 +79,7 @@ public class Functions
       List<LLVMFunction> llvmfuncs = new LinkedList<>()
       
       for (Function function : this.functions)
-         llvmfuncs.add(function.buildLLVM(structs, globals, funcs));
+         llvmfuncs.add(function.buildLLVM(program));
       
       
       return new LLVMFunctions(llvmfuncs);
