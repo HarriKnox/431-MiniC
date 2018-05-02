@@ -3,6 +3,8 @@ package llvm.declaration;
 
 import java.util.List;
 
+import llvm.value.variable.LLVMGlobal;
+
 
 public class LLVMGlobals
 {

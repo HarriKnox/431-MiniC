@@ -7,7 +7,7 @@ import ast.declaration.Structs;
 
 import ast.type.Type;
 
-import llvm.declaration.LLVMGlobal;
+import llvm.value.variable.LLVMGlobal;
 
 
 public class Variable

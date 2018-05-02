@@ -11,8 +11,9 @@ import ast.type.Type;
 
 import common.Error;
 
-import llvm.declaration.LLVMGlobal;
 import llvm.declaration.LLVMGlobals;
+
+import llvm.value.variable.LLVMGlobal;
 
 
 public class Variables
