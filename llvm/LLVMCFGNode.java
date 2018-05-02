@@ -40,4 +40,10 @@ public class LLVMCFGNode
       
       this.link = new LLVMBranch(guard, thenNode, elseNode);
    }
+   
+   
+   public void ret(LLVMReturnValue returnValue)
+   {
+      this.link = new LLVMRet(returnValue);
+   }
 }
