@@ -10,4 +10,8 @@ public abstract class Statement extends LinedElement
    {
       super(lineNum);
    }
+   
+   
+   public abstract LLVMCFGNode buildLLVM(ProgramAST program,
+         Function current, LLVMCFGNode node, LLVMCFGNode exit);
 }
