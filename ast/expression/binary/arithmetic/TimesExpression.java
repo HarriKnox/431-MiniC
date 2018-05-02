@@ -3,6 +3,10 @@ package ast.expression.binary.arithmetic;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.arithmetic.LLVMmul;
+
 
 public class TimesExpression extends ArithmeticExpression
 {
@@ -22,6 +26,6 @@ public class TimesExpression extends ArithmeticExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMTimes(l, r);
+      return new LLVMmul(l, r);
    }
 }

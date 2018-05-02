@@ -3,6 +3,10 @@ package ast.expression.binary.relational;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.comparison.LLVMslt;
+
 
 public class LessThanExpression extends RelationalExpression
 {
@@ -22,6 +26,6 @@ public class LessThanExpression extends RelationalExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMLessThan(l, r);
+      return new LLVMslt(l, r);
    }
 }

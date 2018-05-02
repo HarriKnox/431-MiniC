@@ -3,6 +3,10 @@ package ast.expression.binary.equality;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.comparison.LLVMne;
+
 
 public class NotEqualsExpression extends EqualityExpression
 {
@@ -22,6 +26,6 @@ public class NotEqualsExpression extends EqualityExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMNotEquals(l, r);
+      return new LLVMne(l, r);
    }
 }

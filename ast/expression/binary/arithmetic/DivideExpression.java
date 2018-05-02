@@ -3,6 +3,10 @@ package ast.expression.binary.arithmetic;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.arithmetic.LLVMsdiv;
+
 
 public class DivideExpression extends ArithmeticExpression
 {
@@ -22,6 +26,6 @@ public class DivideExpression extends ArithmeticExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMDivide(l, r);
+      return new LLVMsdiv(l, r);
    }
 }

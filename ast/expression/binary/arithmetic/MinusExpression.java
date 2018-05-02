@@ -3,6 +3,10 @@ package ast.expression.binary.arithmetic;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.arithmetic.LLVMsub;
+
 
 public class MinusExpression extends ArithmeticExpression
 {
@@ -22,6 +26,6 @@ public class MinusExpression extends ArithmeticExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMMinus(l, r);
+      return new LLVMsub(l, r);
    }
 }

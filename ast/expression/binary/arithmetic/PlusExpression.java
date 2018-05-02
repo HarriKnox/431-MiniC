@@ -3,6 +3,10 @@ package ast.expression.binary.arithmetic;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.arithmetic.LLVMadd;
+
 
 public class PlusExpression extends ArithmeticExpression
 {
@@ -22,6 +26,6 @@ public class PlusExpression extends ArithmeticExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMPlus(l, r);
+      return new LLVMadd(l, r);
    }
 }

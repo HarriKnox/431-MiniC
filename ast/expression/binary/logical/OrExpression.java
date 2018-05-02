@@ -3,6 +3,10 @@ package ast.expression.binary.logical;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.logical.LLVMor;
+
 
 public class OrExpression extends LogicalExpression
 {
@@ -22,6 +26,6 @@ public class OrExpression extends LogicalExpression
    @Override
    protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
    {
-      return new LLVMOr(l, r);
+      return new LLVMor(l, r);
    }
 }
