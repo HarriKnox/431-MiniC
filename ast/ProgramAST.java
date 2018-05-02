@@ -5,6 +5,8 @@ import ast.declaration.Functions;
 import ast.declaration.Structs;
 import ast.declaration.Variables;
 
+import common.Options;
+
 import llvm.ProgramLLVM;
 
 import llvm.declaration.LLVMFunctions;
@@ -27,21 +29,12 @@ public class ProgramAST
    }
    
    
-   public ProgramLLVM buildLLVM()
+   public ProgramLLVM buildLLVM(Options opts)
    {
       return new ProgramLLVM(
-         new LLVMStructs(this.structs.buildLLVM(
-               this.structs,
-               this.globals,
-               this.functions)),
-         new LLVMGlobals(this.globals.buildLLVM(
-               this.structs,
-               this.globals,
-               this.functions)),
-         new LLVMFunctions(this.functions.buildLLVM(
-               this.structs,
-               this.globals,
-               this.functions)));
+         new LLVMStructs(this.structs.buildLLVM()),
+         new LLVMGlobals(this.globals.buildLLVM(this.structs)),
+         new LLVMFunctions(this.functions.buildLLVM(this));
    }
    
    
