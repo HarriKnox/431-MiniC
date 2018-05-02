@@ -5,7 +5,7 @@ import org.antlr.v4.runtime.Token;
 
 import ast.type.Type;
 
-import llvm.declaration.llvmType;
+import llvm.declaration.LLVMStruct;
 
 import llvm.type.LLVMType;
 
@@ -42,7 +42,7 @@ public class Struct
       List<LLVMType> llvmTypes = new LinkedList<>();
       
       for (Variable field : this.fields.variables)
-         llvmTypes.add(field.type);
+         llvmTypes.add(field.type.getLLVMType());
       
       
       return new LLVMStruct(this.name, llvmTypes);

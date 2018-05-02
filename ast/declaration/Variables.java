@@ -3,6 +3,7 @@ package ast.declaration;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -83,24 +84,22 @@ public class Variables
       
       while (paramerator.hasNext())
       {
-         Variable parameter = paramerator.next();
+         Variable param = paramerator.next();
          
          
-         if (names.contains(parameter.name))
+         if (names.contains(param.name))
          {
             paramerator.remove();
-            Error.duplicate(parameter.token, "variable", parameter.name);
+            Error.duplicate(param.token, "variable", param.name);
          }
          else
          {
-            names.add(parameter.name);
+            names.add(param.name);
             
-            if (!parameter.hasValidType(structs))
+            if (!param.hasValidType(structs))
             {
                paramerator.remove();
-               Error.unknownStruct(
-                     parameter.token,
-                     parameter.type.astString());
+               Error.unknownStruct(param.token, param.type.astString());
             }
          }
       }
@@ -131,7 +130,7 @@ public class Variables
    }
    
    
-   private LLVMGlobals buildLLVM(Structs structs)
+   public LLVMGlobals buildLLVM(Structs structs)
    {
       this.removeInvalids(structs);
       
@@ -139,7 +138,8 @@ public class Variables
       List<LLVMGlobal> llvmGlobals = new LinkedList<>()
       
       for (Variable variable : this.variabls)
-         llvmGlobals.add(variable.buildLLVM(structs, globals, functions));
+         llvmGlobals.add(variable.buildLLVM());
+      
       
       return new LLVMGlobals(llvmGlobals);
    }

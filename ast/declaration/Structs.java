@@ -75,7 +75,7 @@ public class Structs
       List<LLVMStruct> llvmStructs = new LinkedList<>()
       
       for (Struct struct : this.structs)
-         llvmStructs.add(struct.buildLLVM(this));
+         llvmStructs.add(struct.buildLLVM());
       
       return new LLVMStructs(llvmStructs);
    }

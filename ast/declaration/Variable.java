@@ -7,6 +7,8 @@ import ast.declaration.Structs;
 
 import ast.type.Type;
 
+import llvm.declaration.LLVMGlobal;
+
 
 public class Variable
 {
@@ -28,5 +30,11 @@ public class Variable
    public boolean hasValidType(Structs structs)
    {
       return this.type.isValid(structs);
+   }
+   
+   
+   public LLVMGlobal buildLLVM()
+   {
+      return new LLVMGlobal(this.name, this.type.getLLVMType());
    }
 }
