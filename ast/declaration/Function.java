@@ -4,6 +4,8 @@ package ast.declaration;
 import java.util.ArrayList;
 import java.util.List;
 
+import ast.ProgramAST;
+
 import ast.type.Type;
 
 import ast.statement.Statement;
@@ -63,8 +65,7 @@ public class Function
    }
    
    
-   public LLVMFunction buildLLVm(Structs structs,
-      Variables globals, Functions functions)
+   public LLVMFunction buildLLVM(ProgramAST program)
    {
       
    }
