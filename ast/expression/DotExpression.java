@@ -65,7 +65,7 @@ public class DotExpression extends Expression
       
       
       LLVMGetelementptr getelementptr = new LLVMGetelementptr(
-            left,
+            leftValue,
             field.type.getLLVMType()
             field.index);
       
