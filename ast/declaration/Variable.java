@@ -1,6 +1,10 @@
 package ast.declaration;
 
 
+import org.antlr.v4.runtime.Token;
+
+import ast.declaration.Structs;
+
 import ast.type.Type;
 
 
@@ -11,9 +15,9 @@ public class Variable
    public final int index;
 
 
-   public Variable(int lineNum, String name, Type type, int index)
+   public Variable(Token token, String name, Type type, int index)
    {
-      super(lineNum);
+      super(token);
 
       this.name = name;
       this.type = type;

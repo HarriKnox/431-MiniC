@@ -1,7 +1,9 @@
 package ast.expression;
 
 
-import ast.LinedElement;
+import org.antlr.v4.runtime.Token;
+
+import ast.TokenedElement;
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -11,14 +13,14 @@ import llvm.LLVMCFGNode;
 import llvm.value.LLVMValue;
 
 
-public abstract class Expression extends LinedElement
+public abstract class Expression extends TokenedElement
 {
    public final int height;
    
    
-   public Expression(int lineNum, int height)
+   public Expression(Token token, int height)
    {
-      super(lineNum);
+      super(token);
       
       this.height = height;
    }

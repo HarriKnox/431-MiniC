@@ -51,7 +51,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    public Statement visitAssignment(AssignmentContext ctx)
    {
       return new AssignmentStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             visitLvalue(ctx.lvalue()),
             expressionVisitor.visit(ctx.expression()));
    }
@@ -68,7 +68,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    public Statement visitConditional(ConditionalContext ctx)
    {
       return new ConditionalStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             expressionVisitor.visit(ctx.expression()),
             visit(ctx.thenBlock),
             ctx.elseBlock != null
@@ -83,7 +83,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    public Statement visitDelete(DeleteContext ctx)
    {
       return new DeleteStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             expressionVisitor.visit(ctx.expression()));
    }
 
@@ -99,9 +99,9 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
 
 
       return new InvocationStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             new InvocationExpression(
-                  ctx.getStart().getLine(),
+                  ctx.getStart(),
                   ctx.ID().getText(),
                   arguments));
    }
@@ -118,7 +118,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    public Statement visitPrintLn(PrintLnContext ctx)
    {
       return new PrintStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             expressionVisitor.visit(ctx.expression()),
             true);
    }
@@ -128,7 +128,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    public Statement visitPrint(PrintContext ctx)
    {
       return new PrintStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             expressionVisitor.visit(ctx.expression()),
             false);
    }
@@ -141,10 +141,10 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
       
       
       return new ReturnStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             returnExpression != null
                   ? expressionVisitor.visit(returnExpression)
-                  : new VoidExpression(ctx.getStart().getLine());
+                  : new VoidExpression(ctx.getStart());
    }
 
 
@@ -174,7 +174,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
          return statements.get(0);
 
 
-      return new BlockStatement(ctx.getStart().getLine(), statements);
+      return new BlockStatement(ctx.getStart(), statements);
    }
 
 
@@ -182,7 +182,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
    public Statement visitWhile(WhileContext ctx)
    {
       return new WhileStatement(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             expressionVisitor.visit(ctx.expression()),
             visit(ctx.statement()));
    }
@@ -194,14 +194,14 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
       {
          LvalueIdContext lctx = (LvalueIdContext)ctx;
          return new LvalueId(
-               lctx.getStart().getLine(),
+               lctx.getStart(),
                lctx.ID().getText());
       }
       else
       {
          LvalueDotContext lctx = (LvalueDotContext)ctx;
          return new LvalueDot(
-               lctx.getStart().getLine(),
+               lctx.getStart(),
                visitLvalue(lctx.lvalue()),
                lctx.ID().getText());
       }

@@ -1,7 +1,11 @@
 package ast.declaration;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.type.Type;
+
+import llvm.declaration.llvmType;
 
 import llvm.type.LLVMType;
 
@@ -12,9 +16,9 @@ public class Struct
    public final Variables fields;
    
 
-   public Struct(int lineNum, String name, Variables fields)
+   public Struct(Token token, String name, Variables fields)
    {
-      super(lineNum);
+      super(token);
 
       this.name = name;
       this.fields = fields;

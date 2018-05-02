@@ -1,7 +1,19 @@
 package ast.statement;
 
 
+import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
 import ast.expression.Expression;
+
+import llvm.LLVMCFGNode;
+
+import llvm.value.LLVMValue;
+
+import llvm.type.LLVMBoolType;
 
 
 public class ConditionalStatement extends Statement
@@ -12,12 +24,12 @@ public class ConditionalStatement extends Statement
 
 
    public ConditionalStatement(
-         int lineNum,
+         Token token,
          Expression guard,
          Statement thenBlock,
          Statement elseBlock)
    {
-      super(lineNum);
+      super(token);
 
       this.guard = guard;
       this.thenBlock = thenBlock;

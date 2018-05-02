@@ -3,6 +3,8 @@ package ast.expression;
 
 import java.util.List;
 
+import org.antlr.v4.runtime.Token;
+
 
 public class InvocationExpression extends Expression
 {
@@ -11,11 +13,11 @@ public class InvocationExpression extends Expression
 
 
    public InvocationExpression(
-         int lineNum,
+         Token token,
          String name,
          List<Expression> arguments)
    {
-      super(lineNum, getMax(arguments));
+      super(token, getMax(arguments));
 
       this.name = name;
       this.arguments = arguments;
@@ -84,7 +86,7 @@ public class InvocationExpression extends Expression
          
          if (!llvmArg.type.equals(paramType))
          {
-            System.err.println("line " + this.lineNum
+            System.err.println("line " + this.token
                   + " wrong type for argument " + i + ", should be " + fp
                   + " but is " + ea);
             ok = false;

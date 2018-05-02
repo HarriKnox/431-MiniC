@@ -1,18 +1,22 @@
 package ast.expression.binary.logical;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
 
 import llvm.instruction.LLVMInstruction;
 
 import llvm.instruction.logical.LLVMand;
 
+import llvm.value.LLVMValue;
+
 
 public class AndExpression extends LogicalExpression
 {
-   public AndExpression(int lineNum, Expression left, Expression right)
+   public AndExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

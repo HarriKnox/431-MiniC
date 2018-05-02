@@ -1,6 +1,8 @@
 package ast.expression.binary;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
 
 import llvm.type.Type;
@@ -14,9 +16,9 @@ public abstract class BinaryExpression extends Expression
    public final Expression right;
 
 
-   public BinaryExpression(int lineNum, Expression left, Expression right)
+   public BinaryExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, ((left.height > right.height)
+      super(token, ((left.height > right.height)
             ? left.height
             : right.height) + 1);
 

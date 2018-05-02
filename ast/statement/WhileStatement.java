@@ -1,7 +1,17 @@
 package ast.statement;
 
 
+import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
 import ast.expression.Expression;
+
+import llvm.LLVMCFGNode;
+
+import llvm.value.LLVMValue;
 
 
 public class WhileStatement extends Statement
@@ -10,9 +20,9 @@ public class WhileStatement extends Statement
    public final Statement body;
 
 
-   public WhileStatement(int lineNum, Expression guard, Statement body)
+   public WhileStatement(Token token, Expression guard, Statement body)
    {
-      super(lineNum);
+      super(token);
 
       this.guard = guard;
       this.body = body;

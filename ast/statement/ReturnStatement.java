@@ -1,6 +1,8 @@
 package ast.statement;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -23,9 +25,9 @@ public class ReturnStatement extends Statement
    public final Expression expression;
 
 
-   public ReturnStatement(int lineNum, Expression expression)
+   public ReturnStatement(Token token, Expression expression)
    {
-      super(lineNum);
+      super(token);
 
       this.expression = expression;
    }
@@ -41,7 +43,7 @@ public class ReturnStatement extends Statement
       {
          if (!value.type.equivalent(current.type.getLLVMType())))
          {
-            System.err.println("line " + this.lineNum + " cannot return "
+            System.err.println("line " + this.token + " cannot return "
                   + r + ", expected " + returnType);
          }
          

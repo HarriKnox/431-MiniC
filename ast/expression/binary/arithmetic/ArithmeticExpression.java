@@ -1,15 +1,20 @@
 package ast.expression.binary.arithmetic;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
+
 import ast.expression.binary.BinaryExpression;
+
+import llvm.value.llvmValue;
 
 
 public abstract class ArithmeticExpression extends BinaryExpression
 {
-   public ArithmeticExpression(int lineNum, Expression left, Expression right)
+   public ArithmeticExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

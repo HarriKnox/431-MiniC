@@ -1,11 +1,10 @@
 package ast.type;
 
 
+import ast.declaration.Structs;
+
 import llvm.type.LLVMStructType;
 import llvm.type.LLVMType;
-
-
-import ast.declaration.Structs;
 
 
 public class StructType extends Type

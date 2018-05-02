@@ -1,14 +1,17 @@
 package ast.statement;
 
 
-import ast.LinedElement;
+import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+import ast.TokenedElement;
 
 
-public abstract class Statement extends LinedElement
+public abstract class Statement extends TokenedElement
 {
-   public Statement(int lineNum)
+   public Statement(Token token)
    {
-      super(lineNum);
+      super(token);
    }
    
    

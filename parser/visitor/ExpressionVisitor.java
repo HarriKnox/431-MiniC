@@ -67,28 +67,28 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
          /* Arithmetic */
          case "*":
             return new TimesExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case "/":
             return new DivideExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case "+":
             return new PlusExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case "-":
             return new MinusExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
@@ -96,28 +96,28 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
          /* Relational */
          case "<":
             return new LessThanExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case ">":
             return new GreaterThanExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case "<=":
             return new LessEqualsExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case ">=":
             return new GreaterEqualsExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
@@ -125,14 +125,14 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
          /* Equality */
          case "==":
             return new EqualsExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case "!=":
             return new NotEqualsExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
@@ -140,14 +140,14 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
          /* Logical */
          case "&&":
             return new AndExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
 
 
          case "||":
             return new OrExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.lft),
                   visit(ctx.rht));
       }
@@ -161,7 +161,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
    public Expression visitBoolExpr(BoolExprContext ctx)
    {
       return new BoolExpression(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.getStart().getText().equals("true"));
    }
 
@@ -170,7 +170,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
    public Expression visitDotExpr(DotExprContext ctx)
    {
       return new DotExpression(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             visit(ctx.expression()),
             ctx.ID().getText());
    }
@@ -180,7 +180,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
    public Expression visitIdentifierExpr(IdentifierExprContext ctx)
    {
       return new IdentifierExpression(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.ID().getText());
    }
 
@@ -189,7 +189,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
    public Expression visitIntExpr(IntExprContext ctx)
    {
       return new IntExpression(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.INTEGER().getText());
    }
 
@@ -205,7 +205,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
 
 
       return new InvocationExpression(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.ID().getText(),
             arguments);
    }
@@ -215,7 +215,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
    public Expression visitNewExpr(NewExprContext ctx)
    {
       return new NewExpression(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.ID().getText());
    }
 
@@ -230,14 +230,14 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
    @Override
    public Expression visitNullExpr(NullExprContext ctx)
    {
-      return new NullExpression(ctx.getStart().getLine());
+      return new NullExpression(ctx.getStart());
    }
 
 
    @Override
    public Expression visitReadExpr(ReadExprContext ctx)
    {
-      return new ReadExpression(ctx.getStart().getLine());
+      return new ReadExpression(ctx.getStart());
    }
 
 
@@ -248,7 +248,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
       {
          case "!":
             return new NegateExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   visit(ctx.expression()));
 
 
@@ -259,7 +259,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
                return ((IntExpression)exp).negate();
             
             return new NotExpression(
-                  ctx.op.getLine(),
+                  ctx.op,
                   exp);
       }
 

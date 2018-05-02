@@ -1,15 +1,20 @@
 package ast.expression.binary.relational;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
+
 import ast.expression.binary.BinaryExpression;
+
+import llvm.value.LLVMValue;
 
 
 public abstract class RelationalExpression extends BinaryExpression
 {
-   public RelationalExpression(int lineNum, Expression left, Expression right)
+   public RelationalExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

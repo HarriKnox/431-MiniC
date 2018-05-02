@@ -1,13 +1,16 @@
 package ast;
 
 
-public abstract class LinedElement
+import org.antlr.v4.runtime.Token;
+
+
+public abstract class TokenedElement
 {
-   public final int lineNum;
+   public final Token token;
 
 
-   public LinedElement(int lineNum)
+   public TokenedElement(Token token)
    {
-      this.lineNum = lineNum;
+      this.token = token;
    }
 }

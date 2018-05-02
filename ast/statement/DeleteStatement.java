@@ -1,9 +1,24 @@
 package ast.statement;
 
 
+import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
 import ast.expression.Expression;
 
 import ast.type.StructType;
+
+import llvm.LLVMCFGNode;
+
+import llvm.instruction.LLVMBitcast;
+import llvm.instruction.LLVMFree;
+
+import llvm.value.LLVMValue;
+
+import llvm.value.variable.LLVMRegister;
 
 
 public class DeleteStatement extends Statement
@@ -11,9 +26,9 @@ public class DeleteStatement extends Statement
    public final Expression expression;
 
 
-   public DeleteStatement(int lineNum, Expression expression)
+   public DeleteStatement(Token token, Expression expression)
    {
-      super(lineNum);
+      super(token);
 
       this.expression = expression;
    }

@@ -37,7 +37,7 @@ public class VariablesVisitor extends MiniBaseVisitor<Variables>
          for (TerminalNode node : vctx.ID())
          {
             decls.add(new Variable(
-                  node.getSymbol().getLine(),
+                  node.getSymbol(),
                   node.getText(),
                   type,
                   index++));

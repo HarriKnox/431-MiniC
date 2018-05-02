@@ -21,7 +21,7 @@ public class FunctionVisitor extends MiniBaseVisitor<Function>
    public Function visitFunction(FunctionContext ctx)
    {
       return new Function(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.ID().getText(),
             typeVisitor.visit(ctx.returnType()),
             declVisitor.visit(ctx.parameters()),

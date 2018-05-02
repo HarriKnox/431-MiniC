@@ -1,7 +1,9 @@
 package ast.expression;
 
 
-import ast.LinedElement;
+import org.antlr.v4.runtime.Token;
+
+import ast.TokenedElement;
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -15,9 +17,9 @@ import llvm.value.LLVMValue;
 
 public class VoidExpression extends Expression
 {
-   public VoidExpression(int lineNum)
+   public VoidExpression(Token token)
    {
-      super(lineNum, 0);
+      super(token, 0);
    }
    
    

@@ -1,18 +1,22 @@
 package ast.expression.binary.relational;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
 
 import llvm.instruction.LLVMInstruction;
 
 import llvm.instruction.comparison.LLVMslt;
 
+import llvm.value.LLVMValue;
+
 
 public class LessThanExpression extends RelationalExpression
 {
-   public LessThanExpression(int lineNum, Expression left, Expression right)
+   public LessThanExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

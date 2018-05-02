@@ -1,6 +1,8 @@
 package ast.expression;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -22,9 +24,9 @@ public class DotExpression extends Expression
    public final String id;
 
 
-   public DotExpression(int lineNum, Expression left, String id)
+   public DotExpression(Token token, Expression left, String id)
    {
-      super(lineNum, left.height + 1);
+      super(token, left.height + 1);
 
       this.left = left;
       this.id = id;

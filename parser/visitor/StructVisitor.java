@@ -21,7 +21,7 @@ public class StructVisitor extends MiniBaseVisitor<Struct>
    public Struct visitStruct(StructContext ctx)
    {
       return new Struct(
-            ctx.getStart().getLine(),
+            ctx.getStart(),
             ctx.ID().getText(),
             declVisitor.visit(ctx.fields()));
    }

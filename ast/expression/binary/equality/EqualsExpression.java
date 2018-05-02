@@ -1,18 +1,22 @@
 package ast.expression.binary.equality;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
 
 import llvm.instruction.LLVMInstruction;
 
 import llvm.instruction.comparison.LLVMeq;
 
+import llvm.value.LLVMValue;
+
 
 public class EqualsExpression extends EqualityExpression
 {
-   public EqualsExpression(int lineNum, Expression left, Expression right)
+   public EqualsExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

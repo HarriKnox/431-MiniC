@@ -1,6 +1,8 @@
 package ast.expression;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -18,15 +20,15 @@ public class IntExpression extends Expression
    public final boolean negative;
 
 
-   public IntExpression(int lineNum, String value)
+   public IntExpression(Token token, String value)
    {
-      this(lineNum, value, false);
+      this(token, value, false);
    }
    
    
-   private IntExpression(int lineNum, String value, boolean negative)
+   private IntExpression(Token token, String value, boolean negative)
    {
-      super(lineNum, 0);
+      super(token, 0);
 
       this.value = value;
       this.negative = negative;
@@ -35,7 +37,7 @@ public class IntExpression extends Expression
    
    public IntExpression negate()
    {
-      return new IntExpression(this.lineNum, this.value, !this.negative);
+      return new IntExpression(this.token, this.value, !this.negative);
    }
    
    
@@ -52,7 +54,7 @@ public class IntExpression extends Expression
       }
       catch (NumberFormatException ne)
       {
-         System.err.println("line " + this.lineNum + " integer out of range");
+         System.err.println("line " + this.token + " integer out of range");
          return null;
       }
       

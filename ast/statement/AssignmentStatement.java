@@ -1,6 +1,8 @@
 package ast.statement;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -24,9 +26,9 @@ public class AssignmentStatement extends Statement
    public final Expression source;
 
 
-   public AssignmentStatement(int lineNum, Lvalue target, Expression source)
+   public AssignmentStatement(Token token, Lvalue target, Expression source)
    {
-      super(lineNum);
+      super(token);
 
       this.target = target;
       this.source = source;
@@ -47,7 +49,7 @@ public class AssignmentStatement extends Statement
       if (!(target.type.equivalent(value.type)))
       {
          
-         System.err.println("line " + this.lineNum + " cannot assign "
+         System.err.println("line " + this.token + " cannot assign "
                + r + " to " + l);
       }
       

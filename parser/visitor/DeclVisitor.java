@@ -43,7 +43,7 @@ public class DeclVisitor extends MiniBaseVisitor<Variables>
       for (DeclContext dctx : decls)
       {
          variables.add(new Variable(
-               dctx.getStart().getLine(),
+               dctx.getStart(),
                dctx.ID().getText(),
                typeVisitor.visit(dctx.type()),
                index++));

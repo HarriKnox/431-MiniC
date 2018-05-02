@@ -1,7 +1,9 @@
 package ast.lvalue;
 
 
-import ast.LinedElement;
+import org.antlr.v4.runtime.Token;
+
+import ast.TokenedElement;
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -9,7 +11,7 @@ import ast.declaration.Function;
 import llvm.LLVMCFGNode;
 
 
-public abstract class Lvalue extends LinedElement
+public abstract class Lvalue extends TokenedElement
 {
    /**
     * height is the distance to the bottom of the tree. 0 is a leaf.
@@ -17,14 +19,14 @@ public abstract class Lvalue extends LinedElement
    public final int height;
    
    
-   public Lvalue(int lineNum, int height)
+   public Lvalue(Token token, int height)
    {
-      super(lineNum);
+      super(token);
       
       this.height = height;
    }
    
    
    public abstract LLVMVariable buildLLVM(
-         ProgramAST program, Fuction current, LLVMCFGNode node);
+         ProgramAST program, Function current, LLVMCFGNode node);
 }

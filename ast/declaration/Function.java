@@ -1,6 +1,8 @@
 package ast.declaration;
 
 
+import org.antlr.v4.runtime.Token;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import ast.ProgramAST;
 import ast.type.Type;
 
 import ast.statement.Statement;
+
+import llvm.declaration.LLVMFunction;
 
 
 public class Function
@@ -22,10 +26,10 @@ public class Function
    public final List<Type> parameterTypes;
 
 
-   public Function(int lineNum, String name, Type type,
+   public Function(Token token, String name, Type type,
          Variables params, Variables locals, Statement body)
    {
-      super(lineNum);
+      super(token);
 
       this.name = name;
       this.type = type;

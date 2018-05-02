@@ -1,6 +1,8 @@
 package ast.expression.unary;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -19,9 +21,9 @@ public abstract class UnaryExpression extends Expression
    public final Expression operand;
 
 
-   public UnaryExpression(int lineNum, Expression operand)
+   public UnaryExpression(Token token, Expression operand)
    {
-      super(lineNum, operand.height + 1);
+      super(token, operand.height + 1);
 
       this.operand = operand;
    }

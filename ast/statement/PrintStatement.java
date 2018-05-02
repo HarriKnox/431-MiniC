@@ -1,7 +1,21 @@
 package ast.statement;
 
 
+import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
 import ast.expression.Expression;
+
+import llvm.LLVMCFGNode;
+
+import llvm.instruction.LLVMPrint;
+
+import llvm.type.LLVMintType;
+
+import llvm.value.LLVMValue;
 
 
 public class PrintStatement extends Statement
@@ -10,9 +24,9 @@ public class PrintStatement extends Statement
    public final boolean println;
 
 
-   public PrintStatement(int lineNum, Expression expression, boolean println)
+   public PrintStatement(Token token, Expression expression, boolean println)
    {
-      super(lineNum);
+      super(token);
 
       this.expression = expression;
       this.println = println;
@@ -32,7 +46,7 @@ public class PrintStatement extends Statement
       
       if (!(value.type instanceof LLVMIntType))
       {
-         System.err.println("line " + this.lineNum
+         System.err.println("line " + this.token
                + " cannot print value of type " + q);
          ok = false;
       }

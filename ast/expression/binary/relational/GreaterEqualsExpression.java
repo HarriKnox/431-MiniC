@@ -1,21 +1,25 @@
 package ast.expression.binary.relational;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
 
 import llvm.instruction.LLVMInstruction;
 
 import llvm.instruction.comparison.LLVMsge;
 
+import llvm.value.LLVMValue;
+
 
 public class GreaterEqualsExpression extends RelationalExpression
 {
    public GreaterEqualsExpression(
-         int lineNum,
+         Token token,
          Expression left,
          Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

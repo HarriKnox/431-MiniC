@@ -1,6 +1,8 @@
 package ast.expression;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -18,9 +20,9 @@ public class NewExpression extends Expression
    public final String id;
 
 
-   public NewExpression(int lineNum, String id)
+   public NewExpression(Token token, String id)
    {
-      super(lineNum, 0);
+      super(token, 0);
       this.id = id;
    }
    

@@ -1,18 +1,22 @@
 package ast.expression.binary.arithmetic;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.expression.Expression;
 
 import llvm.instruction.LLVMInstruction;
 
 import llvm.instruction.arithmetic.LLVMsub;
 
+import llvm.value.LLVMValue;
+
 
 public class MinusExpression extends ArithmeticExpression
 {
-   public MinusExpression(int lineNum, Expression left, Expression right)
+   public MinusExpression(Token token, Expression left, Expression right)
    {
-      super(lineNum, left, right);
+      super(token, left, right);
    }
    
    

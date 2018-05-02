@@ -1,6 +1,8 @@
 package ast.expression;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -14,9 +16,9 @@ import llvm.value.constant.LLVMNull;
 
 public class NullExpression extends Expression
 {
-   public NullExpression(int lineNum)
+   public NullExpression(Token token)
    {
-      super(lineNum, 0);
+      super(token, 0);
    }
    
    

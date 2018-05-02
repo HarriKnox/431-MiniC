@@ -1,6 +1,8 @@
 package ast.expression;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -17,9 +19,9 @@ public class BoolExpression extends Expression
    public final boolean value;
 
 
-   public BoolExpression(int lineNum, boolean value)
+   public BoolExpression(Token token, boolean value)
    {
-      super(lineNum, 0);
+      super(token, 0);
 
       this.value = value;
    }

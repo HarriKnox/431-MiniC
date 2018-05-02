@@ -1,8 +1,15 @@
 package ast.statement;
 
 
-import java.util.LinkedList;
 import java.util.List;
+
+import org.antlr.v4.runtime.Token;
+
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
+import llvm.LLVMCFGNode;
 
 
 public class BlockStatement extends Statement
@@ -10,9 +17,9 @@ public class BlockStatement extends Statement
    public final List<Statement> statements;
 
 
-   public BlockStatement(int lineNum, List<Statement> statements)
+   public BlockStatement(Token token, List<Statement> statements)
    {
-      super(lineNum);
+      super(token);
 
       this.statements = statements;
    }
@@ -31,7 +38,7 @@ public class BlockStatement extends Statement
       {
          if (node == null)
          {
-            System.err.println("line " + statement.lineNul
+            System.err.println("line " + statement.token
                   + " WARNING: code after a return will not be examined nor executed");
             break;
          }

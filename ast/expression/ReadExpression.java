@@ -1,6 +1,8 @@
 package ast.expression;
 
 
+import org.antlr.v4.runtime.Token;
+
 import ast.ProgramAST;
 
 import ast.declaration.Function;
@@ -17,9 +19,9 @@ import llvm.value.variable.LLVMGlobal;
 
 public class ReadExpression extends Expression
 {
-   public ReadExpression(int lineNum)
+   public ReadExpression(Token token)
    {
-      super(lineNum, 0);
+      super(token, 0);
    }
    
    
