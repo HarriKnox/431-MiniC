@@ -9,15 +9,13 @@ import llvm.value.variable.LLVMVariable;
 
 public class LLVMStore extends LLVMInstruction
 {
-   public final LLVMVariable destination;
    public final LLVMValue source;
    
    
-   public LLVMStore(LLVMVariable destination, LLVMValue source)
+   public LLVMStore(LLVMVariable target, LLVMValue source)
    {
-      super(new LLVMRegister(new LLVMVoidType()));
+      super(target);
       
-      this.destination = destination;
       this.source = source;
    }
 }
