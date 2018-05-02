@@ -72,7 +72,7 @@ public class Structs
       this.removeInvalids();
       
       
-      List<LLVMStruct> llvmStructs = new LinkedList<>()
+      List<LLVMStruct> llvmStructs = new LinkedList<>();
       
       for (Struct struct : this.structs)
          llvmStructs.add(struct.buildLLVM());

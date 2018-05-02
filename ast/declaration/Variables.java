@@ -136,7 +136,7 @@ public class Variables
       this.removeInvalids(structs);
       
       
-      List<LLVMGlobal> llvmGlobals = new LinkedList<>()
+      List<LLVMGlobal> llvmGlobals = new LinkedList<>();
       
       for (Variable variable : this.variabls)
          llvmGlobals.add(variable.buildLLVM());

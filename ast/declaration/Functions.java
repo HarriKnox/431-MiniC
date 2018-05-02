@@ -78,7 +78,7 @@ public class Functions
       this.removeInvalids(program.structs);
       
       
-      List<LLVMFunction> llvmfuncs = new LinkedList<>()
+      List<LLVMFunction> llvmfuncs = new LinkedList<>();
       
       for (Function function : this.functions)
          llvmfuncs.add(function.buildLLVM(program));
