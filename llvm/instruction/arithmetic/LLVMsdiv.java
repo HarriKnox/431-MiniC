@@ -4,9 +4,9 @@ package llvm.instruction.arithemtic;
 import llvm.value.LLVMValue;
 
 
-public class LLVMDivide extends LLVMArithmetic
+public class LLVMsdiv extends LLVMArithmetic
 {
-   public LLVMDivide(LLVMValue left, LLVMValue right)
+   public LLVMsdiv(LLVMValue left, LLVMValue right)
    {
       super(left, right);
    }
