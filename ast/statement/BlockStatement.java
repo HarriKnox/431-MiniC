@@ -22,4 +22,23 @@ public class BlockStatement extends Statement
    {
       return this.statements.isEmpty();
    }
+   
+   
+   public LLVMCFGNode buildLLVM(ProgramAST program,
+         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   {
+      for (Statement statement : this.statements)
+      {
+         if (node == null)
+         {
+            System.err.println("line " + statement.lineNul
+                  + " WARNING: code after a return will not be examined nor executed");
+            break;
+         }
+         
+         node = statement.buildLLVM(program, current, node, exit);
+      }
+      
+      return node;
+   }
 }

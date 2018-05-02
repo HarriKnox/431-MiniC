@@ -1,10 +1,9 @@
 package ast.statement;
 
 
+import ast.ProgramAST;
+
 import ast.declaration.Function;
-import ast.declaration.Functions;
-import ast.declaration.Structs;
-import ast.declaration.Variables;
 
 import ast.expression.Expression;
 
@@ -13,6 +12,10 @@ import ast.lvalue.Lvalue;
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMStore;
+
+import llvm.value.LLVMValue;
+
+import llvm.value.variable.LLVMVariable;
 
 
 public class AssignmentStatement extends Statement
@@ -30,31 +33,27 @@ public class AssignmentStatement extends Statement
    }
    
    
-   public LLVMCFGNode buildLLVM(Structs structs, Variables globals,
-         Functions functions, Function current,
-         LLVMCFGNode node, LLVMCFGNode exit)
+   public LLVMCFGNode buildLLVM(ProgramAST program,
+         Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMRegister register;
-      LLVMValue value;
+      LLVMVariable target = this.target.buildLLVM(program, current, node);
+      LLVMValue value = this.source.buildLLVM(program, current, node);
       
       
-      if (source.height >= target.height)
+      if (target == null || value == null)
+         return node;
+      
+      
+      if (!(target.type.equivalent(value.type)))
       {
-         value = this.source.buildLLVM(
-               structs, globals, functions,
-               current, node, exit);
-         register = this.target.buildLLVM(
-               structs, globals, functions,
-               current, node, exit);
+         
+         System.err.println("line " + this.lineNum + " cannot assign "
+               + r + " to " + l);
       }
-      else
-      {
-         register = this.target.buildLLVM(
-               structs, globals, functions,
-               current, node, exit);
-         value = this.source.buildLLVM(
-               structs, globals, functions,
-               current, node, exit);
-      }
+      
+      
+      LLVMStore store = new LLVMStore(target, value);
+      
+      return node.add(store);
    }
 }

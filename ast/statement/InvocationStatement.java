@@ -15,4 +15,14 @@ public class InvocationStatement extends Statement
 
       this.expression = expression;
    }
+   
+   
+   @Override
+   public LLVMCFGNode buildLLVM(ProgramAST program,
+         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   {
+      this.expression.buildLLVM(program, current, node);
+      
+      return node;
+   }
 }
