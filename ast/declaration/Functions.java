@@ -8,6 +8,8 @@ import java.util.Set;
 
 import ast.ProgramAST;
 
+import ast.declaration.Structs;
+
 import common.Error;
 
 import llvm.declaration.LLVMFunction;
@@ -73,7 +75,7 @@ public class Functions
    
    private LLVMFunctions buildLLVM(ProgramAST program)
    {
-      this.removeInvalids(structs);
+      this.removeInvalids(program.structs);
       
       
       List<LLVMFunction> llvmfuncs = new LinkedList<>()
