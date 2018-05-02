@@ -19,4 +19,11 @@ public class VoidType extends Type
    {
       return new LLVMVoidType();
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "void";
+   }
 }

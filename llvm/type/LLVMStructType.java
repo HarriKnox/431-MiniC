@@ -19,4 +19,18 @@ public class LLVMStructType extends LLVMType
             || ((t instanceof LLVMStructType)
                   && this.name.equals(((LLVMStructType)t).name));
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "struct " + this.name;
+   }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "%struct." + this.name + "*";
+   }
 }

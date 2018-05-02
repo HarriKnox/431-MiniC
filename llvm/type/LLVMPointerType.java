@@ -8,4 +8,18 @@ public class LLVMPointerType extends LLVMType
    {
       return t instanceof LLVMPointerType;
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "null";
+   }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "i8*";
+   }
 }

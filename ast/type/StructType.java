@@ -39,4 +39,11 @@ public class StructType extends Type
    {
       return new LLVMStructType(this.name);
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "struct " + this.name;
+   }
 }

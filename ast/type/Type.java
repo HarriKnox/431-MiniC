@@ -18,4 +18,6 @@ public abstract class Type
    
    
    public abstract LLVMType getLLVMType();
+   
+   public abstract String astString();
 }

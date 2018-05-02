@@ -19,4 +19,11 @@ public class NullType extends Type
    {
       return new LLVMNullType();
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "null";
+   }
 }

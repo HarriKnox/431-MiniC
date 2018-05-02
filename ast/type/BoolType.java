@@ -19,4 +19,11 @@ public class BoolType extends Type
    {
       return new LLVMBoolType();
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "bool";
+   }
 }

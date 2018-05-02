@@ -8,4 +8,18 @@ public class LLVMBoolType extends LLVMType
    {
       return t instanceof LLVMBoolType;
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "bool";
+   }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "i1";
+   }
 }

@@ -19,4 +19,11 @@ public class IntType extends Type
    {
       return new LLVMIntType();
    }
+   
+   
+   @Override
+   public String astString()
+   {
+      return "int";
+   }
 }
