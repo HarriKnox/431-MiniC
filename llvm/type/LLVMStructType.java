@@ -6,7 +6,7 @@ public class LLVMStructType extends LLVMType
    public final String name;
 
 
-   public StructType(String name)
+   public LLVMStructType(String name)
    {
       this.name = name;
    }

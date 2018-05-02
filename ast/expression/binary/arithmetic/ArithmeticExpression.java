@@ -22,6 +22,6 @@ public abstract class ArithmeticExpression extends BinaryExpression
    protected boolean areValidTypes(LLVMValue left, LLVMValue right)
    {
       return (left.type instanceof LLVMIntType)
-            && (right.type instanceof LLVMIntType)
+            && (right.type instanceof LLVMIntType);
    }
 }

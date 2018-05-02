@@ -1,5 +1,21 @@
 package llvm;
 
+
+import java.util.LinkedList;
+import java.util.List;
+
+import llvm.instruction.LLVMInstruction;
+
+import llvm.instruction.link.LLVMBranch;
+import llvm.instruction.link.LLVMJump;
+import llvm.instruction.link.LLVMLink;
+import llvm.instruction.link.LLVMRet;
+
+import llvm.value.LLVMValue;
+
+import llvm.value.variable.LLVMReturnValue;
+
+
 public class LLVMCFGNode
 {
    public final List<LLVMInstruction> instructions = new LinkedList<>();

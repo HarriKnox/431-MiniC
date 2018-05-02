@@ -30,7 +30,7 @@ public class ReadExpression extends Expression
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       LLVMScanf scanf = new LLVMScanf();
-      LLVMLoad load = new LLVMLoad(LLVMGlobal.SCANF_FORMAT)
+      LLVMLoad load = new LLVMLoad(LLVMGlobal.SCANF_FORMAT);
       
       node.add(scanf).add(load);
       

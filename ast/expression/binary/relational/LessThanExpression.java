@@ -23,7 +23,7 @@ public class LessThanExpression extends RelationalExpression
    @Override
    protected String getOperation()
    {
-      return "less-than"
+      return "less-than";
    }
    
    

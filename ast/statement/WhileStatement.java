@@ -43,7 +43,7 @@ public class WhileStatement extends Statement
       
       if ((llvmGuard != null)
             && (!(llvmGuard.type instanceof LLVMBoolType)))
-         Error.badGuard(this.guard.token, llvmGuard.type.astString())l
+         Error.badGuard(this.guard.token, llvmGuard.type.astString());
       
       
       LLVMCFGNode bodyNode = new LLVMCFGNode();

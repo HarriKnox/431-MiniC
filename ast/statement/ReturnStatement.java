@@ -45,7 +45,7 @@ public class ReturnStatement extends Statement
       
       if (value != null)
       {
-         if (!value.type.equivalent(retType)))
+         if (!value.type.equivalent(retType))
             Error.badReturn(
                   this.expression.token,
                   retType.astString(),

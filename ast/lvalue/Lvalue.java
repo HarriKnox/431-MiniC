@@ -10,6 +10,8 @@ import ast.declaration.Function;
 
 import llvm.LLVMCFGNode;
 
+import llvm.value.variable.LLVMVariable;
+
 
 public abstract class Lvalue extends TokenedElement
 {
