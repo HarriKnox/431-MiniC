@@ -36,7 +36,7 @@ public class IdentifierExpression extends Expression
    }
    
    
-   private LLVMValue findVariable(Variables globals, Function current)
+   private LLVMVariable findVariable(Variables globals, Function current)
    {
       Variable variable;
       

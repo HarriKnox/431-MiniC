@@ -46,7 +46,7 @@ public abstract class BinaryExpression extends Expression
       
       LLVMInstruction instruction = this.getInstruction(left, right);
       
-      node.add(instruction;
+      node.add(instruction);
       
       return instruction.target;
    }

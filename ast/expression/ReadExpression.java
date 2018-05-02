@@ -32,6 +32,6 @@ public class ReadExpression extends Expression
       
       node.add(scanf).add(load);
       
-      return scanf.target;
+      return load.target;
    }
 }
