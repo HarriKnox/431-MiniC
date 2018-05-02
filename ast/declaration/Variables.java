@@ -15,11 +15,13 @@ import llvm.declaration.LLVMGlobals;
 public class Variables
 {
    public final List<Variable> variables;
+   public final int length;
    
    
    public Variables(List<Variable> variables)
    {
       this.variables = variables;
+      this.length = variables.size();
    }
    
    
