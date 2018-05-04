@@ -54,7 +54,7 @@ public class Functions
          Function function = functerator.next();
          
          
-         if (names.contains(function.name));
+         if (names.contains(function.name))
          {
             functerator.remove();
             Error.duplicate(function.token, "function", function.name);
