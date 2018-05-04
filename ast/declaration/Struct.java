@@ -47,7 +47,7 @@ public class Struct extends TokenedElement
       List<LLVMType> llvmTypes = new LinkedList<>();
       
       for (Variable field : this.fields.variables)
-         llvmTypes.add(field.type.getLLVMType());
+         llvmTypes.add(field.type.llvmType());
       
       
       return new LLVMStruct(this.name, llvmTypes);

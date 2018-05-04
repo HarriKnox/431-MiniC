@@ -47,7 +47,7 @@ public class NewExpression extends Expression
       LLVMMalloc malloc = new LLVMMalloc(struct.fields.length);
       LLVMBitcast bitcast = new LLVMBitcast(
             malloc.target,
-            new StructType(struct.name).getLLVMType());
+            new StructType(struct.name).llvmType());
       
       node.add(malloc).add(bitcast);
       

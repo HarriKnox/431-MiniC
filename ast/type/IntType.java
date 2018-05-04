@@ -15,7 +15,7 @@ public class IntType extends Type
    
    
    @Override
-   public LLVMType getLLVMType()
+   public LLVMType llvmType()
    {
       return new LLVMIntType();
    }

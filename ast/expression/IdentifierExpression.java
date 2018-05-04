@@ -70,7 +70,7 @@ public class IdentifierExpression extends Expression
          return new LLVMLocal(
                current.name,
                this.id,
-               variable.type.getLLVMType());
+               variable.type.llvmType());
       
       
       /* Find in parameters */
@@ -80,14 +80,14 @@ public class IdentifierExpression extends Expression
          return new LLVMParameter(
                current.name,
                this.id,
-               variable.type.getLLVMType());
+               variable.type.llvmType());
       
       
       /* Find in globals */
       variable = globals.getVariable(this.id);
       
       if (variable != null)
-         return new LLVMGlobal(this.id, variable.type.getLLVMType());
+         return new LLVMGlobal(this.id, variable.type.llvmType());
       
       
       /* Not found */

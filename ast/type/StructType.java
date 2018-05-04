@@ -35,7 +35,7 @@ public class StructType extends Type
    
    
    @Override
-   public LLVMType getLLVMType()
+   public LLVMType llvmType()
    {
       return new LLVMStructType(this.name);
    }

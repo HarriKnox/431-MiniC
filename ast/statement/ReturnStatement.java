@@ -41,7 +41,7 @@ public class ReturnStatement extends Statement
    {
       LLVMValue value = this.expression.buildLLVM(program, current, node);
       
-      LLVMType retType = current.type.getLLVMType();
+      LLVMType retType = current.type.llvmType();
       
       
       if (value != null)

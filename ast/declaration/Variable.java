@@ -37,6 +37,6 @@ public class Variable extends TokenedElement
    
    public LLVMGlobal buildLLVM()
    {
-      return new LLVMGlobal(this.name, this.type.getLLVMType());
+      return new LLVMGlobal(this.name, this.type.llvmType());
    }
 }

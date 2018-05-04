@@ -15,7 +15,7 @@ public class VoidType extends Type
    
    
    @Override
-   public LLVMType getLLVMType()
+   public LLVMType llvmType()
    {
       return new LLVMVoidType();
    }

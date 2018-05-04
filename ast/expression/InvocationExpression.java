@@ -91,7 +91,7 @@ public class InvocationExpression extends Expression
                .next()
                .buildLLVM(program, current, node);
          
-         LLVMType paramType = typerator.next().getLLVMType();
+         LLVMType paramType = typerator.next().llvmType();
          
          
          /* If an error already occurred, no need to dwell on it */
@@ -113,7 +113,7 @@ public class InvocationExpression extends Expression
          return null;
       
      
-      LLVMCall call = new LLVMCall(this.name, function.type.getLLVMType(), args);
+      LLVMCall call = new LLVMCall(this.name, function.type.llvmType(), args);
       
       node.add(call);
       

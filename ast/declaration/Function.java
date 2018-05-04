@@ -99,14 +99,14 @@ public class Function extends TokenedElement
          params.add(new LLVMParameter(
                this.name,
                param.name,
-               param.type.getLLVMType()));
+               param.type.llvmType()));
       
       
       List<LLVMCFGNode> nodes = getCFGNodes(program);
       
       
       return new LLVMFunction(this.name,
-            this.type.getLLVMType(), params, nodes);
+            this.type.llvmType(), params, nodes);
    }
    
    
@@ -134,7 +134,7 @@ public class Function extends TokenedElement
       
       for (Variable param : this.parameters.variables)
       {
-         LLVMType paramType = param.type.getLLVMType();
+         LLVMType paramType = param.type.llvmType();
          
          
          LLVMParameter llvmParam = new LLVMParameter(
@@ -153,7 +153,7 @@ public class Function extends TokenedElement
       for (Variable local : this.locals.variables)
       {
          LLVMLocal llvmLocal = new LLVMLocal(
-               this.name, local.name, local.type.getLLVMType());
+               this.name, local.name, local.type.llvmType());
          
          allocaNode.add(new LLVMAlloca(llvmLocal));
       }
@@ -162,7 +162,7 @@ public class Function extends TokenedElement
       /* Add return instructions */
       LLVMReturnValue returnValue = new LLVMReturnValue(
             this.name,
-            this.type.getLLVMType());
+            this.type.llvmType());
       
       exit.ret(returnValue);
       

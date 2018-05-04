@@ -85,7 +85,7 @@ public class InvocationStatement extends Statement
                .next()
                .buildLLVM(program, current, node);
          
-         LLVMType paramType = typerator.next().getLLVMType();
+         LLVMType paramType = typerator.next().llvmType();
          
          
          /* If an error already occurred, no need to dwell on it */
@@ -116,7 +116,7 @@ public class InvocationStatement extends Statement
          call = new LLVMCallVoid(this.name, args);
       
       else
-         call = new LLVMCall(this.name, function.type.getLLVMType(), args);
+         call = new LLVMCall(this.name, function.type.llvmType(), args);
       
       
       return node.add(call);

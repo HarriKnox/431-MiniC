@@ -17,7 +17,7 @@ public abstract class Type
    }
    
    
-   public abstract LLVMType getLLVMType();
+   public abstract LLVMType llvmType();
    
    public abstract String astString();
 }

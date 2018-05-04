@@ -15,7 +15,7 @@ public class NullType extends Type
    
    
    @Override
-   public LLVMType getLLVMType()
+   public LLVMType llvmType()
    {
       return new LLVMNullType();
    }

@@ -72,7 +72,7 @@ public class DotExpression extends Expression
       
       LLVMGetelementptr getelementptr = new LLVMGetelementptr(
             leftValue,
-            field.type.getLLVMType(),
+            field.type.llvmType(),
             field.index);
       
       LLVMLoad load = new LLVMLoad(getelementptr.target);
