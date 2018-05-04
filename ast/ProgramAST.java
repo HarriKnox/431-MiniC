@@ -35,9 +35,9 @@ public class ProgramAST
    public ProgramLLVM buildLLVM(Options opts)
    {
       return new ProgramLLVM(
-         new LLVMStructs(this.structs.buildLLVM()),
-         new LLVMGlobals(this.globals.buildLLVM(this.structs)),
-         new LLVMFunctions(this.functions.buildLLVM(this)));
+         this.structs.buildLLVM(),
+         this.globals.buildLLVM(this.structs),
+         this.functions.buildLLVM(this));
    }
    
    
