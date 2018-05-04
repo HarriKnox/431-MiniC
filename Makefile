@@ -26,6 +26,7 @@ out/main/Main.class : $(JAVA_FILES)
 antlr :
 	-rm $(ANTLR_FILES) 2>/dev/null
 	$(JAVA) -cp $(CLASSPATH) org.antlr.v4.Tool -visitor parser/Mini.g4
+	rm parser/MiniBaseListener.java
 	sed -e 's/\t/   /g' -i $(ANTLR_JAVA_FILES)
 
 
