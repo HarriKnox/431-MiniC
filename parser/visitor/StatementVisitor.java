@@ -101,8 +101,10 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
 
       return new InvocationStatement(
             ctx.getStart(),
-            ctx.ID().getText(),
-            arguments);
+            new InvocationExpression(
+                  ctx.getStart(),
+                  ctx.ID().getText(),
+                  arguments));
    }
 
 
