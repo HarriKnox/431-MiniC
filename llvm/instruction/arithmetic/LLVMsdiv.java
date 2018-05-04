@@ -1,4 +1,4 @@
-package llvm.instruction.arithemtic;
+package llvm.instruction.arithmetic;
 
 
 import llvm.value.LLVMValue;
