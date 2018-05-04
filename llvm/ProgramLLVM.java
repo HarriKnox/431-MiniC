@@ -22,4 +22,10 @@ public class ProgramLLVM
       this.llvmGlobals = globals;
       this.llvmFunctions = functions;
    }
+   
+   
+   public void writeLLVM(Options opts)
+   {
+      
+   }
 }
