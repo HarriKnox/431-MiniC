@@ -7,6 +7,8 @@ import ast.expression.Expression;
 
 import ast.expression.binary.BinaryExpression;
 
+import llvm.type.LLVMIntType;
+
 import llvm.value.LLVMValue;
 
 

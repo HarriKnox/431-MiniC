@@ -1,7 +1,7 @@
 package llvm.value.constant;
 
 
-import llvm.type.LLVMNullType;
+import llvm.type.LLVMBoolType;
 import llvm.type.LLVMType;
 
 
