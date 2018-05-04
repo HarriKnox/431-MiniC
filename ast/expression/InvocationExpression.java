@@ -17,7 +17,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.targeted.LLVMCall;
+import llvm.instruction.targeted.LLVMInvocation;
 
 import llvm.type.LLVMType;
 
@@ -30,12 +30,15 @@ public class InvocationExpression extends Expression
    public final List<Expression> arguments;
 
 
-   public InvocationExpression(Token token, String name, List<Expression> args)
+   public InvocationExpression(
+         Token token,
+         String name,
+         List<Expression> arguments)
    {
-      super(token, getMax(args));
+      super(token, getMax(arguments));
 
       this.name = name;
-      this.arguments = args;
+      this.arguments = arguments;
    }
    
    
@@ -84,22 +87,24 @@ public class InvocationExpression extends Expression
       
       List<LLVMValue> args = new LinkedList<>();
       
-      
       for (int i = 0; argerator.hasNext(); i++)
       {
          LLVMValue llvmArg = argerator
                .next()
                .buildLLVM(program, current, node);
          
-         LLVMType paramType = typerator.next().llvmType();
+         LLVMType paramType = typerator.next().getLLVMType();
          
          
          /* If an error already occurred, no need to dwell on it */
          if (llvmArg == null)
          {
             ok = false;
+            continue;
          }
-         else if (!llvmArg.type.equals(paramType))
+         
+         
+         if (!llvmArg.type.equals(paramType))
          {
             ErrorPrinter.unexpectedType(this.token, paramType.astString(),
                   "argument " + i, llvmArg.type.astString());
@@ -108,16 +113,18 @@ public class InvocationExpression extends Expression
          }
       }
       
-      
       if (!ok)
          return null;
       
-     
-      LLVMCall call = new LLVMCall(this.name, function.type.llvmType(), args);
       
-      node.add(call);
+      LLVMInvocation invocation = new LLVMInvocation(
+            this.name,
+            function.type.getLLVMType(),
+            args);
+      
+      node.add(invocation);
       
       
-      return call.target;
+      return invocation.target;
    }
 }
