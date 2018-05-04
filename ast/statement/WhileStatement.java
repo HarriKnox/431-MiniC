@@ -44,7 +44,7 @@ public class WhileStatement extends Statement
       
       
       if ((llvmGuard != null)
-            && (!(llvmGuard instanceof LLVMBoolType)))
+            && (!(llvmGuard.type instanceof LLVMBoolType)))
          Error.badGuard(this.guard.token, llvmGuard.type.astString());
       
       

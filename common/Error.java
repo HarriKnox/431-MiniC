@@ -53,7 +53,7 @@ public class Error
    
    
    public static void wrongArity(Token token,
-         String name, String expected, String got)
+         String name, int expected, int got)
    {
       printLine(token, "function " + name + " expects "
             + expected + " arguments but got " + got);

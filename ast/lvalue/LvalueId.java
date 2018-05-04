@@ -51,7 +51,7 @@ public class LvalueId extends Lvalue
    }
    
    
-   private LLVMValue findVariable(Variables globals, Function current)
+   private LLVMVariable findVariable(Variables globals, Function current)
    {
       Variable variable;
       
