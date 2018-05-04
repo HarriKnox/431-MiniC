@@ -42,7 +42,7 @@ public class Variables
    
    public boolean isValid(String name)
    {
-      return this.getVariables(name) != null;
+      return this.getVariable(name) != null;
    }
    
    
@@ -121,7 +121,7 @@ public class Variables
          {
             names.add(local.name);
             
-            if (!localerator.hasValidType(structs))
+            if (!local.hasValidType(structs))
             {
                localerator.remove();
                Error.unknownStruct(local.token, local.type.astString());
@@ -138,7 +138,7 @@ public class Variables
       
       List<LLVMGlobal> llvmGlobals = new LinkedList<>();
       
-      for (Variable variable : this.variabls)
+      for (Variable variable : this.variables)
          llvmGlobals.add(variable.buildLLVM());
       
       
