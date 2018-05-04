@@ -7,21 +7,21 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
-import ast.expression.Expression;
+import ast.expression.InvocationExpression;
 
 import llvm.LLVMCFGNode;
 
 
 public class InvocationStatement extends Statement
 {
-   public final Expression expression;
+   public final InvocationExpression invocation;
 
 
-   public InvocationStatement(Token token, Expression expression)
+   public InvocationStatement(Token token, InvocationExpression invocation)
    {
       super(token);
 
-      this.expression = expression;
+      this.invocation = invocation;
    }
    
    
@@ -29,7 +29,7 @@ public class InvocationStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      this.expression.buildLLVM(program, current, node);
+      this.invocation.buildLLVM(program, current, node);
       
       return node;
    }
