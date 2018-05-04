@@ -74,7 +74,7 @@ public class StatementVisitor extends MiniBaseVisitor<Statement>
             ctx.elseBlock != null
                   ? visit(ctx.elseBlock)
                   : new BlockStatement(
-                        -1,
+                        ctx.getStart(),
                         new LinkedList<>()));
    }
 

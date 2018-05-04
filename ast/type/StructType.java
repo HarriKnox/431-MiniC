@@ -30,7 +30,7 @@ public class StructType extends Type
    @Override
    public boolean isValid(Structs structs)
    {
-      return structs.getDeclaration(this.name) != null;
+      return structs.getStruct(this.name) != null;
    }
    
    

@@ -72,7 +72,7 @@ public class LvalueDot extends Lvalue
       LLVMLoad load = new LLVMLoad(leftValue);
       
       LLVMGetelementptr getelementptr = new LLVMGetelementptr(
-            load,
+            load.target,
             field.type.getLLVMType(),
             field.index);
       

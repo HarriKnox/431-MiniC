@@ -42,14 +42,14 @@ public class WhileStatement extends Statement
       
       
       if ((llvmGuard != null)
-            && (!(llvmGuard.type instanceof LLVMBoolType)))
+            && (!(llvmGuard instanceof LLVMBoolType)))
          Error.badGuard(this.guard.token, llvmGuard.type.astString());
       
       
       LLVMCFGNode bodyNode = new LLVMCFGNode();
       LLVMCFGNode elseNode = new LLVMCFGNode();
       
-      guardNode.branch(llvmGuard.target, bodyNode, elsenode);
+      guardNode.branch(llvmGuard.target, bodyNode, elseNode);
       
       
       LLVMCFGNode bodyLast = this.body.buildLLVM(

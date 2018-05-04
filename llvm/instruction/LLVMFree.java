@@ -8,10 +8,10 @@ import llvm.value.variable.LLVMRegister;
 
 public class LLVMFree extends LLVMInstruction
 {
-   public final LLVMRegister pointer;
+   public final LLVMVariable pointer;
    
    
-   public LLVMFree(LLVMRegister pointer)
+   public LLVMFree(LLVMVariable pointer)
    {
       super(new LLVMRegister(new LLVMVoidType()));
       

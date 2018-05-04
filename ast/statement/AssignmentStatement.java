@@ -51,8 +51,8 @@ public class AssignmentStatement extends Statement
       if (!(target.type.equivalent(value.type)))
          Error.assignMistype(
                this.source.token,
-               this.target.type.astString(),
-               this.value.type.astString());
+               target.type.astString(),
+               value.type.astString());
       
       
       LLVMStore store = new LLVMStore(target, value);

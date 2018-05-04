@@ -53,7 +53,7 @@ public class ConditionalStatement extends Statement
       LLVMCFGNode thenNode = new LLVMCFGNode();
       LLVMCFGNode elseNode = new LLVMCFGNode();
       
-      node.branch(llvmGuard.target, thenNode, elseNode);
+      node.branch(llvmGuard, thenNode, elseNode);
       
       
       LLVMCFGNode thenLast = this.thenBlock.buildLLVM(
