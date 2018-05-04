@@ -22,15 +22,19 @@ import llvm.LLVMCFGNode;
 import llvm.declaration.LLVMFunction;
 
 import llvm.instruction.LLVMStore;
+import llvm.instruction.LLVMInstruction;
 
 import llvm.instruction.targeted.LLVMAlloca;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.type.LLVMType;
 
 import llvm.value.variable.LLVMLocal;
 import llvm.value.variable.LLVMParameter;
+import llvm.value.variable.LLVMRegister;
 import llvm.value.variable.LLVMReturnValue;
+import llvm.value.variable.LLVMVariable;
 
 
 public class Function extends TokenedElement
@@ -175,6 +179,27 @@ public class Function extends TokenedElement
       List<LLVMCFGNode> nodes = new LinkedList<>();
       
       exit.recursivisit(nodes);
+      
+      
+      /* Set the unique ID number for each node and LLVMRegister */
+      for (LLVMCFGNode node : nodes)
+      {
+         node.setUID();
+         
+         for (LLVMInstruction inst : node.instructions)
+         {
+            if (inst instanceof LLVMTargetedInstruction)
+            {
+               LLVMVariable target = ((LLVMTargetedInstruction)inst).target;
+               
+               if (target instanceof LLVMRegister)
+               {
+                  ((LLVMRegister)target).setUID();
+               }
+            }
+         }
+      }
+      
       
       return nodes;
    }

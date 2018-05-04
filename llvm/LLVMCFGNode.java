@@ -23,6 +23,11 @@ public class LLVMCFGNode
    public LLVMCFGNode loopback = null;
    public LLVMLink link = null;
    
+   private int uid = -1;
+   
+   
+   private static int count = 0;
+   
    
    public LLVMCFGNode add(LLVMInstruction instruction)
    {
@@ -80,5 +85,12 @@ public class LLVMCFGNode
       
       if (this.loopback != null)
          this.loopback.recursivisit(nodes);
+   }
+   
+   
+   public void setUID()
+   {
+      if (this.uid == -1)
+         this.uid = count++;
    }
 }
