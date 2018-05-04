@@ -51,7 +51,7 @@ public class WhileStatement extends Statement
       LLVMCFGNode bodyNode = new LLVMCFGNode();
       LLVMCFGNode elseNode = new LLVMCFGNode();
       
-      guardNode.branch(llvmGuard.target, bodyNode, elseNode);
+      guardNode.branch(llvmGuard, bodyNode, elseNode);
       
       
       LLVMCFGNode bodyLast = this.body.buildLLVM(
