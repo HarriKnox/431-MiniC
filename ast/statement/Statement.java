@@ -6,6 +6,10 @@ import org.antlr.v4.runtime.Token;
 import ast.ProgramAST;
 import ast.TokenedElement;
 
+import ast.declaration.Function;
+
+import llvm.LLVMCFGNode;
+
 
 public abstract class Statement extends TokenedElement
 {

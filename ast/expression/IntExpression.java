@@ -13,7 +13,7 @@ import llvm.LLVMCFGNode;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.constant.LLVMInteger;
+import llvm.value.constant.LLVMInt;
 
 
 public class IntExpression extends Expression

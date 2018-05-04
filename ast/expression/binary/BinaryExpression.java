@@ -3,11 +3,19 @@ package ast.expression.binary;
 
 import org.antlr.v4.runtime.Token;
 
+import ast.ProgramAST;
+
+import ast.declaration.Function;
+
 import ast.expression.Expression;
 
 import common.Error;
 
-import llvm.type.Type;
+import llvm.LLVMCFGNode;
+
+import llvm.instruction.LLVMInstruction;
+
+import llvm.type.LLVMType;
 
 import llvm.value.LLVMValue;
 

@@ -7,7 +7,7 @@ import ast.expression.Expression;
 
 import ast.expression.binary.BinaryExpression;
 
-import llvm.value.llvmValue;
+import llvm.value.LLVMValue;
 
 
 public abstract class ArithmeticExpression extends BinaryExpression

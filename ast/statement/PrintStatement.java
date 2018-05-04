@@ -15,7 +15,7 @@ import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMPrintf;
 
-import llvm.type.LLVMintType;
+import llvm.type.LLVMIntType;
 
 import llvm.value.LLVMValue;
 
