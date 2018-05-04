@@ -3,7 +3,7 @@ package llvm.instruction;
 
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMRegister;
+import llvm.value.variable.LLVMRegister;
 
 
 public class LLVMBitcast extends LLVMInstruction

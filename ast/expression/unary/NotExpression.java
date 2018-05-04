@@ -5,6 +5,14 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+import llvm.instruction.LLVMNot;
+
+import llvm.type.LLVMBoolType;
+import llvm.type.LLVMType;
+
+import llvm.value.LLVMValue;
+
 
 public class NotExpression extends UnaryExpression
 {

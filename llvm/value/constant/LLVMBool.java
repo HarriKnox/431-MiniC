@@ -1,8 +1,8 @@
 package llvm.value.constant;
 
 
-import llvm.type.NullType;
-import llvm.type.Type;
+import llvm.type.LLVMNullType;
+import llvm.type.LLVMType;
 
 
 public class LLVMBool extends LLVMConstant

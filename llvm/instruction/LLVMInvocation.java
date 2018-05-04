@@ -3,8 +3,11 @@ package llvm.instruction;
 
 import java.util.List;
 
-import llvm.value.LLVMRegister;
+import llvm.type.LLVMType;
+
 import llvm.value.LLVMValue;
+
+import llvm.value.variable.LLVMRegister;
 
 
 public class LLVMInvocation extends LLVMInstruction

@@ -5,6 +5,14 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
+import llvm.instruction.LLVMInstruction;
+import llvm.instruction.LLVMNegate;
+
+import llvm.type.LLVMIntType;
+import llvm.type.LLVMType;
+
+import llvm.value.LLVMValue;
+
 
 public class NegateExpression extends UnaryExpression
 {

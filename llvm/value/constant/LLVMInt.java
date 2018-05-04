@@ -1,8 +1,8 @@
 package llvm.value.constant;
 
 
-import llvm.type.IntType;
-import llvm.type.Type;
+import llvm.type.LLVMIntType;
+import llvm.type.LLVMType;
 
 
 public class LLVMInt extends LLVMConstant
