@@ -30,4 +30,4 @@ antlr :
 
 
 test: clean ../out
-	$(JAVAC) -cp $(CLASSPATH) -d ../out Main.java
+	$(JAVAC) -cp $(CLASSPATH) -d ../out Main.java -Xlint:unchecked
