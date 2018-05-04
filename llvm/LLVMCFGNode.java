@@ -20,8 +20,8 @@ public class LLVMCFGNode
 {
    public final List<LLVMInstruction> instructions = new LinkedList<>();
    public final List<LLVMCFGNode> predecessors = new LinkedList<>();
-   public final LLVMCFGNode loopback = null;
-   public final LLVMLink link = null;
+   public LLVMCFGNode loopback = null;
+   public LLVMLink link = null;
    
    
    public LLVMCFGNode add(LLVMInstruction instruction)
