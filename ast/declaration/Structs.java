@@ -67,7 +67,7 @@ public class Structs
    }
    
    
-   private LLVMStructs buildLLVM()
+   public LLVMStructs buildLLVM()
    {
       this.removeInvalids();
       

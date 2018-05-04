@@ -73,7 +73,7 @@ public class Functions
    }
    
    
-   private LLVMFunctions buildLLVM(ProgramAST program)
+   public LLVMFunctions buildLLVM(ProgramAST program)
    {
       this.removeInvalids(program.structs);
       
