@@ -13,6 +13,8 @@ import common.Error;
 
 import llvm.LLVMCFGNode;
 
+import llvm.type.LLVMBoolType;
+
 import llvm.value.LLVMValue;
 
 

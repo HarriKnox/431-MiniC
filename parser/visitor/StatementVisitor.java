@@ -8,6 +8,7 @@ import parser.MiniBaseVisitor;
 
 import ast.expression.Expression;
 import ast.expression.InvocationExpression;
+import ast.expression.VoidExpression;
 
 import ast.lvalue.Lvalue;
 import ast.lvalue.LvalueDot;

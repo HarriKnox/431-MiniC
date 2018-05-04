@@ -15,6 +15,7 @@ import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMStore;
 
+import llvm.type.LLVMType;
 import llvm.type.LLVMVoidType;
 
 import llvm.value.LLVMValue;

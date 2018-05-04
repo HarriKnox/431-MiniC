@@ -15,6 +15,9 @@ import llvm.LLVMCFGNode;
 
 import llvm.value.LLVMValue;
 
+import llvm.value.variable.LLVMGlobal;
+import llvm.value.variable.LLVMLocal;
+import llvm.value.variable.LLVMParameter;
 import llvm.value.variable.LLVMVariable;
 
 

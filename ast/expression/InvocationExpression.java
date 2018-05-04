@@ -11,6 +11,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
+import ast.type.Type;
+
 import common.Error;
 
 import llvm.LLVMCFGNode;

@@ -14,6 +14,8 @@ import llvm.type.LLVMVoidType;
 
 import llvm.value.LLVMValue;
 
+import llvm.value.variable.LLVMRegister;
+
 
 public class VoidExpression extends Expression
 {

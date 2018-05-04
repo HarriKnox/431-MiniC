@@ -18,6 +18,9 @@ import llvm.LLVMCFGNode;
 import llvm.instruction.LLVMBitcast;
 import llvm.instruction.LLVMFree;
 
+import llvm.type.LLVMPointerType;
+import llvm.type.LLVMStructType;
+
 import llvm.value.LLVMValue;
 
 import llvm.value.variable.LLVMRegister;

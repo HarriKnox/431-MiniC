@@ -6,6 +6,9 @@ import org.antlr.v4.runtime.Token;
 import ast.ProgramAST;
 
 import ast.declaration.Function;
+import ast.declaration.Struct;
+
+import ast.type.StructType;
 
 import common.Error;
 
