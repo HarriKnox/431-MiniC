@@ -13,7 +13,7 @@ import common.Error;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMPrint;
+import llvm.instruction.LLVMPrintf;
 
 import llvm.type.LLVMintType;
 
@@ -50,8 +50,8 @@ public class PrintStatement extends Statement
          Error.badPrint(this.expression.token, value.type.astString());
       
       
-      LLVMPrint print = new LLVMPrint(value, this.println);
+      LLVMPrintf printf = new LLVMPrintf(value, this.println);
       
-      return node.add(print);
+      return node.add(printf);
    }
 }
