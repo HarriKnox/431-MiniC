@@ -6,18 +6,22 @@ import llvm.type.LLVMType;
 
 public class LLVMLocal extends LLVMVariable
 {
-   public final String functionName;
+   public final String function;
    public final String identifier;
    
    
-   public LLVMLocal(String funcName, String id, LLVMType type)
+   public LLVMLocal(String function, String identifier, LLVMType type)
    {
       super(type);
       
-      this.functionName = funcName;
-      this.identifier = id;
+      this.function = function;
+      this.identifier = identifier;
    }
    
    
-   /* '%' + this.functionName + '.' + this.identifier */
+   @Override
+   public String llvmString()
+   {
+      return String.format("%%%s.%s", this.function, this.identifier);
+   }
 }

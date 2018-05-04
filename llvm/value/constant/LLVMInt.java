@@ -16,4 +16,11 @@ public class LLVMInt extends LLVMConstant
       
       this.value = value;
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return this.value;
+   }
 }

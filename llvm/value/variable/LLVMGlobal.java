@@ -19,6 +19,13 @@ public class LLVMGlobal extends LLVMVariable
    }
    
    
+   @Override
+   public String llvmString()
+   {
+      return String.format("@%s", this.identifier);
+   }
+   
+   
    /*
     * Despite the fact that these are in the 'variable' package, we are
     * defining constants here because they are global variables.
@@ -34,7 +41,4 @@ public class LLVMGlobal extends LLVMVariable
    
    public static final LLVMGlobal PRINTLN_FORMAT = new LLVMGlobal(
          ".println_format", new LLVMPointerType());
-   
-   
-   /* '@' + this.identifier */
 }

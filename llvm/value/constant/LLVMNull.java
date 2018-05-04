@@ -11,4 +11,11 @@ public class LLVMNull extends LLVMConstant
    {
       super(new LLVMNullType());
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "null";
+   }
 }

@@ -4,20 +4,10 @@ package llvm.value.variable;
 import llvm.type.LLVMType;
 
 
-public class LLVMParameter extends LLVMVariable
+public class LLVMParameter extends LLVMLocal
 {
-   public final String functionName;
-   public final String identifier;
-   
-   
-   public LLVMParameter(String funcName, String id, LLVMType type)
+   public LLVMParameter(String function, String identifier, LLVMType type)
    {
-      super(type);
-      
-      this.functionName = funcName;
-      this.identifier = id;
+      super(function, String.format("param.%s", identifier),type);
    }
-   
-   
-   /* '%' + this.functionName + '.param.' + this.identifier */
 }

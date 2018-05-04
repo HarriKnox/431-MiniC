@@ -6,11 +6,8 @@ import llvm.type.LLVMType;
 
 public class LLVMReturnValue extends LLVMLocal
 {
-   public LLVMReturnValue(String funcName, LLVMType type)
+   public LLVMReturnValue(String function, LLVMType type)
    {
-      super(funcName, "return.value", type);
+      super(function, "return.value", type);
    }
-   
-   
-   /* "%" + this.functionName + ".return.value" */
 }

@@ -13,4 +13,7 @@ public abstract class LLVMValue
    {
       this.type = type;
    }
+   
+   
+   public abstract String llvmString();
 }

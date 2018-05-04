@@ -18,6 +18,13 @@ public class LLVMRegister extends LLVMVariable
    }
    
    
+   @Override
+   public String llvmString()
+   {
+      return String.format("%%v%d", this.uid);
+   }
+   
+   
    public void setUID()
    {
       if (this.uid == -1)
