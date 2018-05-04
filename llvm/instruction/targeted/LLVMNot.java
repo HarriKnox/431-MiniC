@@ -1,4 +1,4 @@
-package llvm.instruction;
+package llvm.instruction.targeted;
 
 
 import llvm.value.LLVMValue;
@@ -6,7 +6,7 @@ import llvm.value.LLVMValue;
 import llvm.value.variable.LLVMRegister;
 
 
-public class LLVMNot extends LLVMInstruction
+public class LLVMNot extends LLVMTargetedInstruction
 {
    public final LLVMValue source;
    

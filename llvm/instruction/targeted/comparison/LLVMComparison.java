@@ -1,14 +1,14 @@
-package llvm.instruction.comparison;
+package llvm.instruction.targeted.comparison;
 
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.value.LLVMValue;
 
 import llvm.value.variable.LLVMRegister;
 
 
-public abstract class LLVMComparison extends LLVMInstruction
+public abstract class LLVMComparison extends LLVMTargetedInstruction
 {
    public final LLVMValue left;
    public final LLVMValue right;

@@ -1,4 +1,4 @@
-package llvm.instruction.logical;
+package llvm.instruction.targeted.logical;
 
 
 import llvm.value.LLVMValue;

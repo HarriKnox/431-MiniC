@@ -13,7 +13,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMLoad;
+import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.value.LLVMValue;
 

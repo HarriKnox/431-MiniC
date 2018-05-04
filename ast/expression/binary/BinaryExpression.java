@@ -13,7 +13,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMType;
 
@@ -60,7 +60,7 @@ public abstract class BinaryExpression extends Expression
       }
       
       
-      LLVMInstruction instruction = this.getInstruction(left, right);
+      LLVMTargetedInstruction instruction = this.getInstruction(left, right);
       
       node.add(instruction);
       
@@ -72,5 +72,6 @@ public abstract class BinaryExpression extends Expression
    
    protected abstract String getOperation();
    
-   protected abstract LLVMInstruction getInstruction(LLVMValue l, LLVMValue r);
+   protected abstract LLVMTargetedInstruction getInstruction(
+         LLVMValue left, LLVMValue right);
 }

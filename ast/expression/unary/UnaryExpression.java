@@ -13,7 +13,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMType;
 
@@ -55,7 +55,7 @@ public abstract class UnaryExpression extends Expression
       }
       
       
-      LLVMInstruction instruction = this.getInstruction(value);
+      LLVMTargetedInstruction instruction = this.getInstruction(value);
       
       node.add(instruction);
       
@@ -67,5 +67,5 @@ public abstract class UnaryExpression extends Expression
    
    protected abstract String getOperation();
    
-   protected abstract LLVMInstruction getInstruction(LLVMValue value);
+   protected abstract LLVMTargetedInstruction getInstruction(LLVMValue value);
 }

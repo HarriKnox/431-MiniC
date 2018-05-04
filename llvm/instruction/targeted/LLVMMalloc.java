@@ -1,4 +1,4 @@
-package llvm.instruction;
+package llvm.instruction.targeted;
 
 
 import llvm.type.LLVMPointerType;
@@ -6,7 +6,7 @@ import llvm.type.LLVMPointerType;
 import llvm.value.variable.LLVMRegister;
 
 
-public class LLVMMalloc extends LLVMInstruction
+public class LLVMMalloc extends LLVMTargetedInstruction
 {
    public final int size;
    

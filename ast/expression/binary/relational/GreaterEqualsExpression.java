@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
-import llvm.instruction.comparison.LLVMsge;
+import llvm.instruction.targeted.comparison.LLVMsge;
 
 import llvm.value.LLVMValue;
 
@@ -31,8 +31,9 @@ public class GreaterEqualsExpression extends RelationalExpression
    
    
    @Override
-   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   protected LLVMTargetedInstruction getInstruction(
+         LLVMValue left, LLVMValue right)
    {
-      return new LLVMsge(l, r);
+      return new LLVMsge(left, right);
    }
 }

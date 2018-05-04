@@ -16,9 +16,6 @@ public class LLVMPrintf extends LLVMInstruction
    
    public LLVMPrintf(LLVMValue value, boolean println)
    {
-      super(new LLVMRegister(new LLVMVoidType()));
-      
-      
       this.value = value;
       this.println = println;
    }

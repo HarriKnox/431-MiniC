@@ -1,4 +1,4 @@
-package llvm.instruction;
+package llvm.instruction.targeted;
 
 
 import java.util.List;
@@ -10,7 +10,7 @@ import llvm.value.LLVMValue;
 import llvm.value.variable.LLVMRegister;
 
 
-public class LLVMInvocation extends LLVMInstruction
+public class LLVMInvocation extends LLVMTargetedInstruction
 {
    public final String name;
    public final List<LLVMValue> arguments;

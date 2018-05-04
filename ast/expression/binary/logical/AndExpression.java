@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
-import llvm.instruction.logical.LLVMand;
+import llvm.instruction.targeted.logical.LLVMand;
 
 import llvm.value.LLVMValue;
 
@@ -28,8 +28,9 @@ public class AndExpression extends LogicalExpression
    
    
    @Override
-   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   protected LLVMTargetedInstruction getInstruction(
+         LLVMValue left, LLVMValue right)
    {
-      return new LLVMand(l, r);
+      return new LLVMand(left, right);
    }
 }

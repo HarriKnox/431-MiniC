@@ -5,8 +5,8 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
-import llvm.instruction.LLVMInstruction;
-import llvm.instruction.LLVMNegate;
+import llvm.instruction.targeted.LLVMNegate;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMIntType;
 import llvm.type.LLVMType;
@@ -37,7 +37,7 @@ public class NegateExpression extends UnaryExpression
    
    
    @Override
-   protected LLVMInstruction getInstruction(LLVMValue value)
+   protected LLVMTargetedInstruction getInstruction(LLVMValue value)
    {
       return new LLVMNegate(value);
    }

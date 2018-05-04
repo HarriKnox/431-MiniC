@@ -1,4 +1,4 @@
-package llvm.instruction;
+package llvm.instruction.targeted;
 
 
 import llvm.type.LLVMType;
@@ -7,7 +7,7 @@ import llvm.value.variable.LLVMRegister;
 import llvm.value.variable.LLVMVariable;
 
 
-public class LLVMBitcast extends LLVMInstruction
+public class LLVMBitcast extends LLVMTargetedInstruction
 {
    public final LLVMVariable source;
    

@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
-import llvm.instruction.arithmetic.LLVMmul;
+import llvm.instruction.targeted.arithmetic.LLVMmul;
 
 import llvm.value.LLVMValue;
 
@@ -28,8 +28,9 @@ public class TimesExpression extends ArithmeticExpression
    
    
    @Override
-   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   protected LLVMTargetedInstruction getInstruction(
+         LLVMValue left, LLVMValue right)
    {
-      return new LLVMmul(l, r);
+      return new LLVMmul(left, right);
    }
 }

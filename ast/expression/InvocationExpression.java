@@ -17,7 +17,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMInvocation;
+import llvm.instruction.targeted.LLVMInvocation;
 
 import llvm.type.LLVMType;
 

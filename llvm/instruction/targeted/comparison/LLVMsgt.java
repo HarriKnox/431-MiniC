@@ -1,4 +1,4 @@
-package llvm.instruction.comparison;
+package llvm.instruction.targeted.comparison;
 
 
 import llvm.value.LLVMValue;

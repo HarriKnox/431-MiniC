@@ -14,8 +14,8 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMBitcast;
-import llvm.instruction.LLVMMalloc;
+import llvm.instruction.targeted.LLVMBitcast;
+import llvm.instruction.targeted.LLVMMalloc;
 
 import llvm.value.LLVMValue;
 

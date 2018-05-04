@@ -15,8 +15,9 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMBitcast;
 import llvm.instruction.LLVMFree;
+
+import llvm.instruction.targeted.LLVMBitcast;
 
 import llvm.type.LLVMPointerType;
 import llvm.type.LLVMStructType;

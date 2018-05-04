@@ -9,8 +9,9 @@ import ast.declaration.Function;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.LLVMLoad;
 import llvm.instruction.LLVMScanf;
+
+import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.value.LLVMValue;
 

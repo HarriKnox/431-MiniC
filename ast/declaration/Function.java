@@ -21,9 +21,10 @@ import llvm.LLVMCFGNode;
 
 import llvm.declaration.LLVMFunction;
 
-import llvm.instruction.LLVMAlloca;
-import llvm.instruction.LLVMLoad;
 import llvm.instruction.LLVMStore;
+
+import llvm.instruction.targeted.LLVMAlloca;
+import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.type.LLVMType;
 

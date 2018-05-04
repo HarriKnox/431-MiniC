@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
-import llvm.instruction.arithmetic.LLVMadd;
+import llvm.instruction.targeted.arithmetic.LLVMadd;
 
 import llvm.value.LLVMValue;
 
@@ -28,8 +28,9 @@ public class PlusExpression extends ArithmeticExpression
    
    
    @Override
-   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   protected LLVMTargetedInstruction getInstruction(
+         LLVMValue left, LLVMValue right)
    {
-      return new LLVMadd(l, r);
+      return new LLVMadd(left, right);
    }
 }

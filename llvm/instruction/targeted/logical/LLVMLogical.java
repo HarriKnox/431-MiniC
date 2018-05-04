@@ -1,14 +1,14 @@
-package llvm.instruction.logical;
+package llvm.instruction.targeted.logical;
 
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.value.LLVMValue;
 
 import llvm.value.variable.LLVMRegister;
 
 
-public abstract class LLVMLogical extends LLVMInstruction
+public abstract class LLVMLogical extends LLVMTargetedInstruction
 {
    public final LLVMValue left;
    public final LLVMValue right;

@@ -1,4 +1,4 @@
-package llvm.instruction;
+package llvm.instruction.targeted;
 
 
 import llvm.value.LLVMValue;
@@ -10,7 +10,7 @@ import llvm.value.LLVMValue;
 import llvm.value.variable.LLVMRegister;
 
 
-public class LLVMGetelementptr extends LLVMInstruction
+public class LLVMGetelementptr extends LLVMTargetedInstruction
 {
    public final LLVMValue source;
    public final int index;

@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.Token;
 
 import ast.expression.Expression;
 
-import llvm.instruction.LLVMInstruction;
+import llvm.instruction.targeted.LLVMTargetedInstruction;
 
-import llvm.instruction.comparison.LLVMne;
+import llvm.instruction.targeted.comparison.LLVMne;
 
 import llvm.value.LLVMValue;
 
@@ -28,8 +28,9 @@ public class NotEqualsExpression extends EqualityExpression
    
    
    @Override
-   protected LLVMInstruction getInstruction(LLVMValue l, LLVMValue r)
+   protected LLVMTargetedInstruction getInstruction(
+         LLVMValue left, LLVMValue right)
    {
-      return new LLVMne(l, r);
+      return new LLVMne(left, right);
    }
 }
