@@ -9,7 +9,7 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -47,7 +47,7 @@ public class ConditionalStatement extends Statement
       
       if ((llvmGuard != null)
             && (!(llvmGuard.type instanceof LLVMBoolType)))
-         Error.badGuard(this.guard.token, llvmGuard.type.astString());
+         ErrorPrinter.badGuard(this.guard.token, llvmGuard.type.astString());
       
       
       LLVMCFGNode thenNode = new LLVMCFGNode();

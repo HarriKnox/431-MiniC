@@ -8,7 +8,7 @@ import ast.ProgramAST;
 import ast.declaration.Function;
 import ast.declaration.Variable;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -49,7 +49,7 @@ public class DotExpression extends Expression
       
       if (!(leftValue.type instanceof LLVMStructType))
       {
-         Error.badIndex(this.token, leftValue.type.astString());
+         ErrorPrinter.badIndex(this.token, leftValue.type.astString());
          return null;
       }
       
@@ -61,7 +61,7 @@ public class DotExpression extends Expression
       
       if (field == null)
       {
-         Error.noField(
+         ErrorPrinter.noField(
                this.token,
                ((LLVMStructType)leftValue.type).name,
                this.id);

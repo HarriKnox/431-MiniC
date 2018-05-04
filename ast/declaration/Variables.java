@@ -9,7 +9,7 @@ import java.util.Set;
 
 import ast.type.Type;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.declaration.LLVMGlobals;
 
@@ -61,7 +61,7 @@ public class Variables
          if (names.contains(variable.name))
          {
             variter.remove();
-            Error.duplicate(variable.token, "variable", variable.name);
+            ErrorPrinter.duplicate(variable.token, "variable", variable.name);
          }
          else
          {
@@ -70,7 +70,7 @@ public class Variables
             if (!variable.hasValidType(structs))
             {
                variter.remove();
-               Error.unknownStruct(variable.token, variable.type.astString());
+               ErrorPrinter.unknownStruct(variable.token, variable.type.astString());
             }
          }
       }
@@ -91,7 +91,7 @@ public class Variables
          if (names.contains(param.name))
          {
             paramerator.remove();
-            Error.duplicate(param.token, "variable", param.name);
+            ErrorPrinter.duplicate(param.token, "variable", param.name);
          }
          else
          {
@@ -100,7 +100,7 @@ public class Variables
             if (!param.hasValidType(structs))
             {
                paramerator.remove();
-               Error.unknownStruct(param.token, param.type.astString());
+               ErrorPrinter.unknownStruct(param.token, param.type.astString());
             }
          }
       }
@@ -115,7 +115,7 @@ public class Variables
          if (names.contains(local.name))
          {
             localerator.remove();
-            Error.duplicate(local.token, "variable", local.name);
+            ErrorPrinter.duplicate(local.token, "variable", local.name);
          }
          else
          {
@@ -124,7 +124,7 @@ public class Variables
             if (!local.hasValidType(structs))
             {
                localerator.remove();
-               Error.unknownStruct(local.token, local.type.astString());
+               ErrorPrinter.unknownStruct(local.token, local.type.astString());
             }
          }
       }

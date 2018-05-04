@@ -9,7 +9,7 @@ import ast.declaration.Function;
 import ast.declaration.Variable;
 import ast.declaration.Variables;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -45,7 +45,7 @@ public class IdentifierExpression extends Expression
       
       if (source == null)
       {
-         Error.undeclared(this.token, "variable", this.id);
+         ErrorPrinter.undeclared(this.token, "variable", this.id);
          return null;
       }
       

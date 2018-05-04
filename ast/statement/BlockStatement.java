@@ -9,7 +9,7 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -40,7 +40,7 @@ public class BlockStatement extends Statement
       {
          if (node == null)
          {
-            Error.codeAfterReturn(statement.token);
+            ErrorPrinter.codeAfterReturn(statement.token);
             break;
          }
          

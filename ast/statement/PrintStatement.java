@@ -9,7 +9,7 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -47,7 +47,7 @@ public class PrintStatement extends Statement
       
       
       if (!(value.type instanceof LLVMIntType))
-         Error.badPrint(this.expression.token, value.type.astString());
+         ErrorPrinter.badPrint(this.expression.token, value.type.astString());
       
       
       LLVMPrintf printf = new LLVMPrintf(value, this.println);

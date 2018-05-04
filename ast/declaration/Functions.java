@@ -11,7 +11,7 @@ import ast.ProgramAST;
 
 import ast.declaration.Structs;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.declaration.LLVMFunction;
 import llvm.declaration.LLVMFunctions;
@@ -58,7 +58,7 @@ public class Functions
          if (names.contains(function.name))
          {
             functerator.remove();
-            Error.duplicate(function.token, "function", function.name);
+            ErrorPrinter.duplicate(function.token, "function", function.name);
          }
          else
          {
@@ -67,7 +67,7 @@ public class Functions
             if (!function.hasValidType(structs))
             {
                functerator.remove();
-               Error.unknownStruct(function.token, function.type.astString());
+               ErrorPrinter.unknownStruct(function.token, function.type.astString());
             }
          }
       }

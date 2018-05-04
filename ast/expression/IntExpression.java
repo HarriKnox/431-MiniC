@@ -7,7 +7,7 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -56,7 +56,7 @@ public class IntExpression extends Expression
       }
       catch (NumberFormatException ne)
       {
-         Error.printLine(this.token, "integer out of range");
+         ErrorPrinter.printLine(this.token, "integer out of range");
          return null;
       }
       

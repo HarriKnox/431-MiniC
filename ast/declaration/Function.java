@@ -15,7 +15,7 @@ import ast.type.VoidType;
 
 import ast.statement.Statement;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -115,7 +115,7 @@ public class Function extends TokenedElement
       if (last != null)
       {
          if (!(this.type instanceof VoidType))
-            Error.nonReturn(this.token, this.name);
+            ErrorPrinter.nonReturn(this.token, this.name);
          
          last.jump(exit);
       }

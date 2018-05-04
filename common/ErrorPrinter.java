@@ -4,7 +4,7 @@ package common;
 import org.antlr.v4.runtime.Token;
 
 
-public class Error
+public class ErrorPrinter
 {
    private static int errors = 0;
    

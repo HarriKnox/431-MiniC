@@ -13,7 +13,7 @@ import ast.declaration.Function;
 
 import ast.type.Type;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -63,7 +63,7 @@ public class InvocationExpression extends Expression
       
       if (function == null)
       {
-         Error.undeclared(this.token, "function", this.name);
+         ErrorPrinter.undeclared(this.token, "function", this.name);
          return null;
       }
       
@@ -73,7 +73,7 @@ public class InvocationExpression extends Expression
       
       if (function.parameters.length != arglen)
       {
-         Error.wrongArity(this.token, this.name,
+         ErrorPrinter.wrongArity(this.token, this.name,
                function.parameters.length, arglen);
          
          return null;
@@ -106,7 +106,7 @@ public class InvocationExpression extends Expression
          
          if (!llvmArg.type.equals(paramType))
          {
-            Error.unexpectedType(this.token, paramType.astString(),
+            ErrorPrinter.unexpectedType(this.token, paramType.astString(),
                   "argument " + i, llvmArg.type.astString());
             
             ok = false;

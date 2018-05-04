@@ -11,7 +11,7 @@ import ast.expression.Expression;
 
 import ast.lvalue.Lvalue;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -49,7 +49,7 @@ public class AssignmentStatement extends Statement
       
       
       if (!(target.type.equivalent(value.type)))
-         Error.assignMistype(
+         ErrorPrinter.assignMistype(
                this.source.token,
                target.type.astString(),
                value.type.astString());

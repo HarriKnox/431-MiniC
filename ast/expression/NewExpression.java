@@ -10,7 +10,7 @@ import ast.declaration.Struct;
 
 import ast.type.StructType;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -40,7 +40,7 @@ public class NewExpression extends Expression
       
       if (struct == null)
       {
-         Error.unknownStruct(this.token, this.id);
+         ErrorPrinter.unknownStruct(this.token, this.id);
          return null;
       }
       

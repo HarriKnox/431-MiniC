@@ -9,7 +9,7 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -46,7 +46,7 @@ public abstract class UnaryExpression extends Expression
       
       if (!this.isValidType(value.type))
       {
-         Error.unaryMistype(
+         ErrorPrinter.unaryMistype(
                this.token,
                this.getOperation(),
                value.type.astString());

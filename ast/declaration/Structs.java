@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.declaration.LLVMStruct;
 import llvm.declaration.LLVMStructs;
@@ -56,7 +56,7 @@ public class Structs
          if (names.contains(struct.name))
          {
             structerator.remove();
-            Error.duplicate(struct.token, "struct", struct.name);
+            ErrorPrinter.duplicate(struct.token, "struct", struct.name);
          }
          else
          {

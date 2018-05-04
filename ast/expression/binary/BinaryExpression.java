@@ -9,7 +9,7 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -50,7 +50,7 @@ public abstract class BinaryExpression extends Expression
       
       if (!this.areValidTypes(left, right))
       {
-         Error.binaryMistype(
+         ErrorPrinter.binaryMistype(
                this.token,
                this.getOperation(),
                left.type.astString(),

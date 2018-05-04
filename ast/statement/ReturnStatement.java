@@ -9,7 +9,7 @@ import ast.declaration.Function;
 
 import ast.expression.Expression;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -47,7 +47,7 @@ public class ReturnStatement extends Statement
       if (value != null)
       {
          if (!value.type.equivalent(retType))
-            Error.badReturn(
+            ErrorPrinter.badReturn(
                   this.expression.token,
                   retType.astString(),
                   value.type.astString());

@@ -11,7 +11,7 @@ import ast.expression.Expression;
 
 import ast.type.StructType;
 
-import common.Error;
+import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
@@ -50,12 +50,12 @@ public class DeleteStatement extends Statement
       
       
       if (!(value.type instanceof LLVMStructType))
-         Error.badDelete(this.expression.token, value.type.astString());
+         ErrorPrinter.badDelete(this.expression.token, value.type.astString());
       
       
       if (!(value instanceof LLVMRegister))
       {
-         Error.IDK("DeleteStatement.buildLLVM:55", value.getClass().getName());
+         ErrorPrinter.IDK("DeleteStatement.buildLLVM:55", value.getClass().getName());
          return node;
       }
       
