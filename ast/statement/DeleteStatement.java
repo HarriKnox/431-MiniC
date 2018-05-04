@@ -55,7 +55,9 @@ public class DeleteStatement extends Statement
       
       if (!(value instanceof LLVMRegister))
       {
-         ErrorPrinter.IDK("DeleteStatement.buildLLVM:55", value.getClass().getName());
+         ErrorPrinter.IDK(
+               "DeleteStatement.buildLLVM:58",
+               value.getClass().getName());
          return node;
       }
       

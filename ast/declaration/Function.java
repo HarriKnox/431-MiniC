@@ -100,7 +100,8 @@ public class Function extends TokenedElement
       List<LLVMCFGNode> nodes = getCFGNodes(program);
       
       
-      return new LLVMFunction(this.name, this.type.getLLVMType(), params, nodes);
+      return new LLVMFunction(this.name,
+            this.type.getLLVMType(), params, nodes);
    }
    
    

@@ -67,7 +67,9 @@ public class Functions
             if (!function.hasValidType(structs))
             {
                functerator.remove();
-               ErrorPrinter.unknownStruct(function.token, function.type.astString());
+               ErrorPrinter.unknownStruct(
+                     function.token,
+                     function.type.astString());
             }
          }
       }

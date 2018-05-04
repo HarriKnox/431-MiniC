@@ -70,7 +70,9 @@ public class Variables
             if (!variable.hasValidType(structs))
             {
                variter.remove();
-               ErrorPrinter.unknownStruct(variable.token, variable.type.astString());
+               ErrorPrinter.unknownStruct(
+                     variable.token,
+                     variable.type.astString());
             }
          }
       }
