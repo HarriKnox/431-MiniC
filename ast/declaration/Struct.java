@@ -3,6 +3,8 @@ package ast.declaration;
 
 import org.antlr.v4.runtime.Token;
 
+import ast.TokenedElement;
+
 import ast.type.Type;
 
 import llvm.declaration.LLVMStruct;
@@ -10,7 +12,7 @@ import llvm.declaration.LLVMStruct;
 import llvm.type.LLVMType;
 
 
-public class Struct
+public class Struct extends TokenedElement
 {
    public final String name;
    public final Variables fields;

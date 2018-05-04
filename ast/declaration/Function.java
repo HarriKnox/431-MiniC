@@ -1,11 +1,12 @@
 package ast.declaration;
 
 
-import org.antlr.v4.runtime.Token;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.antlr.v4.runtime.Token;
+
+import ast.TokenedElement;
 import ast.ProgramAST;
 
 import ast.type.Type;
@@ -20,7 +21,7 @@ import llvm.declaration.LLVMFunction;
 import llvm.value.variable.LLVMParameter;
 
 
-public class Function
+public class Function extends TokenedElement
 {
    public final String name;
    public final Type type;
