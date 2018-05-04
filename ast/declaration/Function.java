@@ -2,6 +2,7 @@ package ast.declaration;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.antlr.v4.runtime.Token;
@@ -13,6 +14,8 @@ import ast.type.Type;
 import ast.type.VoidType;
 
 import ast.statement.Statement;
+
+import common.Error;
 
 import llvm.LLVMCFGNode;
 
@@ -95,6 +98,9 @@ public class Function extends TokenedElement
       
       
       List<LLVMCFGNode> nodes = getCFGNodes(program);
+      
+      
+      return new LLVMFunction(this.name, this.type.getLLVMType(), params, nodes);
    }
    
    
