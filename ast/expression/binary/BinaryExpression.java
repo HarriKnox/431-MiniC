@@ -51,6 +51,7 @@ public abstract class BinaryExpression extends Expression
       if (!this.areValidTypes(left, right))
       {
          Error.binaryMistype(
+               this.token,
                this.getOperation(),
                left.type.astString(),
                right.type.astString());
