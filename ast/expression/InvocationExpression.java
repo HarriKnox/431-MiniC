@@ -87,7 +87,10 @@ public class InvocationExpression extends Expression
       
       for (int i = 0; argerator.hasNext(); i++)
       {
-         LLVMValue llvmArg = argerator.next().buildLLVM(program, current, node);
+         LLVMValue llvmArg = argerator
+               .next()
+               .buildLLVM(program, current, node);
+         
          LLVMType paramType = typerator.next().getLLVMType();
          
          
