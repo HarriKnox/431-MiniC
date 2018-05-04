@@ -1,8 +1,9 @@
 package llvm.instruction;
 
 
-import llvm.value.LLVMRegister;
 import llvm.value.LLVMValue;
+
+import llvm.value.variable.LLVMRegister;
 
 
 public class LLVMNot extends LLVMInstruction

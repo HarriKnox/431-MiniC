@@ -3,7 +3,7 @@ package llvm.instruction;
 
 import llvm.type.LLVMPointerType;
 
-import llvm.value.LLVMRegister;
+import llvm.value.variable.LLVMRegister;
 
 
 public class LLVMMalloc extends LLVMInstruction

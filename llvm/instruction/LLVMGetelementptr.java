@@ -3,6 +3,10 @@ package llvm.instruction;
 
 import llvm.value.LLVMValue;
 
+import llvm.type.LLVMType;
+
+import llvm.value.LLVMValue;
+
 import llvm.value.variable.LLVMRegister;
 
 
