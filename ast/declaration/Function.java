@@ -18,7 +18,15 @@ import llvm.LLVMCFGNode;
 
 import llvm.declaration.LLVMFunction;
 
+import llvm.instruction.LLVMAlloca;
+import llvm.instruction.LLVMLoad;
+import llvm.instruction.LLVMStore;
+
+import llvm.type.LLVMType;
+
+import llvm.value.variable.LLVMLocal;
 import llvm.value.variable.LLVMParameter;
+import llvm.value.variable.LLVMReturnValue;
 
 
 public class Function extends TokenedElement
@@ -47,7 +55,7 @@ public class Function extends TokenedElement
       /* Get parameter types for function signature */
       this.parameterTypes = new ArrayList<>(params.length);
       
-      for (Variable parameter : params.declarations)
+      for (Variable parameter : params.variables)
          this.parameterTypes.add(parameter.type);
    }
    
@@ -65,7 +73,7 @@ public class Function extends TokenedElement
    
    public Variable getLocal(String name)
    {
-      return this.locals.getVariale(name);
+      return this.locals.getVariable(name);
    }
    
    
@@ -77,9 +85,9 @@ public class Function extends TokenedElement
    
    public LLVMFunction buildLLVM(ProgramAST program)
    {
-      List<LLVMParameter> params = new ArrayList(this.parameters.length);
+      List<LLVMParameter> params = new ArrayList<>(this.parameters.length);
       
-      for (Variable param : this.parameters.declarations)
+      for (Variable param : this.parameters.variables)
          params.add(new LLVMParameter(
                this.name,
                param.name,
@@ -112,7 +120,7 @@ public class Function extends TokenedElement
       
       allocaNode.jump(entry);
       
-      for (Variable param : this.parameters.declarations)
+      for (Variable param : this.parameters.variables)
       {
          LLVMType paramType = param.type.getLLVMType();
          
@@ -130,7 +138,7 @@ public class Function extends TokenedElement
       }
       
       
-      for (Variable local : this.locals.declarations)
+      for (Variable local : this.locals.variables)
       {
          LLVMLocal llvmLocal = new LLVMLocal(
                this.name, local.name, local.type.getLLVMType());

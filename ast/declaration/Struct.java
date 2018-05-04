@@ -1,6 +1,9 @@
 package ast.declaration;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.antlr.v4.runtime.Token;
 
 import ast.TokenedElement;

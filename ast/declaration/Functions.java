@@ -3,6 +3,7 @@ package ast.declaration;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -65,7 +66,7 @@ public class Functions
             
             if (!function.hasValidType(structs))
             {
-               iter.remove();
+               functerator.remove();
                Error.unknownStruct(function.token, function.type.astString());
             }
          }
