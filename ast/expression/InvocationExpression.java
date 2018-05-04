@@ -17,7 +17,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.targeted.LLVMInvocation;
+import llvm.instruction.targeted.LLVMCall;
 
 import llvm.type.LLVMType;
 
@@ -30,15 +30,12 @@ public class InvocationExpression extends Expression
    public final List<Expression> arguments;
 
 
-   public InvocationExpression(
-         Token token,
-         String name,
-         List<Expression> arguments)
+   public InvocationExpression(Token token, String name, List<Expression> args)
    {
-      super(token, getMax(arguments));
+      super(token, getMax(args));
 
       this.name = name;
-      this.arguments = arguments;
+      this.arguments = args;
    }
    
    
@@ -87,6 +84,7 @@ public class InvocationExpression extends Expression
       
       List<LLVMValue> args = new LinkedList<>();
       
+      
       for (int i = 0; argerator.hasNext(); i++)
       {
          LLVMValue llvmArg = argerator
@@ -100,11 +98,8 @@ public class InvocationExpression extends Expression
          if (llvmArg == null)
          {
             ok = false;
-            continue;
          }
-         
-         
-         if (!llvmArg.type.equals(paramType))
+         else if (!llvmArg.type.equals(paramType))
          {
             ErrorPrinter.unexpectedType(this.token, paramType.astString(),
                   "argument " + i, llvmArg.type.astString());
@@ -113,18 +108,16 @@ public class InvocationExpression extends Expression
          }
       }
       
+      
       if (!ok)
          return null;
       
+     
+      LLVMCall call = new LLVMCall(this.name, function.type.getLLVMType(), args);
       
-      LLVMInvocation invocation = new LLVMInvocation(
-            this.name,
-            function.type.getLLVMType(),
-            args);
-      
-      node.add(invocation);
+      node.add(call);
       
       
-      return invocation.target;
+      return call.target;
    }
 }
