@@ -16,4 +16,9 @@ public abstract class LLVMValue
    
    
    public abstract String llvmString();
+   
+   public String llvmTypedString()
+   {
+      return String.format("%s %s", this.type.llvmString(), this.llvmString());
+   }
 }
