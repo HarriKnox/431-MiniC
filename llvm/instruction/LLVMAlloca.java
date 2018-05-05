@@ -1,4 +1,4 @@
-package llvm.instruction.targeted;
+package llvm.instruction;
 
 
 import llvm.type.LLVMType;
@@ -8,10 +8,13 @@ import llvm.value.variable.LLVMRegister;
 import llvm.value.variable.LLVMVariable;
 
 
-public class LLVMAlloca extends LLVMTargetedInstruction
+public class LLVMAlloca extends LLVMInstruction
 {
+   public final LLVMVariable pointer;
+   
+   
    public LLVMAlloca(LLVMVariable pointer)
    {
-      super(pointer);
+      this.pointer = pointer;
    }
 }
