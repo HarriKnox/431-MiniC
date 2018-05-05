@@ -17,7 +17,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.targeted.LLVMInvocation;
+import llvm.instruction.targeted.LLVMCall;
 
 import llvm.type.LLVMType;
 
@@ -60,14 +60,43 @@ public class InvocationExpression extends Expression
    {
       Function function = program.getFunction(this.name);
       
+      if (function == null)
+         return null;
+      
+      
+      List<LLVMValue> args = this.gatherArguments(
+            function, program, current, node);
+      
+      if (args == null)
+         return null;
+      
+      
+      LLVMCall call = new LLVMCall(
+            function.name,
+            function.type.llvmType(),
+            args);
+      
+      node.add(call);
+      
+      
+      return call.target;
+   }
+   
+   
+   public Function getFunction(ProgramAST program)
+   {
+      Function function = program.getFunction(this.name);
       
       if (function == null)
-      {
          ErrorPrinter.undeclared(this.token, "function", this.name);
-         return null;
-      }
       
-      
+      return function;
+   }
+   
+   
+   public List<LLVMValue> gatherArguments(Function function,
+         ProgramAST program, Function current, LLVMCFGNode node)
+   {
       int arglen = this.arguments.size();
       
       
@@ -93,7 +122,7 @@ public class InvocationExpression extends Expression
                .next()
                .buildLLVM(program, current, node);
          
-         LLVMType paramType = typerator.next().getLLVMType();
+         LLVMType paramType = typerator.next().llvmType();
          
          
          /* If an error already occurred, no need to dwell on it */
@@ -111,20 +140,12 @@ public class InvocationExpression extends Expression
             
             ok = false;
          }
+         
+         
+         args.add(llvmArg);
       }
       
-      if (!ok)
-         return null;
       
-      
-      LLVMInvocation invocation = new LLVMInvocation(
-            this.name,
-            function.type.getLLVMType(),
-            args);
-      
-      node.add(invocation);
-      
-      
-      return invocation.target;
+      return ok ? args : null;
    }
 }
