@@ -15,7 +15,8 @@ import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.variable.LLVMGlobal;
+
+import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH;
 
 
 public class ReadExpression extends Expression
@@ -31,7 +32,7 @@ public class ReadExpression extends Expression
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       LLVMScanf scanf = new LLVMScanf();
-      LLVMLoad load = new LLVMLoad(LLVMGlobal.SCANF_FORMAT);
+      LLVMLoad load = new LLVMLoad(SCANF_SCRATCH);
       
       node.add(scanf).add(load);
       
