@@ -21,7 +21,7 @@ public class LLVMRegister extends LLVMVariable
    @Override
    public String llvmString()
    {
-      return String.format("%%v%d", this.uid);
+      return "%v" + Integer.toString(this.uid);
    }
    
    

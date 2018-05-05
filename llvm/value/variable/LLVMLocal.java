@@ -22,6 +22,6 @@ public class LLVMLocal extends LLVMVariable
    @Override
    public String llvmString()
    {
-      return String.format("%%%s.%s", this.function, this.identifier);
+      return '%' + this.function + '.' + this.identifier;
    }
 }

@@ -22,7 +22,7 @@ public class LLVMGlobal extends LLVMVariable
    @Override
    public String llvmString()
    {
-      return String.format("@%s", this.identifier);
+      return '@' + this.identifier;
    }
    
    

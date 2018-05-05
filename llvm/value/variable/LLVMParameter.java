@@ -8,6 +8,6 @@ public class LLVMParameter extends LLVMLocal
 {
    public LLVMParameter(String function, String identifier, LLVMType type)
    {
-      super(function, String.format("param.%s", identifier),type);
+      super(function, "param." + identifier,type);
    }
 }
