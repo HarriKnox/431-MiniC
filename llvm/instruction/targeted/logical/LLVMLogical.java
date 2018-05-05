@@ -16,7 +16,7 @@ public abstract class LLVMLogical extends LLVMTargetedInstruction
    
    public LLVMLogical(LLVMValue left, LLVMValue right)
    {
-      super(new LLVMRegister(left.type));
+      super(left.type);
       
       this.left = left;
       this.right = right;

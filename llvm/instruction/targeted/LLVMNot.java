@@ -13,7 +13,7 @@ public class LLVMNot extends LLVMTargetedInstruction
    
    public LLVMNot(LLVMValue source)
    {
-      super(new LLVMRegister(source.type));
+      super(source.type);
       
       this.source = source;
    }

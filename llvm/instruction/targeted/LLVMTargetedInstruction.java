@@ -3,16 +3,18 @@ package llvm.instruction.targeted;
 
 import llvm.instruction.LLVMInstruction;
 
-import llvm.value.variable.LLVMVariable;
+import llvm.type.LLVMType;
+
+import llvm.value.variable.LLVMRegister;
 
 
 public abstract class LLVMTargetedInstruction extends LLVMInstruction
 {
-   public final LLVMVariable target;
+   public final LLVMRegister target;
    
    
-   public LLVMTargetedInstruction(LLVMVariable target)
+   public LLVMTargetedInstruction(LLVMType type)
    {
-      this.target = target;
+      this.target = new LLVMRegister(type);
    }
 }

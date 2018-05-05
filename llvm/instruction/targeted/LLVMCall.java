@@ -18,7 +18,7 @@ public class LLVMCall extends LLVMTargetedInstruction
    
    public LLVMCall(String name, LLVMType type, List<LLVMValue> arguments)
    {
-      super(new LLVMRegister(type));
+      super(type);
       this.name = name;
       this.arguments = arguments;
    }

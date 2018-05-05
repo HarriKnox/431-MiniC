@@ -14,7 +14,7 @@ public class LLVMBitcast extends LLVMTargetedInstruction
    
    public LLVMBitcast(LLVMVariable source, LLVMType targetType)
    {
-      super(new LLVMRegister(targetType));
+      super(targetType);
       this.source = source;
    }
 }

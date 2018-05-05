@@ -16,7 +16,7 @@ public abstract class LLVMArithmetic extends LLVMTargetedInstruction
    
    public LLVMArithmetic(LLVMValue left, LLVMValue right)
    {
-      super(new LLVMRegister(left.type));
+      super(left.type);
       
       this.left = left;
       this.right = right;

@@ -16,7 +16,7 @@ public abstract class LLVMComparison extends LLVMTargetedInstruction
    
    public LLVMComparison(LLVMValue left, LLVMValue right)
    {
-      super(new LLVMRegister(left.type));
+      super(left.type);
       
       this.left = left;
       this.right = right;

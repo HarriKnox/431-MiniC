@@ -13,7 +13,7 @@ public class LLVMMalloc extends LLVMTargetedInstruction
    
    public LLVMMalloc(int numberOfFields)
    {
-      super(new LLVMRegister(new LLVMPointerType()));
+      super(new LLVMPointerType());
       this.size = numberOfFields * 4;
    }
 }

@@ -18,7 +18,7 @@ public class LLVMGetelementptr extends LLVMTargetedInstruction
    
    public LLVMGetelementptr(LLVMValue source, LLVMType resultType, int index)
    {
-      super(new LLVMRegister(resultType));
+      super(resultType);
       this.source = source;
       this.index = index;
    }

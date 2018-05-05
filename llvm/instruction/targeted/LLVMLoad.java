@@ -13,7 +13,7 @@ public class LLVMLoad extends LLVMTargetedInstruction
    
    public LLVMLoad(LLVMValue source)
    {
-      super(new LLVMRegister(source.type));
+      super(source.type);
       this.source = source;
    }
 }

@@ -13,7 +13,7 @@ public class LLVMNegate extends LLVMTargetedInstruction
    
    public LLVMNegate(LLVMValue source)
    {
-      super(new LLVMRegister(source.type));
+      super(source.type);
       
       this.source = source;
    }
