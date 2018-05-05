@@ -1,8 +1,7 @@
 package llvm.value.variable;
 
 
-import llvm.type.LLVMIntType;
-import llvm.type.LLVMPointerType;
+import llvm.type.LLVMIntPointerType;
 import llvm.type.LLVMType;
 
 
@@ -31,5 +30,5 @@ public class LLVMGlobal extends LLVMVariable
     * defining constants here because they are global variables.
     */
    public static final LLVMGlobal SCANF_SCRATCH = new LLVMGlobal(
-         ".scanf_scratch", new LLVMIntType());
+         ".scanf_scratch", new LLVMIntPointerType());
 }
