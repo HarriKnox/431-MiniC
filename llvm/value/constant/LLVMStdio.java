@@ -12,6 +12,8 @@ public class LLVMStdio extends LLVMConstant
    private LLVMStdio(String name)
    {
       super(new LLVMPointerType());
+      
+      this.name = name;
    }
    
    
