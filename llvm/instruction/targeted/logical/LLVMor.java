@@ -10,4 +10,11 @@ public class LLVMor extends LLVMLogical
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "or";
+   }
 }

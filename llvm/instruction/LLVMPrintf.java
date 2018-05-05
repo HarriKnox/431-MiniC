@@ -1,22 +1,26 @@
 package llvm.instruction;
 
 
-import llvm.type.LLVMVoidType;
+import java.util.Arrays;
+
+import llvm.type.LLVMStdioType;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.variable.LLVMRegister;
+
+import static llvm.value.constant.LLVMStdio.PRINT_FORMAT;
+import static llvm.value.constant.LLVMStdio.PRINTLN_FORMAT;
 
 
-public class LLVMPrintf extends LLVMInstruction
+public class LLVMPrintf extends LLVMCallVoid
 {
-   public final LLVMValue value;
-   public final boolean println;
-   
-   
    public LLVMPrintf(LLVMValue value, boolean println)
    {
-      this.value = value;
-      this.println = println;
+      super(
+            "printf",
+            new LLVMStdioType(),
+            Arrays.asList(new LLVMValue[]{
+                  println ? PRINTLN_FORMAT : PRINT_FORMAT,
+                  value}));
    }
 }

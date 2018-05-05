@@ -17,4 +17,12 @@ public class LLVMAlloca extends LLVMInstruction
    {
       this.pointer = pointer;
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return this.pointer.llvmString() + " = alloca "
+            + this.pointer.type.llvmString();
+   }
 }

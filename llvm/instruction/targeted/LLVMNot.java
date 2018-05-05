@@ -17,4 +17,11 @@ public class LLVMNot extends LLVMTargetedInstruction
       
       this.source = source;
    }
+   
+   
+   @Override
+   protected String getInstruction()
+   {
+      return "xor i1 true, " + this.source.llvmString();
+   }
 }

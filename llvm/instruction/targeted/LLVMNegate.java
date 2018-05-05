@@ -17,4 +17,11 @@ public class LLVMNegate extends LLVMTargetedInstruction
       
       this.source = source;
    }
+   
+   
+   @Override
+   protected String getInstruction()
+   {
+      return "sub i32 0, " + this.source.llvmString();
+   }
 }

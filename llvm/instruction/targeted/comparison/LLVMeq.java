@@ -10,4 +10,11 @@ public class LLVMeq extends LLVMComparison
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "eq";
+   }
 }

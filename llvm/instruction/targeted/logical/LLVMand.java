@@ -10,4 +10,11 @@ public class LLVMand extends LLVMLogical
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "and";
+   }
 }

@@ -10,4 +10,11 @@ public class LLVMsdiv extends LLVMArithmetic
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "sdiv";
+   }
 }

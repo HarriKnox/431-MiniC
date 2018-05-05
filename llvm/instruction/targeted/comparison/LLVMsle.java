@@ -10,4 +10,11 @@ public class LLVMsle extends LLVMComparison
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "sle";
+   }
 }

@@ -16,4 +16,15 @@ public class LLVMLoad extends LLVMTargetedInstruction
       super(source.type);
       this.source = source;
    }
+   
+   
+   @Override
+   protected String getInstruction()
+   {
+      return new StringBuilder("load ")
+            .append(this.source.type.llvmString())
+            .append("* ")
+            .append(this.source.type.llvmString())
+            .toString();
+   }
 }

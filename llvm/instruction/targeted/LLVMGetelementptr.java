@@ -22,4 +22,15 @@ public class LLVMGetelementptr extends LLVMTargetedInstruction
       this.source = source;
       this.index = index;
    }
+   
+   
+   @Override
+   protected String getInstruction()
+   {
+      return new StringBuilder("getelementptr ")
+            .append(this.source.llvmTypedString())
+            .append(", i0 0, i32 ")
+            .append(this.index)
+            .toString();
+   }
 }

@@ -17,4 +17,14 @@ public abstract class LLVMTargetedInstruction extends LLVMInstruction
    {
       this.target = new LLVMRegister(type);
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return this.target.llvmString() + " = " + this.getInstruction();
+   }
+   
+   
+   protected abstract String getInstruction();
 }

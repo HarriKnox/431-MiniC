@@ -10,4 +10,11 @@ public class LLVMadd extends LLVMArithmetic
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "add";
+   }
 }

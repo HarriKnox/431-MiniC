@@ -19,4 +19,12 @@ public class LLVMStore extends LLVMInstruction
       
       this.source = source;
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "store " + this.source.llvmTypedString() + ", "
+            + this.target.type.llvmString() + "* " + this.target.llvmString();
+   }
 }

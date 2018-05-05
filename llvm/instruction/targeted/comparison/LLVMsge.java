@@ -10,4 +10,11 @@ public class LLVMsge extends LLVMComparison
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "sge";
+   }
 }

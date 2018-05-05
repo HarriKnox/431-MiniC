@@ -10,4 +10,11 @@ public class LLVMmul extends LLVMArithmetic
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "mul";
+   }
 }

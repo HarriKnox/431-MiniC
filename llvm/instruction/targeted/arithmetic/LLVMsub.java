@@ -10,4 +10,11 @@ public class LLVMsub extends LLVMArithmetic
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "sub";
+   }
 }

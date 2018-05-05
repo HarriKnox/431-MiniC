@@ -10,4 +10,11 @@ public class LLVMslt extends LLVMComparison
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "slt";
+   }
 }

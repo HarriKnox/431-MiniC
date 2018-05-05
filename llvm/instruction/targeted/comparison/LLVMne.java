@@ -10,4 +10,11 @@ public class LLVMne extends LLVMComparison
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "ne";
+   }
 }

@@ -1,19 +1,20 @@
 package llvm.instruction.targeted;
 
 
+import java.util.Collections;
+
 import llvm.type.LLVMPointerType;
 
-import llvm.value.variable.LLVMRegister;
+import llvm.value.constant.LLVMInt;
 
 
-public class LLVMMalloc extends LLVMTargetedInstruction
+public class LLVMMalloc extends LLVMCall
 {
-   public final int size;
-   
-   
-   public LLVMMalloc(int numberOfFields)
+   public LLVMMalloc(int fields)
    {
-      super(new LLVMPointerType());
-      this.size = numberOfFields * 4;
+      super("malloc",
+            new LLVMPointerType(),
+            Collections.singletonList(
+                  new LLVMInt(Integer.toString(fields * 4))));
    }
 }

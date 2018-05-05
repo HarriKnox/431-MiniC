@@ -1,16 +1,17 @@
 package llvm.instruction;
 
 
+import java.util.Collections;
+
+import llvm.type.LLVMVoidType;
+
 import llvm.value.variable.LLVMVariable;
 
 
-public class LLVMFree extends LLVMInstruction
+public class LLVMFree extends LLVMCallVoid
 {
-   public final LLVMVariable pointer;
-   
-   
    public LLVMFree(LLVMVariable pointer)
    {
-      this.pointer = pointer;
+      super("free", new LLVMVoidType(), Collections.singletonList(pointer));
    }
 }
