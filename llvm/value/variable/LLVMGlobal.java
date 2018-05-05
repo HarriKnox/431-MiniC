@@ -32,13 +32,4 @@ public class LLVMGlobal extends LLVMVariable
     */
    public static final LLVMGlobal SCANF_SCRATCH = new LLVMGlobal(
          ".scanf_scratch", new LLVMIntType());
-   
-   public static final LLVMGlobal SCANF_FORMAT = new LLVMGlobal(
-         ".scanf_format", new LLVMPointerType());
-   
-   public static final LLVMGlobal PRINT_FORMAT = new LLVMGlobal(
-         ".print_format", new LLVMPointerType());
-   
-   public static final LLVMGlobal PRINTLN_FORMAT = new LLVMGlobal(
-         ".println_format", new LLVMPointerType());
 }
