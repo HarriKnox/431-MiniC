@@ -31,7 +31,7 @@ public class LLVMCallVoid extends LLVMInstruction
    {
       StringBuilder sb = new StringBuilder("call ")
             .append(this.type.llvmString()).append(" @")
-            .append(this.name).append("(");
+            .append(this.name).append('(');
       
       
       Iterator<LLVMValue> argerator = this.arguments.iterator();
@@ -43,6 +43,6 @@ public class LLVMCallVoid extends LLVMInstruction
          sb.append(", ").append(argerator.next().llvmTypedString());
       
       
-      return sb.append(")").toString();
+      return sb.append(')').toString();
    }
 }

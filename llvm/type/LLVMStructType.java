@@ -31,6 +31,6 @@ public class LLVMStructType extends LLVMType
    @Override
    public String llvmString()
    {
-      return "%struct." + this.name + "*";
+      return "%struct." + this.name + '*';
    }
 }

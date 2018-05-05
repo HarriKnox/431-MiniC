@@ -47,7 +47,7 @@ public class IntExpression extends Expression
    public LLVMValue buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      String val = this.negative ? ("-" + this.value) : this.value;
+      String val = this.negative ? ('-' + this.value) : this.value;
       
       
       try

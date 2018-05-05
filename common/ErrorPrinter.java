@@ -19,19 +19,19 @@ public class ErrorPrinter
    
    public static void printLine(Token token, String message)
    {
-      printOut(tokenPosition(token) + " " + message);
+      printOut(tokenPosition(token) + ' ' + message);
    }
    
    
    public static void duplicate(Token token, String type, String thing)
    {
-      printLine(token, type + " " + thing + " already declared");
+      printLine(token, type + ' ' + thing + " already declared");
    }
    
    
    public static void undeclared(Token token, String type, String thing)
    {
-      printLine(token, type + " " + thing + " not declared");
+      printLine(token, type + ' ' + thing + " not declared");
    }
    
    
@@ -134,7 +134,7 @@ public class ErrorPrinter
    
    private static String tokenPosition(Token token)
    {
-      return "line " + token.getLine() + ":" + token.getCharPositionInLine();
+      return "line " + token.getLine() + ':' + token.getCharPositionInLine();
    }
    
    
