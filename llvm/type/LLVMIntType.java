@@ -22,4 +22,11 @@ public class LLVMIntType extends LLVMType
    {
       return "i32";
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "0";
+   }
 }

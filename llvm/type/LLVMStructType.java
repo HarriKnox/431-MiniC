@@ -33,4 +33,11 @@ public class LLVMStructType extends LLVMType
    {
       return "%struct." + this.name + '*';
    }
+   
+   
+   @Override
+   public String defaultValue()
+   {
+      return "null";
+   }
 }

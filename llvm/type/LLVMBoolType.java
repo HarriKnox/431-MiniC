@@ -22,4 +22,11 @@ public class LLVMBoolType extends LLVMType
    {
       return "i1";
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "false";
+   }
 }
