@@ -1,6 +1,7 @@
 package llvm.declaration;
 
 
+import java.util.Iterator;
 import java.util.List;
 
 import llvm.type.LLVMType;
@@ -16,5 +17,26 @@ public class LLVMStruct
    {
       this.name = name;
       this.types = types;
+   }
+   
+   
+   public llvmString()
+   {
+      StringBuilder sb = new StringBuilder("%struct.")
+            .append(this.name)
+            .append(" = type {");
+      
+      
+      Iterator<LLVMType> typerator = this.types.iterator();
+      
+      
+      if (typerator.hasNext())
+         sb.append(typerator.next().llvmString());
+      
+      while (typerator.hasNext())
+         sb.append(", ").append(typerator.next().llvmString());
+      
+      
+      return sb.append('}').toString();
    }
 }

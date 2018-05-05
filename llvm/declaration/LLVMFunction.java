@@ -3,6 +3,8 @@ package llvm.declaration;
 
 import java.util.List;
 
+import common.Options;
+
 import llvm.LLVMCFGNode;
 
 import llvm.type.LLVMType;
@@ -25,5 +27,15 @@ public class LLVMFunction
       this.type = type;
       this.parameters = parameters;
       this.nodes = nodes;
+   }
+   
+   
+   public void writeLLVM(Options opts)
+   {
+      System.out.println(this.name);
+      System.out.println('{');
+      
+      for (LLVMCFGNode node : this.nodes)
+         
    }
 }
