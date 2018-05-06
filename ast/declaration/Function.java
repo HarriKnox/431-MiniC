@@ -181,24 +181,9 @@ public class Function extends TokenedElement
       exit.recursivisit(nodes);
       
       
-      /* Set the unique ID number for each node and LLVMRegister */
+      /* Set the unique ID number for each node (registers come later) */
       for (LLVMCFGNode node : nodes)
-      {
-         node.setUID();
-         
-         for (LLVMInstruction inst : node.instructions)
-         {
-            if (inst instanceof LLVMTargetedInstruction)
-            {
-               LLVMVariable target = ((LLVMTargetedInstruction)inst).target;
-               
-               if (target instanceof LLVMRegister)
-               {
-                  ((LLVMRegister)target).setUID();
-               }
-            }
-         }
-      }
+         node.getUID();
       
       
       return nodes;
