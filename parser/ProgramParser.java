@@ -1,8 +1,7 @@
 package parser;
 
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -25,10 +24,33 @@ public class ProgramParser
 {
    public ProgramAST parseProgram(Options opts)
    {
+      CharStream charStream = null;
+      
+      try
+      {
+         if (opts.miniFile == null)
+            charStream = CharStreams.fromStream(System.in);
+         
+         else
+            charStream = CharStreams.fromReader(new FileReader(opts.miniFile));
+      }
+      catch (IOException e)
+      {
+         System.err.println(e);
+         System.exit(2);
+      }
+      
+      
+      if (charStream == null)
+      {
+         System.err.println("Some error occurred and I don't know why.");
+         System.exit(3);
+      }
+      
+      
       MiniParser parser = new MiniParser(
             new CommonTokenStream(
-                  new MiniLexer(
-                        this.getCharStream(opts))));
+                  new MiniLexer(charStream)));
       
       ParseTree tree = parser.program();
       
@@ -45,35 +67,5 @@ public class ProgramParser
       
       
       return new ProgramVisitor().visit(tree);
-   }
-   
-   
-   private CharStream getCharStream(Options opts)
-   {
-      CharStream input = null;
-      
-      try
-      {
-         if (opts.filename == null)
-            input = CharStreams.fromStream(System.in);
-         
-         else
-            input = CharStreams.fromFileName(opts.filename + ".mini");
-      }
-      catch (IOException e)
-      {
-         System.err.println(e);
-         System.exit(2);
-      }
-      
-      
-      if (input == null)
-      {
-         System.err.println("Some error occurred and I don't know why.");
-         System.exit(3);
-      }
-      
-      
-      return input;
    }
 }
