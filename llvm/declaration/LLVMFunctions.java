@@ -23,6 +23,9 @@ public class LLVMFunctions
    public void writeLLVM(BufferedWriter llvmOut) throws IOException
    {
       for (LLVMFunction function : this.functions)
+      {
          function.writeLLVM(llvmOut);
+         llvmOut.newLine();
+      }
    }
 }
