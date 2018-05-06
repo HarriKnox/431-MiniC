@@ -20,7 +20,7 @@ public class LLVMStruct
    }
    
    
-   public llvmString()
+   public String llvmString()
    {
       StringBuilder sb = new StringBuilder("%struct.")
             .append(this.name)

@@ -1,6 +1,9 @@
 package llvm.declaration;
 
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import java.util.List;
 
 import common.Options;
@@ -17,9 +20,9 @@ public class LLVMFunctions
    }
    
    
-   public void writeLLVM(Options opts)
+   public void writeLLVM(BufferedWriter llvmOut) throws IOException
    {
       for (LLVMFunction function : this.functions)
-         function.writeLLVM(opts);
+         function.writeLLVM(llvmOut);
    }
 }

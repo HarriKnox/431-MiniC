@@ -1,6 +1,9 @@
 package llvm.declaration;
 
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import java.util.List;
 
 import common.Options;
@@ -17,9 +20,12 @@ public class LLVMStructs
    }
    
    
-   public void writeLLVM(Options opts)
+   public void writeLLVM(BufferedWriter llvmOut) throws IOException
    {
       for (LLVMStruct struct : this.structs)
-         System.out.println(struct.llvmString());
+      {
+         llvmOut.write(struct.llvmString());
+         llvmOut.newLine();
+      }
    }
 }
