@@ -13,4 +13,11 @@ public class LLVMJump extends LLVMLink
    {
       this.target = target;
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "br label %" + this.target.llvmString();
+   }
 }

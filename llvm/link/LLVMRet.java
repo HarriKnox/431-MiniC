@@ -13,4 +13,13 @@ public class LLVMRet extends LLVMLink
    {
       this.returnValue = returnValue;
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return "ret " + ((this.returnValue == null)
+            ? "void"
+            : this.returnValue.llvmTypedString());
+   }
 }

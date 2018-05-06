@@ -20,4 +20,17 @@ public class LLVMBranch extends LLVMLink
       this.thenNode = thenNode;
       this.elseNode = elseNode;
    }
+   
+   
+   @Override
+   public String llvmString()
+   {
+      return new StringBuilder("br i1 ")
+            .append(guard.llvmString())
+            .append(", label %")
+            .append(thenNode.llvmString())
+            .append(", label %")
+            .append(elseNode.llvmString())
+            .toString();
+   }
 }
