@@ -88,9 +88,11 @@ public class LLVMCFGNode
    }
    
    
-   public void setUID()
+   public int getUID()
    {
       if (this.uid == -1)
          this.uid = count++;
+      
+      return this.uid;
    }
 }

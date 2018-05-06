@@ -21,13 +21,15 @@ public class LLVMRegister extends LLVMVariable
    @Override
    public String llvmString()
    {
-      return "%v" + Integer.toString(this.uid);
+      return "%v" + Integer.toString(this.getUID());
    }
    
    
-   public void setUID()
+   public int getUID()
    {
       if (this.uid == -1)
          this.uid = count++;
+      
+      return this.uid;
    }
 }
