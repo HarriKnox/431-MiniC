@@ -67,6 +67,7 @@ public class Options
       if ((ob.name == null) || (ob.name.equals("-")))
       {
          this.name = "a";
+         this.miniFile = null;
       }
       else
       {
@@ -115,7 +116,7 @@ public class Options
             else
                ErrorPrinter.printOut("unexpected option: " + arg);
          }
-         else if (ob.filename != null)
+         else if (ob.name != null)
          {
             ErrorPrinter.printOut("too many files specified: " + arg);
          }
