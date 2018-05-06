@@ -80,6 +80,8 @@ public class Functions
    {
       this.removeInvalids(program.structs);
       
+      checkMain();
+      
       
       List<LLVMFunction> llvmfuncs = new LinkedList<>();
       
@@ -88,5 +90,23 @@ public class Functions
       
       
       return new LLVMFunctions(llvmfuncs);
+   }
+   
+   
+   public void checkMain()
+   {
+      Function main = this.getFunction("main");
+      
+      if (main == null)
+      {
+         ErrorPrinter.printOut("No function `main() int`");
+         return;
+      }
+      
+      if (!main.type.equivalent(new IntType()))
+         ErrorPrinter.badMainType(main.token, main.type.astString();
+      
+      if (main.parameters.size != 0)
+         ErrorPrinter.badMainArity(main.token);
    }
 }

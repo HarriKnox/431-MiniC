@@ -120,6 +120,18 @@ public class ErrorPrinter
    }
    
    
+   public static void badMainType(Token token, String got)
+   {
+      printLine(token, "function `main` must return int, not " + got);
+   }
+   
+   
+   public static void badMainArity(Token token)
+   {
+      printLine(token, "function `main` requires 0 (zero) parameters");
+   }
+   
+   
    public static void codeAfterReturn(Token token)
    {
       printLine(token, "cannot have code after a return");
