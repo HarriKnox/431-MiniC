@@ -26,6 +26,14 @@ public class ProgramLLVM
    
    public void writeLLVM(Options opts)
    {
-      
+      try (BufferedWriter llvmOut = getLLVMOut(opts))
+      {
+         
+      }
    }
+   
+   
+   private BufferedWriter getLLVMOut(Options opts) throws IOException
+   {
+      if (opts.llvm
 }

@@ -36,6 +36,6 @@ public class LLVMFunction
       System.out.println('{');
       
       for (LLVMCFGNode node : this.nodes)
-         
+         node.writeLLVM
    }
 }
