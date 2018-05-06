@@ -11,7 +11,7 @@ public class ErrorPrinter
    
    public static void printOut(String message)
    {
-      System.out.println(message);
+      System.err.println(message);
       
       errors++;
    }
