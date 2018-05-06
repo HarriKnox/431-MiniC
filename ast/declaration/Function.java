@@ -160,18 +160,21 @@ public class Function extends TokenedElement
       
       
       /* Add return instructions */
-      LLVMReturnValue returnValue = new LLVMReturnValue(
-            this.name,
-            this.type.llvmType());
-      
-      exit.ret(returnValue);
-      
-      
-      if (!(this.type instanceof VoidType))
+      if (this.type instanceof VoidType)
       {
+         exit.ret(null);
+      }
+      else
+      {
+         LLVMReturnValue returnValue = new LLVMReturnValue(
+               this.name,
+               this.type.llvmType());
+         
          allocaNode.add(new LLVMAlloca(returnValue));
          
-         exit.add(new LLVMLoad(returnValue));
+         LLVMLoad load = new LLVMLoad(returnValue);
+         
+         exit.add(load).ret(load.target);
       }
       
       
