@@ -95,4 +95,25 @@ public class LLVMCFGNode
       
       return this.uid;
    }
+   
+   
+   public String llvmString()
+   {
+      return 'N' + Integer.toString(this.getUID());
+   }
+   
+   
+   public void writeLLVM()
+   {
+      System.out.println(this.llvmString() + ':');
+      
+      for (LLVMInstruction instruction : this.instructions)
+      {
+         System.out.print("   ");
+         System.out.println(instruction.llvmString());
+      }
+      
+      if (this.link != null)
+         System.out.println(this.link.llvmString());
+   }
 }

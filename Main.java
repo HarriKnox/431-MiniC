@@ -19,7 +19,7 @@ public class Main
       
       ProgramLLVM llvm = ast.buildLLVM(opts);
       
-      llvm.writeLLVM(opts);
+      llvm.writeLLVM();
       
       System.exit(0);
    }

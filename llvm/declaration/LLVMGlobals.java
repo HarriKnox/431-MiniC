@@ -22,13 +22,10 @@ public class LLVMGlobals
    }
    
    
-   public void writeLLVM(BufferedWriter llvmOut) throws IOException
+   public void writeLLVM()
    {
       for (LLVMGlobal global : this.globals)
-      {
-         llvmOut.write(this.llvmString(global));
-         llvmOut.newLine();
-      }
+         System.out.println(this.llvmString(global));
    }
    
    

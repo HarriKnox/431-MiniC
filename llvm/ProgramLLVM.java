@@ -1,9 +1,6 @@
 package llvm;
 
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-
 import llvm.declaration.LLVMFunctions;
 import llvm.declaration.LLVMGlobals;
 import llvm.declaration.LLVMStructs;
@@ -27,10 +24,10 @@ public class ProgramLLVM
    }
    
    
-   public void writeLLVM(BufferedWriter llvmOut) throws IOException
+   public void writeLLVM()
    {
-      this.llvmStructs.writeLLVM(llvmOut);
-      this.llvmGlobals.writeLLVM(llvmOut);
-      this.llvmFunctions.writeLLVM(llvmOut);
+      this.llvmStructs.writeLLVM();
+      this.llvmGlobals.writeLLVM();
+      this.llvmFunctions.writeLLVM();
    }
 }

@@ -1,9 +1,6 @@
 package llvm.declaration;
 
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,21 +31,17 @@ public class LLVMFunction
    }
    
    
-   public void writeLLVM(BufferedWriter llvmOut) throws IOException
+   public void writeLLVM()
    {
-      llvmOut.write(this.signature());
-      llvmOut.newLine();
-      
-      llvmOut.write('{');
-      llvmOut.newLine();
+      System.out.println(this.signature());
+      System.out.println('{');
       
       
       for (LLVMCFGNode node : this.nodes)
-         node.writeLLVM(llvmOut);
+         node.writeLLVM();
       
       
-      llvmOut.write('}');
-      llvmOut.newLine();
+      System.out.println('}');
    }
    
    
@@ -56,7 +49,7 @@ public class LLVMFunction
    {
       StringBuilder sb = new StringBuilder("define ")
             .append(this.type.llvmString())
-            .append(" @");
+            .append(" @")
             .append(this.name)
             .append('(');
       
@@ -70,6 +63,6 @@ public class LLVMFunction
          sb.append(", ").append(paramerator.next().llvmTypedString());
       
       
-      return sb.append(')');
+      return sb.append(')').toString();
    }
 }

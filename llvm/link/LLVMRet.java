@@ -1,25 +1,25 @@
 package llvm.link;
 
 
-import llvm.value.variable.LLVMReturnValue;
+import llvm.value.LLVMValue;
 
 
 public class LLVMRet extends LLVMLink
 {
-   public final LLVMReturnValue returnValue;
+   public final LLVMValue value;
    
    
-   public LLVMRet(LLVMReturnValue returnValue)
+   public LLVMRet(LLVMValue value)
    {
-      this.returnValue = returnValue;
+      this.value = value;
    }
    
    
    @Override
    public String llvmString()
    {
-      return "ret " + ((this.returnValue == null)
+      return "ret " + ((this.value == null)
             ? "void"
-            : this.returnValue.llvmTypedString());
+            : this.value.llvmTypedString());
    }
 }
