@@ -11,6 +11,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Structs;
 
+import ast.type.IntType;
+
 import common.ErrorPrinter;
 
 import llvm.declaration.LLVMFunction;
@@ -104,9 +106,9 @@ public class Functions
       }
       
       if (!main.type.equivalent(new IntType()))
-         ErrorPrinter.badMainType(main.token, main.type.astString();
+         ErrorPrinter.badMainType(main.token, main.type.astString());
       
-      if (main.parameters.size != 0)
+      if (main.parameters.length != 0)
          ErrorPrinter.badMainArity(main.token);
    }
 }
