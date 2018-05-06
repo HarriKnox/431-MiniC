@@ -25,7 +25,7 @@ public class LLVMBoolType extends LLVMType
    
    
    @Override
-   public String llvmString()
+   public String defaultValue()
    {
       return "false";
    }

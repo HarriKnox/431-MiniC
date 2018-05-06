@@ -25,7 +25,7 @@ public class LLVMIntType extends LLVMType
    
    
    @Override
-   public String llvmString()
+   public String defaultValue()
    {
       return "0";
    }
