@@ -63,9 +63,9 @@ public class LLVMCFGNode
    }
    
    
-   public void ret(LLVMReturnValue returnValue)
+   public void ret(LLVMValue value)
    {
-      this.link = new LLVMRet(returnValue);
+      this.link = new LLVMRet(value);
    }
    
    
