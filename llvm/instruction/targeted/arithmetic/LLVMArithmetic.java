@@ -29,7 +29,9 @@ public abstract class LLVMArithmetic extends LLVMTargetedInstruction
    protected String getInstruction()
    {
       return new StringBuilder(this.getOperation())
-            .append(" i1 ")
+            .append(' ')
+            .append(this.target.type.llvmString())
+            .append(' ')
             .append(this.left.llvmString())
             .append(", ")
             .append(this.right.llvmString())
