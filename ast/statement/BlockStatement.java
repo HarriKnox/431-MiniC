@@ -38,7 +38,7 @@ public class BlockStatement extends Statement
    {
       for (Statement statement : this.statements)
       {
-         if (node == null)
+         if (node instanceof LLVMCFGNode.UnreachableNode)
          {
             ErrorPrinter.codeAfterReturn(statement.token);
             break;

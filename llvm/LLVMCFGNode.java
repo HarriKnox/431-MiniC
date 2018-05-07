@@ -121,4 +121,14 @@ public class LLVMCFGNode
          printer.println(this.link.llvmString());
       }
    }
+   
+   
+   public static class UnreachableNode extends LLVMCFGNode
+   {
+      /*
+       * A class that does absolutely nothing but mark that a node is
+       * unreachable; that is, that the node has no path from the start of the
+       * function that will eventually end up here.
+       */
+   }
 }

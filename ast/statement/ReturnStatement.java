@@ -67,7 +67,6 @@ public class ReturnStatement extends Statement
       node.jump(exit);
       
       
-      /* `null` indicates a statement is return equivalent */
-      return null;
+      return new LLVMCFGNode.UnreachableNode();
    }
 }

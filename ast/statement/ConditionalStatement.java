@@ -63,17 +63,23 @@ public class ConditionalStatement extends Statement
             program, current, elseNode, exit);
       
       
-      if (thenLast == null && elseLast == null)
-         return null;
+      /*
+       * Add the join node. If the join is unreachable, construct an
+       * unreachable node but still add the jumps. It'll all work out in the
+       * end.
+       */
+      LLVMCFGNode join;
+      
+      if (thenLast instanceof LLVMCFGNode.UnreachableNode
+            && elseLast instanceof LLVMCFGNode.UnreachableNode)
+         join = new LLVMCFGNode.UnreachableNode();
+      
+      else
+         join = new LLVMCFGNode();
       
       
-      LLVMCFGNode join = new LLVMCFGNode();
-      
-      if (thenLast != null)
-         thenLast.jump(join);
-      
-      if (elseLast != null)
-         elseLast.jump(join);
+      thenLast.jump(join);
+      elseLast.jump(join);
       
       
       return join;

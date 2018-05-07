@@ -58,8 +58,7 @@ public class WhileStatement extends Statement
             program, current, bodyNode, exit);
       
       
-      if (bodyLast != null)
-         bodyLast.loopback(guardNode);
+      bodyLast.loopback(guardNode);
       
       
       return elseNode;
