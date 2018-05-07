@@ -25,6 +25,9 @@ public class LLVMGlobals
    {
       for (LLVMGlobal global : this.globals)
          printer.println(this.llvmString(global));
+      
+      if (!this.globals.isEmpty())
+         printer.println();
    }
    
    

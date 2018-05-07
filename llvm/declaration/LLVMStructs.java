@@ -23,5 +23,8 @@ public class LLVMStructs
    {
       for (LLVMStruct struct : this.structs)
          printer.println(struct.llvmString());
+      
+      if (!this.structs.isEmpty())
+         printer.println();
    }
 }
