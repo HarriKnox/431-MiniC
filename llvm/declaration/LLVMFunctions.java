@@ -1,6 +1,8 @@
 package llvm.declaration;
 
 
+import java.io.PrintWriter;
+
 import java.util.List;
 
 import common.Options;
@@ -17,12 +19,12 @@ public class LLVMFunctions
    }
    
    
-   public void writeLLVM()
+   public void writeLLVM(PrintWriter printer)
    {
       for (LLVMFunction function : this.functions)
       {
-         function.writeLLVM();
-         System.out.println();
+         function.writeLLVM(printer);
+         printer.println();
       }
    }
 }

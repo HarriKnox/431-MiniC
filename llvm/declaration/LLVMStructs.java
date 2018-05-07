@@ -1,6 +1,8 @@
 package llvm.declaration;
 
 
+import java.io.PrintWriter;
+
 import java.util.List;
 
 import common.Options;
@@ -17,9 +19,9 @@ public class LLVMStructs
    }
    
    
-   public void writeLLVM()
+   public void writeLLVM(PrintWriter printer)
    {
       for (LLVMStruct struct : this.structs)
-         System.out.println(struct.llvmString());
+         printer.println(struct.llvmString());
    }
 }

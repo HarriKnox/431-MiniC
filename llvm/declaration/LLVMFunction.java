@@ -1,6 +1,8 @@
 package llvm.declaration;
 
 
+import java.io.PrintWriter;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,17 +33,17 @@ public class LLVMFunction
    }
    
    
-   public void writeLLVM()
+   public void writeLLVM(PrintWriter printer)
    {
-      System.out.println(this.signature());
-      System.out.println('{');
+      printer.println(this.signature());
+      printer.println('{');
       
       
       for (LLVMCFGNode node : this.nodes)
-         node.writeLLVM();
+         node.writeLLVM(printer);
       
       
-      System.out.println('}');
+      printer.println('}');
    }
    
    

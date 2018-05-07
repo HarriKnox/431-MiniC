@@ -1,6 +1,8 @@
 package llvm;
 
 
+import java.io.PrintWriter;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -103,17 +105,17 @@ public class LLVMCFGNode
    }
    
    
-   public void writeLLVM()
+   public void writeLLVM(PrintWriter printer)
    {
-      System.out.println(this.llvmString() + ':');
+      printer.println(this.llvmString() + ':');
       
       for (LLVMInstruction instruction : this.instructions)
       {
-         System.out.print("   ");
-         System.out.println(instruction.llvmString());
+         printer.print("   ");
+         printer.println(instruction.llvmString());
       }
       
       if (this.link != null)
-         System.out.println(this.link.llvmString());
+         printer.println(this.link.llvmString());
    }
 }

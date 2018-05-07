@@ -1,8 +1,7 @@
 package llvm.declaration;
 
 
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.util.List;
 
@@ -22,10 +21,10 @@ public class LLVMGlobals
    }
    
    
-   public void writeLLVM()
+   public void writeLLVM(PrintWriter printer)
    {
       for (LLVMGlobal global : this.globals)
-         System.out.println(this.llvmString(global));
+         printer.println(this.llvmString(global));
    }
    
    

@@ -1,6 +1,8 @@
 package llvm;
 
 
+import java.io.PrintWriter;
+
 import llvm.declaration.LLVMFunctions;
 import llvm.declaration.LLVMGlobals;
 import llvm.declaration.LLVMStructs;
@@ -24,10 +26,10 @@ public class ProgramLLVM
    }
    
    
-   public void writeLLVM()
+   public void writeLLVM(PrintWriter printer)
    {
-      this.llvmStructs.writeLLVM();
-      this.llvmGlobals.writeLLVM();
-      this.llvmFunctions.writeLLVM();
+      this.llvmStructs.writeLLVM(printer);
+      this.llvmGlobals.writeLLVM(printer);
+      this.llvmFunctions.writeLLVM(printer);
    }
 }
