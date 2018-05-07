@@ -1,7 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 import java.util.LinkedList;
@@ -37,7 +36,7 @@ public class Main
       
       
       /* Write all the LLVM code to stdout */
-      llvm.writeLLVM(new PrintWriter(new OutputStreamWriter(System.out)));
+      writeLLVM(opts, llvm);
       
       
       System.exit(0);
@@ -101,5 +100,19 @@ public class Main
          System.err.println("Exception running clang:");
          System.err.println(e);
       }
+   }
+   
+   
+   private static void writeLLVM(Options opts, ProgramLLVM llvm)
+   {
+      if (!opts.llvm)
+         return;
+      
+      
+      PrintWriter printer = new PrintWriter(System.out);
+      
+      llvm.writeLLVM(printer);
+      
+      printer.close();
    }
 }
