@@ -22,7 +22,7 @@ import parser.visitor.ProgramVisitor;
 
 public class ProgramParser
 {
-   public ProgramAST parseProgram(Options opts)
+   public static ProgramAST parseProgram(Options opts)
    {
       CharStream charStream = null;
       

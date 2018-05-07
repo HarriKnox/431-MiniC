@@ -13,9 +13,7 @@ public class Main
    {
       Options opts = Options.parseOptions(args);
       
-      ProgramParser parser = new ProgramParser();
-      
-      ProgramAST ast = parser.parseProgram(opts);
+      ProgramAST ast = ProgramParser.parseProgram(opts);
       
       ProgramLLVM llvm = ast.buildLLVM(opts);
       
