@@ -76,7 +76,6 @@ public class Options
       }
       
       
-      
       this.stack   = ob.stack;
       this.orphans = ob.orphans;
       this.clang   = ob.clang;
