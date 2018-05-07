@@ -77,7 +77,7 @@ public class IdentifierExpression extends Expression
       variable = current.getParameter(this.id);
       
       if (variable != null)
-         return new LLVMParameter(
+         return new LLVMLocal(
                current.name,
                this.id,
                variable.type.llvmType());
