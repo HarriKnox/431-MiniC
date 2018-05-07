@@ -67,7 +67,7 @@ public class Main
       }
       
       
-      llvm.writeLLVM(printer);
+      llvm.writeLLVM(opts, printer);
       printer.close();
       
       
@@ -111,7 +111,7 @@ public class Main
       
       PrintWriter printer = new PrintWriter(System.out);
       
-      llvm.writeLLVM(printer);
+      llvm.writeLLVM(opts, printer);
       
       printer.close();
    }
