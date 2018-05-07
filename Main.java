@@ -62,7 +62,7 @@ public class Main
       catch (Exception e)
       {
          System.err.println("Can't use clang: can't create a temp file");
-         System.err.println(e);
+         e.printStackTrace();
          return;
       }
       
@@ -74,7 +74,7 @@ public class Main
       if (printer.checkError())
       {
          System.err.println("Error in printing.");
-         System.err.println("Too bad we won't know what it is");
+         System.err.println("Too bad we won't know what the error was");
          return;
       }
       
@@ -98,7 +98,7 @@ public class Main
       catch (Exception e)
       {
          System.err.println("Exception running clang:");
-         System.err.println(e);
+         e.printStackTrace();
       }
    }
    

@@ -32,11 +32,12 @@ public class ProgramParser
             charStream = CharStreams.fromStream(System.in);
          
          else
-            charStream = CharStreams.fromFileName(opts.miniFile.getName());
+            charStream = CharStreams.fromFileName(
+                  opts.miniFile.getAbsolutePath());
       }
       catch (IOException e)
       {
-         System.err.println(e);
+         e.printStackTrace();
          System.exit(2);
       }
       
