@@ -20,6 +20,6 @@ public class LLVMStdioType extends LLVMType
    @Override
    public String llvmString()
    {
-      return "i32 (i8*, ...)";
+      return "i32 (i8*, ...)*";
    }
 }
