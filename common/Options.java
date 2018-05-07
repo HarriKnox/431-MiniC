@@ -115,14 +115,22 @@ public class Options
             else if (arg.equals("-clang"))
             {
                ob.clang = true;
+               i++;
                
-               String mach = args[++i];
-               
-               if (mach.equals("csl"))
-                  ob.csl = true;
-               
-               else if (!mach.equals("home"))
+               if (i >= args.length)
+               {
                   ErrorPrinter.printOut("clang compile at 'home' or 'csl'");
+               }
+               else
+               {
+                  String mach = args[i];
+                  
+                  if (mach.equals("csl"))
+                     ob.csl = true;
+                  
+                  else if (!mach.equals("home"))
+                     ErrorPrinter.printOut("clang compile at 'home' or 'csl'");
+               }
             }
             else if (arg.equals("-llvm"))
             {
