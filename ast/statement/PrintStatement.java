@@ -43,7 +43,7 @@ public class PrintStatement extends Statement
       
       
       if (value == null)
-         return null;
+         return node;
       
       
       if (!(value.type instanceof LLVMIntType))
