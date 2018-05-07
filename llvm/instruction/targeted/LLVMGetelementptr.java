@@ -29,7 +29,7 @@ public class LLVMGetelementptr extends LLVMTargetedInstruction
    {
       return new StringBuilder("getelementptr ")
             .append(this.source.llvmTypedString())
-            .append(", i0 0, i32 ")
+            .append(", i1 0, i32 ")
             .append(this.index)
             .toString();
    }
