@@ -32,7 +32,7 @@ public class ProgramParser
             charStream = CharStreams.fromStream(System.in);
          
          else
-            charStream = CharStreams.fromReader(new FileReader(opts.miniFile));
+            charStream = CharStreams.fromFileName(opts.miniFile.getName());
       }
       catch (IOException e)
       {
