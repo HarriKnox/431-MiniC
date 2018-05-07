@@ -125,7 +125,7 @@ public class Options
          }
          else
          {
-            ob.name = arg;
+            ob.name = arg.substring(0, len - 5);
          }
       }
       
