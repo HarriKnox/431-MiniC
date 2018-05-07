@@ -48,6 +48,12 @@ public class Options
    
    
    /**
+    * Compile on the CSL machines (valid only if clang)
+    */
+   public static boolean csl;
+   
+   
+   /**
     * Output LLVM and don't continue compiling unless otherwise specified (if
     * the -arm option is given then continue compiling).
     */
@@ -79,6 +85,7 @@ public class Options
       this.stack   = ob.stack;
       this.orphans = ob.orphans;
       this.clang   = ob.clang;
+      this.csl     = ob.csl;
       this.llvm    = ob.llvm;
       this.arm     = ob.arm;
       
@@ -98,22 +105,37 @@ public class Options
          if ((len > 1) && (arg.charAt(0) == '-'))
          {
             if (arg.equals("-stack"))
+            {
                ob.stack = true;
-            
+            }
             else if (arg.equals("-orphans"))
+            {
                ob.orphans = true;
-            
+            }
             else if (arg.equals("-clang"))
+            {
                ob.clang = true;
-            
+               
+               String mach = args[++i];
+               
+               if (mach.equals("csl"))
+                  ob.csl = true;
+               
+               else if (!mach.equals("home"))
+                  ErrorPrinter.printOut("clang compile at 'home' or 'csl'");
+            }
             else if (arg.equals("-llvm"))
+            {
                ob.llvm = true;
-            
+            }
             else if (arg.equals("-arm"))
+            {
                ob.arm = true;
-            
+            }
             else
+            {
                ErrorPrinter.printOut("unexpected option: " + arg);
+            }
          }
          else if (ob.name != null)
          {
@@ -140,14 +162,15 @@ public class Options
    
    private static class OptionsBuilder
    {
-      String name;
+      String name = null;
       
-      boolean stack;
-      boolean orphans;
+      boolean stack   = false;
+      boolean orphans = false;
       
-      boolean clang;
-      boolean llvm;
-      boolean arm;
+      boolean clang = false;
+      boolean csl   = false;
+      boolean llvm  = false;
+      boolean arm   = false;
       
       Options create()
       {
