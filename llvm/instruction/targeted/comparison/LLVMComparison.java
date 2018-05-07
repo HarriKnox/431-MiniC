@@ -31,7 +31,7 @@ public abstract class LLVMComparison extends LLVMTargetedInstruction
       return new StringBuilder("icmp ")
             .append(this.getOperation())
             .append(' ')
-            .append(this.target.type.llvmString())
+            .append(this.left.type.llvmString())
             .append(' ')
             .append(this.left.llvmString())
             .append(", ")
