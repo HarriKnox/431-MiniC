@@ -64,6 +64,8 @@ public class ProgramLLVM
       printer.println("declare i32 @printf(i8*, ...)");
       printer.println("declare i32 @scanf(i8*, ...)");
       
+      printer.println();
+      
       
       printer.print(PRINTLN_FORMAT.name);
       printer.println(" = private unnamed_addr constant [4 x i8] c\"%d\\0A\\00\", align 1");
@@ -72,7 +74,7 @@ public class ProgramLLVM
       printer.println(" = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1");
       
       printer.print(SCANF_FORMAT.name);
-      printer.println(" = private unnamed_addr constant [3 x i8] c\"%d\\00\", align 1");
+      printer.println(" = private unnamed_addr constant [4 x i8] c\"%d\\00\\00\", align 1");
       
       printer.print(SCANF_SCRATCH.llvmString());
       printer.println(" = common global i32 0, align 4");
