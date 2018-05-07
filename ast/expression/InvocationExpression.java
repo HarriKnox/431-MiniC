@@ -23,6 +23,8 @@ import llvm.type.LLVMType;
 
 import llvm.value.LLVMValue;
 
+import llvm.value.constant.LLVMNull;
+
 
 public class InvocationExpression extends Expression
 {
@@ -129,20 +131,21 @@ public class InvocationExpression extends Expression
          if (llvmArg == null)
          {
             ok = false;
-            continue;
          }
-         
-         
-         if (!llvmArg.type.equivalent(paramType))
+         else if (!llvmArg.type.equivalent(paramType))
          {
             ErrorPrinter.unexpectedType(this.token, paramType.astString(),
                   "argument " + i, llvmArg.type.astString());
             
             ok = false;
          }
-         
-         
-         args.add(llvmArg);
+         else
+         {
+            if (llvmArg instanceof LLVMNull)
+               llvmArg = new LLVMNull(paramType);
+            
+            args.add(llvmArg);
+         }
       }
       
       

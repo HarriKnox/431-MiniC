@@ -13,6 +13,12 @@ public class LLVMNull extends LLVMConstant
    }
    
    
+   public LLVMNull(LLVMType type)
+   {
+      super(type);
+   }
+   
+   
    @Override
    public String llvmString()
    {
