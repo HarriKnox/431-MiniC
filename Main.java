@@ -55,6 +55,7 @@ public class Main
       try
       {
          file = File.createTempFile("tmp", ".ll", new File("."));
+         file.deleteOnExit();
          
          printer = new PrintWriter(new BufferedWriter(new FileWriter(file)));
       }
@@ -84,7 +85,6 @@ public class Main
       command.add(file.getName());
       command.add("-o");
       command.add(opts.name);
-      command.add("-m32");
       
       try
       {
