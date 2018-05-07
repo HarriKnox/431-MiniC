@@ -133,7 +133,7 @@ public class InvocationExpression extends Expression
          }
          
          
-         if (!llvmArg.type.equals(paramType))
+         if (!llvmArg.type.equivalent(paramType))
          {
             ErrorPrinter.unexpectedType(this.token, paramType.astString(),
                   "argument " + i, llvmArg.type.astString());
