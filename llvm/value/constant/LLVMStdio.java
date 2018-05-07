@@ -13,13 +13,13 @@ public class LLVMStdio extends LLVMConstant
    {
       super(new LLVMPointerType());
       
-      this.name = name;
+      this.name = "@." + name;
    }
    
    
    public String llvmString()
    {
-      return "getelementptr inbounds ([4 x i8]* @."
+      return "getelementptr inbounds ([4 x i8]* "
             + this.name + ", i32 0, i32 0)";
    }
    
