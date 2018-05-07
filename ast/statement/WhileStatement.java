@@ -59,7 +59,7 @@ public class WhileStatement extends Statement
       
       
       if (bodyLast != null)
-         bodyLast.loopback(node);
+         bodyLast.loopback(guardNode);
       
       
       return elseNode;
