@@ -24,7 +24,7 @@ public class LLVMLoad extends LLVMTargetedInstruction
       return new StringBuilder("load ")
             .append(this.source.type.llvmString())
             .append("* ")
-            .append(this.source.type.llvmString())
+            .append(this.source.llvmString())
             .toString();
    }
 }
