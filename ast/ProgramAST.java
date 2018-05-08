@@ -8,6 +8,7 @@ import ast.declaration.Structs;
 import ast.declaration.Variable;
 import ast.declaration.Variables;
 
+import common.ErrorPrinter;
 import common.Options;
 
 import llvm.ProgramLLVM;
@@ -34,10 +35,21 @@ public class ProgramAST
    
    public ProgramLLVM buildLLVM(Options opts)
    {
-      return new ProgramLLVM(
-         this.structs.buildLLVM(),
-         this.globals.buildLLVM(this.structs),
-         this.functions.buildLLVM(this));
+      LLVMStructs llvmStructs = this.structs.buildLLVM(),
+      LLVMGlobals llvmGlobals = this.globals.buildLLVM(this.structs),
+      LLVMFunctions llvmFunctions = this.functions.buildLLVM(this));
+      
+      
+      int errors = ErrorPrinter.getErrorCount();
+      
+      if (errors > 0)
+      {
+         System.err.println("Found " + errors
+               + " errors. Fix them and recompile");
+         System.exit(8);
+      }
+      
+      return new ProgramLLVM(llvmStructs, llvmGlobals, llvmFunctions);
    }
    
    
