@@ -247,7 +247,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
       switch (ctx.op.getText())
       {
          case "!":
-            return new NegateExpression(
+            return new NotExpression(
                   ctx.op,
                   visit(ctx.expression()));
 
@@ -258,7 +258,7 @@ public class ExpressionVisitor extends MiniBaseVisitor<Expression>
             if (exp instanceof IntExpression)
                return ((IntExpression)exp).negate();
             
-            return new NotExpression(
+            return new NegateExpression(
                   ctx.op,
                   exp);
       }
