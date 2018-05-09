@@ -35,9 +35,9 @@ public class ProgramAST
    
    public ProgramLLVM buildLLVM(Options opts)
    {
-      LLVMStructs llvmStructs = this.structs.buildLLVM(),
-      LLVMGlobals llvmGlobals = this.globals.buildLLVM(this.structs),
-      LLVMFunctions llvmFunctions = this.functions.buildLLVM(this));
+      LLVMStructs llvmStructs = this.structs.buildLLVM();
+      LLVMGlobals llvmGlobals = this.globals.buildLLVM(this.structs);
+      LLVMFunctions llvmFunctions = this.functions.buildLLVM(this);
       
       
       int errors = ErrorPrinter.getErrorCount();
