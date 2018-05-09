@@ -7,10 +7,10 @@ import llvm.type.LLVMType;
 
 public class LLVMInt extends LLVMConstant
 {
-   public final String value;
+   public final int value;
    
    
-   public LLVMInt(String value)
+   public LLVMInt(int value)
    {
       super(new LLVMIntType());
       
@@ -21,6 +21,6 @@ public class LLVMInt extends LLVMConstant
    @Override
    public String llvmString()
    {
-      return this.value;
+      return Integer.toString(this.value);
    }
 }

@@ -48,11 +48,11 @@ public class IntExpression extends Expression
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       String val = this.negative ? ('-' + this.value) : this.value;
-      
+      int num;
       
       try
       {
-         Integer.parseInt(val);
+         num = Integer.parseInt(val);
       }
       catch (NumberFormatException ne)
       {
@@ -61,6 +61,6 @@ public class IntExpression extends Expression
       }
       
       
-      return new LLVMInt(val);
+      return new LLVMInt(num);
    }
 }
