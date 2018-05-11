@@ -22,4 +22,11 @@ public class LLVMRet extends LLVMLink
             ? "void"
             : this.value.llvmTypedString());
    }
+   
+   
+   @Override
+   public void replace(LLVMCFGNode from, LLVMCFGNode to)
+   {
+      ;
+   }
 }

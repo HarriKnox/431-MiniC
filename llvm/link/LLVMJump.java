@@ -20,4 +20,12 @@ public class LLVMJump extends LLVMLink
    {
       return "br label %" + this.target.llvmString();
    }
+   
+   
+   @Override
+   public void replace(LLVMCFGNode from, LLVMCFGNode to)
+   {
+      if (this.target.equals(from))
+         this.target = to;
+   }
 }
