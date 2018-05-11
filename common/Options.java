@@ -38,7 +38,7 @@ public class Options
     * executed unless a cosmic ray hit the processor at just the right moment
     * and the right angle to cause the program counter to jump into an orphan.
     */
-   public final boolean orphans;
+   public final boolean dirtycfg;
    
    
    /**
@@ -82,12 +82,12 @@ public class Options
       }
       
       
-      this.stack   = ob.stack;
-      this.orphans = ob.orphans;
-      this.clang   = ob.clang;
-      this.csl     = ob.csl;
-      this.llvm    = ob.llvm;
-      this.arm     = ob.arm;
+      this.stack    = ob.stack;
+      this.dirtycfg = ob.dirtycfg;
+      this.clang    = ob.clang;
+      this.csl      = ob.csl;
+      this.llvm     = ob.llvm;
+      this.arm      = ob.arm;
       
    }
    
@@ -108,9 +108,9 @@ public class Options
             {
                ob.stack = true;
             }
-            else if (arg.equals("-orphans"))
+            else if (arg.equals("-dirtycfg"))
             {
-               ob.orphans = true;
+               ob.dirtycfg = true;
             }
             else if (arg.equals("-clang"))
             {
@@ -173,7 +173,7 @@ public class Options
       String name = null;
       
       boolean stack   = false;
-      boolean orphans = false;
+      boolean dirtycfg = false;
       
       boolean clang = false;
       boolean csl   = false;
