@@ -3,6 +3,7 @@ package llvm;
 
 import java.io.PrintWriter;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,6 +98,25 @@ public class LLVMCFGNode
       
       if (this.loopback != null)
          this.loopback.recursivisit(nodes);
+   }
+   
+   
+   public LLVMCFGNode cleanCFG()
+   {
+      Iterator<LLVMCFGNode> predecessorator = this.predecessors.iterator();
+      
+      /* Remove all unreachable (returned) nodes */
+      while (predecessorator.hasNext())
+         if (precedessorator.next().returned)
+            predecessorator.remove();
+      
+      
+      /* Remove empty blocks */
+      if (this.instructions.isEmpty())
+      {
+         @SuppressWarnings("unchecked")
+         LLVMCFGNode target = ((LLVMJump)this.link).target;
+      }
    }
    
    
