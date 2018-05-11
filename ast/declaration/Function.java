@@ -112,26 +112,33 @@ public class Function extends TokenedElement
    
    private List<LLVMCFGNode> getCFGNodes(ProgramAST program)
    {
+      LLVMCFGNode entry = buildEntryNode();
+      LLVMCFGNode exit = buildExitNode();
+      
+      buildCFG(program, entry, exit);
+      
+      
+      return recursivisit(exit);
+   }
+   
+   
+   private LLVMCFGNode buildEntryNode()
+   {
       LLVMCFGNode entry = new LLVMCFGNode(false);
-      LLVMCFGNode exit = new LLVMCFGNode(false);
       
-      /* Build the CFG and complain if it doesn't return */
-      LLVMCFGNode last = this.body.buildLLVM(program, this, entry, exit);
       
-      if (!last.returned)
+      /* Allocate space for return value */
+      if (!(this.type instanceof VoidType))
       {
-         if (!(this.type instanceof VoidType))
-            ErrorPrinter.nonReturn(this.token, this.name);
+         LLVMReturnValue returnValue = new LLVMReturnValue(
+               this.name,
+               this.type.llvmType());
          
-         last.jump(exit);
+         entry.add(new LLVMAlloca(returnValue));
       }
       
       
-      /* Add stack allocations and parameter value stores */
-      LLVMCFGNode allocaNode = new LLVMCFGNode(false);
-      
-      allocaNode.jump(entry);
-      
+      /* Allocate space and store value for each parameter */
       for (Variable param : this.parameters.variables)
       {
          LLVMType paramType = param.type.llvmType();
@@ -144,19 +151,28 @@ public class Function extends TokenedElement
                this.name, param.name, paramType);
          
          
-         allocaNode
-               .add(new LLVMAlloca(llvmLocal))
+         entry .add(new LLVMAlloca(llvmLocal))
                .add(new LLVMStore(llvmLocal, llvmParam));
       }
       
       
+      /* Allocate space for each local */
       for (Variable local : this.locals.variables)
       {
          LLVMLocal llvmLocal = new LLVMLocal(
                this.name, local.name, local.type.llvmType());
          
-         allocaNode.add(new LLVMAlloca(llvmLocal));
+         entry.add(new LLVMAlloca(llvmLocal));
       }
+      
+      
+      return entry;
+   }
+   
+   
+   private LLVMCFGNode buildExitNode()
+   {
+      LLVMCFGNode exit = new LLVMCFGNode(false);
       
       
       /* Add return instructions */
@@ -170,15 +186,40 @@ public class Function extends TokenedElement
                this.name,
                this.type.llvmType());
          
-         allocaNode.add(new LLVMAlloca(returnValue));
-         
          LLVMLoad load = new LLVMLoad(returnValue);
          
          exit.add(load).ret(load.target);
       }
       
       
-      /* Sort the nodes */
+      return exit;
+   }
+   
+   
+   private void buildCFG(ProgramAST program,
+         LLVMCFGNode entry, LLVMCFGNode exit)
+   {
+      LLVMCFGNode first = new LLVMCFGNode(false);
+      
+      entry.jump(first);
+      
+      
+      /* Build the CFG and complain if it doesn't return */
+      LLVMCFGNode last = this.body.buildLLVM(program, this, first, exit);
+      
+      
+      if (!last.returned)
+      {
+         if (!(this.type instanceof VoidType))
+            ErrorPrinter.nonReturn(this.token, this.name);
+         
+         last.jump(exit);
+      }
+   }
+   
+   
+   private List<LLVMCFGNode> recursivisit(LLVMCFGNode exit)
+   {
       List<LLVMCFGNode> nodes = new LinkedList<>();
       
       exit.recursivisit(nodes);
