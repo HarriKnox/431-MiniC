@@ -15,6 +15,6 @@ public class LLVMMalloc extends LLVMCall
       super("malloc",
             new LLVMPointerType(),
             Collections.singletonList(
-                  new LLVMInt(Integer.toString(fields * 4))));
+                  new LLVMInt(fields * 4)));
    }
 }
