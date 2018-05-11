@@ -26,8 +26,8 @@ public class LLVMCFGNode
    public LLVMLink link = null;
    public final boolean returned;
    
-   private int uid = -1;
    
+   private int uid = -1;
    
    private static int count = 0;
    
