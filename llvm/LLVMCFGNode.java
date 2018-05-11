@@ -25,7 +25,7 @@ public class LLVMCFGNode
    public final List<LLVMCFGNode> predecessors = new LinkedList<>();
    public LLVMCFGNode loopback = null;
    public LLVMLink link = null;
-   public final boolean returned;
+   public final boolean unreachable;
    
    
    private int uid = -1;
@@ -33,9 +33,9 @@ public class LLVMCFGNode
    private static int count = 0;
    
    
-   public LLVMCFGNode(boolean returned)
+   public LLVMCFGNode(boolean unreachable)
    {
-      this.returned = returned;
+      this.unreachable = unreachable;
    }
    
    

@@ -213,7 +213,7 @@ public class Function extends TokenedElement
       LLVMCFGNode last = this.body.buildLLVM(program, this, first, exit);
       
       
-      if (!last.returned)
+      if (!last.unreachable)
       {
          if (!(this.type instanceof VoidType))
             ErrorPrinter.nonReturn(this.token, this.name);

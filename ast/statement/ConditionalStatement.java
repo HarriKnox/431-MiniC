@@ -69,7 +69,7 @@ public class ConditionalStatement extends Statement
        * end.
        */
       LLVMCFGNode join = new LLVMCFGNode(
-            thenLast.returned && elseLast.returned);
+            thenLast.unreachable && elseLast.unreachable);
       
       thenLast.jump(join);
       elseLast.jump(join);

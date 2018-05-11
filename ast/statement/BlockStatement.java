@@ -38,7 +38,7 @@ public class BlockStatement extends Statement
    {
       for (Statement statement : this.statements)
       {
-         if (node.returned)
+         if (node.unreachable)
          {
             ErrorPrinter.codeAfterReturn(statement.token);
             break;
