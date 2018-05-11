@@ -16,6 +16,7 @@ import ast.type.VoidType;
 import ast.statement.Statement;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -91,7 +92,7 @@ public class Function extends TokenedElement
    }
    
    
-   public LLVMFunction buildLLVM(ProgramAST program)
+   public LLVMFunction buildLLVM(ProgramAST program, Options opts)
    {
       List<LLVMParameter> params = new ArrayList<>(this.parameters.length);
       
@@ -102,7 +103,7 @@ public class Function extends TokenedElement
                param.type.llvmType()));
       
       
-      List<LLVMCFGNode> nodes = getCFGNodes(program);
+      List<LLVMCFGNode> nodes = getCFGNodes(program, opts);
       
       
       return new LLVMFunction(this.name,
@@ -110,12 +111,16 @@ public class Function extends TokenedElement
    }
    
    
-   private List<LLVMCFGNode> getCFGNodes(ProgramAST program)
+   private List<LLVMCFGNode> getCFGNodes(ProgramAST program, Options opts)
    {
       LLVMCFGNode entry = buildEntryNode();
       LLVMCFGNode exit = buildExitNode();
       
       buildCFG(program, entry, exit);
+      
+      
+      if (!opts.dirtycfg)
+         exit = exit.cleanCFG();
       
       
       return recursivisit(exit);

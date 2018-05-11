@@ -14,6 +14,7 @@ import ast.declaration.Structs;
 import ast.type.IntType;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.declaration.LLVMFunction;
 import llvm.declaration.LLVMFunctions;
@@ -78,7 +79,7 @@ public class Functions
    }
    
    
-   public LLVMFunctions buildLLVM(ProgramAST program)
+   public LLVMFunctions buildLLVM(ProgramAST program, Options opts)
    {
       this.removeInvalids(program.structs);
       
@@ -88,7 +89,7 @@ public class Functions
       List<LLVMFunction> llvmfuncs = new LinkedList<>();
       
       for (Function function : this.functions)
-         llvmfuncs.add(function.buildLLVM(program));
+         llvmfuncs.add(function.buildLLVM(program, opts));
       
       
       return new LLVMFunctions(llvmfuncs);
