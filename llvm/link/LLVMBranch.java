@@ -33,15 +33,4 @@ public class LLVMBranch extends LLVMLink
             .append(elseNode.llvmString())
             .toString();
    }
-   
-   
-   @Override
-   public void replace(LLVMCFGNode from, LLVMCFGNode to)
-   {
-      if (this.thenNode.equals(from))
-         this.thenNode = to;
-      
-      if (this.elseNode.equals(from))
-         this.elseNode = to;
-   }
 }
