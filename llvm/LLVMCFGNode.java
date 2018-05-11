@@ -89,7 +89,10 @@ public class LLVMCFGNode
       
       
       if (!nodes.contains(this))
+      {
          nodes.add(this);
+         this.getUID();
+      }
       
       
       if (this.loopback != null)
