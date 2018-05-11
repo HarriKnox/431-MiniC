@@ -36,11 +36,11 @@ public class WhileStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMCFGNode guardNode = new LLVMCFGNode();
-      
-      LLVMValue llvmGuard = this.guard.buildLLVM(program, current, guardNode);
+      LLVMCFGNode guardNode = new LLVMCFGNode(false);
       
       node.jump(guardNode);
+      
+      LLVMValue llvmGuard = this.guard.buildLLVM(program, current, guardNode);
       
       
       if ((llvmGuard != null)
@@ -48,8 +48,8 @@ public class WhileStatement extends Statement
          ErrorPrinter.badGuard(this.guard.token, llvmGuard.type.astString());
       
       
-      LLVMCFGNode bodyNode = new LLVMCFGNode();
-      LLVMCFGNode elseNode = new LLVMCFGNode();
+      LLVMCFGNode bodyNode = new LLVMCFGNode(false);
+      LLVMCFGNode elseNode = new LLVMCFGNode(false);
       
       guardNode.branch(llvmGuard, bodyNode, elseNode);
       

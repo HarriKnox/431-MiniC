@@ -112,13 +112,13 @@ public class Function extends TokenedElement
    
    private List<LLVMCFGNode> getCFGNodes(ProgramAST program)
    {
-      LLVMCFGNode entry = new LLVMCFGNode();
-      LLVMCFGNode exit = new LLVMCFGNode();
+      LLVMCFGNode entry = new LLVMCFGNode(false);
+      LLVMCFGNode exit = new LLVMCFGNode(false);
       
       /* Build the CFG and complain if it doesn't return */
       LLVMCFGNode last = this.body.buildLLVM(program, this, entry, exit);
       
-      if (!(last instanceof LLVMCFGNode.UnreachableNode))
+      if (!last.returned)
       {
          if (!(this.type instanceof VoidType))
             ErrorPrinter.nonReturn(this.token, this.name);
@@ -128,7 +128,7 @@ public class Function extends TokenedElement
       
       
       /* Add stack allocations and parameter value stores */
-      LLVMCFGNode allocaNode = new LLVMCFGNode();
+      LLVMCFGNode allocaNode = new LLVMCFGNode(false);
       
       allocaNode.jump(entry);
       

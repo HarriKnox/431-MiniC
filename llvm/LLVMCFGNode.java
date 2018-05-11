@@ -24,11 +24,18 @@ public class LLVMCFGNode
    public final List<LLVMCFGNode> predecessors = new LinkedList<>();
    public LLVMCFGNode loopback = null;
    public LLVMLink link = null;
+   public final boolean returned;
    
    private int uid = -1;
    
    
    private static int count = 0;
+   
+   
+   public LLVMCFGNode(boolean returned)
+   {
+      this.returned = returned;
+   }
    
    
    public LLVMCFGNode add(LLVMInstruction instruction)
@@ -120,15 +127,5 @@ public class LLVMCFGNode
          printer.print("   ");
          printer.println(this.link.llvmString());
       }
-   }
-   
-   
-   public static class UnreachableNode extends LLVMCFGNode
-   {
-      /*
-       * A class that does absolutely nothing but mark that a node is
-       * unreachable; that is, that the node has no path from the start of the
-       * function that will eventually end up here.
-       */
    }
 }

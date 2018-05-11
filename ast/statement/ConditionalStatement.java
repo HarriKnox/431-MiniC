@@ -50,8 +50,8 @@ public class ConditionalStatement extends Statement
          ErrorPrinter.badGuard(this.guard.token, llvmGuard.type.astString());
       
       
-      LLVMCFGNode thenNode = new LLVMCFGNode();
-      LLVMCFGNode elseNode = new LLVMCFGNode();
+      LLVMCFGNode thenNode = new LLVMCFGNode(false);
+      LLVMCFGNode elseNode = new LLVMCFGNode(false);
       
       node.branch(llvmGuard, thenNode, elseNode);
       
@@ -68,15 +68,8 @@ public class ConditionalStatement extends Statement
        * unreachable node but still add the jumps. It'll all work out in the
        * end.
        */
-      LLVMCFGNode join;
-      
-      if (thenLast instanceof LLVMCFGNode.UnreachableNode
-            && elseLast instanceof LLVMCFGNode.UnreachableNode)
-         join = new LLVMCFGNode.UnreachableNode();
-      
-      else
-         join = new LLVMCFGNode();
-      
+      LLVMCFGNode join = new LLVMCFGNode(
+            thenLast.returned && elseLast.returned);
       
       thenLast.jump(join);
       elseLast.jump(join);
