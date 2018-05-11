@@ -103,20 +103,104 @@ public class LLVMCFGNode
    
    public LLVMCFGNode cleanCFG()
    {
+      removeUnreachables();
+      
+      removeEmpties();
+      
+      
+      for (LLVMCFGNode pred : this.predecessors)
+         pred.cleanCFG();
+      
+      return this;
+   }
+   
+   
+   private void removeUnreachables()
+   {
       Iterator<LLVMCFGNode> predecessorator = this.predecessors.iterator();
       
-      /* Remove all unreachable (returned) nodes */
+      
+      /* Remove all unreachable predecessors */
       while (predecessorator.hasNext())
-         if (precedessorator.next().returned)
+         if (predecessorator.next().unreachable)
             predecessorator.remove();
       
       
-      /* Remove empty blocks */
-      if (this.instructions.isEmpty())
+      /* Remove the loopback if it won't be reached */
+      if (loopback != null && loopback.unreachable)
+         this.loopback = null;
+   }
+   
+   
+   private void removeEmpties()
+   {
+      List<LLVMCFGNode> newPredecessors = new LinkedList<>();
+      
+      
+      while (true)
       {
-         @SuppressWarnings("unchecked")
-         LLVMCFGNode target = ((LLVMJump)this.link).target;
+         Iterator<LLVMCFGNode> predecessorator = this.predecessors.iterator();
+         
+         
+         /* Remove all empty predecessors */
+         while (predecessorator.hasNext())
+         {
+            LLVMCFGNode pred = predecessorator.next();
+            
+            if (pred.instructions.isEmpty() && (pred.link instanceof LLVMJump))
+            {
+               for (LLVMCFGNode predepredecessor : pred.predecessors)
+               {
+                  predepredecessor.replaceLink(pred, this);
+                  
+                  if (!newPredecessors.contains(predepredecessor))
+                     newPredecessors.add(predepredecessor);
+               }
+            }
+            else
+            {
+               newPredecessors.add(pred);
+            }
+         }
+         
+         
+         /* If the two lists equal, then nothing changed and we can break */
+         if (this.predecessors.equals(newPredecessors))
+            break;
+         
+         
+         /* Otherwise, move the contents from the new list and restart */
+         this.predecessors.clear();
+         this.predecessors.addAll(newPredecessors);
+         
+         newPredecessors.clear();
       }
+   }
+   
+   
+   private void replaceLink(LLVMCFGNode from, LLVMCFGNode to)
+   {
+      if (this.link instanceof LLVMJump)
+      {
+         this.link = new LLVMJump(to);
+         return;
+      }
+      
+      
+      LLVMBranch branch = ((LLVMBranch)this.link);
+      
+      LLVMCFGNode thenNode = branch.thenNode;
+      LLVMCFGNode elseNode = branch.elseNode;
+      
+      
+      if (thenNode.equals(to) || elseNode.equals(to))
+         this.link = new LLVMJump(to);
+      
+      else if (thenNode.equals(from))
+         this.link = new LLVMBranch(branch.guard, to, elseNode);
+      
+      else
+         this.link = new LLVMBranch(branch.guard, thenNode, to);
    }
    
    
