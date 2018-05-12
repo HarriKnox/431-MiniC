@@ -108,6 +108,21 @@ public class LLVMCFGNode
       removeEmpties();
       
       
+      /* Remove unnecessary jump if possible */
+      if (this.predecessors.size() == 1)
+      {
+         LLVMCFGNode pred = this.predecessors.get(0);
+         
+         if (pred.link instanceof LLVMJump)
+         {
+            pred.instructions.addAll(this.instructions);
+            pred.link = this.link;
+            
+            return pred.cleanCFG();
+         }
+      }
+      
+      
       for (LLVMCFGNode pred : this.predecessors)
          pred.cleanCFG();
       
