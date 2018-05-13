@@ -120,7 +120,7 @@ public class Function extends TokenedElement
       
       
       if (!opts.dirtycfg)
-         exit = exit.cleanCFG();
+         exit = LLVMCFGNode.cleanCFG(exit);
       
       
       return recursivisit(exit);

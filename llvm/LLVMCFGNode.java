@@ -3,9 +3,12 @@ package llvm;
 
 import java.io.PrintWriter;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
 import llvm.instruction.LLVMInstruction;
 
@@ -69,7 +72,7 @@ public class LLVMCFGNode
       thenNode.predecessors.add(this);
       elseNode.predecessors.add(this);
       
-      this.link = new LLVMBranch(guard, thenNode, elseNode);
+      this.link = new LLVMBranch(guard, false, thenNode, elseNode);
    }
    
    
@@ -101,121 +104,158 @@ public class LLVMCFGNode
    }
    
    
-   public LLVMCFGNode cleanCFG()
+   public static LLVMCFGNode cleanCFG(LLVMCFGNode exit)
    {
-      removeUnreachables();
+      removeUnreachables(exit);
+      removeEmpties(exit);
       
-      removeEmpties();
+      return exit;
+   }
+   
+   
+   private static void removeUnreachables(LLVMCFGNode exit)
+   {
+      Queue<LLVMCFGNode> nodes = new LinkedList<>();
+      Set<LLVMCFGNode> visited = new HashSet<>();
       
+      nodes.add(exit);
       
-      /* Remove unnecessary jump if possible */
-      if (this.predecessors.size() == 1)
+      while (!nodes.isEmpty())
       {
-         LLVMCFGNode pred = this.predecessors.get(0);
+         LLVMCFGNode node = nodes.remove();
          
-         if (pred.link instanceof LLVMJump)
+         
+         if (visited.contains(node))
+            continue;
+         
+         visited.add(node);
+         
+         
+         if (node.unreachable)
          {
-            pred.instructions.addAll(this.instructions);
-            pred.link = this.link;
-            
-            return pred.cleanCFG();
+            /*
+             * A branch or ret node will never be unreachable:
+             * - if a branch node was unreachable then that would mean it came
+             *   from an `if` in a block that followed a return-equivalent
+             *   statement, which isn't allowed
+             * - the only ret node allowed is the exit node, and it is always
+             *   instantiated as reachable
+             */
+            ((LLVMJump)node.link).target.replacePredecessor(node, null);
+            continue;
          }
+         
+         
+         for (LLVMCFGNode pred : node.predecessors)
+            nodes.add(pred);
+         
+         if (node.loopback != null)
+            nodes.add(node.loopback);
       }
-      
-      
-      for (LLVMCFGNode pred : this.predecessors)
-         pred.cleanCFG();
-      
-      return this;
    }
    
    
-   private void removeUnreachables()
+   private static void removeEmpties(LLVMCFGNode exit)
    {
-      Iterator<LLVMCFGNode> predecessorator = this.predecessors.iterator();
+      Queue<LLVMCFGNode> nodes = new LinkedList<>();
+      Set<LLVMCFGNode> visited = new HashSet<>();
       
+      nodes.add(exit);
       
-      /* Remove all unreachable predecessors */
-      while (predecessorator.hasNext())
-         if (predecessorator.next().unreachable)
-            predecessorator.remove();
-      
-      
-      /* Remove the loopback if it won't be reached */
-      if (loopback != null && loopback.unreachable)
-         this.loopback = null;
-   }
-   
-   
-   private void removeEmpties()
-   {
-      List<LLVMCFGNode> newPredecessors = new LinkedList<>();
-      
-      
-      while (true)
+      while (!nodes.isEmpty())
       {
-         Iterator<LLVMCFGNode> predecessorator = this.predecessors.iterator();
+         LLVMCFGNode node = nodes.remove();
          
          
-         /* Remove all empty predecessors */
-         while (predecessorator.hasNext())
+         if (visited.contains(node))
          {
-            LLVMCFGNode pred = predecessorator.next();
+            /* Revisit a loopback node that may be able to be removed now */
+            if ((node.link instanceof LLVMJump) && ((LLVMJump)node.link).loop)
+            {
+               LLVMCFGNode target = ((LLVMJump)node.link).target;
+               
+               visited.add(target);
+               
+               
+               if (node.instructions.isEmpty()
+                     && (node.predecessors.size() == 1))
+                  node.predecessors.get(0).replaceLink(node, target);
+            }
             
-            if (pred.instructions.isEmpty() && (pred.link instanceof LLVMJump))
-            {
-               for (LLVMCFGNode predepredecessor : pred.predecessors)
-               {
-                  predepredecessor.replaceLink(pred, this);
-                  
-                  if (!newPredecessors.contains(predepredecessor))
-                     newPredecessors.add(predepredecessor);
-               }
-            }
-            else
-            {
-               newPredecessors.add(pred);
-            }
+            continue;
          }
          
          
-         /* If the two lists equal, then nothing changed and we can break */
-         if (this.predecessors.equals(newPredecessors))
-            break;
+         /*
+          * Don't add loopback target nodes (guard nodes for while loops) so we
+          * can traverse back into them if changes to the body of the loop
+          * allow the last node to be removed.
+          */
+         if (node.loopback == null)
+            visited.add(node);
          
          
-         /* Otherwise, move the contents from the new list and restart */
-         this.predecessors.clear();
-         this.predecessors.addAll(newPredecessors);
+         if ((node.instructions.isEmpty())
+               && (node.link instanceof LLVMJump)
+               && !((LLVMJump)node.link).loop)
+            for (LLVMCFGNode pred : node.predecessors)
+               pred.replaceLink(node, ((LLVMJump)node.link).target);
          
-         newPredecessors.clear();
+         for (LLVMCFGNode pred : node.predecessors)
+            nodes.add(pred);
+         
+         if (node.loopback != null)
+            nodes.add(node.loopback);
       }
    }
    
    
    private void replaceLink(LLVMCFGNode from, LLVMCFGNode to)
    {
+      boolean isloop = (from.link instanceof LLVMJump)
+            && ((LLVMJump)from.link).loop;
+      
+      
       if (this.link instanceof LLVMJump)
       {
-         this.link = new LLVMJump(to);
-         return;
+         this.link = new LLVMJump(to, isloop);
+      }
+      else
+      {
+         LLVMBranch branch = ((LLVMBranch)this.link);
+         
+         LLVMCFGNode thenNode = branch.thenNode;
+         LLVMCFGNode elseNode = branch.elseNode;
+         
+         
+         if (thenNode.equals(to) || elseNode.equals(to))
+            this.link = new LLVMJump(to, isloop);
+         
+         else if (thenNode.equals(from))
+            this.link = new LLVMBranch(branch.guard, isloop, to, elseNode);
+         
+         else
+            this.link = new LLVMBranch(branch.guard, isloop, thenNode, to);
       }
       
       
-      LLVMBranch branch = ((LLVMBranch)this.link);
-      
-      LLVMCFGNode thenNode = branch.thenNode;
-      LLVMCFGNode elseNode = branch.elseNode;
-      
-      
-      if (thenNode.equals(to) || elseNode.equals(to))
-         this.link = new LLVMJump(to);
-      
-      else if (thenNode.equals(from))
-         this.link = new LLVMBranch(branch.guard, to, elseNode);
-      
+      to.replacePredecessor(from, this);
+   }
+   
+   
+   private void replacePredecessor(LLVMCFGNode from, LLVMCFGNode to)
+   {
+      if (this.loopback.equals(from))
+      {
+         this.loopback = to;
+      }
       else
-         this.link = new LLVMBranch(branch.guard, thenNode, to);
+      {
+         this.predecessors.remove(from);
+         
+         if (to != null)
+            this.predecessors.add(to);
+      }
    }
    
    
