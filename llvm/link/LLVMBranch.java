@@ -9,14 +9,16 @@ import llvm.value.LLVMValue;
 public class LLVMBranch extends LLVMLink
 {
    public final LLVMValue guard;
+   public final boolean loop;
    public final LLVMCFGNode thenNode;
    public final LLVMCFGNode elseNode;
    
    
-   public LLVMBranch(LLVMValue guard,
+   public LLVMBranch(LLVMValue guard, boolean loop,
          LLVMCFGNode thenNode, LLVMCFGNode elseNode)
    {
       this.guard = guard;
+      this.loop = loop;
       this.thenNode = thenNode;
       this.elseNode = elseNode;
    }
