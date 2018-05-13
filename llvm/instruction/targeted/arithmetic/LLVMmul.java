@@ -17,4 +17,18 @@ public class LLVMmul extends LLVMArithmetic
    {
       return "mul";
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMRegister leftReg = this.left.buildARM(node);
+      ARMRegister rightReg = this.right.buildARM(node);
+      
+      ARMMul mul = new ARMMul(leftReg, rightReg);
+      
+      node.add(mul);
+      
+      return mul.target;
+   }
 }

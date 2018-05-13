@@ -17,4 +17,20 @@ public class LLVMslt extends LLVMComparison
    {
       return "slt";
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMRegister leftReg = this.left.buildARM(node);
+      ARMRegister rightReg = this.right.buildARM(node);
+      
+      ARMMov mov = new ARMMov(0);
+      ARMCmp cmp = new ARMCmp(leftReg, rightReg);
+      ARMMovlt movlt = new ARMMovlt(mov.target, 1);
+      
+      node.add(mov).add(cmp).add(movlt);
+      
+      return mov.target;
+   }
 }

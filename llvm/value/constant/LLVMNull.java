@@ -24,4 +24,14 @@ public class LLVMNull extends LLVMConstant
    {
       return "null";
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMMovw movw = new ARMMovw(0);
+      node.add(movw);
+      
+      return movw.target;
+   }
 }

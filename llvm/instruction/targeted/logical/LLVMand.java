@@ -17,4 +17,18 @@ public class LLVMand extends LLVMLogical
    {
       return "and";
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMRegister leftReg = this.left.buildARM(node);
+      ARMRegister rightReg = this.right.buildARM(node);
+      
+      ARMAnd and = new ARMAnd(leftReg, rightReg);
+      
+      node.add(and);
+      
+      return and.target;
+   }
 }
