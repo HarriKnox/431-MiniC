@@ -151,8 +151,8 @@ public class LLVMCFGNode
             /*
              * A branch or ret node will never be unreachable:
              * - if a branch node was unreachable then that would mean it came
-             *   from an `if` in a block that followed a return-equivalent
-             *   statement, which isn't allowed
+             *   from an `if` or a `while` in a block that followed a
+             *   return-equivalent statement, which isn't allowed
              * - the only ret node allowed is the exit node, and it is always
              *   instantiated as reachable
              */
