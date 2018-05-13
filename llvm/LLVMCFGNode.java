@@ -108,6 +108,21 @@ public class LLVMCFGNode
    {
       removeUnreachables(exit);
       removeEmpties(exit);
+      removeRedundants(exit);
+      
+      
+      if (exit.predecessors.size() == 1)
+      {
+         LLVMCFGNode pred = exit.predecessors.get(0);
+         
+         if (pred.link instanceof LLVMJump)
+         {
+            pred.instructions.addAll(exit.instructions);
+            pred.link = exit.link;
+            exit = pred;
+         }
+      }
+      
       
       return exit;
    }
@@ -198,8 +213,70 @@ public class LLVMCFGNode
          if ((node.instructions.isEmpty())
                && (node.link instanceof LLVMJump)
                && !((LLVMJump)node.link).loop)
-            for (LLVMCFGNode pred : node.predecessors)
-               pred.replaceLink(node, ((LLVMJump)node.link).target);
+         {
+            if (node.predecessors.isEmpty())
+               ((LLVMJump)node.link).target.replacePredecessor(node, null);
+            
+            else
+               for (LLVMCFGNode pred : node.predecessors)
+                  pred.replaceLink(node, ((LLVMJump)node.link).target);
+         }
+         
+         
+         for (LLVMCFGNode pred : node.predecessors)
+            nodes.add(pred);
+         
+         if (node.loopback != null)
+            nodes.add(node.loopback);
+      }
+   }
+   
+   
+   private static void removeRedundants(LLVMCFGNode exit)
+   {
+      Queue<LLVMCFGNode> nodes = new LinkedList<>();
+      Set<LLVMCFGNode> visited = new HashSet<>();
+      
+      
+      for (LLVMCFGNode pred : exit.predecessors)
+         nodes.add(pred);
+      
+      
+      while (!nodes.isEmpty())
+      {
+         LLVMCFGNode node = nodes.remove();
+         
+         
+         if (visited.contains(node))
+            continue;
+         
+         visited.add(node);
+         
+         
+         if (node.predecessors.size() == 1 && node.loopback == null)
+         {
+            LLVMCFGNode pred = node.predecessors.get(0);
+            
+            if (pred.link instanceof LLVMJump)
+            {
+               pred.instructions.addAll(node.instructions);
+               pred.link = node.link;
+               
+               if (node.link instanceof LLVMJump)
+               {
+                  ((LLVMJump)node.link).target.replacePredecessor(node, pred);
+               }
+               else
+               {
+                  ((LLVMBranch)node.link).thenNode
+                        .replacePredecessor(node, pred);
+                  
+                  ((LLVMBranch)node.link).elseNode
+                        .replacePredecessor(node, pred);
+               }
+            }
+         }
+         
          
          for (LLVMCFGNode pred : node.predecessors)
             nodes.add(pred);
@@ -245,7 +322,7 @@ public class LLVMCFGNode
    
    private void replacePredecessor(LLVMCFGNode from, LLVMCFGNode to)
    {
-      if (this.loopback.equals(from))
+      if (this.loopback != null && this.loopback.equals(from))
       {
          this.loopback = to;
       }
