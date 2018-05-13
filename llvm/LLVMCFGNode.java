@@ -51,7 +51,7 @@ public class LLVMCFGNode
    {
       target.predecessors.add(this);
       
-      this.link = new LLVMJump(target);
+      this.link = new LLVMJump(target, false);
    }
    
    
@@ -59,7 +59,7 @@ public class LLVMCFGNode
    {
       target.loopback = this;
       
-      this.link = new LLVMJump(target);
+      this.link = new LLVMJump(target, true);
    }
    
    
