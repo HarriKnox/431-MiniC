@@ -60,7 +60,7 @@ public class InvocationExpression extends Expression
    public LLVMValue buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      Function function = program.getFunction(this.name);
+      Function function = this.getFunction(program);
       
       if (function == null)
          return null;
