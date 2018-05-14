@@ -81,5 +81,14 @@ public class LLVMCallVoid extends LLVMInstruction
       ARMBl bl = new ARMBl(this.name);
       
       node.add(bl);
+      
+      
+      if (arglen >= 4)
+      {
+         ARMAdd spAdd = new ARMAdd(ARMRegister.RSP,
+               ARMRegister.RSP, (arglen - 4) * 4);
+         
+         node.add(spAdd);
+      }
    }
 }
