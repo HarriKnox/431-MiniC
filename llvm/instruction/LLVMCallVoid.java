@@ -47,4 +47,39 @@ public class LLVMCallVoid extends LLVMInstruction
       
       return sb.append(')').toString();
    }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      int arglen = this.arguments.size();
+      
+      for (int i = arglen; i >= 4; i--)
+      {
+         LLVMValue arg = this.arguments.get(i);
+         
+         ARMRegister reg = arg.buildARM(node);
+         
+         ARMPush push = new ARMPush(reg);
+         
+         node.add(push);
+      }
+      
+      
+      for (i = 0; i < arglen && i < 4; i++)
+      {
+         LLVMValue arg = this.arguments.get(i);
+         
+         ARMRegister reg = arg.buildARM(node);
+         
+         ARMMov mov = new ARMMov(ARMRegister.getReal(i), reg);
+         
+         node.add(mov);
+      }
+      
+      
+      ARMBl bl = new ARMBl(this.name);
+      
+      node.add(bl);
+   }
 }

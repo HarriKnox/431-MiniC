@@ -30,4 +30,17 @@ public class LLVMCall extends LLVMTargetedInstruction
    {
       return this.call.llvmString();
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      this.call.buildARM(node);
+      
+      ARMMov mov = new ARMMov(ARMRegister.R0);
+      
+      node.add(mov);
+      
+      return mov.target;
+   }
 }
