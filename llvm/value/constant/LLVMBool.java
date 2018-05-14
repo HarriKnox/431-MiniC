@@ -28,7 +28,7 @@ public class LLVMBool extends LLVMConstant
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
-      ARMMovw movw = new ARMMovw(this.value ? 1 : 0);
+      ARMMovw movw = new ARMMovw(new ARMInt(this.value ? 1 : 0));
       node.add(movw);
       
       return movw.target;

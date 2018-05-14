@@ -29,7 +29,7 @@ public class LLVMNull extends LLVMConstant
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
-      ARMMovw movw = new ARMMovw(0);
+      ARMMovw movw = new ARMMovw(new ARMInt(0));
       node.add(movw);
       
       return movw.target;

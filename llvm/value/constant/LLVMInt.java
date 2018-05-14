@@ -31,22 +31,19 @@ public class LLVMInt extends LLVMConstant
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
-      /* if the number is small enough to fit in one mov instruction */
-      if ((this.value & ~0xffff) == 0)
+      ARMMovw movw = new ARMMovw(new ARMInt(this.value));
+      
+      node.add(movw);
+      
+      
+      if ((this.value &~ 0xffff) != 0)
       {
-         ARMMovw movw = new ARMMovw(this.value);
-         node.add(movw);
+         ARMMovt movt = new ARMMovt(movw.target, movw.value);
          
-         return movw.target;
+         node.add(movt);
       }
-      else
-      {
-         ARMMovw movw = new ARMMovw(this.value & 0xffff);
-         ARMMovt movt = new ARMMovt(movw.target, (this.value >> 16) & 0xffff);
-         
-         node.add(movw).add(movt);
-         
-         return movw.target;
-      }
+      
+      
+      return movw.target;
    }
 }
