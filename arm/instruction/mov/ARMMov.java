@@ -19,14 +19,21 @@ public class ARMMov extends ARMInstruction
    
    public ARMMov(ARMRegister target, ARMValue value)
    {
-      this(ARMConditions.NONE, target, value);
+      this.target = target;
+      this.value = value;
    }
    
    
-   public ARMMov(ARMConditions condition, ARMRegister target, ARMValue value)
+   protected String conditionString()
    {
-      this.condition = condition;
-      this.target = target;
-      this.value = value;
+      return "";
+   }
+   
+   
+   @Override
+   public String armString()
+   {
+      return "mov" + this.conditionString() + " "
+            + this.target.armString() + ", " + this.value.armString();
    }
 }
