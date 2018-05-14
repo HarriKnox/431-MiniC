@@ -25,9 +25,9 @@ public class LLVMslt extends LLVMComparison
       ARMRegister leftReg = this.left.buildARM(node);
       ARMRegister rightReg = this.right.buildARM(node);
       
-      ARMMov mov = new ARMMov(0);
+      ARMMov mov = new ARMMov(new ARMInt(0));
       ARMCmp cmp = new ARMCmp(leftReg, rightReg);
-      ARMMovlt movlt = new ARMMovlt(mov.target, 1);
+      ARMMovlt movlt = new ARMMovlt(mov.target, new ARMInt(1));
       
       node.add(mov).add(cmp).add(movlt);
       
