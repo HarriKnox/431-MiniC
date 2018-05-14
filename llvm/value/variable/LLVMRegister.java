@@ -6,8 +6,9 @@ import llvm.type.LLVMType;
 
 public class LLVMRegister extends LLVMVariable
 {
-   private int uid = -1;
+   private ARMRegister armReg = null;
    
+   private int uid = -1;
    
    private static int count = 0;
    
@@ -22,6 +23,16 @@ public class LLVMRegister extends LLVMVariable
    public String llvmString()
    {
       return "%v" + Integer.toString(this.getUID());
+   }
+   
+   
+   @Override
+   public ARMRegister buildARM()
+   {
+      if (armReg == null)
+         this.armReg = new ARMRegister();
+      
+      return this.armReg;
    }
    
    
