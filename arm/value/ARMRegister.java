@@ -34,4 +34,30 @@ public class ARMRegister extends ARMValue
    public static final ARMRegister R13 = new ARMRegister(13);
    public static final ARMRegister R14 = new ARMRegister(14);
    public static final ARMRegister R15 = new ARMRegister(15);
+   
+   
+   public static ARMRegister getReal(int i)
+   {
+      switch (i)
+      {
+         case 0:  return R0;
+         case 1:  return R1;
+         case 2:  return R2;
+         case 3:  return R3;
+         case 4:  return R4;
+         case 5:  return R5;
+         case 6:  return R6;
+         case 7:  return R7;
+         case 8:  return R8;
+         case 9:  return R9;
+         case 10: return R10;
+         case 11: return R11;
+         case 12: return R12;
+         case 13: return R13;
+         case 14: return R14;
+         case 15: return R15;
+      }
+      
+      return null;
+   }
 }
