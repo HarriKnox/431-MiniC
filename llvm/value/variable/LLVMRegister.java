@@ -27,7 +27,7 @@ public class LLVMRegister extends LLVMVariable
    
    
    @Override
-   public ARMRegister buildARM()
+   public ARMRegister buildARM(ARMCFGNode node)
    {
       if (armReg == null)
          this.armReg = new ARMRegister();

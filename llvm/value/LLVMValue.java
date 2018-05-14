@@ -3,6 +3,10 @@ package llvm.value;
 
 import llvm.type.LLVMType;
 
+import arm.ARMCFGNode;
+
+import arm.value.ARMRegister;
+
 
 public abstract class LLVMValue
 {
@@ -16,6 +20,8 @@ public abstract class LLVMValue
    
    
    public abstract String llvmString();
+   
+   public abstract ARMRegister buildARM(ARMCFGNode node);
    
    
    public String llvmTypedString()
