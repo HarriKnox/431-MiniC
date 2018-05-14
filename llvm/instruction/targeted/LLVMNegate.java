@@ -24,4 +24,17 @@ public class LLVMNegate extends LLVMTargetedInstruction
    {
       return "sub i32 0, " + this.source.llvmString();
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMRegister sourceReg = this.source.buildARM(node);
+      
+      ARMRsb rsb = new ARMRsb(sourceReg, 0);
+      
+      node.add(rsb);
+      
+      return rsb.target;
+   }
 }
