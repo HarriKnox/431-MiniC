@@ -28,4 +28,11 @@ public class LLVMBitcast extends LLVMTargetedInstruction
             .append(this.target.type.llvmString())
             .toString();
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      return this.source.buildARM(node);
+   }
 }
