@@ -30,8 +30,10 @@ public class LLVMCallVoid extends LLVMInstruction
    public String llvmString()
    {
       StringBuilder sb = new StringBuilder("call ")
-            .append(this.type.llvmString()).append(" @")
-            .append(this.name).append('(');
+            .append(this.type.llvmString())
+            .append(" @")
+            .append(this.name)
+            .append('(');
       
       
       Iterator<LLVMValue> argerator = this.arguments.iterator();
