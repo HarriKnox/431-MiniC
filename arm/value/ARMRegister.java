@@ -35,6 +35,12 @@ public class ARMRegister extends ARMValue
    public static final ARMRegister R14 = new ARMRegister(14);
    public static final ARMRegister R15 = new ARMRegister(15);
    
+   public static final ARMRegister RFP = R11;
+   public static final ARMRegister RIP = R12;
+   public static final ARMRegister RSP = R13;
+   public static final ARMRegister RLR = R14;
+   public static final ARMRegister RPC = R15;
+   
    
    public static ARMRegister getReal(int i)
    {
