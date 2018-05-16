@@ -79,13 +79,13 @@ public class Variable extends TokenedElement
    }
 
 
-   public LLVMLocal llvmLocal(String funcName)
+   public LLVMLocal llvmLocal()
    {
       return this.llvmLocal;
    }
 
 
-   public LLVMParameter llvmParameter(String funcName)
+   public LLVMParameter llvmParameter()
    {
       return this.llvmParameter;
    }

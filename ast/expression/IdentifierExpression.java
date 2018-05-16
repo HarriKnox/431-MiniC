@@ -67,7 +67,7 @@ public class IdentifierExpression extends Expression
       variable = current.getLocal(this.id);
       
       if (variable != null)
-         return variable.llvmLocal(current.name);
+         return variable.llvmLocal();
       
       
       /* Find in globals */

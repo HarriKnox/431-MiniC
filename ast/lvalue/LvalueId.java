@@ -60,7 +60,7 @@ public class LvalueId extends Lvalue
       variable = current.getLocal(this.id);
       
       if (variable != null)
-         return variable.llvmLocal(this.id);
+         return variable.llvmLocal();
       
       
       /* Find in globals */
