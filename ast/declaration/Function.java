@@ -119,7 +119,7 @@ public class Function extends TokenedElement
       
       
       return new LLVMFunction(this.name,
-            this.type.llvmType(), params, nodes);
+            this.type.llvmType(), params, locals, nodes);
    }
    
    
