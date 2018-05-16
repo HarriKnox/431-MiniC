@@ -48,7 +48,6 @@ public class Variable extends TokenedElement
       if (this.llvmGlobal == null)
          this.llvmGlobal = new LLVMGlobal(this.name, this.type.llvmType());
       
-      
       return this.llvmGlobal;
    }
 
@@ -67,7 +66,7 @@ public class Variable extends TokenedElement
    {
       if (this.llvmParameter == null)
          this.llvmParameter = new LLVMParameter(
-               funcName, this.name, this.type.llvmType());
+               funcName, this.name, this.type.llvmType(), index);
       
       return this.llvmParameter;
    }
