@@ -102,10 +102,7 @@ public class Function extends TokenedElement
       List<LLVMParameter> params = new ArrayList<>(this.parameters.length);
       
       for (Variable param : this.parameters.variables)
-         params.add(new LLVMParameter(
-               this.name,
-               param.name,
-               param.type.llvmType()));
+         params.add(param.llvmParameter(this.name));
       
       
       List<LLVMCFGNode> nodes = getCFGNodes(program, opts);
@@ -153,13 +150,8 @@ public class Function extends TokenedElement
       {
          LLVMType paramType = param.type.llvmType();
          
-         
-         LLVMParameter llvmParam = new LLVMParameter(
-               this.name, param.name, paramType);
-         
-         LLVMLocal llvmLocal = new LLVMLocal(
-               this.name, param.name, paramType);
-         
+         LLVMParameter llvmParam = param.llvmParameter(this.name);
+         LLVMLocal llvmLocal = param.llvmLocal(this.name);
          
          entry .add(new LLVMAlloca(llvmLocal))
                .add(new LLVMStore(llvmLocal, llvmParam));
@@ -169,8 +161,7 @@ public class Function extends TokenedElement
       /* Allocate space for each local */
       for (Variable local : this.locals.variables)
       {
-         LLVMLocal llvmLocal = new LLVMLocal(
-               this.name, local.name, local.type.llvmType());
+         LLVMLocal llvmLocal = local.llvmLocal(this.name);
          
          entry.add(new LLVMAlloca(llvmLocal));
       }
