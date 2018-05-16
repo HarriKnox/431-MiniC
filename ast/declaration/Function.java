@@ -100,9 +100,19 @@ public class Function extends TokenedElement
    public LLVMFunction buildLLVM(ProgramAST program, Options opts)
    {
       List<LLVMParameter> params = new ArrayList<>(this.parameters.length);
+      List<LLVMLocal> locals = new ArrayList<>(
+            this.parameters.length + this.locals.length);
+      
       
       for (Variable param : this.parameters.variables)
+      {
          params.add(param.llvmParameter(this.name));
+         locals.add(param.llvmLocal(this.name));
+      }
+      
+      
+      for (Variable local : this.locals.variables)
+         locals.add(local.llvmLocal(this.name));
       
       
       List<LLVMCFGNode> nodes = getCFGNodes(program, opts);
