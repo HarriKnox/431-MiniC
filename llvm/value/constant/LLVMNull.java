@@ -25,7 +25,7 @@ public class LLVMNull extends LLVMConstant
       return "null";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -33,5 +33,5 @@ public class LLVMNull extends LLVMConstant
       node.add(movw);
       
       return movw.target;
-   }
+   }*/
 }

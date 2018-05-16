@@ -18,7 +18,7 @@ public class LLVMsgt extends LLVMComparison
       return "sgt";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -32,5 +32,5 @@ public class LLVMsgt extends LLVMComparison
       node.add(mov).add(cmp).add(movgt);
       
       return mov.target;
-   }
+   }*/
 }

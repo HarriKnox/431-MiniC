@@ -18,7 +18,7 @@ public class LLVMmul extends LLVMArithmetic
       return "mul";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -30,5 +30,5 @@ public class LLVMmul extends LLVMArithmetic
       node.add(mul);
       
       return mul.target;
-   }
+   }*/
 }

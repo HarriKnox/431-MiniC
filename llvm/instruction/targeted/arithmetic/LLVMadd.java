@@ -18,7 +18,7 @@ public class LLVMadd extends LLVMArithmetic
       return "add";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -30,5 +30,5 @@ public class LLVMadd extends LLVMArithmetic
       node.add(add);
       
       return add.target;
-   }
+   }*/
 }

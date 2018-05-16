@@ -18,7 +18,7 @@ public class LLVMand extends LLVMLogical
       return "and";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -30,5 +30,5 @@ public class LLVMand extends LLVMLogical
       node.add(and);
       
       return and.target;
-   }
+   }*/
 }

@@ -25,7 +25,7 @@ public class LLVMNot extends LLVMTargetedInstruction
       return "xor i1 true, " + this.source.llvmString();
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -36,5 +36,5 @@ public class LLVMNot extends LLVMTargetedInstruction
       node.add(eor);
       
       return eor.target;
-   }
+   }*/
 }

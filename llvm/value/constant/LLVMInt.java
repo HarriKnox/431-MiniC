@@ -4,9 +4,9 @@ package llvm.value.constant;
 import llvm.type.LLVMIntType;
 import llvm.type.LLVMType;
 
-
+/*
 import arm.value.ARMRegister;
-
+*/
 
 public class LLVMInt extends LLVMConstant
 {
@@ -27,7 +27,7 @@ public class LLVMInt extends LLVMConstant
       return Integer.toString(this.value);
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -45,5 +45,5 @@ public class LLVMInt extends LLVMConstant
       
       
       return movw.target;
-   }
+   }*/
 }

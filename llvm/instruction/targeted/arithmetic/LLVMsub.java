@@ -18,7 +18,7 @@ public class LLVMsub extends LLVMArithmetic
       return "sub";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -30,5 +30,5 @@ public class LLVMsub extends LLVMArithmetic
       node.add(sub);
       
       return sub.target;
-   }
+   }*/
 }

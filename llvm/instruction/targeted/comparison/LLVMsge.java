@@ -18,7 +18,7 @@ public class LLVMsge extends LLVMComparison
       return "sge";
    }
    
-   
+   /*
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -32,5 +32,5 @@ public class LLVMsge extends LLVMComparison
       node.add(mov).add(cmp).add(movge);
       
       return mov.target;
-   }
+   }*/
 }
