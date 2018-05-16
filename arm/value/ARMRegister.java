@@ -29,17 +29,12 @@ public class ARMRegister extends ARMValue
    public static final ARMRegister R8  = new ARMRegister(8);
    public static final ARMRegister R9  = new ARMRegister(9);
    public static final ARMRegister R10 = new ARMRegister(10);
-   public static final ARMRegister R11 = new ARMRegister(11);
-   public static final ARMRegister R12 = new ARMRegister(12);
-   public static final ARMRegister R13 = new ARMRegister(13);
-   public static final ARMRegister R14 = new ARMRegister(14);
-   public static final ARMRegister R15 = new ARMRegister(15);
    
-   public static final ARMRegister RFP = R11;
-   public static final ARMRegister RIP = R12;
-   public static final ARMRegister RSP = R13;
-   public static final ARMRegister RLR = R14;
-   public static final ARMRegister RPC = R15;
+   public static final ARMRegister RFP = new ARMRegister(11);
+   public static final ARMRegister RIP = new ARMRegister(12);
+   public static final ARMRegister RSP = new ARMRegister(13);
+   public static final ARMRegister RLR = new ARMRegister(14);
+   public static final ARMRegister RPC = new ARMRegister(15);
    
    
    public static ARMRegister getReal(int i)
@@ -57,11 +52,11 @@ public class ARMRegister extends ARMValue
          case 8:  return R8;
          case 9:  return R9;
          case 10: return R10;
-         case 11: return R11;
-         case 12: return R12;
-         case 13: return R13;
-         case 14: return R14;
-         case 15: return R15;
+         case 11: return RFP;
+         case 12: return RIP;
+         case 13: return RSP;
+         case 14: return RLR;
+         case 15: return RPC;
       }
       
       return null;
