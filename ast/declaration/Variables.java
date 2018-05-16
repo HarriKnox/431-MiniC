@@ -141,7 +141,7 @@ public class Variables
       List<LLVMGlobal> llvmGlobals = new LinkedList<>();
       
       for (Variable variable : this.variables)
-         llvmGlobals.add(variable.buildLLVM());
+         llvmGlobals.add(variable.llvmGlobal());
       
       
       return new LLVMGlobals(llvmGlobals);
