@@ -19,8 +19,6 @@ import llvm.link.LLVMRet;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.variable.LLVMReturnValue;
-
 
 public class LLVMCFGNode
 {

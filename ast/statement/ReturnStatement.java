@@ -22,8 +22,6 @@ import llvm.value.LLVMValue;
 
 import llvm.value.constant.LLVMNull;
 
-import llvm.value.variable.LLVMReturnValue;
-
 
 public class ReturnStatement extends Statement
 {
@@ -62,7 +60,7 @@ public class ReturnStatement extends Statement
             
             
             LLVMStore store = new LLVMStore(
-                  new LLVMReturnValue(current.name, current.type.llvmType()),
+                  current.returnValue().llvmLocal(),
                   value);
             
             node.add(store);

@@ -34,7 +34,6 @@ import llvm.type.LLVMType;
 import llvm.value.variable.LLVMLocal;
 import llvm.value.variable.LLVMParameter;
 import llvm.value.variable.LLVMRegister;
-import llvm.value.variable.LLVMReturnValue;
 import llvm.value.variable.LLVMVariable;
 
 
@@ -47,6 +46,9 @@ public class Function extends TokenedElement
    public final Statement body;
    
    public final List<Type> parameterTypes;
+   
+   
+   private Variable returnValue;
 
 
    public Function(Token token, String name, Type type,
@@ -97,13 +99,19 @@ public class Function extends TokenedElement
    }
    
    
+   public Variable returnValue()
+   {
+      return this.returnValue;
+   }
+   
+   
    public LLVMFunction buildLLVM(ProgramAST program, Options opts)
    {
       int paramLen = this.parameters.length;
       
       List<LLVMParameter> params = new ArrayList<>(paramLen);
       List<LLVMLocal> locals = new ArrayList<>(
-            paramLen + this.locals.length);
+            paramLen + this.locals.length + 1);
       
       
       for (Variable param : this.parameters.variables)
@@ -115,6 +123,14 @@ public class Function extends TokenedElement
       
       for (Variable local : this.locals.variables)
          locals.add(local.llvmLocalSet(this.name, local.index + paramLen));
+      
+      
+      if (!(this.type instanceof VoidType))
+      {
+         this.returnValue = new Variable(null, "return.value", this.type, 0);
+         locals.add(this.returnValue.llvmLocalSet(
+               this.name, locals.size() + 1));
+      }
       
       
       List<LLVMCFGNode> nodes = getCFGNodes(program, opts);
@@ -147,14 +163,8 @@ public class Function extends TokenedElement
       
       
       /* Allocate space for return value */
-      if (!(this.type instanceof VoidType))
-      {
-         LLVMReturnValue returnValue = new LLVMReturnValue(
-               this.name,
-               this.type.llvmType());
-         
-         entry.add(new LLVMAlloca(returnValue));
-      }
+      if (this.returnValue != null)
+         entry.add(new LLVMAlloca(this.returnValue.llvmLocal()));
       
       
       /* Allocate space and store value for each parameter */
@@ -189,17 +199,13 @@ public class Function extends TokenedElement
       
       
       /* Add return instructions */
-      if (this.type instanceof VoidType)
+      if (this.returnValue == null)
       {
          exit.ret(null);
       }
       else
       {
-         LLVMReturnValue returnValue = new LLVMReturnValue(
-               this.name,
-               this.type.llvmType());
-         
-         LLVMLoad load = new LLVMLoad(returnValue);
+         LLVMLoad load = new LLVMLoad(this.returnValue.llvmLocal());
          
          exit.add(load).ret(load.target);
       }
