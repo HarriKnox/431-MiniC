@@ -20,6 +20,8 @@ import llvm.type.LLVMVoidType;
 
 import llvm.value.LLVMValue;
 
+import llvm.value.constant.LLVMNull;
+
 import llvm.value.variable.LLVMReturnValue;
 
 
@@ -55,8 +57,12 @@ public class ReturnStatement extends Statement
          
          if (!(value.type instanceof LLVMVoidType))
          {
+            if (value instanceof LLVMNull)
+               value = new LLVMNull(current.type.llvmType());
+            
+            
             LLVMStore store = new LLVMStore(
-                  new LLVMReturnValue(current.name, value.type),
+                  new LLVMReturnValue(current.name, current.type.llvmType()),
                   value);
             
             node.add(store);

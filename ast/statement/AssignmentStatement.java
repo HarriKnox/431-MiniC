@@ -19,6 +19,8 @@ import llvm.instruction.LLVMStore;
 
 import llvm.value.LLVMValue;
 
+import llvm.value.constant.LLVMNull;
+
 import llvm.value.variable.LLVMVariable;
 
 
@@ -53,6 +55,9 @@ public class AssignmentStatement extends Statement
                this.source.token,
                target.type.astString(),
                value.type.astString());
+      
+      if (value instanceof LLVMNull)
+         value = new LLVMNull(target.type);
       
       
       LLVMStore store = new LLVMStore(target, value);
