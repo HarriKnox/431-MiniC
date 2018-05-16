@@ -17,6 +17,11 @@ public class Variable extends TokenedElement
    public final String name;
    public final Type type;
    public final int index;
+   
+   
+   private LLVMValue llvmGlobal;
+   private LLVMValue llvmLocal;
+   private LLVMValue llvmParameter;
 
 
    public Variable(Token token, String name, Type type, int index)
@@ -37,27 +42,29 @@ public class Variable extends TokenedElement
    
    public LLVMValue llvmGlobal()
    {
-      if (this.llvmValue == null)
-         this.llvmValue = new LLVMGlobal(this.name, this.type.llvmType());
+      if (this.llvmGlobal == null)
+         this.llvmGlobal = new LLVMGlobal(this.name, this.type.llvmType());
 
-      return this.llvmValue;
+      return this.llvmGlobal;
    }
 
 
    public LLVMValue llvmLocal(String funcName)
    {
-      if (this.llvmValue == null)
-         this.llvmValue = new LLVMLocal(funcName, this.name, this type.llvmType());
+      if (this.llvmLocal == null)
+         this.llvmLocal = new LLVMLocal(funcName,
+               this.name, this type.llvmType());
 
-      return this.llvmValue;
+      return this.llvmLocal;
    }
 
 
    public LLVMValue llvmParameter(String funcName)
    {
-      if (this.llvmValue == null)
-         this.llvmValue = new LLVMParameter(funcName, this.name, this.type.llvmType());
+      if (this.llvmParameter == null)
+         this.llvmParameter = new LLVMParameter(
+               funcName, this.name, this.type.llvmType());
 
-      return this.llvmValue;
+      return this.llvmParameter;
    }
 }
