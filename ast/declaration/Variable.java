@@ -10,6 +10,9 @@ import ast.declaration.Structs;
 import ast.type.Type;
 
 import llvm.value.variable.LLVMGlobal;
+import llvm.value.variable.LLVMLocal;
+import llvm.value.variable.LLVMParameter;
+import llvm.value.variable.LLVMVariable;
 
 
 public class Variable extends TokenedElement
@@ -19,9 +22,9 @@ public class Variable extends TokenedElement
    public final int index;
    
    
-   private LLVMValue llvmGlobal;
-   private LLVMValue llvmLocal;
-   private LLVMValue llvmParameter;
+   private LLVMGlobal llvmGlobal;
+   private LLVMLocal llvmLocal;
+   private LLVMParameter llvmParameter;
 
 
    public Variable(Token token, String name, Type type, int index)
@@ -40,7 +43,7 @@ public class Variable extends TokenedElement
    }
    
    
-   public LLVMValue llvmGlobal()
+   public LLVMGlobal llvmGlobal()
    {
       if (this.llvmGlobal == null)
          this.llvmGlobal = new LLVMGlobal(this.name, this.type.llvmType());
@@ -49,17 +52,17 @@ public class Variable extends TokenedElement
    }
 
 
-   public LLVMValue llvmLocal(String funcName)
+   public LLVMLocal llvmLocal(String funcName)
    {
       if (this.llvmLocal == null)
          this.llvmLocal = new LLVMLocal(funcName,
-               this.name, this type.llvmType());
+               this.name, this.type.llvmType());
 
       return this.llvmLocal;
    }
 
 
-   public LLVMValue llvmParameter(String funcName)
+   public LLVMParameter llvmParameter(String funcName)
    {
       if (this.llvmParameter == null)
          this.llvmParameter = new LLVMParameter(
