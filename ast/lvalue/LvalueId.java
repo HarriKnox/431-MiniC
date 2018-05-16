@@ -60,27 +60,14 @@ public class LvalueId extends Lvalue
       variable = current.getLocal(this.id);
       
       if (variable != null)
-         return new LLVMLocal(
-               current.name,
-               this.id,
-               variable.type.llvmType());
-      
-      
-      /* Find in parameters */
-      variable = current.getParameter(this.id);
-      
-      if (variable != null)
-         return new LLVMParameter(
-               current.name,
-               this.id,
-               variable.type.llvmType());
+         return variable.llvmLocal(this.id);
       
       
       /* Find in globals */
       variable = globals.getVariable(this.id);
       
       if (variable != null)
-         return new LLVMGlobal(this.id, variable.type.llvmType());
+         return variable.llvmGlobal();
       
       
       /* Not found */
