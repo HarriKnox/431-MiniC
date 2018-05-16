@@ -82,7 +82,12 @@ public class Function extends TokenedElement
    
    public Variable getLocal(String name)
    {
-      return this.locals.getVariable(name);
+      Variable local = this.locals.getVariable(name);
+      
+      if (local == null)
+         local = this.getParameter(name);
+      
+      return local;
    }
    
    
