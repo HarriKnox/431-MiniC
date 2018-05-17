@@ -19,6 +19,7 @@ import llvm.instruction.LLVMFree;
 
 import llvm.instruction.targeted.LLVMBitcast;
 
+import llvm.type.LLVMByteType;
 import llvm.type.LLVMPointerType;
 import llvm.type.LLVMStructType;
 
@@ -65,7 +66,7 @@ public class DeleteStatement extends Statement
       
       LLVMBitcast bitcast = new LLVMBitcast(
             (LLVMRegister)value,
-            new LLVMPointerType());
+            new LLVMPointerType(new LLVMByteType()));
       
       LLVMFree free = new LLVMFree(bitcast.target);
       

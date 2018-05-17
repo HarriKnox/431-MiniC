@@ -11,13 +11,6 @@ public class LLVMStdioType extends LLVMType
    
    
    @Override
-   public String astString()
-   {
-      return "";
-   }
-   
-   
-   @Override
    public String llvmString()
    {
       return "i32 (i8*, ...)*";

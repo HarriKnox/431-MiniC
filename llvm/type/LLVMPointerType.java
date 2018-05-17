@@ -3,23 +3,26 @@ package llvm.type;
 
 public class LLVMPointerType extends LLVMType
 {
-   @Override
-   public boolean equivalent(LLVMType t)
+   public final LLVMType type;
+   
+   
+   public LLVMPointerType(LLVMType type)
    {
-      return t instanceof LLVMPointerType;
+      this.type = type;
    }
    
    
    @Override
-   public String astString()
+   public boolean equivalent(LLVMType t)
    {
-      return "null";
+      return (t instanceof LLVMPointerType)
+            && ((LLVMPointerType)t).type.equivalent(this.type);
    }
    
    
    @Override
    public String llvmString()
    {
-      return "i8*";
+      return this.type.llvmString() + '*';
    }
 }

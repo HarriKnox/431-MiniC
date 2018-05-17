@@ -11,13 +11,6 @@ public class LLVMIntPointerType extends LLVMType
    
    
    @Override
-   public String astString()
-   {
-      return "int*";
-   }
-   
-   
-   @Override
    public String llvmString()
    {
       return "i32*";

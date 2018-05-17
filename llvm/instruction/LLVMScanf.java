@@ -10,7 +10,7 @@ import llvm.value.LLVMValue;
 
 import static llvm.value.constant.LLVMStdio.SCANF_FORMAT;
 
-import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH_POINTER;
+import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH;
 
 
 public class LLVMScanf extends LLVMCallVoid
@@ -22,6 +22,6 @@ public class LLVMScanf extends LLVMCallVoid
             new LLVMStdioType(),
             Arrays.asList(new LLVMValue[]{
                   SCANF_FORMAT,
-                  SCANF_SCRATCH_POINTER}));
+                  SCANF_SCRATCH}));
    }
 }

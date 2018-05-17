@@ -1,6 +1,7 @@
 package llvm.value.constant;
 
 
+import llvm.type.LLVMByteType;
 import llvm.type.LLVMPointerType;
 
 
@@ -11,7 +12,7 @@ public class LLVMStdio extends LLVMConstant
    
    private LLVMStdio(String name)
    {
-      super(new LLVMPointerType());
+      super(new LLVMPointerType(new LLVMByteType()));
       
       this.name = "@." + name;
    }
