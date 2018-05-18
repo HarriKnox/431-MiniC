@@ -23,7 +23,9 @@ import llvm.type.LLVMType;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.constant.LLVMNull;
+import llvm.value.operand.LLVMOperand;
+
+import llvm.value.operand.constant.LLVMNull;
 
 
 public class InvocationExpression extends Expression
@@ -57,7 +59,7 @@ public class InvocationExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       Function function = this.getFunction(program);

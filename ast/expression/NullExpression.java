@@ -9,9 +9,9 @@ import ast.declaration.Function;
 
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
-import llvm.value.constant.LLVMNull;
+import llvm.value.operand.constant.LLVMNull;
 
 
 public class NullExpression extends Expression
@@ -23,7 +23,7 @@ public class NullExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       return new LLVMNull();

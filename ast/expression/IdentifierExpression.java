@@ -15,11 +15,12 @@ import llvm.LLVMCFGNode;
 
 import llvm.instruction.targeted.LLVMLoad;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
+
+import llvm.value.operand.register.LLVMParameter;
 
 import llvm.value.variable.LLVMGlobal;
 import llvm.value.variable.LLVMLocal;
-import llvm.value.variable.LLVMParameter;
 import llvm.value.variable.LLVMVariable;
 
 
@@ -37,7 +38,7 @@ public class IdentifierExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       LLVMVariable source = findVariable(program.globals, current);

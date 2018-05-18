@@ -17,7 +17,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class BinaryExpression extends Expression
@@ -37,11 +37,11 @@ public abstract class BinaryExpression extends Expression
    }
    
    
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      LLVMValue left = this.left.buildLLVM(program, current, node);
-      LLVMValue right = this.right.buildLLVM(program, current, node);
+      LLVMOperand left = this.left.buildLLVM(program, current, node);
+      LLVMOperand right = this.right.buildLLVM(program, current, node);
       
       
       if (left == null || right == null)
@@ -68,10 +68,11 @@ public abstract class BinaryExpression extends Expression
    }
    
    
-   protected abstract boolean areValidTypes(LLVMValue left, LLVMValue right);
+   protected abstract boolean areValidTypes(
+         LLVMOperand left, LLVMOperand right);
    
    protected abstract String getOperation();
    
    protected abstract LLVMTargetedInstruction getInstruction(
-         LLVMValue left, LLVMValue right);
+         LLVMOperand left, LLVMOperand right);
 }

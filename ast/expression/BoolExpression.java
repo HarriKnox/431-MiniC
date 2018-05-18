@@ -9,9 +9,9 @@ import ast.declaration.Function;
 
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
-import llvm.value.constant.LLVMBool;
+import llvm.value.operand.constant.LLVMBool;
 
 
 public class BoolExpression extends Expression
@@ -28,7 +28,7 @@ public class BoolExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       return new LLVMBool(this.value);

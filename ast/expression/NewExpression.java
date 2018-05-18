@@ -17,7 +17,7 @@ import llvm.LLVMCFGNode;
 import llvm.instruction.targeted.LLVMBitcast;
 import llvm.instruction.targeted.LLVMMalloc;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class NewExpression extends Expression
@@ -33,7 +33,7 @@ public class NewExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       Struct struct = program.structs.getStruct(this.id);

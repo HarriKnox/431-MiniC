@@ -13,7 +13,7 @@ import llvm.instruction.LLVMScanf;
 
 import llvm.instruction.targeted.LLVMLoad;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH;
@@ -28,7 +28,7 @@ public class ReadExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       LLVMScanf scanf = new LLVMScanf();

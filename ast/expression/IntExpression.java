@@ -11,9 +11,9 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
-import llvm.value.constant.LLVMInt;
+import llvm.value.operand.constant.LLVMInt;
 
 
 public class IntExpression extends Expression
@@ -44,7 +44,7 @@ public class IntExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       String val = this.negative ? ('-' + this.value) : this.value;

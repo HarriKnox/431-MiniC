@@ -9,7 +9,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.instruction.targeted.arithmetic.LLVMmul;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class TimesExpression extends ArithmeticExpression
@@ -29,7 +29,7 @@ public class TimesExpression extends ArithmeticExpression
    
    @Override
    protected LLVMTargetedInstruction getInstruction(
-         LLVMValue left, LLVMValue right)
+         LLVMOperand left, LLVMOperand right)
    {
       return new LLVMmul(left, right);
    }

@@ -10,7 +10,7 @@ import ast.declaration.Function;
 
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class Expression extends TokenedElement
@@ -26,6 +26,6 @@ public abstract class Expression extends TokenedElement
    }
    
    
-   public abstract LLVMValue buildLLVM(
+   public abstract LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node);
 }

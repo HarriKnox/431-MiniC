@@ -9,7 +9,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.instruction.targeted.logical.LLVMand;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class AndExpression extends LogicalExpression
@@ -29,7 +29,7 @@ public class AndExpression extends LogicalExpression
    
    @Override
    protected LLVMTargetedInstruction getInstruction(
-         LLVMValue left, LLVMValue right)
+         LLVMOperand left, LLVMOperand right)
    {
       return new LLVMand(left, right);
    }

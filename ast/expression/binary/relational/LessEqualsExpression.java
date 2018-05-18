@@ -9,7 +9,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.instruction.targeted.comparison.LLVMsle;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LessEqualsExpression extends RelationalExpression
@@ -29,7 +29,7 @@ public class LessEqualsExpression extends RelationalExpression
    
    @Override
    protected LLVMTargetedInstruction getInstruction(
-         LLVMValue left, LLVMValue right)
+         LLVMOperand left, LLVMOperand right)
    {
       return new LLVMsle(left, right);
    }

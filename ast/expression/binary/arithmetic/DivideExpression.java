@@ -9,7 +9,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.instruction.targeted.arithmetic.LLVMsdiv;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class DivideExpression extends ArithmeticExpression
@@ -29,7 +29,7 @@ public class DivideExpression extends ArithmeticExpression
    
    @Override
    protected LLVMTargetedInstruction getInstruction(
-         LLVMValue left, LLVMValue right)
+         LLVMOperand left, LLVMOperand right)
    {
       return new LLVMsdiv(left, right);
    }

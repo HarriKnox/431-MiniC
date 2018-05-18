@@ -12,12 +12,13 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.targeted.LLVMGetelementptr;
+import llvm.instruction.LLVMGetelementptr;
+
 import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.type.LLVMStructType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class DotExpression extends Expression
@@ -36,10 +37,10 @@ public class DotExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      LLVMValue leftValue = this.left.buildLLVM(program, current, node);
+      LLVMOperand leftValue = this.left.buildLLVM(program, current, node);
       
       
       /* null indicates something went wrong deeper in the tree */

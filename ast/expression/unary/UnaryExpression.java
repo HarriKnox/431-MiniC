@@ -17,7 +17,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class UnaryExpression extends Expression
@@ -34,10 +34,10 @@ public abstract class UnaryExpression extends Expression
    
    
    @Override
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      LLVMValue value = this.operand.buildLLVM(program, current, node);
+      LLVMOperand value = this.operand.buildLLVM(program, current, node);
       
       
       if (value == null)
@@ -67,5 +67,6 @@ public abstract class UnaryExpression extends Expression
    
    protected abstract String getOperation();
    
-   protected abstract LLVMTargetedInstruction getInstruction(LLVMValue value);
+   protected abstract LLVMTargetedInstruction
+         getInstruction(LLVMOperand value);
 }

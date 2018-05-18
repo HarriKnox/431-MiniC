@@ -9,7 +9,7 @@ import ast.expression.binary.BinaryExpression;
 
 import llvm.type.LLVMIntType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class ArithmeticExpression extends BinaryExpression
@@ -21,7 +21,7 @@ public abstract class ArithmeticExpression extends BinaryExpression
    
    
    @Override
-   protected boolean areValidTypes(LLVMValue left, LLVMValue right)
+   protected boolean areValidTypes(LLVMOperand left, LLVMOperand right)
    {
       return (left.type instanceof LLVMIntType)
             && (right.type instanceof LLVMIntType);

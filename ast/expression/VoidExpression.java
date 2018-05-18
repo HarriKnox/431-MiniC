@@ -12,9 +12,9 @@ import llvm.LLVMCFGNode;
 
 import llvm.type.LLVMVoidType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.register.LLVMVirtual;
 
 
 public class VoidExpression extends Expression
@@ -25,9 +25,9 @@ public class VoidExpression extends Expression
    }
    
    
-   public LLVMValue buildLLVM(
+   public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      return new LLVMRegister(new LLVMVoidType());
+      return new LLVMVirtual(new LLVMVoidType());
    }
 }

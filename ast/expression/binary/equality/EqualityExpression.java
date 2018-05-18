@@ -7,7 +7,7 @@ import ast.expression.Expression;
 
 import ast.expression.binary.BinaryExpression;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class EqualityExpression extends BinaryExpression
@@ -19,7 +19,7 @@ public abstract class EqualityExpression extends BinaryExpression
    
    
    @Override
-   protected boolean areValidTypes(LLVMValue left, LLVMValue right)
+   protected boolean areValidTypes(LLVMOperand left, LLVMOperand right)
    {
       return left.type.equivalent(right.type);
    }

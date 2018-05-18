@@ -11,7 +11,7 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 import llvm.type.LLVMBoolType;
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class NotExpression extends UnaryExpression
@@ -37,7 +37,7 @@ public class NotExpression extends UnaryExpression
    
    
    @Override
-   protected LLVMTargetedInstruction getInstruction(LLVMValue value)
+   protected LLVMTargetedInstruction getInstruction(LLVMOperand value)
    {
       return new LLVMNot(value);
    }
