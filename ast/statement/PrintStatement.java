@@ -17,7 +17,7 @@ import llvm.instruction.LLVMPrintf;
 
 import llvm.type.LLVMIntType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class PrintStatement extends Statement
@@ -39,7 +39,7 @@ public class PrintStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMValue value = this.expression.buildLLVM(program, current, node);
+      LLVMOperand value = this.expression.buildLLVM(program, current, node);
       
       
       if (value == null)

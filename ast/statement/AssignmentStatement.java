@@ -17,9 +17,9 @@ import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMStore;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
-import llvm.value.constant.LLVMNull;
+import llvm.value.operand.constant.LLVMNull;
 
 import llvm.value.variable.LLVMVariable;
 
@@ -43,7 +43,7 @@ public class AssignmentStatement extends Statement
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
       LLVMVariable target = this.target.buildLLVM(program, current, node);
-      LLVMValue value = this.source.buildLLVM(program, current, node);
+      LLVMOperand value = this.source.buildLLVM(program, current, node);
       
       
       if (target == null || value == null)

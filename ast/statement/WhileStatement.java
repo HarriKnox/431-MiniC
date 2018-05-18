@@ -15,7 +15,7 @@ import llvm.LLVMCFGNode;
 
 import llvm.type.LLVMBoolType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class WhileStatement extends Statement
@@ -40,7 +40,8 @@ public class WhileStatement extends Statement
       
       node.jump(guardNode);
       
-      LLVMValue llvmGuard = this.guard.buildLLVM(program, current, guardNode);
+      LLVMOperand llvmGuard = this.guard.buildLLVM(
+            program, current, guardNode);
       
       
       if ((llvmGuard != null)

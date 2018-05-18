@@ -13,7 +13,7 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 import llvm.type.LLVMBoolType;
 
@@ -42,7 +42,7 @@ public class ConditionalStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMValue llvmGuard = this.guard.buildLLVM(program, current, node);
+      LLVMOperand llvmGuard = this.guard.buildLLVM(program, current, node);
       
       
       if ((llvmGuard != null)

@@ -18,9 +18,9 @@ import llvm.instruction.LLVMStore;
 import llvm.type.LLVMType;
 import llvm.type.LLVMVoidType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
-import llvm.value.constant.LLVMNull;
+import llvm.value.operand.constant.LLVMNull;
 
 
 public class ReturnStatement extends Statement
@@ -39,7 +39,7 @@ public class ReturnStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMValue value = this.expression.buildLLVM(program, current, node);
+      LLVMOperand value = this.expression.buildLLVM(program, current, node);
       
       LLVMType retType = current.type.llvmType();
       
