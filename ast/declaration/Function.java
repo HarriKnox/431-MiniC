@@ -127,6 +127,7 @@ public class Function extends TokenedElement
       if (!(this.type instanceof VoidType))
       {
          this.returnValue = new Variable(null, "return.value", this.type, 0);
+         
          locals.add(this.returnValue.llvmLocalSet(
                this.name, locals.size() + 1));
       }
@@ -137,7 +138,9 @@ public class Function extends TokenedElement
       
       return new LLVMFunction(
             this.name, this.type.llvmType(), params,
-            locals, nodes, this.returnValue.llvmLocal());
+            locals, nodes, (this.returnValue == null)
+                  ? null
+                  : this.returnValue.llvmLocal());
    }
    
    
@@ -170,8 +173,6 @@ public class Function extends TokenedElement
       /* Allocate space and store value for each parameter */
       for (Variable param : this.parameters.variables)
       {
-         LLVMType paramType = param.type.llvmType();
-         
          LLVMParameter llvmParam = param.llvmParameter();
          LLVMLocal llvmLocal = param.llvmLocal();
          
