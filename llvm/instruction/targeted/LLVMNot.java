@@ -1,17 +1,15 @@
 package llvm.instruction.targeted;
 
 
-import llvm.value.LLVMValue;
-
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMNot extends LLVMTargetedInstruction
 {
-   public final LLVMValue source;
+   public final LLVMOperand source;
    
    
-   public LLVMNot(LLVMValue source)
+   public LLVMNot(LLVMOperand source)
    {
       super(source.type);
       

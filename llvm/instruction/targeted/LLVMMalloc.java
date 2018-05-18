@@ -6,7 +6,7 @@ import java.util.Collections;
 import llvm.type.LLVMByteType;
 import llvm.type.LLVMPointerType;
 
-import llvm.value.constant.LLVMInt;
+import llvm.value.operand.constant.LLVMInt;
 
 
 public class LLVMMalloc extends LLVMCall

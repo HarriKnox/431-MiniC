@@ -1,17 +1,15 @@
 package llvm.instruction.targeted;
 
 
-import llvm.value.LLVMValue;
-
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMNegate extends LLVMTargetedInstruction
 {
-   public final LLVMValue source;
+   public final LLVMOperand source;
    
    
-   public LLVMNegate(LLVMValue source)
+   public LLVMNegate(LLVMOperand source)
    {
       super(source.type);
       

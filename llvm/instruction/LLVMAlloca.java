@@ -4,7 +4,6 @@ package llvm.instruction;
 import llvm.type.LLVMType;
 import llvm.type.LLVMVoidType;
 
-import llvm.value.variable.LLVMRegister;
 import llvm.value.variable.LLVMVariable;
 
 

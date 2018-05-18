@@ -8,7 +8,7 @@ import llvm.type.LLVMStdioType;
 import llvm.value.LLVMValue;
 
 
-import static llvm.value.constant.LLVMStdio.SCANF_FORMAT;
+import static llvm.value.operand.constant.LLVMStdio.SCANF_FORMAT;
 
 import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH;
 

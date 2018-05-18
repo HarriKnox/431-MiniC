@@ -1,12 +1,12 @@
 package llvm.instruction.targeted.logical;
 
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMor extends LLVMLogical
 {
-   public LLVMor(LLVMValue left, LLVMValue right)
+   public LLVMor(LLVMOperand left, LLVMOperand right)
    {
       super(left, right);
    }

@@ -5,17 +5,17 @@ import llvm.instruction.LLVMInstruction;
 
 import llvm.type.LLVMType;
 
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.register.LLVMVirtual;
 
 
 public abstract class LLVMTargetedInstruction extends LLVMInstruction
 {
-   public final LLVMRegister target;
+   public final LLVMVirtual target;
    
    
    public LLVMTargetedInstruction(LLVMType type)
    {
-      this.target = new LLVMRegister(type);
+      this.target = new LLVMVirtual(type);
    }
    
    

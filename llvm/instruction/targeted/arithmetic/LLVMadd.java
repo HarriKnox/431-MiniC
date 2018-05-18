@@ -1,12 +1,12 @@
 package llvm.instruction.targeted.arithmetic;
 
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMadd extends LLVMArithmetic
 {
-   public LLVMadd(LLVMValue left, LLVMValue right)
+   public LLVMadd(LLVMOperand left, LLVMOperand right)
    {
       super(left, right);
    }

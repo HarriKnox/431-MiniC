@@ -5,18 +5,16 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMBoolType;
 
-import llvm.value.LLVMValue;
-
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class LLVMComparison extends LLVMTargetedInstruction
 {
-   public final LLVMValue left;
-   public final LLVMValue right;
+   public final LLVMOperand left;
+   public final LLVMOperand right;
    
    
-   public LLVMComparison(LLVMValue left, LLVMValue right)
+   public LLVMComparison(LLVMOperand left, LLVMOperand right)
    {
       super(new LLVMBoolType());
       

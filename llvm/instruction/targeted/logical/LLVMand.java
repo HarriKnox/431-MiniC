@@ -1,12 +1,12 @@
 package llvm.instruction.targeted.logical;
 
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMand extends LLVMLogical
 {
-   public LLVMand(LLVMValue left, LLVMValue right)
+   public LLVMand(LLVMOperand left, LLVMOperand right)
    {
       super(left, right);
    }

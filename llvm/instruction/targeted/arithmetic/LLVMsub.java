@@ -1,12 +1,12 @@
 package llvm.instruction.targeted.arithmetic;
 
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMsub extends LLVMArithmetic
 {
-   public LLVMsub(LLVMValue left, LLVMValue right)
+   public LLVMsub(LLVMOperand left, LLVMOperand right)
    {
       super(left, right);
    }

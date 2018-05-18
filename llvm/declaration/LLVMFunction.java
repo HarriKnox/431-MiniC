@@ -12,8 +12,9 @@ import llvm.LLVMCFGNode;
 
 import llvm.type.LLVMType;
 
+import llvm.value.operand.register.LLVMParameter;
+
 import llvm.value.variable.LLVMLocal;
-import llvm.value.variable.LLVMParameter;
 
 
 public class LLVMFunction

@@ -3,17 +3,17 @@ package llvm.instruction;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.LLVMOperand;
 import llvm.value.variable.LLVMVariable;
 
 
 public class LLVMStore extends LLVMInstruction
 {
    public final LLVMVariable target;
-   public final LLVMValue source;
+   public final LLVMOperand source;
    
    
-   public LLVMStore(LLVMVariable target, LLVMValue source)
+   public LLVMStore(LLVMVariable target, LLVMOperand source)
    {
       this.target = target;
       

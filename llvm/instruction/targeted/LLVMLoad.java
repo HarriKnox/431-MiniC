@@ -1,17 +1,15 @@
 package llvm.instruction.targeted;
 
 
-import llvm.value.LLVMValue;
-
-import llvm.value.variable.LLVMRegister;
+import llvm.value.variable.LLVMVariable;
 
 
 public class LLVMLoad extends LLVMTargetedInstruction
 {
-   public final LLVMValue source;
+   public final LLVMVariable source;
    
    
-   public LLVMLoad(LLVMValue source)
+   public LLVMLoad(LLVMVariable source)
    {
       super(source.type);
       this.source = source;

@@ -1,12 +1,12 @@
 package llvm.instruction.targeted.comparison;
 
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMsle extends LLVMComparison
 {
-   public LLVMsle(LLVMValue left, LLVMValue right)
+   public LLVMsle(LLVMOperand left, LLVMOperand right)
    {
       super(left, right);
    }

@@ -3,16 +3,15 @@ package llvm.instruction.targeted;
 
 import llvm.type.LLVMType;
 
-import llvm.value.variable.LLVMRegister;
-import llvm.value.variable.LLVMVariable;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMBitcast extends LLVMTargetedInstruction
 {
-   public final LLVMVariable source;
+   public final LLVMOperand source;
    
    
-   public LLVMBitcast(LLVMVariable source, LLVMType targetType)
+   public LLVMBitcast(LLVMOperand source, LLVMType targetType)
    {
       super(targetType);
       this.source = source;

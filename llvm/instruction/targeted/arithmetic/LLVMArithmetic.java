@@ -5,18 +5,16 @@ import llvm.instruction.targeted.LLVMTargetedInstruction;
 
 import llvm.type.LLVMIntType;
 
-import llvm.value.LLVMValue;
-
-import llvm.value.variable.LLVMRegister;
+import llvm.value.operand.LLVMOperand;
 
 
 public abstract class LLVMArithmetic extends LLVMTargetedInstruction
 {
-   public final LLVMValue left;
-   public final LLVMValue right;
+   public final LLVMOperand left;
+   public final LLVMOperand right;
    
    
-   public LLVMArithmetic(LLVMValue left, LLVMValue right)
+   public LLVMArithmetic(LLVMOperand left, LLVMOperand right)
    {
       super(new LLVMIntType());
       

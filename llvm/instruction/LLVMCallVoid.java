@@ -8,8 +8,6 @@ import llvm.type.LLVMType;
 
 import llvm.value.LLVMValue;
 
-import llvm.value.variable.LLVMRegister;
-
 
 public class LLVMCallVoid extends LLVMInstruction
 {

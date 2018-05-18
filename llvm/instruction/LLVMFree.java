@@ -5,12 +5,12 @@ import java.util.Collections;
 
 import llvm.type.LLVMVoidType;
 
-import llvm.value.variable.LLVMVariable;
+import llvm.value.operand.register.LLVMVirtual;
 
 
 public class LLVMFree extends LLVMCallVoid
 {
-   public LLVMFree(LLVMVariable pointer)
+   public LLVMFree(LLVMVirtual pointer)
    {
       super("free", new LLVMVoidType(), Collections.singletonList(pointer));
    }
