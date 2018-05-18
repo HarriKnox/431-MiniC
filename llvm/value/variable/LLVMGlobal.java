@@ -2,7 +2,6 @@ package llvm.value.variable;
 
 
 import llvm.type.LLVMIntType;
-import llvm.type.LLVMPointerType;
 import llvm.type.LLVMType;
 
 

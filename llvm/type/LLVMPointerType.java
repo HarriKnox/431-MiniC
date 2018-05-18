@@ -21,8 +21,22 @@ public class LLVMPointerType extends LLVMType
    
    
    @Override
+   public String astString()
+   {
+      return this.type.astString() + " pointer";
+   }
+   
+   
+   @Override
    public String llvmString()
    {
       return this.type.llvmString() + '*';
+   }
+   
+   
+   @Override
+   public String defaultValue()
+   {
+      return this.type.defaultValue();
    }
 }
