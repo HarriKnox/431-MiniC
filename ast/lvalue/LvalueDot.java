@@ -12,7 +12,8 @@ import common.ErrorPrinter;
 
 import llvm.LLVMCFGNode;
 
-import llvm.instruction.targeted.LLVMGetelementptr;
+import llvm.instruction.LLVMGetelementptr;
+
 import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.type.LLVMStructType;
