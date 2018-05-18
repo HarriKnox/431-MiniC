@@ -3,16 +3,20 @@ package llvm;
 
 import java.io.PrintWriter;
 
+import java.util.Arrays;
+
 import llvm.declaration.LLVMFunctions;
 import llvm.declaration.LLVMGlobals;
 import llvm.declaration.LLVMStructs;
 
+import llvm.value.operand.constant.LLVMStdio;
+
 import common.Options;
 
 
-import static llvm.value.constant.LLVMStdio.PRINTLN_FORMAT;
-import static llvm.value.constant.LLVMStdio.PRINT_FORMAT;
-import static llvm.value.constant.LLVMStdio.SCANF_FORMAT;
+import static llvm.value.operand.constant.LLVMStdio.PRINTLN_FORMAT;
+import static llvm.value.operand.constant.LLVMStdio.PRINT_FORMAT;
+import static llvm.value.operand.constant.LLVMStdio.SCANF_FORMAT;
 
 import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH;
 
@@ -67,16 +71,20 @@ public class ProgramLLVM
       printer.println();
       
       
-      printer.print(PRINTLN_FORMAT.name);
-      printer.println(" = private unnamed_addr constant [4 x i8] c\"%d\\0A\\00\", align 1");
-      
-      printer.print(PRINT_FORMAT.name);
-      printer.println(" = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1");
-      
-      printer.print(SCANF_FORMAT.name);
-      printer.println(" = private unnamed_addr constant [4 x i8] c\"%d\\00\\00\", align 1");
-      
-      printer.print(SCANF_SCRATCH.llvmString());
-      printer.println(" = common global i32 0, align 4");
+      for (LLVMStdio stdio : Arrays.asList(new LLVMStdio[]{
+               PRINTLN_FORMAT, PRINT_FORMAT, SCANF_FORMAT}))
+      {
+         printer.print(stdio.name);
+         printer.print(" = private unnamed_addr constant [4 x i8] ");
+         printer.print(stdio.initialization);
+         printer.println(", align 1");
+      }
    }
+   
+   /*
+   public ProgramARM buildARM(Options opts)
+   {
+      ARMGlobals = this.llvmGlobals.buildARM();
+      ARMFunctions = this.llvmFunctions.buildARM();
+   }*/
 }
