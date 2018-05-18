@@ -1,4 +1,4 @@
-package arm.value.constant;
+package arm.operand.constant;
 
 
 public class ARMInt extends ARMConstant

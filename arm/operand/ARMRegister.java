@@ -1,7 +1,7 @@
-package arm.value;
+package arm.operand;
 
 
-public class ARMRegister extends ARMValue
+public class ARMRegister extends ARMOperand
 {
    private int number = -1;
    
@@ -52,6 +52,7 @@ public class ARMRegister extends ARMValue
          case 8:  return R8;
          case 9:  return R9;
          case 10: return R10;
+         
          case 11: return RFP;
          case 12: return RIP;
          case 13: return RSP;

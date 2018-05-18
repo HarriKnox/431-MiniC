@@ -1,7 +1,7 @@
-package arm.value.global;
+package arm.operand.constant.label;
 
 
-public class ARMStdio extends ARMConstant
+public class ARMStdio extends ARMLabel
 {
    public final String name;
    public final String asciz;

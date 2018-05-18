@@ -1,7 +1,7 @@
-package arm.value.global;
+package arm.operand.constant.label;
 
 
-public class ARMGlobal extends ARMValue
+public class ARMGlobal extends ARMLabel
 {
    public final String name;
    

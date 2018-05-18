@@ -1,10 +1,10 @@
-package arm.value.constant;
+package arm.operand.constant;
 
 
-import arm.value.ARMValue;
+import arm.operand.ARMOperand;
 
 
-public abstract class ARMConstant extends ARMValue
+public abstract class ARMConstant extends ARMOperand
 {
    public abstract String lowerARMString();
    
