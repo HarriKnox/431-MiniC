@@ -1,10 +1,10 @@
-package llvm.value.variable;
+package llvm.value.operand.register;
 
 
 import llvm.type.LLVMType;
 
 
-public class LLVMRegister extends LLVMVariable
+public class LLVMVirtual extends LLVMRegister
 {/*
    private ARMRegister armReg = null;
    */
@@ -13,7 +13,7 @@ public class LLVMRegister extends LLVMVariable
    private static int count = 0;
    
    
-   public LLVMRegister(LLVMType type)
+   public LLVMVirtual(LLVMType type)
    {
       super(type);
    }

@@ -1,4 +1,4 @@
-package llvm.value.constant;
+package llvm.value.operand.constant;
 
 
 import llvm.type.LLVMNullType;

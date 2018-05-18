@@ -1,8 +1,7 @@
-package llvm.value.constant;
+package llvm.value.operand.constant;
 
 
 import llvm.type.LLVMIntType;
-import llvm.type.LLVMType;
 
 /*
 import arm.value.ARMRegister;

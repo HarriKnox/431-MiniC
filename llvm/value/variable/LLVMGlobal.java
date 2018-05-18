@@ -27,5 +27,5 @@ public class LLVMGlobal extends LLVMVariable
    
    
    public static final LLVMGlobal SCANF_SCRATCH = new LLVMGlobal(
-         ".scanf_scratch", new LLVMPointerType(new LLVMIntType()));
+         ".scanf_scratch", new LLVMIntType());
 }

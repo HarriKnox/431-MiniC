@@ -1,8 +1,7 @@
-package llvm.value.constant;
+package llvm.value.operand.constant;
 
 
 import llvm.type.LLVMBoolType;
-import llvm.type.LLVMType;
 
 
 public class LLVMBool extends LLVMConstant

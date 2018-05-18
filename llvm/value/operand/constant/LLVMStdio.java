@@ -1,4 +1,4 @@
-package llvm.value.constant;
+package llvm.value.operand.constant;
 
 
 import llvm.type.LLVMByteType;
@@ -8,13 +8,15 @@ import llvm.type.LLVMPointerType;
 public class LLVMStdio extends LLVMConstant
 {
    public final String name;
+   public final String initialization;
    
    
-   private LLVMStdio(String name)
+   private LLVMStdio(String name, String initialization)
    {
       super(new LLVMPointerType(new LLVMByteType()));
       
       this.name = "@." + name;
+      this.initialization = initialization;
    }
    
    
@@ -26,11 +28,11 @@ public class LLVMStdio extends LLVMConstant
    
    
    public static final LLVMStdio PRINT_FORMAT
-         = new LLVMStdio("print_format");
+         = new LLVMStdio("print_format", "c\"%d\\0A\\00\"");
    
    public static final LLVMStdio PRINTLN_FORMAT
-         = new LLVMStdio("println_format");
+         = new LLVMStdio("println_format", "c\"%d \\00\"");
    
    public static final LLVMStdio SCANF_FORMAT
-         = new LLVMStdio("scanf_format");
+         = new LLVMStdio("scanf_format", "c\"%d\\00\\00\"");
 }
