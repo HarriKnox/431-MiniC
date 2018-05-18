@@ -365,4 +365,16 @@ public class LLVMCFGNode
          printer.println(this.link.llvmString());
       }
    }
+   
+   
+   public ARMCFGNode buildARM()
+   {
+      ARMCFGNode armNode = new ARMCFGNode(this.uid);
+      
+      for (LLVMInstruction instruction : this.instructions)
+         instruction.buildARM(armNode);
+      
+      
+      return armNode;
+   }
 }

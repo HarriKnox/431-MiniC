@@ -3,9 +3,13 @@ package llvm.declaration;
 
 import java.io.PrintWriter;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import common.Options;
+
+import arm.declaration.ARMFunction;
+import arm.declaration.ARMFunctions;
 
 
 public class LLVMFunctions
@@ -26,5 +30,17 @@ public class LLVMFunctions
          function.writeLLVM(printer);
          printer.println();
       }
+   }
+   
+   
+   public ARMFunctions buildARM()
+   {
+      List<ARMFunction> armFunctions = new LinkedList<>();
+      
+      for (LLVMFunction function : this.functions)
+         armFunctions.add(function.buildARM())
+      
+      
+      return new ARMFunctions(armFunctions);
    }
 }

@@ -81,10 +81,10 @@ public class ProgramLLVM
       }
    }
    
-   /*
+   
    public ProgramARM buildARM(Options opts)
    {
       ARMGlobals = this.llvmGlobals.buildARM();
       ARMFunctions = this.llvmFunctions.buildARM();
-   }*/
+   }
 }

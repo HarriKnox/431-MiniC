@@ -74,4 +74,21 @@ public class LLVMFunction
       
       return sb.append(')').toString();
    }
+   
+   
+   public ARMFunction buildARM()
+   {
+      List<ARMCFGNode> armNodes = new ArrayList<>(this.nodes.size());
+      
+      for (LLVMNode node : this.nodes)
+         armNodes.add(node.buildARM());
+      
+      
+      ARMCFGNode first = armNodes.get(0);
+      
+      first.instructions.add(0, new ARMSub(ARMRegister.RFP, ARMRegister.RSP, this.locals.size() * 4));
+      
+      
+      return new ARMFunction(this.name, armNodes);
+   }
 }

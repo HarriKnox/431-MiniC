@@ -10,6 +10,9 @@ import common.Options;
 import llvm.value.variable.LLVMGlobal;
 
 
+import arm.declaration.ARMGlobals;
+
+
 public class LLVMGlobals
 {
    public final List<LLVMGlobal> globals;
@@ -40,5 +43,17 @@ public class LLVMGlobals
             .append(global.type.defaultValue())
             .append(", align 4")
             .toString();
+   }
+   
+   
+   public ARMGlobals buildARM()
+   {
+      List<String> armGlobals = new LinkedList<>();
+      
+      for (LLVMGlobal global : this.globals)
+         armGlobals.add(global.identifier);
+      
+      
+      return new ARMGlobals(armGlobals);
    }
 }
