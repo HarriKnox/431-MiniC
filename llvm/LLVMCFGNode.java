@@ -17,7 +17,7 @@ import llvm.link.LLVMJump;
 import llvm.link.LLVMLink;
 import llvm.link.LLVMRet;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMCFGNode
@@ -64,7 +64,7 @@ public class LLVMCFGNode
    }
    
    
-   public void branch(LLVMValue guard,
+   public void branch(LLVMOperand guard,
          LLVMCFGNode thenNode, LLVMCFGNode elseNode)
    {
       thenNode.predecessors.add(this);
@@ -74,7 +74,7 @@ public class LLVMCFGNode
    }
    
    
-   public void ret(LLVMValue value)
+   public void ret(LLVMOperand value)
    {
       this.link = new LLVMRet(value);
    }
