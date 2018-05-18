@@ -3,18 +3,18 @@ package llvm.link;
 
 import llvm.LLVMCFGNode;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMBranch extends LLVMLink
 {
-   public final LLVMValue guard;
+   public final LLVMOperand guard;
    public final boolean loop;
    public final LLVMCFGNode thenNode;
    public final LLVMCFGNode elseNode;
    
    
-   public LLVMBranch(LLVMValue guard, boolean loop,
+   public LLVMBranch(LLVMOperand guard, boolean loop,
          LLVMCFGNode thenNode, LLVMCFGNode elseNode)
    {
       this.guard = guard;

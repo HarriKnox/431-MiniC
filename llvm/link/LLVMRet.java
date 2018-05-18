@@ -1,15 +1,15 @@
 package llvm.link;
 
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMRet extends LLVMLink
 {
-   public final LLVMValue value;
+   public final LLVMOperand value;
    
    
-   public LLVMRet(LLVMValue value)
+   public LLVMRet(LLVMOperand value)
    {
       this.value = value;
    }
