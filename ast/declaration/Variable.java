@@ -9,10 +9,10 @@ import ast.declaration.Structs;
 
 import ast.type.Type;
 
+import llvm.value.operand.register.LLVMParameter;
+
 import llvm.value.variable.LLVMGlobal;
 import llvm.value.variable.LLVMLocal;
-import llvm.value.variable.LLVMParameter;
-import llvm.value.variable.LLVMVariable;
 
 
 public class Variable extends TokenedElement

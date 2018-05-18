@@ -16,6 +16,9 @@ import llvm.declaration.LLVMGlobals;
 import llvm.value.variable.LLVMGlobal;
 
 
+import static llvm.value.variable.LLVMGlobal.SCANF_SCRATCH;
+
+
 public class Variables
 {
    public final List<Variable> variables;
@@ -142,6 +145,9 @@ public class Variables
       
       for (Variable variable : this.variables)
          llvmGlobals.add(variable.llvmGlobalSet());
+      
+      
+      llvmGlobals.add(SCANF_SCRATCH);
       
       
       return new LLVMGlobals(llvmGlobals);

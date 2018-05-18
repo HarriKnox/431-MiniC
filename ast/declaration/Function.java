@@ -31,10 +31,9 @@ import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.type.LLVMType;
 
+import llvm.value.operand.register.LLVMParameter;
+
 import llvm.value.variable.LLVMLocal;
-import llvm.value.variable.LLVMParameter;
-import llvm.value.variable.LLVMRegister;
-import llvm.value.variable.LLVMVariable;
 
 
 public class Function extends TokenedElement
