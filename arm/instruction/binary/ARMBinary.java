@@ -8,10 +8,10 @@ public abstract class ARMBinary extends ARMInstruction
 {
    public final ARMRegister target;
    public final ARMRegister left;
-   public final ARMOperandTwo right;
+   public final ARMOperand right;
    
    
-   public ARMBinary(ARMRegister target, ARMRegister left, ARMOperandTwo right)
+   public ARMBinary(ARMRegister target, ARMRegister left, ARMOperand right)
    {
       this.target = target;
       this.left = left;
@@ -19,7 +19,7 @@ public abstract class ARMBinary extends ARMInstruction
    }
    
    
-   public ARMBinary(ARMRegister left, ARMOperandTwo right)
+   public ARMBinary(ARMRegister left, ARMOperand right)
    {
       this.left = left;
       this.right = right;
