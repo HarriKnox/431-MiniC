@@ -9,6 +9,7 @@ public class ARMCFGNode
    public final List<ARMInstruction> instructions = new LinkedList<>();
    public final List<ARMCFGNode> predecessors = new LinkedList<>();
    public ARMCFGNode loopback = null;
+   public ARMLink link = null;
    
    public final int uid;
    
