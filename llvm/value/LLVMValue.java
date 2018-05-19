@@ -2,11 +2,11 @@ package llvm.value;
 
 
 import llvm.type.LLVMType;
-/*
+
 import arm.ARMCFGNode;
 
-import arm.value.ARMRegister;
-*/
+import arm.value.operand.ARMRegister;
+
 
 public abstract class LLVMValue
 {

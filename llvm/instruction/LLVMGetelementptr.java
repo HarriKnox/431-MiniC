@@ -9,6 +9,8 @@ import llvm.value.operand.LLVMOperand;
 
 import llvm.value.variable.LLVMField;
 
+import arm.ARMCFGNode;
+
 
 public class LLVMGetelementptr extends LLVMInstruction
 {

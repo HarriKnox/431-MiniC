@@ -3,6 +3,10 @@ package llvm.value.variable;
 
 import llvm.type.LLVMType;
 
+import arm.ARMCFGNode;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMLocal extends LLVMVariable
 {

@@ -3,9 +3,12 @@ package llvm.value.operand.constant;
 
 import llvm.type.LLVMIntType;
 
-/*
-import arm.value.ARMRegister;
-*/
+import arm.ARMCFGNode;
+
+import arm.value.immediate.ARMInt;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMInt extends LLVMConstant
 {

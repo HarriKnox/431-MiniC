@@ -4,6 +4,12 @@ package llvm.value.operand.constant;
 import llvm.type.LLVMByteType;
 import llvm.type.LLVMPointerType;
 
+import arm.ARMCFGNode;
+
+import arm.value.integer.ARMGlobal;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMStdio extends LLVMConstant
 {

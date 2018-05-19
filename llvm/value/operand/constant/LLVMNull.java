@@ -4,6 +4,12 @@ package llvm.value.operand.constant;
 import llvm.type.LLVMNullType;
 import llvm.type.LLVMType;
 
+import arm.ARMCFGNode;
+
+import arm.value.immediate.ARMInt;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMNull extends LLVMConstant
 {
