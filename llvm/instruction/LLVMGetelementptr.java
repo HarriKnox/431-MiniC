@@ -13,11 +13,11 @@ import llvm.value.variable.LLVMField;
 public class LLVMGetelementptr extends LLVMInstruction
 {
    public final LLVMField target;
-   public final LLVMOperand source;
+   public final LLVMVirtual source;
    public final int index;
    
    
-   public LLVMGetelementptr(LLVMOperand source, LLVMType resultType, int index)
+   public LLVMGetelementptr(LLVMVirtual source, LLVMType resultType, int index)
    {
       this.target = new LLVMField(resultType);
       this.source = source;

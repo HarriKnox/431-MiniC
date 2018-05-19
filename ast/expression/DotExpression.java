@@ -72,7 +72,11 @@ public class DotExpression extends Expression
       
       
       LLVMGetelementptr getelementptr = new LLVMGetelementptr(
-            leftValue,
+            /*
+             * This cast will work because only virtual registers can be used
+             * in a dot expression AND have type LLVMStructType.
+             */
+            (LLVMVirtual)leftValue,
             field.type.llvmType(),
             field.index);
       
