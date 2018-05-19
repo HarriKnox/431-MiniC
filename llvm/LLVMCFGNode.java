@@ -29,6 +29,7 @@ public class LLVMCFGNode
    public final boolean unreachable;
    
    
+   private ARMCFGNode armNode = null;
    private int uid = -1;
    
    private static int count = 0;
@@ -369,7 +370,7 @@ public class LLVMCFGNode
    
    public ARMCFGNode buildARM()
    {
-      ARMCFGNode armNode = new ARMCFGNode(this.uid);
+      this.armNode = new ARMCFGNode(this.uid);
       
       for (LLVMInstruction instruction : this.instructions)
          instruction.buildARM(armNode);
