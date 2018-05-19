@@ -28,4 +28,11 @@ public class LLVMLocal extends LLVMVariable
    {
       return '%' + this.function + '.' + this.identifier;
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMAdd add = new ARMAdd(ARMRegister.SP, new ARMConstant(this.index * 4));
+   }
 }

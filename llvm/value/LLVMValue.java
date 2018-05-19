@@ -20,9 +20,9 @@ public abstract class LLVMValue
    
    
    public abstract String llvmString();
-   /*
+   
    public abstract ARMRegister buildARM(ARMCFGNode node);
-   */
+   
    
    public String llvmTypedString()
    {

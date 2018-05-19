@@ -26,7 +26,7 @@ public class LLVMInt extends LLVMConstant
       return Integer.toString(this.value);
    }
    
-   /*
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -44,5 +44,5 @@ public class LLVMInt extends LLVMConstant
       
       
       return movw.target;
-   }*/
+   }
 }

@@ -27,4 +27,21 @@ public class LLVMParameter extends LLVMRegister
    {
       return '%' + this.function + ".param." + this.id;
    }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      if (this.index <= 3)
+         return ARMRegister.getReal(this.index);
+      
+      
+      ARMOffset offset = new ARMOffset(ARMRegister.FP, (this.index - 3) * 4);
+      
+      ARMLoad load = new ARMLoad(offset);
+      
+      node.add(load);
+      
+      return load.target;
+   }
 }

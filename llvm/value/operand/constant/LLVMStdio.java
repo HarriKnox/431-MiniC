@@ -15,7 +15,7 @@ public class LLVMStdio extends LLVMConstant
    {
       super(new LLVMPointerType(new LLVMByteType()));
       
-      this.name = "@." + name;
+      this.name = '@' + name;
       this.initialization = initialization;
    }
    
@@ -28,11 +28,23 @@ public class LLVMStdio extends LLVMConstant
    
    
    public static final LLVMStdio PRINT_FORMAT
-         = new LLVMStdio("print_format", "c\"%d\\0A\\00\"");
+         = new LLVMStdio(".print_format", "c\"%d\\0A\\00\"");
    
    public static final LLVMStdio PRINTLN_FORMAT
-         = new LLVMStdio("println_format", "c\"%d \\00\"");
+         = new LLVMStdio(".println_format", "c\"%d \\00\"");
    
    public static final LLVMStdio SCANF_FORMAT
          = new LLVMStdio("scanf_format", "c\"%d\\00\\00\"");
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      ARMMovw movw = new ARMMovw(new ARMGlobal(this.name));
+      ARMMovt movt = new ARMMovt(movw.target, movw.value);
+      
+      node.add(movw).add(movt);
+      
+      return movw.target;
+   }
 }
