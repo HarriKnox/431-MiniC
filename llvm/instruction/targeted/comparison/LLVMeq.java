@@ -18,7 +18,7 @@ public class LLVMeq extends LLVMComparison
       return "eq";
    }
    
-   /*
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -32,5 +32,5 @@ public class LLVMeq extends LLVMComparison
       node.add(mov).add(cmp).add(moveq);
       
       return mov.target;
-   }*/
+   }
 }

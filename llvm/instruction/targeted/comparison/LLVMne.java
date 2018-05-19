@@ -18,7 +18,7 @@ public class LLVMne extends LLVMComparison
       return "ne";
    }
    
-   /*
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -32,5 +32,5 @@ public class LLVMne extends LLVMComparison
       node.add(mov).add(cmp).add(movne);
       
       return mov.target;
-   }*/
+   }
 }

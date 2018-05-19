@@ -18,7 +18,7 @@ public class LLVMsle extends LLVMComparison
       return "sle";
    }
    
-   /*
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -32,5 +32,5 @@ public class LLVMsle extends LLVMComparison
       node.add(mov).add(cmp).add(movle);
       
       return mov.target;
-   }*/
+   }
 }

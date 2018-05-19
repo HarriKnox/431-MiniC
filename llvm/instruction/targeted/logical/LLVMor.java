@@ -18,7 +18,7 @@ public class LLVMor extends LLVMLogical
       return "or";
    }
    
-   /*
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -30,5 +30,5 @@ public class LLVMor extends LLVMLogical
       node.add(orr);
       
       return orr.target;
-   }*/
+   }
 }

@@ -29,7 +29,7 @@ public class LLVMCall extends LLVMTargetedInstruction
       return this.call.llvmString();
    }
    
-   /*
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
@@ -40,5 +40,5 @@ public class LLVMCall extends LLVMTargetedInstruction
       node.add(mov);
       
       return mov.target;
-   }*/
+   }
 }
