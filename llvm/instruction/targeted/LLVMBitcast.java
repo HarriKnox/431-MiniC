@@ -30,8 +30,11 @@ public class LLVMBitcast extends LLVMTargetedInstruction
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      return this.source.buildARM(node);
+      /* A bitcast is just moving a value from one register to another */
+      node.add(new ARMMov(
+            this.target.buildARM(node),
+            this.source.buildARM(node)));
    }
 }

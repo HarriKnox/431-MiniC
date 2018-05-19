@@ -20,17 +20,15 @@ public class LLVMeq extends LLVMComparison
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
       ARMRegister leftReg = this.left.buildARM(node);
       ARMRegister rightReg = this.right.buildARM(node);
       
-      ARMMov mov = new ARMMov(new ARMInt(0));
+      ARMMov mov = new ARMMov(this.target.buildARM(node), new ARMConstant(0));
       ARMCmp cmp = new ARMCmp(leftReg, rightReg);
-      ARMMoveq moveq = new ARMMoveq(mov.target, new ARMInt(1));
+      ARMMoveq moveq = new ARMMoveq(mov.target, new ARMConstant(1));
       
       node.add(mov).add(cmp).add(moveq);
-      
-      return mov.target;
    }
 }

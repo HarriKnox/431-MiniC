@@ -20,15 +20,11 @@ public class LLVMand extends LLVMLogical
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister leftReg = this.left.buildARM(node);
-      ARMRegister rightReg = this.right.buildARM(node);
-      
-      ARMAnd and = new ARMAnd(leftReg, rightReg);
-      
-      node.add(and);
-      
-      return and.target;
+      node.add(new ARMAnd(
+            this.target.buildARM(node),
+            this.left.buildARM(node),
+            this.right.buildARM(node)));
    }
 }

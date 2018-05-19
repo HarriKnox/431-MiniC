@@ -20,15 +20,11 @@ public class LLVMmul extends LLVMArithmetic
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister leftReg = this.left.buildARM(node);
-      ARMRegister rightReg = this.right.buildARM(node);
-      
-      ARMMul mul = new ARMMul(leftReg, rightReg);
-      
-      node.add(mul);
-      
-      return mul.target;
+      node.add(new ARMMul(
+            this.target.buildARM(node),
+            this.left.buildARM(node),
+            this.right.buildARM(node)));
    }
 }

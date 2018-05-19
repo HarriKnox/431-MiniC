@@ -20,15 +20,11 @@ public class LLVMsub extends LLVMArithmetic
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister leftReg = this.left.buildARM(node);
-      ARMRegister rightReg = this.right.buildARM(node);
-      
-      ARMSub sub = new ARMSub(leftReg, rightReg);
-      
-      node.add(sub);
-      
-      return sub.target;
+      node.add(new ARMSub(
+            this.target.buildARM(node),
+            this.left.buildARM(node),
+            this.right.buildARM(node)));
    }
 }

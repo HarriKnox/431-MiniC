@@ -25,14 +25,8 @@ public class LLVMNot extends LLVMTargetedInstruction
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister sourceReg = this.source.buildARM(node);
-      
-      ARMRsb eor = new ARMEor(sourceReg, 1);
-      
-      node.add(eor);
-      
-      return eor.target;
+      node.add(new ARMEor(this.source.buildARM(node), new ARMConstant(1)));
    }
 }

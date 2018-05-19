@@ -20,17 +20,15 @@ public class LLVMne extends LLVMComparison
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
       ARMRegister leftReg = this.left.buildARM(node);
       ARMRegister rightReg = this.right.buildARM(node);
       
-      ARMMov mov = new ARMMov(new ARMInt(0));
+      ARMMov mov = new ARMMov(this.target.buildARM(node), new ARMConstant(0));
       ARMCmp cmp = new ARMCmp(leftReg, rightReg);
-      ARMMovne movne = new ARMMovne(mov.target, new ARMInt(1));
+      ARMMovne movne = new ARMMovne(mov.target, new ARMConstant(1));
       
       node.add(mov).add(cmp).add(movne);
-      
-      return mov.target;
    }
 }

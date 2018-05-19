@@ -52,41 +52,27 @@ public class LLVMCallVoid extends LLVMInstruction
    {
       int arglen = this.arguments.size();
       
+      /* Push extra arguments to the stack */
       for (int i = arglen; i >= 4; i--)
-      {
-         LLVMValue arg = this.arguments.get(i);
-         
-         ARMRegister reg = arg.buildARM(node);
-         
-         ARMPush push = new ARMPush(reg);
-         
-         node.add(push);
-      }
+         node.add(new ARMPush(this.arguments.get(i).buildARM(node)));
       
       
+      /* Move the first four into r0-r3 */
       for (i = 0; i < arglen && i < 4; i++)
-      {
-         LLVMValue arg = this.arguments.get(i);
-         
-         ARMRegister reg = arg.buildARM(node);
-         
-         ARMMov mov = new ARMMov(ARMRegister.getReal(i), reg);
-         
-         node.add(mov);
-      }
+         node.add(new ARMMov(
+               ARMRegister.getReal(i),
+               this.arguments.get(i).buildARM(node)));
       
       
-      ARMBl bl = new ARMBl(this.name);
+      /* branch-link to the function */
+      node.add(new ARMBl(this.name));
       
-      node.add(bl);
       
-      
+      /* pop the extra arguments off the stack all at once */
       if (arglen >= 4)
-      {
-         ARMAdd spAdd = new ARMAdd(ARMRegister.RSP,
-               ARMRegister.RSP, (arglen - 4) * 4);
-         
-         node.add(spAdd);
-      }
+         node.add(new ARMAdd(
+               ARMRegister.SP,
+               ARMRegister.SP,
+               (arglen - 4) * 4));
    }
 }

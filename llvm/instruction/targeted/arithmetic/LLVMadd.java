@@ -20,15 +20,11 @@ public class LLVMadd extends LLVMArithmetic
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister leftReg = this.left.buildARM(node);
-      ARMRegister rightReg = this.right.buildARM(node);
-      
-      ARMAdd add = new ARMAdd(leftReg, rightReg);
-      
-      node.add(add);
-      
-      return add.target;
+      node.add(new ARMAdd(
+            this.target.buildARM(node),
+            this.left.buildARM(node),
+            this.right.buildARM(node)));
    }
 }

@@ -25,14 +25,8 @@ public class LLVMNegate extends LLVMTargetedInstruction
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister sourceReg = this.source.buildARM(node);
-      
-      ARMRsb rsb = new ARMRsb(sourceReg, 0);
-      
-      node.add(rsb);
-      
-      return rsb.target;
+      node.add(new ARMRsb(this.source.buildARM(node), new ARMConstant(0)));
    }
 }

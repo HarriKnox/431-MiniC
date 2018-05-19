@@ -20,15 +20,11 @@ public class LLVMor extends LLVMLogical
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public void buildARM(ARMCFGNode node)
    {
-      ARMRegister leftReg = this.left.buildARM(node);
-      ARMRegister rightReg = this.right.buildARM(node);
-      
-      ARMOrr orr = new ARMOrr(leftReg, rightReg);
-      
-      node.add(orr);
-      
-      return orr.target;
+      node.add(new ARMOrr(
+            this.target.buildARM(node),
+            this.left.buildARM(node),
+            this.right.buildARM(node)));
    }
 }
