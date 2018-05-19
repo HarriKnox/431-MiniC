@@ -24,4 +24,11 @@ public class LLVMAlloca extends LLVMInstruction
       return this.pointer.llvmString() + " = alloca "
             + this.pointer.type.llvmString();
    }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      ; /* alloca translates to a no-op */
+   }
 }

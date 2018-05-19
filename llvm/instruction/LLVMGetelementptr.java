@@ -35,4 +35,14 @@ public class LLVMGetelementptr extends LLVMInstruction
             .append(this.index)
             .toString();
    }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      node.add(new ARMAdd(
+            this.target.buildARM(node),
+            this.source.buildARM(node),
+            this.index * 4));
+   }
 }

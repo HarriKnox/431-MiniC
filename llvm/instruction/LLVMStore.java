@@ -27,4 +27,13 @@ public class LLVMStore extends LLVMInstruction
       return "store " + this.source.llvmTypedString() + ", "
             + this.target.type.llvmString() + "* " + this.target.llvmString();
    }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      node.add(new ARMStore(
+            this.source.buildARM(node),
+            this.target.buildARM()));
+   }
 }

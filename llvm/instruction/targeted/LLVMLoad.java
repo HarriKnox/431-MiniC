@@ -25,4 +25,13 @@ public class LLVMLoad extends LLVMTargetedInstruction
             .append(this.source.llvmString())
             .toString();
    }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      node.add(new ARMLoad(
+            this.target.buildARM(node),
+            this.source.buildARM(node)));
+   }
 }
