@@ -1,12 +1,12 @@
-package arm.operand.constant;
+package arm.operand.integer;
 
 
-public class ARMInt extends ARMConstant
+public class ARMImmediate extends ARMInteger
 {
    public final int value;
    
    
-   public ARMInt(int value)
+   public ARMImmediate(int value)
    {
       this.value = value;
    }
