@@ -4,7 +4,7 @@ package arm.value.integer;
 import arm.value.ARMValue;
 
 
-public abstract class ARMInteger extends ARMValue
+public abstract class ARMImmediate extends ARMValue
 {
    public abstract String lowerARMString();
    

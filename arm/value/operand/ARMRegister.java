@@ -3,18 +3,32 @@ package arm.operand;
 
 public class ARMRegister extends ARMOperand
 {
-   private int number = -1;
+   public final int offset;
+   private int number;
    
    
    public ARMRegister()
    {
-      ;
+      this(-1);
    }
    
    
    private ARMRegister(int r)
    {
+      this(r, 0);
+   }
+   
+   
+   private ARMRegister(int r, int o)
+   {
       this.number = r;
+      this.offset = o;
+   }
+   
+   
+   public ARMRegister(ARMRegister reg, int offset)
+   {
+      this(reg.number, offset);
    }
    
    
@@ -30,11 +44,11 @@ public class ARMRegister extends ARMOperand
    public static final ARMRegister R9  = new ARMRegister(9);
    public static final ARMRegister R10 = new ARMRegister(10);
    
-   public static final ARMRegister RFP = new ARMRegister(11);
-   public static final ARMRegister RIP = new ARMRegister(12);
-   public static final ARMRegister RSP = new ARMRegister(13);
-   public static final ARMRegister RLR = new ARMRegister(14);
-   public static final ARMRegister RPC = new ARMRegister(15);
+   public static final ARMRegister FP = new ARMRegister(11);
+   public static final ARMRegister IP = new ARMRegister(12);
+   public static final ARMRegister SP = new ARMRegister(13);
+   public static final ARMRegister LR = new ARMRegister(14);
+   public static final ARMRegister PC = new ARMRegister(15);
    
    
    public static ARMRegister getReal(int i)
@@ -53,11 +67,11 @@ public class ARMRegister extends ARMOperand
          case 9:  return R9;
          case 10: return R10;
          
-         case 11: return RFP;
-         case 12: return RIP;
-         case 13: return RSP;
-         case 14: return RLR;
-         case 15: return RPC;
+         case 11: return FP;
+         case 12: return IP;
+         case 13: return SP;
+         case 14: return LR;
+         case 15: return PC;
       }
       
       return null;

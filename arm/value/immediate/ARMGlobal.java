@@ -1,7 +1,7 @@
 package arm.value.integer;
 
 
-public class ARMGlobal extends ARMInteger
+public class ARMGlobal extends ARMImmediate
 {
    public final String name;
    
