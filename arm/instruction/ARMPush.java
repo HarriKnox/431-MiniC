@@ -1,7 +1,7 @@
 package arm.instruction;
 
 
-public class ARMPush extends ARMInstruction;
+public class ARMPush extends ARMInstruction
 {
    public final ARMRegister[] registers;
    
