@@ -8,7 +8,7 @@ import llvm.instruction.LLVMCallVoid;
 
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMCall extends LLVMTargetedInstruction
@@ -16,7 +16,7 @@ public class LLVMCall extends LLVMTargetedInstruction
    private final LLVMCallVoid call;
    
    
-   public LLVMCall(String name, LLVMType type, List<LLVMValue> arguments)
+   public LLVMCall(String name, LLVMType type, List<LLVMOperand> arguments)
    {
       super(type);
       this.call = new LLVMCallVoid(name, type, arguments);

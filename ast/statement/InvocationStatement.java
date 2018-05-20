@@ -16,7 +16,7 @@ import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMCallVoid;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class InvocationStatement extends Statement
@@ -42,7 +42,7 @@ public class InvocationStatement extends Statement
          return node;
       
       
-      List<LLVMValue> args = this.invocation.gatherArguments(
+      List<LLVMOperand> args = this.invocation.gatherArguments(
             function, program, current, node);
       
       if (args == null)

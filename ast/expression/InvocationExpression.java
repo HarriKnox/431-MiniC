@@ -21,8 +21,6 @@ import llvm.instruction.targeted.LLVMCall;
 
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMValue;
-
 import llvm.value.operand.LLVMOperand;
 
 import llvm.value.operand.constant.LLVMNull;
@@ -68,7 +66,7 @@ public class InvocationExpression extends Expression
          return null;
       
       
-      List<LLVMValue> args = this.gatherArguments(
+      List<LLVMOperand> args = this.gatherArguments(
             function, program, current, node);
       
       if (args == null)
@@ -98,7 +96,7 @@ public class InvocationExpression extends Expression
    }
    
    
-   public List<LLVMValue> gatherArguments(Function function,
+   public List<LLVMOperand> gatherArguments(Function function,
          ProgramAST program, Function current, LLVMCFGNode node)
    {
       int arglen = this.arguments.size();
@@ -118,11 +116,11 @@ public class InvocationExpression extends Expression
       Iterator<Expression> argerator = this.arguments.iterator();
       Iterator<Type> typerator = function.parameterTypes.iterator();
       
-      List<LLVMValue> args = new LinkedList<>();
+      List<LLVMOperand> args = new LinkedList<>();
       
       for (int i = 0; argerator.hasNext(); i++)
       {
-         LLVMValue llvmArg = argerator
+         LLVMOperand llvmArg = argerator
                .next()
                .buildLLVM(program, current, node);
          

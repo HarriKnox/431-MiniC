@@ -6,17 +6,17 @@ import java.util.List;
 
 import llvm.type.LLVMType;
 
-import llvm.value.LLVMValue;
+import llvm.value.operand.LLVMOperand;
 
 
 public class LLVMCallVoid extends LLVMInstruction
 {
    public final String name;
    public final LLVMType type;
-   public final List<LLVMValue> arguments;
+   public final List<LLVMOperand> arguments;
    
    
-   public LLVMCallVoid(String name, LLVMType type, List<LLVMValue> arguments)
+   public LLVMCallVoid(String name, LLVMType type, List<LLVMOperand> arguments)
    {
       this.name = name;
       this.type = type;
@@ -34,7 +34,7 @@ public class LLVMCallVoid extends LLVMInstruction
             .append('(');
       
       
-      Iterator<LLVMValue> argerator = this.arguments.iterator();
+      Iterator<LLVMOperand> argerator = this.arguments.iterator();
       
       if (argerator.hasNext())
          sb.append(argerator.next().llvmTypedString());

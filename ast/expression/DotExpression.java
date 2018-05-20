@@ -20,6 +20,8 @@ import llvm.type.LLVMStructType;
 
 import llvm.value.operand.LLVMOperand;
 
+import llvm.value.operand.register.LLVMVirtual;
+
 
 public class DotExpression extends Expression
 {
