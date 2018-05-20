@@ -84,7 +84,9 @@ public class ProgramLLVM
    
    public ProgramARM buildARM(Options opts)
    {
-      ARMGlobals = this.llvmGlobals.buildARM();
-      ARMFunctions = this.llvmFunctions.buildARM();
+      ARMGlobals armGlobals = this.llvmGlobals.buildARM();
+      ARMFunctions armFuncs = this.llvmFunctions.buildARM();
+      
+      return new ProgramARM(armGlobals, armFuncs);
    }
 }
