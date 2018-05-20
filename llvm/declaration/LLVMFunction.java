@@ -99,7 +99,7 @@ public class LLVMFunction
       
       ARMCFGNode first = armNodes.get(0);
       
-      first.instructions.add(0, new ARMSub(ARMRegister.RFP, ARMRegister.RSP, this.locals.size() * 4));
+      first.instructions.add(0, new ARMSub(FP, SP, this.locals.size() * 4));
       
       
       return new ARMFunction(this.name, armNodes);

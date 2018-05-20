@@ -45,6 +45,6 @@ public class LLVMCall extends LLVMTargetedInstruction
       
       
       /* Move the return value out of r0 and into a virtual register */
-      node.add(new ARMMov(this.target.buildARM(node), ARMRegister.R0));
+      node.add(new ARMMov(this.target.buildARM(node), R0));
    }
 }

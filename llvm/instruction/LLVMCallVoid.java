@@ -86,8 +86,8 @@ public class LLVMCallVoid extends LLVMInstruction
       /* pop the extra arguments off the stack all at once */
       if (arglen >= 4)
          node.add(new ARMAdd(
-               ARMRegister.SP,
-               ARMRegister.SP,
+               SP,
+               SP,
                (arglen - 4) * 4));
    }
 }
