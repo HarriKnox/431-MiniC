@@ -38,7 +38,7 @@ public class LLVMFunctions
       List<ARMFunction> armFunctions = new LinkedList<>();
       
       for (LLVMFunction function : this.functions)
-         armFunctions.add(function.buildARM())
+         armFunctions.add(function.buildARM());
       
       
       return new ARMFunctions(armFunctions);
