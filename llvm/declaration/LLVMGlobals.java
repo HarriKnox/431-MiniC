@@ -52,7 +52,7 @@ public class LLVMGlobals
       List<String> armGlobals = new LinkedList<>();
       
       for (LLVMGlobal global : this.globals)
-         armGlobals.add(global.identifier);
+         armGlobals.add(global.name);
       
       
       return new ARMGlobals(armGlobals);
