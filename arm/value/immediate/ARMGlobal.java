@@ -6,9 +6,23 @@ public class ARMGlobal extends ARMImmediate
    public final String name;
    
    
-   public ARMGlobal(name)
+   public ARMGlobal(String name)
    {
       this.name = name;
+   }
+   
+   
+   @Override
+   public String lowerARMString()
+   {
+      return "#:lower16:" + this.name;
+   }
+   
+   
+   @Override
+   public String upperARMString()
+   {
+      return "#:upper16:" + this.name;
    }
    
    
