@@ -26,6 +26,7 @@ public class LLVMStdio extends LLVMConstant
    }
    
    
+   @Override
    public String llvmString()
    {
       return "getelementptr inbounds ([4 x i8]* "
@@ -40,7 +41,7 @@ public class LLVMStdio extends LLVMConstant
          = new LLVMStdio(".println_format", "c\"%d \\00\"");
    
    public static final LLVMStdio SCANF_FORMAT
-         = new LLVMStdio("scanf_format", "c\"%d\\00\\00\"");
+         = new LLVMStdio(".scanf_format", "c\"%d\\00\\00\"");
    
    
    @Override
