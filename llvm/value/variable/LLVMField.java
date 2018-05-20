@@ -6,16 +6,21 @@ import llvm.type.LLVMType;
 
 public class LLVMField extends LLVMVariable
 {
-   private ARMRegister armReg = null;
+   public final LLVMVirtual base;
+   public final int index;
+   
    
    private int uid = -1;
    
    private static int count = 0;
    
    
-   public LLVMField(LLVMType type)
+   public LLVMField(LLVMType type, LLVMVirtual base, int index)
    {
       super(type);
+      
+      this.base = base;
+      this.index = index;
    }
    
    
@@ -29,10 +34,7 @@ public class LLVMField extends LLVMVariable
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
-      if (this.armReg == null)
-         this.armReg = new ARMRegister();
-      
-      return this.armReg;
+      return new ARMAddress(this.base.buildARM(node), this.index * 4);
    }
    
    
