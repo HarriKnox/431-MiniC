@@ -5,6 +5,10 @@ import llvm.type.LLVMType;
 
 import llvm.value.LLVMValue;
 
+import arm.ARMCFGNode;
+
+import arm.value.operand.ARMRegister;
+
 
 public abstract class LLVMOperand extends LLVMValue
 {
@@ -12,4 +16,6 @@ public abstract class LLVMOperand extends LLVMValue
    {
       super(type);
    }
+   
+   public abstract ARMRegister buildARM(ARMCFGNode node);
 }
