@@ -5,11 +5,15 @@ import llvm.value.LLVMValue;
 
 import llvm.type.LLVMType;
 
-import llvm.value.operand.LLVMOperand;
+import llvm.value.operand.register.LLVMVirtual;
 
 import llvm.value.variable.LLVMField;
 
 import arm.ARMCFGNode;
+
+import arm.instruction.binary.ARMAdd;
+
+import arm.value.operand.ARMConstant;
 
 
 public class LLVMGetelementptr extends LLVMInstruction

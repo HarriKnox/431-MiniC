@@ -5,6 +5,10 @@ import llvm.type.LLVMType;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.mov.ARMMov;
+
 
 public class LLVMBitcast extends LLVMTargetedInstruction
 {

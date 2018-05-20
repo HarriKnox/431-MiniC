@@ -3,6 +3,10 @@ package llvm.instruction.targeted.arithmetic;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.ARMMul;
+
 
 public class LLVMmul extends LLVMArithmetic
 {

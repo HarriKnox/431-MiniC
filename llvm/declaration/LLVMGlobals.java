@@ -3,6 +3,7 @@ package llvm.declaration;
 
 import java.io.PrintWriter;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import common.Options;

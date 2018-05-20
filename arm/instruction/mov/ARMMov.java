@@ -3,6 +3,9 @@ package arm.instruction.mov;
 
 import arm.instruction.ARMInstruction;
 
+import arm.value.operand.ARMOperand;
+import arm.value.operand.ARMRegister;
+
 
 public class ARMMov extends ARMInstruction
 {

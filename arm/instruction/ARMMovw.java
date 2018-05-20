@@ -1,9 +1,9 @@
 package arm.instruction;
 
 
-import arm.value.ARMRegister;
+import arm.value.immediate.ARMImmediate;
 
-import arm.value.constant.ARMConstant;
+import arm.value.operand.ARMRegister;
 
 
 public class ARMMovw extends ARMInstruction

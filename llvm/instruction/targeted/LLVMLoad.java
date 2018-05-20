@@ -3,6 +3,10 @@ package llvm.instruction.targeted;
 
 import llvm.value.variable.LLVMVariable;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.ARMLdr;
+
 
 public class LLVMLoad extends LLVMTargetedInstruction
 {

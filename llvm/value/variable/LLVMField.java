@@ -3,6 +3,12 @@ package llvm.value.variable;
 
 import llvm.type.LLVMType;
 
+import llvm.value.operand.register.LLVMVirtual;
+
+import arm.ARMCFGNode;
+
+import arm.value.operand.ARMAddress;
+
 
 public class LLVMField extends LLVMVariable
 {

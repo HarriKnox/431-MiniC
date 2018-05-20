@@ -3,6 +3,14 @@ package llvm.instruction.targeted.arithmetic;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.ARMBl;
+
+import arm.instruction.mov.ARMMov;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMsdiv extends LLVMArithmetic
 {

@@ -3,6 +3,12 @@ package llvm.instruction.targeted;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.binary.ARMEor;
+
+import arm.value.operand.ARMConstant;
+
 
 public class LLVMNot extends LLVMTargetedInstruction
 {

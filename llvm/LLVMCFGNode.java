@@ -19,6 +19,8 @@ import llvm.link.LLVMRet;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
 
 public class LLVMCFGNode
 {

@@ -3,6 +3,10 @@ package llvm.instruction.targeted.logical;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.binary.ARMAnd;
+
 
 public class LLVMand extends LLVMLogical
 {

@@ -3,6 +3,7 @@ package llvm.declaration;
 
 import java.io.PrintWriter;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,18 @@ import llvm.type.LLVMType;
 import llvm.value.operand.register.LLVMParameter;
 
 import llvm.value.variable.LLVMLocal;
+
+import arm.ARMCFGNode;
+
+import arm.declaration.ARMFunction;
+
+import arm.instruction.binary.ARMSub;
+
+import arm.value.operand.ARMConstant;
+
+
+import static arm.value.operand.ARMRegister.FP;
+import static arm.value.operand.ARMRegister.SP;
 
 
 public class LLVMFunction

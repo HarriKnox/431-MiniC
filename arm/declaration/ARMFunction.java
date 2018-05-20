@@ -3,6 +3,8 @@ package arm.declaration;
 
 import java.util.List;
 
+import arm.ARMCFGNode;
+
 
 public class ARMFunction
 {

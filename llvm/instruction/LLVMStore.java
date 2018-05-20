@@ -8,6 +8,8 @@ import llvm.value.variable.LLVMVariable;
 
 import arm.ARMCFGNode;
 
+import arm.instruction.ARMStr;
+
 
 public class LLVMStore extends LLVMInstruction
 {

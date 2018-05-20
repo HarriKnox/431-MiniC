@@ -5,6 +5,8 @@ import llvm.type.LLVMBoolType;
 
 import arm.ARMCFGNode;
 
+import arm.instruction.ARMMovw;
+
 import arm.value.immediate.ARMInt;
 
 import arm.value.operand.ARMRegister;

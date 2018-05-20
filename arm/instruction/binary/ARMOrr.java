@@ -1,6 +1,10 @@
 package arm.instruction.binary;
 
 
+import arm.value.operand.ARMOperand;
+import arm.value.operand.ARMRegister;
+
+
 public class ARMOrr extends ARMBinary
 {
    public ARMOrr(ARMRegister target, ARMRegister left, ARMOperand right)

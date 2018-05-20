@@ -1,6 +1,10 @@
 package arm.instruction.mov;
 
 
+import arm.value.operand.ARMOperand;
+import arm.value.operand.ARMRegister;
+
+
 public class ARMMovle extends ARMMov
 {
    public ARMMovle(ARMValue value)

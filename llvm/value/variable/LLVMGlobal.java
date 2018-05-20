@@ -4,6 +4,15 @@ package llvm.value.variable;
 import llvm.type.LLVMIntType;
 import llvm.type.LLVMType;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.ARMMovt;
+import arm.instruction.ARMMovw;
+
+import arm.value.immediate.ARMGlobal;
+
+import arm.value.operand.ARMAddress;
+
 
 public class LLVMGlobal extends LLVMVariable
 {

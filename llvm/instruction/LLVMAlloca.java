@@ -6,6 +6,8 @@ import llvm.type.LLVMVoidType;
 
 import llvm.value.variable.LLVMVariable;
 
+import arm.ARMCFGNode;
+
 
 public class LLVMAlloca extends LLVMInstruction
 {

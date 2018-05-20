@@ -1,6 +1,9 @@
 package arm.instruction;
 
 
+import arm.value.operand.ARMRegister;
+
+
 public class ARMMul extends ARMInstruction
 {
    public final ARMRegister left;

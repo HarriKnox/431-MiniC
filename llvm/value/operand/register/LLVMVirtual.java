@@ -3,6 +3,10 @@ package llvm.value.operand.register;
 
 import llvm.type.LLVMType;
 
+import arm.ARMCFGNode;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMVirtual extends LLVMRegister
 {

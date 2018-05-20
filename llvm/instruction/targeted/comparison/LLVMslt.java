@@ -3,6 +3,16 @@ package llvm.instruction.targeted.comparison;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.ARMCmp;
+
+import arm.instruction.mov.ARMMov;
+import arm.instruction.mov.ARMMovlt;
+
+import arm.value.operand.ARMConstant;
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMslt extends LLVMComparison
 {

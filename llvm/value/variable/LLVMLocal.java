@@ -5,7 +5,10 @@ import llvm.type.LLVMType;
 
 import arm.ARMCFGNode;
 
-import arm.value.operand.ARMRegister;
+import arm.value.operand.ARMAddress;
+
+
+import static arm.value.operand.ARMRegister.SP;
 
 
 public class LLVMLocal extends LLVMVariable

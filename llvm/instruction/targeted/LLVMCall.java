@@ -10,6 +10,13 @@ import llvm.type.LLVMType;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.mov.ARMMov;
+
+
+import static arm.value.operand.ARMRegister.R0;
+
 
 public class LLVMCall extends LLVMTargetedInstruction
 {

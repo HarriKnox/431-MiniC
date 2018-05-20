@@ -3,6 +3,9 @@ package arm.instruction.binary;
 
 import arm.instruction.ARMInstruction;
 
+import arm.value.operand.ARMOperand;
+import arm.value.operand.ARMRegister;
+
 
 public abstract class ARMBinary extends ARMInstruction
 {

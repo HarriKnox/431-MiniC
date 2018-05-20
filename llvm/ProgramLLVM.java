@@ -13,6 +13,11 @@ import llvm.value.operand.constant.LLVMStdio;
 
 import common.Options;
 
+import arm.ProgramARM;
+
+import arm.declaration.ARMFunctions;
+import arm.declaration.ARMGlobals;
+
 
 import static llvm.value.operand.constant.LLVMStdio.PRINTLN_FORMAT;
 import static llvm.value.operand.constant.LLVMStdio.PRINT_FORMAT;

@@ -3,6 +3,16 @@ package llvm.value.operand.register;
 
 import llvm.type.LLVMType;
 
+import arm.ARMCFGNode;
+
+import arm.instruction.ARMLdr;
+
+import arm.value.operand.ARMAddress;
+import arm.value.operand.ARMRegister;
+
+
+import static arm.value.operand.ARMRegister.FP;
+
 
 public class LLVMParameter extends LLVMRegister
 {

@@ -6,7 +6,10 @@ import llvm.type.LLVMPointerType;
 
 import arm.ARMCFGNode;
 
-import arm.value.integer.ARMGlobal;
+import arm.instruction.ARMMovt;
+import arm.instruction.ARMMovw;
+
+import arm.value.immediate.ARMGlobal;
 
 import arm.value.operand.ARMRegister;
 

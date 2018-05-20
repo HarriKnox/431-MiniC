@@ -5,6 +5,10 @@ import llvm.type.LLVMType;
 
 import llvm.value.LLVMValue;
 
+import arm.ARMCFGNode;
+
+import arm.value.operand.ARMAddress;
+
 
 public abstract class LLVMVariable extends LLVMValue
 {
