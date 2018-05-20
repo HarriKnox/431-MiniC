@@ -9,7 +9,7 @@ public class ARMGlobals
    private final List<String> globals;
    
    
-   public ARMGlobals(List<> globals)
+   public ARMGlobals(List<String> globals)
    {
       this.globals = globals;
    }

@@ -9,7 +9,7 @@ public class ARMFunctions
    private List<ARMFunction> functions;
    
    
-   public ARMFunctions(List<> functions)
+   public ARMFunctions(List<ARMFunction> functions)
    {
       this.functions = functions;
    }
