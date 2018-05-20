@@ -1,4 +1,4 @@
-package arm.operand;
+package arm.value.operand;
 
 
 public class ARMRegister extends ARMOperand

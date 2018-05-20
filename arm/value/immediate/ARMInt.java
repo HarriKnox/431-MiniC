@@ -1,4 +1,4 @@
-package arm.operand.integer;
+package arm.value.immediate;
 
 
 public class ARMInt extends ARMImmediate

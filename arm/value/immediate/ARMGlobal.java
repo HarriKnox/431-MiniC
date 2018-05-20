@@ -1,4 +1,4 @@
-package arm.value.integer;
+package arm.value.immediate;
 
 
 public class ARMGlobal extends ARMImmediate

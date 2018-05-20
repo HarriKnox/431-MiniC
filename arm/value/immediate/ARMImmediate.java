@@ -1,4 +1,4 @@
-package arm.value.integer;
+package arm.value.immediate;
 
 
 import arm.value.ARMValue;
