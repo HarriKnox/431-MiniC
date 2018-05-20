@@ -25,7 +25,7 @@ public class LLVMGetelementptr extends LLVMInstruction
    
    public LLVMGetelementptr(LLVMVirtual source, LLVMType resultType, int index)
    {
-      this.target = new LLVMField(resultType);
+      this.target = new LLVMField(resultType, source, index);
       this.source = source;
       this.index = index;
    }
@@ -46,9 +46,6 @@ public class LLVMGetelementptr extends LLVMInstruction
    @Override
    public void buildARM(ARMCFGNode node)
    {
-      node.add(new ARMAdd(
-            this.target.buildARM(node),
-            this.source.buildARM(node),
-            this.index * 4));
+      ;
    }
 }
