@@ -20,7 +20,7 @@ public class LLVMScanf extends LLVMCallVoid
       super(
             "scanf",
             new LLVMStdioType(),
-            Arrays.asList(new LLVMValue[]{
+            Arrays.asList(new LLVMOperand[]{
                   SCANF_FORMAT,
                   SCANF_SCRATCH}));
    }

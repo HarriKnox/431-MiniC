@@ -19,7 +19,7 @@ public class LLVMPrintf extends LLVMCallVoid
       super(
             "printf",
             new LLVMStdioType(),
-            Arrays.asList(new LLVMValue[]{
+            Arrays.asList(new LLVMOperand[]{
                   println ? PRINTLN_FORMAT : PRINT_FORMAT,
                   value}));
    }
