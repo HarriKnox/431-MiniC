@@ -36,9 +36,7 @@ public class LLVMParameter extends LLVMRegister
          return ARMRegister.getReal(this.index);
       
       
-      ARMOffset offset = new ARMOffset(ARMRegister.FP, (this.index - 3) * 4);
-      
-      ARMLoad load = new ARMLoad(offset);
+      ARMLdr load = new ARMLdr(new ARMAddress(FP, (this.index - 3) * 4));
       
       node.add(load);
       
