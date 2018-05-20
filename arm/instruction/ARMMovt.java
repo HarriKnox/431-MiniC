@@ -9,16 +9,16 @@ import arm.value.operand.ARMRegister;
 public class ARMMovt extends ARMInstruction
 {
    public final ARMRegister target;
-   public final ARMConstant value;
+   public final ARMImmediate value;
    
    
-   public ARMMovt(ARMConstant value)
+   public ARMMovt(ARMImmediate value)
    {
       this(new ARMRegister(), value);
    }
    
    
-   public ARMMovt(ARMRegister target, ARMConstant value)
+   public ARMMovt(ARMRegister target, ARMImmediate value)
    {
       this.target = target;
       this.value = value;
