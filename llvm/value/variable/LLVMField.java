@@ -32,7 +32,7 @@ public class LLVMField extends LLVMVariable
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public ARMAddress buildARM(ARMCFGNode node)
    {
       return new ARMAddress(this.base.buildARM(node), this.index * 4);
    }

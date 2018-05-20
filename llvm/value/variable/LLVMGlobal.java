@@ -26,14 +26,14 @@ public class LLVMGlobal extends LLVMVariable
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode)
+   public ARMAddress buildARM(ARMCFGNode node)
    {
       ARMMovw movw = new ARMMovw(new ARMGlobal(this.name));
       ARMMovt movt = new ARMMovt(movw.target, movw.value);
       
       node.add(movw).add(movt);
       
-      return movw.target;
+      return new ARMAddress(movw.target, 0);
    }
    
    

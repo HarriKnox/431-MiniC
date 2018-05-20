@@ -16,8 +16,7 @@ public class LLVMLocal extends LLVMVariable
    
    
    public LLVMLocal(String function,
-         String identifier,
-         LLVMType type, int index)
+         String identifier, LLVMType type, int index)
    {
       super(type);
       
@@ -35,8 +34,8 @@ public class LLVMLocal extends LLVMVariable
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public ARMAddress buildARM(ARMCFGNode node)
    {
-      ARMAdd add = new ARMAdd(ARMRegister.SP, new ARMConstant(this.index * 4));
+      return new ARMAddress(SP, this.index * 4);
    }
 }

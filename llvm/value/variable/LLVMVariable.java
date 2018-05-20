@@ -13,8 +13,12 @@ public abstract class LLVMVariable extends LLVMValue
       super(type);
    }
    
+   
    public String llvmTypedString()
    {
       return this.type.llvmString() + "* " + this.llvmString();
    }
+   
+   
+   public abstract ARMAddress buildARM(ARMCFGNode node);
 }
