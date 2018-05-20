@@ -93,7 +93,7 @@ public class LLVMFunction
    {
       List<ARMCFGNode> armNodes = new ArrayList<>(this.nodes.size());
       
-      for (LLVMNode node : this.nodes)
+      for (LLVMCFGNode node : this.nodes)
          armNodes.add(node.buildARM());
       
       

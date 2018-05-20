@@ -36,7 +36,7 @@ public class LLVMStore extends LLVMInstruction
    @Override
    public void buildARM(ARMCFGNode node)
    {
-      node.add(new ARMStore(
+      node.add(new ARMStr(
             this.source.buildARM(node),
             this.target.buildARM()));
    }
