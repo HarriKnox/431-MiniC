@@ -88,6 +88,6 @@ public class LLVMCallVoid extends LLVMInstruction
          node.add(new ARMAdd(
                SP,
                SP,
-               (arglen - 4) * 4));
+               new ARMConstant((arglen - 4) * 4)));
    }
 }
