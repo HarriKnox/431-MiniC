@@ -7,15 +7,15 @@ import arm.value.operand.ARMRegister;
 
 public class ARMMovge extends ARMMov
 {
-   public ARMMovge(ARMValue value)
+   public ARMMovge(ARMOperand operand)
    {
-      super(new ARMRegister(), value);
+      super(new ARMRegister(), operand);
    }
    
    
-   public ARMMovge(ARMRegister target, ARMValue value)
+   public ARMMovge(ARMRegister target, ARMOperand operand)
    {
-      super(target, value)
+      super(target, operand);
    }
    
    
