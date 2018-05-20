@@ -24,9 +24,6 @@ public abstract class ARMBinary extends ARMInstruction
    
    public ARMBinary(ARMRegister left, ARMOperand right)
    {
-      this.left = left;
-      this.right = right;
-      
-      this.target = new ARMRegister();
+      this(new ARMRegister(), left, right);
    }
 }
