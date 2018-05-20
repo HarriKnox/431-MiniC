@@ -76,4 +76,20 @@ public class ARMRegister extends ARMOperand
       
       return null;
    }
+   
+   
+   @Override
+   public String armString()
+   {
+      switch (this.number)
+      {
+         case 11: return "fp";
+         case 12: return "ip";
+         case 13: return "sp";
+         case 14: return "lr";
+         case 15: return "pc";
+      }
+      
+      return 'r' + Integer.toString(this.number);
+   }
 }
