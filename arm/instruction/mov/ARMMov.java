@@ -9,7 +9,6 @@ import arm.value.operand.ARMRegister;
 
 public class ARMMov extends ARMInstruction
 {
-   public final ARMConditions condition;
    public final ARMRegister target;
    public final ARMValue value;
    
