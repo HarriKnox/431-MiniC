@@ -38,6 +38,6 @@ public class LLVMStore extends LLVMInstruction
    {
       node.add(new ARMStr(
             this.source.buildARM(node),
-            this.target.buildARM()));
+            this.target.buildARM(node)));
    }
 }
