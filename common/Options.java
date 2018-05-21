@@ -4,11 +4,10 @@ package common;
 public class Options
 {
    /**
-    * The name of the file (minus the '.mini'). To be used for naming the
-    * output files. If no source file is specified this defaults to 'a' (to
-    * produce an 'a.out', for example).
+    * The name of the file. If no source file is specified or the source "file"
+    * is literally "-" (indicating to read from stdin), this is null;
     */
-   public final String name;
+   public final String filename;
    
    
    
@@ -114,23 +113,35 @@ public class Options
    
    Options(OptionsBuilder ob)
    {
+      String name;
+      
       if ((ob.name == null) || (ob.name.equals("-")))
-         this.name = "a";
+      {
+         name = "a";
+         this.filename = null;
+      }
       
       else
-         this.name = ob.name;
+      {
+         this.filename = ob.name;
+         
+         /* name is just the bit between the last slash and the .mini*/
+         name = ob.name.substring(
+               ob.name.lastIndexOf('/') + 1,
+               ob.name.length() - 5);
+      }
       
       
-      this.llvm  = getFilename(ob.llvm,  this.name, true,  ".ll");
-      this.clang = getFilename(ob.clang, this.name, false, ".clang");
-      this.arm   = getFilename(ob.arm,   this.name, true,  ".s");
+      this.llvm  = getFilename(ob.llvm,  name, true,  ".ll");
+      this.clang = getFilename(ob.clang, name, false, ".clang");
+      this.arm   = getFilename(ob.arm,   name, true,  ".s");
       
       if ((ob.llvm == null) && (ob.clang == null)
             && (ob.arm == null) && (ob.out == null))
-         this.out = getFilename("", this.name, false, ".out");
+         this.out = getFilename("", name, false, ".out");
       
       else
-         this.out = getFilename(ob.out, this.name, false, ".out");
+         this.out = getFilename(ob.out, name, false, ".out");
    }
    
    
@@ -177,11 +188,11 @@ public class Options
          else if (arg.equals("-"))
             ob.name = arg;
          
-         else if (!arg.endsWith(".mini"))
+         else if ((len < 5) || !arg.endsWith(".mini"))
             ErrorPrinter.printOut("source must be a .mini file: " + arg);
          
          else
-            ob.name = arg.substring(0, len - 5);
+            ob.name = arg;
       }
       
       
