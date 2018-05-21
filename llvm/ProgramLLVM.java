@@ -44,22 +44,7 @@ public class ProgramLLVM
    
    public void writeLLVM(Options opts, PrintWriter printer)
    {
-      printer.print("target triple = \"");
-      
-      if (opts.clang)
-      {
-         if (opts.csl)
-            printer.print("x86_64-redhat-linux-gnu");
-         
-         else
-            printer.print("x86_64-pc-linux-gnu");
-      }
-      else
-      {
-         printer.print("i686");
-      }
-      
-      printer.println('"');
+      printer.println("target triple = \"x86_64-unknown-linux-gnu\"");
       printer.println();
       
       
