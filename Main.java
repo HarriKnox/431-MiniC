@@ -24,28 +24,28 @@ public class Main
       
       
       /* Parse the source file and get the AST */
-      ProgramAST ast = ProgramParser.parseProgram(opts);
+      ProgramAST ast = ProgramParser.parseProgram(opts.filename);
       
       
       /* Build the LLVM representation using stack-based variable storage */
       ProgramLLVM llvm = ast.buildLLVM(opts);
       
       
+      /* Write all the LLVM code to stdout (if enabled) */
+      writeLLVM(opts, llvm);
+      
+      
       /* Compile with Clang (if enabled) */
       clangCompile(opts, llvm);
       
       
-      /* Write all the LLVM code to stdout */
-      writeLLVM(opts, llvm);
-      
-      
-      System.exit(0);
+      /* Write output ARM code to file */
    }
    
    
    private static void clangCompile(Options opts, ProgramLLVM llvm)
    {
-      if (!opts.clang)
+      if ((opts.clang == null) || opts.clang.isEmpty())
          return;
       
       
@@ -84,7 +84,7 @@ public class Main
       command.add("clang");
       command.add(file.getName());
       command.add("-o");
-      command.add(opts.name);
+      command.add(opts.clang);
       
       try
       {
@@ -105,11 +105,29 @@ public class Main
    
    private static void writeLLVM(Options opts, ProgramLLVM llvm)
    {
-      if (!opts.llvm)
+      if (opts.llvm == null)
          return;
       
+      PrintWriter printer;
       
-      PrintWriter printer = new PrintWriter(System.out);
+      if (opts.llvm.isEmpty())
+      {
+         printer = new PrintWriter(System.out);
+      }
+      
+      else
+      {
+         try
+         {
+            printer = new PrintWriter(opts.llvm);
+         }
+         catch (Exception e)
+         {
+            System.err.println("Exception opening file:");
+            e.printStackTrace();
+            return;
+         }
+      }
       
       llvm.writeLLVM(opts, printer);
       
