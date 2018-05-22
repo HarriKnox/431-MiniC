@@ -13,8 +13,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import ast.ProgramAST;
 
-import common.Options;
-
 import parser.MiniLexer;
 import parser.MiniParser;
 import parser.visitor.ProgramVisitor;
@@ -22,18 +20,17 @@ import parser.visitor.ProgramVisitor;
 
 public class ProgramParser
 {
-   public static ProgramAST parseProgram(Options opts)
+   public static ProgramAST parseProgram(String filename)
    {
       CharStream charStream = null;
       
       try
       {
-         if (opts.miniFile == null)
+         if (filename == null)
             charStream = CharStreams.fromStream(System.in);
          
          else
-            charStream = CharStreams.fromFileName(
-                  opts.miniFile.getAbsolutePath());
+            charStream = CharStreams.fromFileName(filename);
       }
       catch (IOException e)
       {
