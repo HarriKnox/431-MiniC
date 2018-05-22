@@ -152,7 +152,7 @@ public class Function extends TokenedElement
       buildCFG(program, entry, exit);
       
       
-      if (!opts.dirtycfg)
+      if (!opts.dirtyCFG)
          exit = LLVMCFGNode.cleanCFG(exit);
       
       
