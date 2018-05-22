@@ -29,14 +29,13 @@ public class Options
    
    
    /*
-    * The Four Output Options: -llvm -arm -clang -out
+    * The Three Output Options: -llvm -arm -clang
     *
     * During the compilation process there are a number of different files
     * Minic could produce, with default extensions in parentheses:
     *    -llvm   : human-readable LLVM code    (.ll   )
     *    -clang  : Clang-compiled executable   (.clang)
     *    -arm    : human-readable ARM code     (.s    )
-    *    -out    : ARM-GCC-Compiled executable (.out  )
     *
     * When an output option is provided, Minic will write the data associated
     * with that option to the file with either the default name, stdout, or a
@@ -47,7 +46,7 @@ public class Options
     * with the associated extension (see above) in place of the .mini extension
     * (for example, main.mini -> main.ll). If the input is stdin (either the
     * input file is explicitly "-" or not given, then the default name is "a"
-    * (to produce a.ll, a.clang, a.s, and a.out).
+    * (to produce a.ll, a.clang, and a.s).
     *
     * When no output options are specified, Minic will compile without writing
     * anything in-between. If any number of options are given, then Minic will
@@ -58,23 +57,23 @@ public class Options
     * to follow. When no equals sign is given, the options cause Minic to write
     * to files with the default names. If just an equals sign is given, -llvm
     * and -arm will cause Minic to output their respective contents to stdout;
-    * -clang and -out will still use the default filename.
-    *
-    * If both the equals and a name are provided for an option, then Minic will
-    * write the data to the filename given.
+    * -clang will still use the default filename (Clang can't compile to
+    * stdout). If both the equals and a name are provided for an option, then
+    * Minic will write the data to the filename given.
     *
     *
     * Some examples
-    *    minic main.mini                  : compile to main.out
+    *    minic main.mini                  : write ARM to main.s
     *
-    *    minic main.mini -out             : compile to main.out (same as above)
+    *    minic main.mini -arm             : write ARM to main.s (same as above)
     *
     *    minic main.mini -llvm            : Write LLVM to main.ll
     *
-    *    minic main.mini -clang -out=     : Compile with clang to main.clang
-    *                                     : and compile to main.out
+    *    minic main.mini -clang -arm=     : Compile with clang to main.clang
+    *                                     : and write ARM to stdout
     *
-    *    minic main.mini -llvm= -arm=asd  : Write LLVM to stdout and ARM to asd
+    *    minic main.mini -clang= -arm=asd : Compile with Clang to main.clang
+    *                                     : and write ARM to asd
     */
    
    
@@ -102,16 +101,8 @@ public class Options
    public final String arm;
    
    
-   /**
-    * Filename to compile the final product to. If this is null, don't compile.
-    * If this is the empty string, panic (it should not be the empty string).
-    * If anything else, write to that file.
-    */
-   public final String out;
    
-   
-   
-   Options(OptionsBuilder ob)
+   private Options(OptionsBuilder ob)
    {
       String name;
       
@@ -125,7 +116,7 @@ public class Options
       {
          this.filename = ob.name;
          
-         /* name is just the bit between the last slash and the .mini*/
+         /* name is just the bit between the last slash and the .mini */
          name = ob.name.substring(
                ob.name.lastIndexOf('/') + 1,
                ob.name.length() - 5);
@@ -134,14 +125,16 @@ public class Options
       
       this.llvm  = getFilename(ob.llvm,  name, true,  ".ll");
       this.clang = getFilename(ob.clang, name, false, ".clang");
-      this.arm   = getFilename(ob.arm,   name, true,  ".s");
       
-      if ((ob.llvm == null) && (ob.clang == null)
-            && (ob.arm == null) && (ob.out == null))
-         this.out = getFilename("", name, false, ".out");
+      if ((ob.llvm == null) && (ob.clang == null) && (ob.arm == null))
+         this.arm = getFilename("", name, true, ".s");
       
       else
-         this.out = getFilename(ob.out, name, false, ".out");
+         this.arm = getFilename(ob.arm, name, true, ".s");
+      
+      
+      this.stack = ob.stack;
+      this.dirtyCFG = ob.dirtyCFG;
    }
    
    
@@ -219,13 +212,13 @@ public class Options
    }
    
    
-   private static isOutputOption(String arg, String option)
+   private static boolean isOutputOption(String arg, String option)
    {
       return arg.equals(option) || arg.startsWith(option + '=');
    }
    
    
-   private static handleOption(String option, OptionsBuilder ob)
+   private static void handleOption(String arg, OptionsBuilder ob)
    {
       if (isOutputOption(arg, "-llvm"))
          ob.llvm = getOutputName(arg);
@@ -235,9 +228,6 @@ public class Options
       
       else if (isOutputOption(arg, "-arm"))
          ob.arm = getOutputName(arg);
-      
-      else if (isOutputOption(arg, "-out"))
-         ob.out = getOutputName(arg);
       
       else if (arg.equals("-stack"))
          ob.stack = true;
@@ -260,7 +250,6 @@ public class Options
       String llvm = null;
       String clang = null;
       String arm = null;
-      String out = null;
       
       Options create()
       {
