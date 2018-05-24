@@ -47,10 +47,25 @@ public class LLVMStdio extends LLVMConstant
          = new LLVMStdio(".scanf_format", "c\"%d\\00\\00\"");
    
    
+   private ARMGlobal armGlobal()
+   {
+      if (this == PRINT_FORMAT)
+         return ARMGlobal.PRINT_FORMAT;
+      
+      if (this == PRINTLN_FORMAT)
+         return ARMGlobal.PRINTLN_FORMAT;
+      
+      if (this == SCANF_FORMAT)
+         return ARMGlobal.SCANF_FORMAT;
+      
+      return new ARMGlobal(this.name);
+   }
+   
+   
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
-      ARMMovw movw = new ARMMovw(new ARMGlobal(this.name));
+      ARMMovw movw = new ARMMovw(this.armGlobal());
       ARMMovt movt = new ARMMovt(movw.target, movw.value);
       
       node.add(movw).add(movt);
