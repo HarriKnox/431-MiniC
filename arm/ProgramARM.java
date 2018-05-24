@@ -16,4 +16,10 @@ public class ProgramARM
       this.globals = globals;
       this.functions = functions;
    }
+   
+   
+   public static void writeARM(Options opts, Printer printer)
+   {
+      printer.println(".arch armv7-a");
+   }
 }

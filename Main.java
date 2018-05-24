@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
+import arm.ProgramARM;
+
 import ast.ProgramAST;
 
 import common.Options;
@@ -39,7 +41,46 @@ public class Main
       clangCompile(opts, llvm);
       
       
-      /* Write output ARM code to file */
+      if (opts.arm != null)
+      {
+         ProgramARM arm = llvm.buildARM(opts);
+         
+         
+         /* Write output ARM code to file */
+         writeARM(opts, arm);
+      }
+   }
+   
+   
+   private static void writeLLVM(Options opts, ProgramLLVM llvm)
+   {
+      if (opts.llvm == null)
+         return;
+      
+      PrintWriter printer;
+      
+      if (opts.llvm.isEmpty())
+      {
+         printer = new PrintWriter(System.out);
+      }
+      
+      else
+      {
+         try
+         {
+            printer = new PrintWriter(opts.llvm);
+         }
+         catch (Exception e)
+         {
+            System.err.println("Exception opening file:");
+            e.printStackTrace();
+            return;
+         }
+      }
+      
+      llvm.writeLLVM(opts, printer);
+      
+      printer.close();
    }
    
    
@@ -103,14 +144,14 @@ public class Main
    }
    
    
-   private static void writeLLVM(Options opts, ProgramLLVM llvm)
+   private static void writeARM(Options opts, ProgramARM arm)
    {
-      if (opts.llvm == null)
+      if (opts.arm == null)
          return;
       
       PrintWriter printer;
       
-      if (opts.llvm.isEmpty())
+      if (opts.arm.isEmpty())
       {
          printer = new PrintWriter(System.out);
       }
@@ -119,7 +160,7 @@ public class Main
       {
          try
          {
-            printer = new PrintWriter(opts.llvm);
+            printer = new PrintWriter(opts.arm);
          }
          catch (Exception e)
          {
@@ -129,7 +170,7 @@ public class Main
          }
       }
       
-      llvm.writeLLVM(opts, printer);
+      arm.writeARM(opts, printer);
       
       printer.close();
    }
