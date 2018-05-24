@@ -1,6 +1,8 @@
 package arm;
 
 
+import java.io.PrintWriter;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,5 +47,25 @@ public class ARMCFGNode
    public String armString()
    {
       return ".N" + this.getUID();
+   }
+   
+   
+   public void writeARM(PrintWriter printer)
+   {
+      printer.print(this.armString());
+      printer.println(':');
+      
+      
+      for (ARMInstruction instruction : this.instructions)
+      {
+         printer.print("   ");
+         printer.println(instruction.armString());
+      }
+      
+      
+      /*
+      if (this.link != null)
+         this.link.writeARM(printer));
+      */
    }
 }

@@ -1,8 +1,19 @@
 package arm;
 
 
+import java.io.PrintWriter;
+
+import java.util.Arrays;
+
 import arm.declaration.ARMFunctions;
 import arm.declaration.ARMGlobals;
+
+import common.Options;
+
+
+import static arm.value.immediate.ARMGlobal.PRINT_FORMAT;
+import static arm.value.immediate.ARMGlobal.PRINTLN_FORMAT;
+import static arm.value.immediate.ARMGlobal.SCANF_FORMAT;
 
 
 public class ProgramARM
@@ -18,8 +29,34 @@ public class ProgramARM
    }
    
    
-   public static void writeARM(Options opts, Printer printer)
+   public void writeARM(Options opts, PrintWriter printer)
    {
       printer.println(".arch armv7-a");
+      printer.println(".text");
+      
+      this.globals.writeARM(printer);
+      
+      printer.println(".global __aeabi_idiv");
+      printer.println();
+      
+      this.functions.writeARM(printer);
+      
+      
+      printer.println(".section .rodata");
+      
+      printer.println(".align 2");
+      printer.print(PRINTLN_FORMAT.name);
+      printer.println(':');
+      printer.println("   .asciz \"%d\\n\"");
+      
+      printer.println(".align 2");
+      printer.print(PRINT_FORMAT.name);
+      printer.println(':');
+      printer.println("   .asciz \"%d \"");
+      
+      printer.println(".align 2");
+      printer.print(SCANF_FORMAT.name);
+      printer.println(':');
+      printer.println("   .asciz \"%d\"");
    }
 }
