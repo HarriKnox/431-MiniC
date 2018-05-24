@@ -37,7 +37,7 @@ public class LLVMScratchPointer extends LLVMConstant
    @Override
    public ARMRegister buildARM(ARMCFGNode node)
    {
-      ARMMovw movw = new ARMMovw(new ARMGlobal(this.llvmString()));
+      ARMMovw movw = new ARMMovw(new ARMGlobal(LLVMGlobal.SCANF_SCRATCH.name));
       ARMMovt movt = new ARMMovt(movw.target, movw.value);
       
       node.add(movw).add(movt);
