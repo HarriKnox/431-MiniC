@@ -5,30 +5,34 @@ public class ARMRegister extends ARMOperand
 {
    public final int offset;
    private int number;
+   private boolean virtual;
+   
+   private static int count = 0;
    
    
    public ARMRegister()
    {
-      this(-1);
+      this(-1, 0, true);
    }
    
    
    private ARMRegister(int r)
    {
-      this(r, 0);
+      this(r, 0, false);
    }
    
    
-   private ARMRegister(int r, int o)
+   private ARMRegister(int r, int o, boolean v)
    {
       this.number = r;
       this.offset = o;
+      this.virtual = v;
    }
    
    
    public ARMRegister(ARMRegister reg, int offset)
    {
-      this(reg.number, offset);
+      this(reg.number, offset, reg.virtual);
    }
    
    
@@ -78,9 +82,22 @@ public class ARMRegister extends ARMOperand
    }
    
    
+   private int getNumber()
+   {
+      if (this.number == -1)
+         this.number = count++;
+      
+      return this.number;
+   }
+   
+   
    @Override
    public String armString()
    {
+      if (this.virtual)
+         return "r0";//"%v" + this.getNumber();
+      
+      
       switch (this.number)
       {
          case 11: return "fp";
