@@ -62,7 +62,7 @@ public class ProgramLLVM
       
       
       for (LLVMStdio stdio : Arrays.asList(new LLVMStdio[]{
-               PRINTLN_FORMAT, PRINT_FORMAT, SCANF_FORMAT}))
+            PRINTLN_FORMAT, PRINT_FORMAT, SCANF_FORMAT}))
       {
          printer.print(stdio.name);
          printer.print(" = private unnamed_addr constant [4 x i8] ");
