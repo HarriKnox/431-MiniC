@@ -95,7 +95,7 @@ public class ARMRegister extends ARMOperand
    public String armString()
    {
       if (this.virtual)
-         return "r0";//"%v" + this.getNumber();
+         return "%v" + this.getNumber();
       
       
       switch (this.number)
