@@ -39,20 +39,25 @@ public class ProgramARM
       printer.println(".global __aeabi_idiv");
       printer.println();
       
+      printer.println();
       this.functions.writeARM(printer);
       
       
+      printer.println();
       printer.println(".section .rodata");
+      printer.println();
       
       printer.println(".align 2");
       printer.print(PRINTLN_FORMAT.name);
       printer.println(':');
       printer.println("   .asciz \"%d\\n\"");
+      printer.println();
       
       printer.println(".align 2");
       printer.print(PRINT_FORMAT.name);
       printer.println(':');
       printer.println("   .asciz \"%d \"");
+      printer.println();
       
       printer.println(".align 2");
       printer.print(SCANF_FORMAT.name);
