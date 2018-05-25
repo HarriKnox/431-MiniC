@@ -21,11 +21,6 @@ public class ARMCFGNode
    private static int count = 0;
    
    
-   public ARMCFGNode(int uid)
-   {
-      this.uid = uid;
-   }
-   
    
    public int getUID()
    {
