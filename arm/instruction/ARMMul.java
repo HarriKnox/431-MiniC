@@ -22,4 +22,12 @@ public class ARMMul extends ARMInstruction
       this.left = left;
       this.right = right;
    }
+   
+   
+   @Override
+   public String armString()
+   {
+      return "mul " + this.target.armString() + ", "
+            + this.left.armString() + ", " + this.right.armString();
+   }
 }

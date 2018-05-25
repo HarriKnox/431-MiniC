@@ -26,4 +26,15 @@ public abstract class ARMBinary extends ARMInstruction
    {
       this(new ARMRegister(), left, right);
    }
+   
+   
+   protected abstract String getOperation();
+   
+   
+   @Override
+   public String armString()
+   {
+      return this.getOperation() + ' ' + this.target.armString() + ", "
+            + this.left.armString() + ", " + this.right.armString();
+   }
 }

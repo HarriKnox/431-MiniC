@@ -17,4 +17,11 @@ public class ARMSub extends ARMBinary
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "sub";
+   }
 }

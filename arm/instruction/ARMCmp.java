@@ -18,4 +18,11 @@ public class ARMCmp extends ARMInstruction
       this.left = left;
       this.right = right;
    }
+   
+   
+   @Override
+   public String armString()
+   {
+      return "cmp " + this.left.armString() + ", " + this.right.armString();
+   }
 }

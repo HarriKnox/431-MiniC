@@ -17,4 +17,11 @@ public class ARMAdd extends ARMBinary
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "add";
+   }
 }

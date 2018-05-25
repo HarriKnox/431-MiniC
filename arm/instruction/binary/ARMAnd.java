@@ -17,4 +17,11 @@ public class ARMAnd extends ARMBinary
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "and";
+   }
 }

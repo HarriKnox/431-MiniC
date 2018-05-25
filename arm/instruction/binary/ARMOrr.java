@@ -17,4 +17,11 @@ public class ARMOrr extends ARMBinary
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "orr";
+   }
 }

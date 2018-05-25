@@ -17,4 +17,11 @@ public class ARMRsb extends ARMBinary
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "rsb";
+   }
 }

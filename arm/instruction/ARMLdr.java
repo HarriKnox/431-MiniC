@@ -24,4 +24,12 @@ public class ARMLdr extends ARMInstruction
       this.target = target;
       this.source = source;
    }
+   
+   
+   @Override
+   public String armString()
+   {
+      return "ldr " + this.target.armString() + ", ["
+            + this.source.armString() + ']';
+   }
 }

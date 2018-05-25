@@ -17,4 +17,11 @@ public class ARMEor extends ARMBinary
    {
       super(left, right);
    }
+   
+   
+   @Override
+   protected String getOperation()
+   {
+      return "eor";
+   }
 }

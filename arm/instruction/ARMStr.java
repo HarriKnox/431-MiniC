@@ -18,4 +18,12 @@ public class ARMStr extends ARMInstruction
       this.source = source;
       this.target = target;
    }
+   
+   
+   @Override
+   public String armString()
+   {
+      return "str " + this.source.armString() + ", ["
+            + this.target.armString() + "]";
+   }
 }
