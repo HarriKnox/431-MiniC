@@ -55,8 +55,14 @@ public class Variable extends TokenedElement
    public LLVMLocal llvmLocalSet(String funcName, int index)
    {
       if (this.llvmLocal == null)
-         this.llvmLocal = new LLVMLocal(funcName,
-               this.name, this.type.llvmType(), index);
+      {
+         if (this.llvmParameter == null)
+            this.llvmLocal = new LLVMLocal(funcName,
+                  this.name, this.type.llvmType(), index);
+         
+         else
+            this.llvmLocal = this.llvmParameter.llvmLocal;
+      }
       
       return this.llvmLocal;
    }
@@ -65,8 +71,15 @@ public class Variable extends TokenedElement
    public LLVMParameter llvmParameterSet(String funcName, int index)
    {
       if (this.llvmParameter == null)
-         this.llvmParameter = new LLVMParameter(
-               funcName, this.name, this.type.llvmType(), index);
+      {
+         if (this.llvmLocal == null)
+            this.llvmParameter = new LLVMParameter(
+                  funcName, this.name, this.type.llvmType(), index);
+         
+         else
+            this.llvmParameter = new LLVMParameter(funcName,
+                  this.name, this.type.llvmType(), index, this.llvmLocal);
+      }
       
       return this.llvmParameter;
    }
