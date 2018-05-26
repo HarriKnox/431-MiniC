@@ -19,16 +19,26 @@ public class LLVMParameter extends LLVMRegister
    public final String function;
    public final String id;
    public final int index;
+   public final LLVMLocal llvmLocal;
    
    
-   public LLVMParameter(String function,
-         String identifier, LLVMType type, int index)
+   public LLVMParameter(String function, String identifier,
+         LLVMType type, int index, LLVMLocal llvmLocal)
    {
       super(type);
       
       this.function = function;
       this.id = identifier;
       this.index = index;
+      this.llvmLocal = llvmLocal;
+   }
+   
+   
+   public LLVMParameter(String function,
+         String identifier, LLVMType type, int index)
+   {
+      this(function, identifier, type, index,
+            new LLVMLocal(function, identifier, type, index));
    }
    
    
