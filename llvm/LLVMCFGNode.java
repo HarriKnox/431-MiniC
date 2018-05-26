@@ -95,8 +95,10 @@ public class LLVMCFGNode
       
       if (!nodes.contains(this))
       {
+         if (!nodes.isEmpty() && this.loopback == null)
+            this.setUID();
+         
          nodes.add(this);
-         this.getUID();
       }
       
       
@@ -337,30 +339,31 @@ public class LLVMCFGNode
    }
    
    
-   public int getUID()
+   public void setUID()
    {
       if (this.uid == -1)
          this.uid = count++;
-      
-      return this.uid;
    }
    
    
    public String llvmString()
    {
-      return 'N' + Integer.toString(this.getUID());
+      return 'N' + Integer.toString(this.uid);
    }
    
    
    public void writeLLVM(PrintWriter printer)
    {
-      printer.println(this.llvmString() + ':');
+      if (this.uid != -1)
+         printer.println(this.llvmString() + ':');
+      
       
       for (LLVMInstruction instruction : this.instructions)
       {
          printer.print("   ");
          printer.println(instruction.llvmString());
       }
+      
       
       if (this.link != null)
       {
