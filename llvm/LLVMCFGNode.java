@@ -15,7 +15,6 @@ import llvm.instruction.LLVMInstruction;
 import llvm.link.LLVMBranch;
 import llvm.link.LLVMJump;
 import llvm.link.LLVMLink;
-import llvm.link.LLVMRet;
 
 import llvm.value.operand.LLVMOperand;
 
@@ -77,12 +76,6 @@ public class LLVMCFGNode
    }
    
    
-   public void ret(LLVMOperand value)
-   {
-      this.link = new LLVMRet(value);
-   }
-   
-   
    public void recursivisit(List<LLVMCFGNode> nodes)
    {
       if (nodes.contains(this))
@@ -95,7 +88,7 @@ public class LLVMCFGNode
       
       if (!nodes.contains(this))
       {
-         if (!nodes.isEmpty() && this.loopback == null)
+         if (!nodes.isEmpty() || this.loopback != null)
             this.setUID();
          
          nodes.add(this);
@@ -343,6 +336,12 @@ public class LLVMCFGNode
    {
       if (this.uid == -1)
          this.uid = count++;
+   }
+   
+   
+   public int getUID()
+   {
+      return this.uid;
    }
    
    

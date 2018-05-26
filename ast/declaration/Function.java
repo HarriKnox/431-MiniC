@@ -22,7 +22,6 @@ import llvm.LLVMCFGNode;
 
 import llvm.declaration.LLVMFunction;
 
-import llvm.instruction.LLVMAlloca;
 import llvm.instruction.LLVMStore;
 import llvm.instruction.LLVMInstruction;
 
@@ -43,11 +42,10 @@ public class Function extends TokenedElement
    public final Variables parameters;
    public final Variables locals;
    public final Statement body;
+   public final Variable returnValue;
    
    public final List<Type> parameterTypes;
    
-   
-   private Variable returnValue;
 
 
    public Function(Token token, String name, Type type,
@@ -60,6 +58,8 @@ public class Function extends TokenedElement
       this.parameters = params;
       this.locals = locals;
       this.body = body;
+      
+      this.returnValue = new Variable(null, "return.value", this.type, 0);
       
       
       /* Get parameter types for function signature */
@@ -98,12 +98,6 @@ public class Function extends TokenedElement
    }
    
    
-   public Variable returnValue()
-   {
-      return this.returnValue;
-   }
-   
-   
    public LLVMFunction buildLLVM(ProgramAST program, Options opts)
    {
       int paramLen = this.parameters.length;
@@ -124,13 +118,10 @@ public class Function extends TokenedElement
          locals.add(local.llvmLocalSet(this.name, local.index + paramLen));
       
       
+      this.returnValue.llvmLocalSet(this.name, locals.size() + 1);
+      
       if (!(this.type instanceof VoidType))
-      {
-         this.returnValue = new Variable(null, "return.value", this.type, 0);
-         
-         locals.add(this.returnValue.llvmLocalSet(
-               this.name, locals.size() + 1));
-      }
+         locals.add(this.returnValue.llvmLocal());
       
       
       List<LLVMCFGNode> nodes = getCFGNodes(program, opts);
@@ -138,16 +129,14 @@ public class Function extends TokenedElement
       
       return new LLVMFunction(
             this.name, this.type.llvmType(), params,
-            locals, nodes, (this.returnValue == null)
-                  ? null
-                  : this.returnValue.llvmLocal());
+            locals, nodes, this.returnValue.llvmLocal());
    }
    
    
    private List<LLVMCFGNode> getCFGNodes(ProgramAST program, Options opts)
    {
-      LLVMCFGNode entry = buildEntryNode();
-      LLVMCFGNode exit = buildExitNode();
+      LLVMCFGNode entry = new LLVMCFGNode(false);
+      LLVMCFGNode exit = new LLVMCFGNode(false);
       
       buildCFG(program, entry, exit);
       
@@ -157,62 +146,6 @@ public class Function extends TokenedElement
       
       
       return recursivisit(exit);
-   }
-   
-   
-   private LLVMCFGNode buildEntryNode()
-   {
-      LLVMCFGNode entry = new LLVMCFGNode(false);
-      
-      
-      /* Allocate space for return value */
-      if (this.returnValue != null)
-         entry.add(new LLVMAlloca(this.returnValue.llvmLocal()));
-      
-      
-      /* Allocate space and store value for each parameter */
-      for (Variable param : this.parameters.variables)
-      {
-         LLVMParameter llvmParam = param.llvmParameter();
-         LLVMLocal llvmLocal = param.llvmLocal();
-         
-         entry .add(new LLVMAlloca(llvmLocal))
-               .add(new LLVMStore(llvmLocal, llvmParam));
-      }
-      
-      
-      /* Allocate space for each local */
-      for (Variable local : this.locals.variables)
-      {
-         LLVMLocal llvmLocal = local.llvmLocal();
-         
-         entry.add(new LLVMAlloca(llvmLocal));
-      }
-      
-      
-      return entry;
-   }
-   
-   
-   private LLVMCFGNode buildExitNode()
-   {
-      LLVMCFGNode exit = new LLVMCFGNode(false);
-      
-      
-      /* Add return instructions */
-      if (this.returnValue == null)
-      {
-         exit.ret(null);
-      }
-      else
-      {
-         LLVMLoad load = new LLVMLoad(this.returnValue.llvmLocal());
-         
-         exit.add(load).ret(load.target);
-      }
-      
-      
-      return exit;
    }
    
    

@@ -60,7 +60,7 @@ public class ReturnStatement extends Statement
             
             
             LLVMStore store = new LLVMStore(
-                  current.returnValue().llvmLocal(),
+                  current.returnValue.llvmLocal(),
                   value);
             
             node.add(store);

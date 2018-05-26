@@ -3,6 +3,8 @@ package llvm.value.operand.register;
 
 import llvm.type.LLVMType;
 
+import llvm.value.variable.LLVMLocal;
+
 import arm.ARMCFGNode;
 
 import arm.instruction.ARMLdr;

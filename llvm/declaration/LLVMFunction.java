@@ -11,7 +11,10 @@ import common.Options;
 
 import llvm.LLVMCFGNode;
 
+import llvm.instruction.LLVMStore;
+
 import llvm.type.LLVMType;
+import llvm.type.LLVMVoidType;
 
 import llvm.value.operand.register.LLVMParameter;
 
@@ -59,11 +62,67 @@ public class LLVMFunction
       printer.println('{');
       
       
+      for (LLVMLocal local : this.locals)
+      {
+         printer.print("   ");
+         printer.print(local.llvmString());
+         printer.print(" = alloca ");
+         printer.println(local.type.llvmString());
+      }
+      
+      
+      for (LLVMParameter param : this.parameters)
+      {
+         printer.print("   ");
+         printer.println(new LLVMStore(param.llvmLocal, param).llvmString());
+      }
+      
+      
+      int firstUID = nodes.get(0).getUID();
+      
+      if (firstUID != -1)
+      {
+         printer.print("   br label %N");
+         printer.println(firstUID);
+      }
+      
+      
       for (LLVMCFGNode node : this.nodes)
          node.writeLLVM(printer);
       
       
+      if (this.returnValue.type instanceof LLVMVoidType)
+      {
+         printer.println("   ret void");
+      }
+      
+      else
+      {
+         printer.print("   ");
+         printer.print(this.retvalRegister());
+         printer.print(" = load ");
+         printer.print(this.type.llvmString());
+         printer.print("* ");
+         printer.println(this.returnValue.llvmString());
+         
+         printer.print("   ret ");
+         printer.print(this.type.llvmString());
+         printer.print(' ');
+         printer.println(this.retvalRegister());
+      }
+      
+      
       printer.println('}');
+   }
+   
+   
+   private String retvalRegister()
+   {
+      return new StringBuilder()
+            .append('%')
+            .append(this.name)
+            .append(".ret.val")
+            .toString();
    }
    
    

@@ -5,6 +5,8 @@ import llvm.LLVMCFGNode;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
 
 public class LLVMBranch extends LLVMLink
 {
@@ -34,5 +36,12 @@ public class LLVMBranch extends LLVMLink
             .append(", label %")
             .append(elseNode.llvmString())
             .toString();
+   }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      
    }
 }

@@ -3,6 +3,8 @@ package llvm.link;
 
 import llvm.LLVMCFGNode;
 
+import arm.ARMCFGNode;
+
 
 public class LLVMJump extends LLVMLink
 {
@@ -21,5 +23,12 @@ public class LLVMJump extends LLVMLink
    public String llvmString()
    {
       return "br label %" + this.target.llvmString();
+   }
+   
+   
+   @Override
+   public void buildARM(ARMCFGNode node)
+   {
+      
    }
 }
