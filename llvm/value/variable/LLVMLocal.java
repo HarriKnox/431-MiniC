@@ -2,6 +2,7 @@ package llvm.value.variable;
 
 
 import llvm.type.LLVMType;
+import llvm.type.LLVMVoidType;
 
 import arm.ARMCFGNode;
 
@@ -39,6 +40,9 @@ public class LLVMLocal extends LLVMVariable
    @Override
    public ARMAddress buildARM(ARMCFGNode node)
    {
+      if (this.type instanceof LLVMVoidType)
+         return null;
+      
       return new ARMAddress(SP, this.index * 4);
    }
 }
