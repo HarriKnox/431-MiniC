@@ -118,7 +118,7 @@ public class Function extends TokenedElement
          locals.add(local.llvmLocalSet(this.name, local.index + paramLen));
       
       
-      this.returnValue.llvmLocalSet(this.name, locals.size() + 1);
+      this.returnValue.llvmLocalSet(this.name, locals.size());
       
       if (!(this.type instanceof VoidType))
          locals.add(this.returnValue.llvmLocal());
