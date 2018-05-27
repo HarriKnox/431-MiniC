@@ -90,9 +90,8 @@ public class ARMCFGNode
       }
       
       
-      /*
+      
       if (this.link != null)
-         this.link.writeARM(printer));
-      */
+         this.link.writeARM(printer);
    }
 }

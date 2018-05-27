@@ -381,6 +381,15 @@ public class LLVMCFGNode
    }
    
    
+   public void putARMLink()
+   {
+      if (this.link == null)
+         return;
+      
+      this.link.buildARM(this.armNode);
+   }
+   
+   
    public ARMCFGNode armNode()
    {
       return this.armNode;
