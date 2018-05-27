@@ -163,6 +163,6 @@ public class LLVMFunction
          armNodes.add(node.buildARM());
       
       
-      return new ARMFunction(this.name, armNodes);
+      return new ARMFunction(this.name, armNodes, this.locals.size());
    }
 }
