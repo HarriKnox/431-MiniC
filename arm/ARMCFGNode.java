@@ -28,12 +28,10 @@ public class ARMCFGNode
    
    
    
-   public int getUID()
+   public void setUID()
    {
       if (this.uid == -1)
          this.uid = count++;
-      
-      return this.uid;
    }
    
    
@@ -73,14 +71,17 @@ public class ARMCFGNode
    
    public String armString()
    {
-      return ".N" + this.getUID();
+      return ".N" + this.uid;
    }
    
    
    public void writeARM(PrintWriter printer)
    {
-      printer.print(this.armString());
-      printer.println(':');
+      if (this.uid != -1)
+      {
+         printer.print(this.armString());
+         printer.println(':');
+      }
       
       
       for (ARMInstruction instruction : this.instructions)
@@ -88,7 +89,6 @@ public class ARMCFGNode
          printer.print("   ");
          printer.println(instruction.armString());
       }
-      
       
       
       if (this.link != null)
