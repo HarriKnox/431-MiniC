@@ -31,10 +31,15 @@ public class ARMFunction
       printer.print(this.name);
       printer.println(':');
       
+      printer.println("   push {fp, lr}");
+      printer.println("   add fp, sp, #4");
+      
       
       for (ARMCFGNode node : this.nodes)
          node.writeARM(printer);
       
+      
+      printer.println("   pop {fp, pc}");
       
       printer.print(".size ");
       printer.print(this.name);
