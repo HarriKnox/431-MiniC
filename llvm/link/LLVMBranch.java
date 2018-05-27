@@ -1,6 +1,8 @@
 package llvm.link;
 
 
+import java.io.PrintWriter;
+
 import llvm.LLVMCFGNode;
 
 import llvm.value.operand.LLVMOperand;
@@ -27,15 +29,14 @@ public class LLVMBranch extends LLVMLink
    
    
    @Override
-   public String llvmString()
+   public void writeLLVM(PrintWriter printer)
    {
-      return new StringBuilder("br i1 ")
-            .append(guard.llvmString())
-            .append(", label %")
-            .append(thenNode.llvmString())
-            .append(", label %")
-            .append(elseNode.llvmString())
-            .toString();
+      printer.print("   br i1 ");
+      printer.print(guard.llvmString());
+      printer.print(", label %");
+      printer.print(thenNode.llvmString());
+      printer.print(", label %");
+      printer.println(elseNode.llvmString());
    }
    
    

@@ -1,6 +1,8 @@
 package llvm.link;
 
 
+import java.io.PrintWriter;
+
 import llvm.LLVMCFGNode;
 
 import arm.ARMCFGNode;
@@ -20,9 +22,10 @@ public class LLVMJump extends LLVMLink
    
    
    @Override
-   public String llvmString()
+   public void writeLLVM(PrintWriter printer)
    {
-      return "br label %" + this.target.llvmString();
+      printer.print("   br label %");
+      printer.println(this.target.llvmString());
    }
    
    

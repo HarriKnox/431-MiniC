@@ -365,10 +365,7 @@ public class LLVMCFGNode
       
       
       if (this.link != null)
-      {
-         printer.print("   ");
-         printer.println(this.link.llvmString());
-      }
+         this.link.writeLLVM(printer);
    }
    
    
