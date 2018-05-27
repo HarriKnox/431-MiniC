@@ -1,6 +1,8 @@
 package arm.link;
 
 
+import java.io.PrintWriter;
+
 import arm.ARMCFGNode;
 
 
@@ -17,4 +19,10 @@ public class ARMJump extends ARMLink
    }
    
    
+   @Override
+   public void writeARM(PrintWriter printer)
+   {
+      printer.print("   b ");
+      printer.println(this.target.armString());
+   }
 }
