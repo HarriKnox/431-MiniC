@@ -32,6 +32,10 @@ public class LLVMJump extends LLVMLink
    @Override
    public void buildARM(ARMCFGNode node)
    {
+      if (this.loop)
+         node.loopback(this.target.armNode());
       
+      else
+         node.jump(this.target.armNode());
    }
 }

@@ -43,6 +43,9 @@ public class LLVMBranch extends LLVMLink
    @Override
    public void buildARM(ARMCFGNode node)
    {
-      
+      node.branch(
+            this.guard.buildARM(node),
+            this.thenNode.armNode(),
+            this.elseNode.armNode());
    }
 }

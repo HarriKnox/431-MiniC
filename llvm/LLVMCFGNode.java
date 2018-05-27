@@ -379,4 +379,10 @@ public class LLVMCFGNode
       
       return armNode;
    }
+   
+   
+   public ARMCFGNode armNode()
+   {
+      return this.armNode;
+   }
 }
