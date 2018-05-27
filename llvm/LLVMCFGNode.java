@@ -354,7 +354,10 @@ public class LLVMCFGNode
    public void writeLLVM(PrintWriter printer)
    {
       if (this.uid != -1)
-         printer.println(this.llvmString() + ':');
+      {
+         printer.print(this.llvmString());
+         printer.println(':');
+      }
       
       
       for (LLVMInstruction instruction : this.instructions)
