@@ -374,22 +374,24 @@ public class LLVMCFGNode
    
    public ARMCFGNode buildARM()
    {
-      this.armNode = new ARMCFGNode();
-      
       for (LLVMInstruction instruction : this.instructions)
          instruction.buildARM(armNode);
+      
+      
+      if (this.link != null)
+         this.link.buildARM(this.armNode);
       
       
       return armNode;
    }
    
    
-   public void putARMLink()
+   public void setupARMNode()
    {
-      if (this.link == null)
-         return;
+      this.armNode = new ARMCFGNode();
       
-      this.link.buildARM(this.armNode);
+      if (this.uid != -1)
+         this.armNode.setUID();
    }
    
    

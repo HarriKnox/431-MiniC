@@ -153,11 +153,14 @@ public class LLVMFunction
       List<ARMCFGNode> armNodes = new ArrayList<>(this.nodes.size());
       
       
+      /* First pass to create ARM nodes */
+      for (LLVMCFGNode node : this.nodes)
+         node.setupARMNode();
+      
+      
+      /* Second pass to put instructions (and links) into nodes */
       for (LLVMCFGNode node : this.nodes)
          armNodes.add(node.buildARM());
-      
-      for (LLVMCFGNode node : this.nodes)
-         node.putARMLink();
       
       
       return new ARMFunction(this.name, armNodes);
