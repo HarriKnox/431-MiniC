@@ -14,8 +14,7 @@ import arm.ARMCFGNode;
 
 import arm.instruction.mov.ARMMov;
 
-
-import static arm.value.operand.ARMRegister.R0;
+import arm.value.operand.ARMRegister;
 
 
 public class LLVMCall extends LLVMTargetedInstruction
@@ -45,6 +44,6 @@ public class LLVMCall extends LLVMTargetedInstruction
       
       
       /* Move the return value out of r0 and into a virtual register */
-      node.add(new ARMMov(this.target.buildARM(node), R0));
+      node.add(new ARMMov(this.target.buildARM(node), new ARMRegister(0)));
    }
 }

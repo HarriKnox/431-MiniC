@@ -55,7 +55,7 @@ public class LLVMParameter extends LLVMRegister
    public ARMRegister buildARM(ARMCFGNode node)
    {
       if (this.index <= 3)
-         return ARMRegister.getReal(this.index);
+         return new ARMRegister(this.index);
       
       
       ARMLdr load = new ARMLdr(new ARMAddress(FP, (this.index - 3) * 4));

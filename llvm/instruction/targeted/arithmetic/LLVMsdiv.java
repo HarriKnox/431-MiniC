@@ -30,9 +30,9 @@ public class LLVMsdiv extends LLVMArithmetic
    @Override
    public void buildARM(ARMCFGNode node)
    {
-      node  .add(new ARMMov(ARMRegister.R0, this.left.buildARM(node)))
-            .add(new ARMMov(ARMRegister.R1, this.right.buildARM(node)))
+      node  .add(new ARMMov(new ARMRegister(0), this.left.buildARM(node)))
+            .add(new ARMMov(new ARMRegister(1), this.right.buildARM(node)))
             .add(new ARMBl("__aeabi_idiv"))
-            .add(new ARMMov(this.target.buildARM(node), ARMRegister.R0));
+            .add(new ARMMov(this.target.buildARM(node), new ARMRegister(0)));
    }
 }
