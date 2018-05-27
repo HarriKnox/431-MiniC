@@ -78,12 +78,12 @@ public class LLVMFunction
       }
       
       
-      int firstUID = nodes.get(0).getUID();
+      LLVMCFGNode firstNode = nodes.get(0);
       
-      if (firstUID != -1)
+      if ((firstNode != null) && (firstNode.getUID() != -1))
       {
-         printer.print("   br label %N");
-         printer.println(firstUID);
+         printer.print("   br label %");
+         printer.println(firstNode.llvmString());
       }
       
       
