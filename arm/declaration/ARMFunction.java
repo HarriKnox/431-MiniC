@@ -7,19 +7,24 @@ import java.util.List;
 
 import arm.ARMCFGNode;
 
+import arm.value.operand.ARMAddress;
+
 
 public class ARMFunction
 {
    public final String name;
    public final List<ARMCFGNode> nodes;
    public final int localCount;
+   public final ARMAddress returnValue;
    
    
-   public ARMFunction(String name, List<ARMCFGNode> nodes, int localCount)
+   public ARMFunction(String name, List<ARMCFGNode> nodes, int localCount,
+         ARMAddress returnValue)
    {
       this.name = name;
       this.nodes = nodes;
       this.localCount = localCount;
+      this.returnValue = returnValue;
    }
    
    
@@ -50,6 +55,15 @@ public class ARMFunction
       /* Write all node instructions */
       for (ARMCFGNode node : this.nodes)
          node.writeARM(printer);
+      
+      
+      /* Load return value into r0 */
+      if (this.returnValue != null)
+      {
+         printer.print("   ldr r0, [");
+         printer.print(this.returnValue.armString());
+         printer.println(']');
+      }
       
       
       /* Pop off all of stack at once */
