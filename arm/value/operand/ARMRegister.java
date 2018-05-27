@@ -3,7 +3,6 @@ package arm.value.operand;
 
 public class ARMRegister extends ARMOperand
 {
-   public final int offset;
    private int number;
    private boolean virtual;
    
@@ -12,27 +11,20 @@ public class ARMRegister extends ARMOperand
    
    public ARMRegister()
    {
-      this(-1, 0, true);
+      this(-1, true);
    }
    
    
    private ARMRegister(int r)
    {
-      this(r, 0, false);
+      this(r, false);
    }
    
    
-   private ARMRegister(int r, int o, boolean v)
+   private ARMRegister(int r, boolean v)
    {
       this.number = r;
-      this.offset = o;
       this.virtual = v;
-   }
-   
-   
-   public ARMRegister(ARMRegister reg, int offset)
-   {
-      this(reg.number, offset, reg.virtual);
    }
    
    
