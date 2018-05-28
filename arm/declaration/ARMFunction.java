@@ -3,6 +3,7 @@ package arm.declaration;
 
 import java.io.PrintWriter;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import arm.ARMCFGNode;
@@ -83,5 +84,47 @@ public class ARMFunction
       printer.println(this.name);
       
       printer.println();
+   }
+   
+   
+   public void allocateRegisters()
+   {
+      /* It's more efficient to run the LVA through the nodes backwards */
+      List<ARMCFGNode> revNodes = this.reverseNodeList();
+      
+      
+      /* Generate Phase */
+      for (ARMCFGNode node : revNodes)
+         node.makeGenKillSets();
+      
+      
+      /* Propagation Phase */
+      boolean changed;
+      
+      do
+      {
+         changed = false;
+         
+         for (ARMCFGNode node : revNodes)
+            changed |= node.updateLiveSet();
+      }
+      while (changed);
+      
+      
+      /* Interference Phase */
+      
+   }
+   
+   
+   private List<ARMCFGNode> reverseNodeList()
+   {
+      List<ARMCFGNode> newNodes = new LinkedList<>();
+      
+      
+      for (ARMCFGNode node : this.nodes)
+         newNodes.add(0, node);
+      
+      
+      return newNodes;
    }
 }
