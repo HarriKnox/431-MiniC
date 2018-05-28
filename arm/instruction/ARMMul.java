@@ -1,7 +1,14 @@
 package arm.instruction;
 
 
+import java.util.List;
+
 import arm.value.operand.ARMRegister;
+
+
+import static java.util.Arrays.asList;
+
+import static java.util.Collections.singletonList;
 
 
 public class ARMMul extends ARMInstruction
@@ -29,5 +36,19 @@ public class ARMMul extends ARMInstruction
    {
       return "mul " + this.target.armString() + ", "
             + this.left.armString() + ", " + this.right.armString();
+   }
+   
+   
+   @Override
+   public List<ARMRegister> getSources()
+   {
+      return asList(new ARMRegister[]{this.left, this.right});
+   }
+   
+   
+   @Override
+   public List<ARMRegister> getTargets()
+   {
+      return singletonList(this.target);
    }
 }

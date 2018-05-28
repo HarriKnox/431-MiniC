@@ -1,10 +1,14 @@
 package arm.instruction;
 
 
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import arm.value.operand.ARMRegister;
+
+
+import static java.util.Arrays.asList;
 
 
 public class ARMPush extends ARMInstruction
@@ -30,7 +34,7 @@ public class ARMPush extends ARMInstruction
       StringBuilder sb = new StringBuilder("push {");
       
       
-      Iterator<ARMRegister> regs = Arrays.asList(this.registers).iterator();
+      Iterator<ARMRegister> regs = asList(this.registers).iterator();
       
       if (regs.hasNext())
          sb.append(regs.next().armString());
@@ -40,5 +44,19 @@ public class ARMPush extends ARMInstruction
       
       
       return sb.append("}").toString();
+   }
+   
+   
+   @Override
+   public List<ARMRegister> getSources()
+   {
+      return asList(this.registers);
+   }
+   
+   
+   @Override
+   public List<ARMRegister> getTargets()
+   {
+      return new LinkedList<>();
    }
 }

@@ -1,9 +1,15 @@
 package arm.instruction;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
 import arm.value.immediate.ARMImmediate;
 
 import arm.value.operand.ARMRegister;
+
+
+import static java.util.Collections.singletonList;
 
 
 public class ARMMovw extends ARMInstruction
@@ -30,5 +36,19 @@ public class ARMMovw extends ARMInstruction
    {
       return "movw " + this.target.armString()
             + ", " + this.value.lowerARMString();
+   }
+   
+   
+   @Override
+   public List<ARMRegister> getSources()
+   {
+      return new LinkedList<>();
+   }
+   
+   
+   @Override
+   public List<ARMRegister> getTargets()
+   {
+      return singletonList(this.target);
    }
 }
