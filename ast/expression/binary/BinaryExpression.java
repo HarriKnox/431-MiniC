@@ -40,38 +40,39 @@ public abstract class BinaryExpression extends Expression
    public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      LLVMOperand left, right;
+      LLVMOperand llvmLeft, llvmRight;
       
       
-      if (left.height >= right.height)
+      if (this.left.height >= this.right.height)
       {
-         left = this.left.buildLLVM(program, current, node);
-         right = this.right.buildLLVM(program, current, node);
+         llvmLeft = this.left.buildLLVM(program, current, node);
+         llvmRight = this.right.buildLLVM(program, current, node);
       }
       else
       {
-         right = this.right.buildLLVM(program, current, node);
-         left = this.left.buildLLVM(program, current, node);
+         llvmRight = this.right.buildLLVM(program, current, node);
+         llvmLeft = this.left.buildLLVM(program, current, node);
       }
       
       
-      if (left == null || right == null)
+      if (llvmLeft == null || llvmRight == null)
          return null;
       
       
-      if (!this.areValidTypes(left, right))
+      if (!this.areValidTypes(llvmLeft, llvmRight))
       {
          ErrorPrinter.binaryMistype(
                this.token,
                this.getOperation(),
-               left.type.astString(),
-               right.type.astString());
+               llvmLeft.type.astString(),
+               llvmRight.type.astString());
          
          return null;
       }
       
       
-      LLVMTargetedInstruction instruction = this.getInstruction(left, right);
+      LLVMTargetedInstruction instruction =
+            this.getInstruction(llvmLeft, llvmRight);
       
       node.add(instruction);
       

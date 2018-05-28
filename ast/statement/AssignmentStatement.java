@@ -42,37 +42,37 @@ public class AssignmentStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMVariable target;
-      LLVMOperand value;
+      LLVMVariable llvmTarget;
+      LLVMOperand llvmSource;
       
       
-      if (target.height >= value.height)
+      if (this.target.height >= this.source.height)
       {
-         target = this.target.buildLLVM(program, current, node);
-         value = this.source.buildLLVM(program, current, node);
+         llvmTarget = this.target.buildLLVM(program, current, node);
+         llvmSource = this.source.buildLLVM(program, current, node);
       }
       else
       {
-         value = this.source.buildLLVM(program, current, node);
-         target = this.target.buildLLVM(program, current, node);
+         llvmSource = this.source.buildLLVM(program, current, node);
+         llvmTarget = this.target.buildLLVM(program, current, node);
       }
       
       
-      if (target == null || value == null)
+      if (llvmTarget == null || llvmSource == null)
          return node;
       
       
-      if (!(target.type.equivalent(value.type)))
+      if (!(llvmTarget.type.equivalent(llvmSource.type)))
          ErrorPrinter.assignMistype(
                this.source.token,
-               target.type.astString(),
-               value.type.astString());
+               llvmTarget.type.astString(),
+               llvmSource.type.astString());
       
-      if (value instanceof LLVMNull)
-         value = new LLVMNull(target.type);
+      if (llvmSource instanceof LLVMNull)
+         llvmSource = new LLVMNull(llvmTarget.type);
       
       
-      LLVMStore store = new LLVMStore(target, value);
+      LLVMStore store = new LLVMStore(llvmTarget, llvmSource);
       
       return node.add(store);
    }
