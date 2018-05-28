@@ -3,7 +3,6 @@ package arm.value.operand;
 
 public class ARMRegister extends ARMOperand
 {
-   private boolean virtual;
    private int number;
    
    private static int count = 0;
@@ -11,20 +10,13 @@ public class ARMRegister extends ARMOperand
    
    public ARMRegister()
    {
-      this(-1, true);
+      this(-1);
    }
    
    
    private ARMRegister(int r)
    {
-      this(r, false);
-   }
-   
-   
-   private ARMRegister(int r, boolean v)
-   {
       this.number = r;
-      this.virtual = v;
    }
    
    
@@ -86,7 +78,7 @@ public class ARMRegister extends ARMOperand
    @Override
    public String armString()
    {
-      if (this.virtual)
+      if (this.number == -1)
          return "%v" + this.getNumber();
       
       
