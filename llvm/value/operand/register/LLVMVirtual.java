@@ -40,6 +40,13 @@ public class LLVMVirtual extends LLVMRegister
    }
    
    
+   public void setARMRegister(ARMRegister reg)
+   {
+      if (this.armReg == null)
+         this.armReg = reg;
+   }
+   
+   
    public int getUID()
    {
       if (this.uid == -1)
