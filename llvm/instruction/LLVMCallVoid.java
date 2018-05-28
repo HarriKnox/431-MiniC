@@ -75,7 +75,7 @@ public class LLVMCallVoid extends LLVMInstruction
       /* Move the first four into r0-r3 */
       for (int i = 0; i < arglen && i < 4; i++)
          node.add(new ARMMov(
-               new ARMRegister(i),
+               ARMRegister.getReal(i),
                this.arguments.get(i).buildARM(node)));
       
       
