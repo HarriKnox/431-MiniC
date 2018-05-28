@@ -3,8 +3,10 @@ package arm;
 
 import java.io.PrintWriter;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import arm.instruction.ARMInstruction;
 
@@ -21,6 +23,10 @@ public class ARMCFGNode
    public final List<ARMCFGNode> predecessors = new LinkedList<>();
    public ARMCFGNode loopback = null;
    public ARMLink link = null;
+   
+   public Set<ARMRegister> genSet = new HashSet<>();
+   public Set<ARMRegister> killSet = new HashSet<>();
+   public Set<ARMRegister> liveSet = new HashSet<>();
    
    private int uid = -1;
    
@@ -93,6 +99,50 @@ public class ARMCFGNode
       
       if (this.link != null)
          this.link.writeARM(printer);
+   }
+   
+   
+   public void makeGenKillSets()
+   {
+      for (ARMInstruction instruction : this.instructions)
+      {
+         for (ARMRegister source : instruction.getSources())
+            if (!this.killSet.contains(source))
+               this.genSet.add(source);
+         
+         for (ARMRegister target : instruction.getTargets())
+            this.killSet.add(target);
+      }
+   }
+   
+   
+   public boolean updateLiveSet()
+   {
+      Set<ARMRegister> newLiveSet = new HashSet<>();
+      
+      
+      for (ARMCFGNode successor : this.getSuccessors())
+      {
+         Set<ARMRegister> successorLOSet = new HashSet<>();
+         
+         successorLOSet.addAll(successor.liveSet);
+         
+         successorLOSet.removeAll(successor.killSet);
+         
+         successorLOSet.addAll(successor.genSet);
+         
+         newLiveSet.addAll(successorLOSet);
+      }
+      
+      
+      if (this.liveSet.equals(newLiveSet))
+         return false;
+      
+      
+      this.liveSet.clear();
+      this.liveSet.addAll(newLiveSet);
+      
+      return true;
    }
    
    
