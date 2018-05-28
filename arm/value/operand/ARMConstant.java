@@ -17,4 +17,11 @@ public class ARMConstant extends ARMOperand
    {
       return '#' + Integer.toString(this.number);
    }
+   
+   
+   @Override
+   public ARMRegister getRegister()
+   {
+      return null;
+   }
 }

@@ -93,4 +93,11 @@ public class ARMRegister extends ARMOperand
       
       return 'r' + Integer.toString(this.number);
    }
+   
+   
+   @Override
+   public ARMRegister getRegister()
+   {
+      return this;
+   }
 }

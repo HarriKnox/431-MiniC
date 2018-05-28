@@ -28,4 +28,11 @@ public class ARMAddress extends ARMOperand
       
       return this.source.armString() + " #" + Integer.toString(this.offset);
    }
+   
+   
+   @Override
+   public ARMRegister getRegister()
+   {
+      return this.source;
+   }
 }
