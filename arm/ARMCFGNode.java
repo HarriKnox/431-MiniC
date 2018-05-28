@@ -125,12 +125,20 @@ public class ARMCFGNode
       {
          Set<ARMRegister> successorLOSet = new HashSet<>();
          
+         
+         /*                    s.live           */
          successorLOSet.addAll(successor.liveSet);
          
+         
+         /*                   (s.live - s.kill) */
          successorLOSet.removeAll(successor.killSet);
          
+         
+         /*           s.gen U (s.live - s.kill) */
          successorLOSet.addAll(successor.genSet);
          
+         
+         /* b.live U= s.gen U (s.live - s.kill) */
          newLiveSet.addAll(successorLOSet);
       }
       
