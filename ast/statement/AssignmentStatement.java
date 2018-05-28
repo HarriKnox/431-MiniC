@@ -42,8 +42,20 @@ public class AssignmentStatement extends Statement
    public LLVMCFGNode buildLLVM(ProgramAST program,
          Function current, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMVariable target = this.target.buildLLVM(program, current, node);
-      LLVMOperand value = this.source.buildLLVM(program, current, node);
+      LLVMVariable target;
+      LLVMOperand value;
+      
+      
+      if (target.height >= value.height)
+      {
+         target = this.target.buildLLVM(program, current, node);
+         value = this.source.buildLLVM(program, current, node);
+      }
+      else
+      {
+         value = this.source.buildLLVM(program, current, node);
+         target = this.target.buildLLVM(program, current, node);
+      }
       
       
       if (target == null || value == null)

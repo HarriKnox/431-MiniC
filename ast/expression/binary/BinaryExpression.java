@@ -40,8 +40,19 @@ public abstract class BinaryExpression extends Expression
    public LLVMOperand buildLLVM(
          ProgramAST program, Function current, LLVMCFGNode node)
    {
-      LLVMOperand left = this.left.buildLLVM(program, current, node);
-      LLVMOperand right = this.right.buildLLVM(program, current, node);
+      LLVMOperand left, right;
+      
+      
+      if (left.height >= right.height)
+      {
+         left = this.left.buildLLVM(program, current, node);
+         right = this.right.buildLLVM(program, current, node);
+      }
+      else
+      {
+         right = this.right.buildLLVM(program, current, node);
+         left = this.left.buildLLVM(program, current, node);
+      }
       
       
       if (left == null || right == null)
