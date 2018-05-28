@@ -94,4 +94,13 @@ public class ARMCFGNode
       if (this.link != null)
          this.link.writeARM(printer);
    }
+   
+   
+   private List<ARMCFGNode> getSuccessors()
+   {
+      if (this.link == null)
+         return new LinkedList<>();
+      
+      return this.link.getSuccessors();
+   }
 }

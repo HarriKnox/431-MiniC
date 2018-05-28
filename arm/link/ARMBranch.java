@@ -3,12 +3,17 @@ package arm.link;
 
 import java.io.PrintWriter;
 
+import java.util.List;
+
 import arm.ARMCFGNode;
 
 import arm.instruction.ARMCmp;
 
 import arm.value.operand.ARMConstant;
 import arm.value.operand.ARMRegister;
+
+
+import static java.util.Arrays.asList;
 
 
 public class ARMBranch extends ARMLink
@@ -40,5 +45,12 @@ public class ARMBranch extends ARMLink
       
       printer.print("   b ");
       printer.println(this.elseNode.armString());
+   }
+   
+   
+   @Override
+   public List<ARMCFGNode> getSuccessors()
+   {
+      return asList(new ARMCFGNode[]{this.thenNode, this.elseNode});
    }
 }
