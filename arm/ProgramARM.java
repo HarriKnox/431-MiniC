@@ -63,5 +63,8 @@ public class ProgramARM
       printer.print(SCANF_FORMAT.name);
       printer.println(':');
       printer.println("   .asciz \"%d\"");
+      
+      
+      this.functions.allocate();
    }
 }

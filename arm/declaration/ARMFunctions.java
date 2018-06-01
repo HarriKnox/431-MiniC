@@ -22,4 +22,13 @@ public class ARMFunctions
       for (ARMFunction function : this.functions)
          function.writeARM(printer);
    }
+   
+   
+   public void allocate()
+   {
+      for (ARMFunction func : this.functions)
+      {
+         func.allocateRegisters();
+      }
+   }
 }

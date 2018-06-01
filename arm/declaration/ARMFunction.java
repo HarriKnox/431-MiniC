@@ -3,10 +3,14 @@ package arm.declaration;
 
 import java.io.PrintWriter;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import arm.ARMCFGNode;
+import arm.ARMInterferenceEdge;
 
 import arm.value.operand.ARMAddress;
 
@@ -112,7 +116,19 @@ public class ARMFunction
       
       
       /* Interference Phase */
+      Set<ARMInterferenceEdge> interferenceGraph = new LinkedHashSet<>();
       
+      for (ARMCFGNode node : revNodes)
+         for (ARMInterferenceEdge interference : node.getInterferences())
+            interferenceGraph.add(interference);
+      
+      
+      for (ARMInterferenceEdge edge : interferenceGraph)
+      {
+         System.out.print(edge.left.armString());
+         System.out.print(", ");
+         System.out.println(edge.right.armString());
+      }
    }
    
    
