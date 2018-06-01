@@ -32,7 +32,7 @@ public class LLVMsdiv extends LLVMArithmetic
    {
       node  .add(new ARMMov(ARMRegister.R0, this.left.buildARM(node)))
             .add(new ARMMov(ARMRegister.R1, this.right.buildARM(node)))
-            .add(new ARMBl("__aeabi_idiv"))
+            .add(new ARMBl("__aeabi_idiv", 2))
             .add(new ARMMov(this.target.buildARM(node), ARMRegister.R0));
    }
 }

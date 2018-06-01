@@ -80,7 +80,7 @@ public class LLVMCallVoid extends LLVMInstruction
       
       
       /* branch-link to the function */
-      node.add(new ARMBl(this.name));
+      node.add(new ARMBl(this.name, arglen));
       
       
       /* pop the extra arguments off the stack all at once */
