@@ -4,6 +4,7 @@ package arm;
 import java.io.PrintWriter;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class ARMCFGNode
    
    public Set<ARMRegister> genSet = new HashSet<>();
    public Set<ARMRegister> killSet = new HashSet<>();
-   public Set<ARMRegister> liveSet = new HashSet<>();
+   public Set<ARMRegister> liveSet = new LinkedHashSet<>();
    
    private int uid = -1;
    
@@ -160,5 +161,62 @@ public class ARMCFGNode
          return new LinkedList<>();
       
       return this.link.getSuccessors();
+   }
+   
+   
+   public List<ARMInterferenceEdge> getInterferences()
+   {
+      /* Reverse instructions to visit backwards */
+      List<ARMInstruction> revInstructions = this.reverseInstructionList();
+      
+      
+      /* Create a copy of the live-out set */
+      Set<ARMRegister> liveSetCopy = new LinkedHashSet<>();
+      
+      for (ARMRegister live : this.liveSet)
+         liveSetCopy.add(live);
+      
+      
+      /* List of interference edges */
+      List<ARMInterferenceEdge> interferences = new LinkedList<>();
+      
+      
+      for (ARMInstruction instruction : this.instructions)
+      {
+         List<ARMRegister> targets = instruction.getTargets();
+         List<ARMRegister> sources = instruction.getSources();
+         
+         
+         /* Remove targets from live set */
+         for (ARMRegister target : targets)
+            liveSetCopy.remove(target);
+         
+         
+         /* Add edges from each target to everything in live-set */
+         for (ARMRegister target : targets)
+            for (ARMRegister live : liveSetCopy)
+               interferences.add(new ARMInterferenceEdge(target, live));
+         
+         
+         /* Add each source to live set */
+         for (ARMRegister source : sources)
+            liveSetCopy.add(source);
+      }
+      
+      
+      return interferences;
+   }
+   
+   
+   private List<ARMInstruction> reverseInstructionList()
+   {
+      List<ARMInstruction> newInstructions = new LinkedList<>();
+      
+      
+      for (ARMInstruction instruction : this.instructions)
+         newInstructions.add(0, instruction);
+      
+      
+      return newInstructions;
    }
 }
