@@ -9,7 +9,7 @@ import arm.ARMCFGNode;
 import arm.value.operand.ARMAddress;
 
 
-import static arm.value.operand.ARMRegister.SP;
+import static arm.value.operand.ARMRegister.FP;
 
 
 public class LLVMLocal extends LLVMVariable
@@ -43,6 +43,6 @@ public class LLVMLocal extends LLVMVariable
       if (this.type instanceof LLVMVoidType)
          return null;
       
-      return new ARMAddress(SP, this.index * 4);
+      return new ARMAddress(FP, (this.index * -4) - 8);
    }
 }

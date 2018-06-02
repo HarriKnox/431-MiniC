@@ -82,8 +82,8 @@ public class ARMFunction
       {
          printer.print("   str r");
          printer.print(i);
-         printer.print(", [sp, #");
-         printer.print(i * 4);
+         printer.print(", [fp, #-");
+         printer.print((i * 4) + 8);
          printer.println(']');
       }
       
@@ -93,8 +93,8 @@ public class ARMFunction
          printer.print((i - 3) * 4);
          printer.println(']');
          
-         printer.print("   str r0, [sp, #");
-         printer.print(i * 4);
+         printer.print("   str r0, [fp, #-");
+         printer.print((i * 4) + 8);
          printer.println(']');
       }
       
