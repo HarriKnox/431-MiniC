@@ -15,13 +15,13 @@ public class ARMInt extends ARMImmediate
    @Override
    public String lowerARMString()
    {
-      return String.format("#0x%04x", this.value & 0xffff);
+      return String.format("#0x%x", this.value & 0xffff);
    }
    
    
    @Override
    public String upperARMString()
    {
-      return String.format("#0x%04x", (this.value >> 16) & 0xffff);
+      return String.format("#0x%x", (this.value >> 16) & 0xffff);
    }
 }
