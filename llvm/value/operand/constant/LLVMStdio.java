@@ -37,11 +37,11 @@ public class LLVMStdio extends LLVMConstant
    }
    
    
-   public static final LLVMStdio PRINT_FORMAT
-         = new LLVMStdio(".print_format", "c\"%d\\0A\\00\"");
-   
    public static final LLVMStdio PRINTLN_FORMAT
-         = new LLVMStdio(".println_format", "c\"%d \\00\"");
+         = new LLVMStdio(".println_format", "c\"%d\\0A\\00\"");
+   
+   public static final LLVMStdio PRINT_FORMAT
+         = new LLVMStdio(".print_format", "c\"%d \\00\"");
    
    public static final LLVMStdio SCANF_FORMAT
          = new LLVMStdio(".scanf_format", "c\"%d\\00\\00\"");
