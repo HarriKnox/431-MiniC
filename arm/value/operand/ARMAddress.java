@@ -32,4 +32,11 @@ public class ARMAddress extends ARMOperand
    {
       return this.source;
    }
+   
+   
+   @Override
+   public boolean isValid()
+   {
+      return this.source.isValid();
+   }
 }

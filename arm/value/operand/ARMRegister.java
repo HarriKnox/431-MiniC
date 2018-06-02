@@ -123,4 +123,21 @@ public class ARMRegister extends ARMOperand
    {
       return this;
    }
+   
+   
+   @Override
+   public boolean isValid()
+   {
+      /*
+       * Since the function is called only when spills occur, this returns true
+       * for only non-spilled registers. r9 and r10 are used to handle spills,
+       * so they are not considered valid registers.
+       */
+      return (this == FP)
+            || (this == IP)
+            || (this == SP)
+            || (this == LR)
+            || (this == PC)
+            || (this.number <= 8);
+   }
 }

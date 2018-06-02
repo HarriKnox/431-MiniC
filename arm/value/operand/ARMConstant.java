@@ -24,4 +24,11 @@ public class ARMConstant extends ARMOperand
    {
       return null;
    }
+   
+   
+   @Override
+   public boolean isValid()
+   {
+      return true;
+   }
 }
