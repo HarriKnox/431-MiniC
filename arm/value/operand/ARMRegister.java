@@ -83,7 +83,7 @@ public class ARMRegister extends ARMOperand
    
    public int getSpillOffset(int localCount)
    {
-      return (this.number - 8 + localCount) * 4 + 8;
+      return (this.number - 9 + localCount) * 4 + 8;
    }
    
    
