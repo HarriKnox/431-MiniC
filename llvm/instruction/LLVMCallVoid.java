@@ -68,7 +68,7 @@ public class LLVMCallVoid extends LLVMInstruction
       int arglen = this.arguments.size();
       
       /* Push extra arguments to the stack */
-      for (int i = arglen; i >= 4; i--)
+      for (int i = arglen - 1; i >= 4; i--)
          node.add(new ARMPush(this.arguments.get(i).buildARM(node)));
       
       
@@ -84,7 +84,7 @@ public class LLVMCallVoid extends LLVMInstruction
       
       
       /* pop the extra arguments off the stack all at once */
-      if (arglen >= 4)
+      if (arglen > 4)
          node.add(new ARMAdd(
                SP,
                SP,
