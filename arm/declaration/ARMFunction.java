@@ -57,7 +57,6 @@ public class ARMFunction
       int stackSize = ((this.highestRegisterUsed > 10)
             ? (this.localCount + this.highestRegisterUsed - 8)
             : this.localCount) * 4;
-      System.err.println(this.highestRegisterUsed);
       
       printer.println(".align 2");
       
