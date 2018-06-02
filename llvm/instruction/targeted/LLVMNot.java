@@ -33,6 +33,7 @@ public class LLVMNot extends LLVMTargetedInstruction
    @Override
    public void buildARM(ARMCFGNode node)
    {
-      node.add(new ARMEor(this.source.buildARM(node), new ARMConstant(1)));
+      node.add(new ARMEor(this.target.buildARM(node),
+            this.source.buildARM(node), new ARMConstant(1)));
    }
 }

@@ -33,6 +33,7 @@ public class LLVMNegate extends LLVMTargetedInstruction
    @Override
    public void buildARM(ARMCFGNode node)
    {
-      node.add(new ARMRsb(this.source.buildARM(node), new ARMConstant(0)));
+      node.add(new ARMRsb(this.target.buildARM(node),
+            this.source.buildARM(node), new ARMConstant(0)));
    }
 }
