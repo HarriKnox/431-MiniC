@@ -54,6 +54,11 @@ public class ARMFunction
    
    public void writeARM(PrintWriter printer)
    {
+      int stackSize = ((this.highestRegisterUsed > 10)
+            ? (this.localCount + this.highestRegisterUsed - 8)
+            : this.localCount) * 4;
+      System.err.println(this.highestRegisterUsed);
+      
       printer.println(".align 2");
       
       printer.print(".global ");
@@ -75,13 +80,7 @@ public class ARMFunction
       if (this.localCount > 0)
       {
          printer.print("   sub sp, #");
-         
-         if (this.highestRegisterUsed > 10)
-            printer.println(
-                  (this.localCount + this.highestRegisterUsed - 10) * 4);
-         
-         else
-            printer.println(this.localCount * 4);
+         printer.println(stackSize);
       }
       
       
@@ -127,7 +126,7 @@ public class ARMFunction
       if (this.localCount > 0)
       {
          printer.print("   add sp, #");
-         printer.println(this.localCount * 4);
+         printer.println(stackSize);
       }
       
       
