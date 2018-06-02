@@ -26,7 +26,7 @@ public class ARMAddress extends ARMOperand
       if (this.offset == 0)
          return this.source.armString();
       
-      return this.source.armString() + " #" + Integer.toString(this.offset);
+      return this.source.armString() + ", #" + Integer.toString(this.offset);
    }
    
    
