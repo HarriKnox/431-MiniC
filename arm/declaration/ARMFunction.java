@@ -36,6 +36,7 @@ public class ARMFunction
    public final int localCount;
    public final int paramCount;
    public final ARMAddress returnValue;
+   
    private int highestRegisterUsed = 0;
    
    
@@ -73,7 +74,13 @@ public class ARMFunction
       if (this.localCount > 0)
       {
          printer.print("   sub sp, #");
-         printer.println(this.localCount * 4);
+         
+         if (this.highestRegisterUsed > 10)
+            printer.println(
+                  (this.localCount + this.highestRegisterUsed - 10) * 4);
+         
+         else
+            printer.println(this.localCount * 4);
       }
       
       
