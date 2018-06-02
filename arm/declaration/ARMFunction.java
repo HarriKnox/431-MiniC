@@ -19,8 +19,6 @@ import arm.value.operand.ARMAddress;
 import arm.value.operand.ARMRegister;
 
 
-import static java.util.Arrays.deepToString;
-
 import static arm.value.operand.ARMRegister.R0;
 import static arm.value.operand.ARMRegister.R1;
 import static arm.value.operand.ARMRegister.R2;
@@ -36,16 +34,18 @@ public class ARMFunction
    public final String name;
    public final List<ARMCFGNode> nodes;
    public final int localCount;
+   public final int paramCount;
    public final ARMAddress returnValue;
    private int highestRegisterUsed = 0;
    
    
    public ARMFunction(String name, List<ARMCFGNode> nodes, int localCount,
-         ARMAddress returnValue)
+         int paramCount, ARMAddress returnValue)
    {
       this.name = name;
       this.nodes = nodes;
       this.localCount = localCount;
+      this.paramCount = paramCount;
       this.returnValue = returnValue;
    }
    
@@ -74,6 +74,28 @@ public class ARMFunction
       {
          printer.print("   sub sp, #");
          printer.println(this.localCount * 4);
+      }
+      
+      
+      /* Move parameters to stack-pointer-relative addresses */
+      for (int i = 0; i < paramCount && i < 4; i++)
+      {
+         printer.print("   str r");
+         printer.print(i);
+         printer.print(", [sp, #");
+         printer.print(i * 4);
+         printer.println(']');
+      }
+      
+      for (int i = 4; i < paramCount; i++)
+      {
+         printer.print("   ldr r0, [fp, #");
+         printer.print((i - 3) * 4);
+         printer.println(']');
+         
+         printer.print("   str r0, [sp, #");
+         printer.print(i * 4);
+         printer.println(']');
       }
       
       

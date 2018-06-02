@@ -164,7 +164,8 @@ public class LLVMFunction
       
       
       ARMFunction armFunction = new ARMFunction(this.name, armNodes,
-            this.locals.size(), this.returnValue.buildARM(null));
+            this.locals.size(), this.parameters.size(),
+            this.returnValue.buildARM(null));
       
       armFunction.allocateRegisters();
       
