@@ -11,6 +11,8 @@ import java.util.Set;
 
 import arm.instruction.ARMInstruction;
 
+import arm.instruction.mov.ARMMov;
+
 import arm.link.ARMBranch;
 import arm.link.ARMJump;
 import arm.link.ARMLink;
@@ -93,6 +95,18 @@ public class ARMCFGNode
       
       for (ARMInstruction instruction : this.instructions)
       {
+         if (instruction instanceof ARMMov)
+         {
+            ARMMov mov = (ARMMov)instruction;
+            
+            /* Skip mov instruction if the left and right are the same */
+            if ((mov.value instanceof ARMRegister)
+                  && (((ARMRegister)mov.value).getNumber()
+                        == mov.target.getNumber()))
+               continue;
+         }
+         
+         
          printer.print("   ");
          printer.println(instruction.armString());
       }
