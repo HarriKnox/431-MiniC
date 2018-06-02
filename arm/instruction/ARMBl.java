@@ -13,7 +13,6 @@ import static arm.value.operand.ARMRegister.R0;
 import static arm.value.operand.ARMRegister.R1;
 import static arm.value.operand.ARMRegister.R2;
 import static arm.value.operand.ARMRegister.R3;
-import static arm.value.operand.ARMRegister.IP;
 
 
 public class ARMBl extends ARMInstruction
@@ -62,6 +61,6 @@ public class ARMBl extends ARMInstruction
    @Override
    public List<ARMRegister> getTargets()
    {
-      return asList(new ARMRegister[]{R0, R1, R2, R3, IP});
+      return asList(new ARMRegister[]{R0, R1, R2, R3});
    }
 }
