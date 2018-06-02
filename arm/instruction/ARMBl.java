@@ -9,6 +9,8 @@ import arm.value.operand.ARMRegister;
 
 import static java.util.Arrays.asList;
 
+import static java.util.Collections.singletonList;
+
 import static arm.value.operand.ARMRegister.R0;
 import static arm.value.operand.ARMRegister.R1;
 import static arm.value.operand.ARMRegister.R2;
@@ -29,9 +31,9 @@ public class ARMBl extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
-      return "bl " + this.name;
+      return singletonList("bl " + this.name);
    }
    
    

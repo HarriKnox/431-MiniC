@@ -41,10 +41,51 @@ public class ARMMov extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
-      return "mov" + this.conditionString() + " "
-            + this.target.armString() + ", " + this.value.armString();
+      boolean targetValid = this.target.isValid();
+      boolean valueValid = this.value.isValid();
+      
+      if (!spilled || (targetValid && valueValid))
+      {
+         /* Ignore movs where the target and source are the same */
+         if ((this.value instanceof ARMRegister)
+               && ((ARMRegister)this.value).getNumber()
+                     == this.target.getNumber())
+            return new LinkedList<>();
+         
+         return singletonList("mov" + this.conditionString() + ' '
+            + this.target.armString() + ", " + this.value.armString());
+      }
+      
+      
+      List<String> strings = new LinkedList<>();
+      
+      String targetString = targetValid ? this.target.armString() : "r10";
+      String valueString = valueValid ? this.value.armString() : "r9";
+      
+      
+      if (!valueValid)
+         strings.add("ldr r9, [fp, #-"
+               + ((ARMRegister)this.value).getSpillOffset(localCount) + ']');
+      
+      
+      /* If conditional, then target is a source */
+      if (!targetValid && !this.conditionString().isEmpty())
+         strings.add("ldr r10, [fp, #-"
+               + this.target.getSpillOffset(localCount) + ']');
+      
+      
+      strings.add("mov" + this.conditionString() + ' '
+            + targetString + ", " + valueString);
+      
+      
+      if (!targetValid)
+         strings.add("str r10, [fp, #-"
+               + this.target.getSpillOffset(localCount) + ']');
+      
+      
+      return strings;
    }
    
    

@@ -108,7 +108,9 @@ public class ARMFunction
       
       /* Write all node instructions */
       for (ARMCFGNode node : this.nodes)
-         node.writeARM(printer);
+         node.writeARM(printer,
+               this.highestRegisterUsed > 10,
+               this.localCount);
       
       
       /* Load return value into r0 */

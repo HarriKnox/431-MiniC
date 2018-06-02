@@ -35,10 +35,15 @@ public class ARMBranch extends ARMLink
    
    
    @Override
-   public void writeARM(PrintWriter printer)
+   public void writeARM(PrintWriter printer, boolean spilled, int localCount)
    {
-      printer.print("   ");
-      printer.println(new ARMCmp(this.guard, new ARMConstant(1)).armString());
+      for (String str
+            : new ARMCmp(this.guard, new ARMConstant(1))
+                  .armStrings(spilled, localCount))
+      {
+         printer.print("   ");
+         printer.println(str);
+      }
       
       printer.print("   beq ");
       printer.println(this.thenNode.armString());

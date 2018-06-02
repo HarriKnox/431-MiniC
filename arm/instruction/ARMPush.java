@@ -10,6 +10,8 @@ import arm.value.operand.ARMRegister;
 
 import static java.util.Arrays.asList;
 
+import static java.util.Collections.singletonList;
+
 
 public class ARMPush extends ARMInstruction
 {
@@ -29,8 +31,16 @@ public class ARMPush extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
+      if (spilled && this.registers.length == 1
+            && !this.registers[0].isValid())
+         return asList(new String[]{
+               "ldr r10, [fp, #-" + this.registers[0].getSpillOffset(localCount)
+                     + ']',
+               "push {r10}"});
+      
+      
       StringBuilder sb = new StringBuilder("push {");
       
       
@@ -43,7 +53,7 @@ public class ARMPush extends ARMInstruction
          sb.append(", ").append(regs.next().armString());
       
       
-      return sb.append("}").toString();
+      return singletonList(sb.append("}").toString());
    }
    
    

@@ -38,10 +38,44 @@ public abstract class ARMBinary extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
-      return this.getOperation() + ' ' + this.target.armString() + ", "
-            + this.left.armString() + ", " + this.right.armString();
+      boolean targetValid = this.target.isValid();
+      boolean leftValid = this.left.isValid();
+      boolean rightValid = this.right.isValid();
+      
+      if (!spilled || (targetValid && leftValid && rightValid))
+         return singletonList(this.getOperation() + ' '
+            + this.target.armString() + ", " + this.left.armString()
+            + ", " + this.right.armString());
+      
+      
+      String targetString = targetValid ? this.target.armString() : "r10";
+      String leftString   = leftValid   ? this.left.armString()   : "r9";
+      String rightString  = rightValid  ? this.right.armString()  : "r10";
+      
+      List<String> strings = new LinkedList<>();
+      
+      
+      if (!leftValid)
+         strings.add("ldr r9, [fp, #-"
+               + this.left.getSpillOffset(localCount) + ']');
+      
+      if (!rightValid)
+         strings.add("ldr r10, [fp, #-"
+               + ((ARMRegister)this.right).getSpillOffset(localCount) + ']');
+      
+      
+      strings.add(this.getOperation() + ' ' + targetString + ", "
+            + leftString + ", " + rightString);
+      
+      
+      if (!targetValid)
+         strings.add("str r10, [fp, #-"
+               + this.target.getSpillOffset(localCount) + ']');
+      
+      
+      return strings;
    }
    
    

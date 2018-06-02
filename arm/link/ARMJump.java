@@ -25,7 +25,7 @@ public class ARMJump extends ARMLink
    
    
    @Override
-   public void writeARM(PrintWriter printer)
+   public void writeARM(PrintWriter printer, boolean spilled, int localCount)
    {
       printer.print("   b ");
       printer.println(this.target.armString());

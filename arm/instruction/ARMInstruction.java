@@ -8,7 +8,7 @@ import arm.value.operand.ARMRegister;
 
 public abstract class ARMInstruction
 {
-   public abstract String armString();
+   public abstract List<String> armStrings(boolean spilled, int localCount);
    
    public abstract List<ARMRegister> getSources();
    

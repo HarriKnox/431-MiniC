@@ -10,7 +10,8 @@ import arm.ARMCFGNode;
 
 public abstract class ARMLink
 {
-   public abstract void writeARM(PrintWriter printer);
+   public abstract void writeARM(PrintWriter printer,
+         boolean spilled, int localCount);
    
    public abstract List<ARMCFGNode> getSuccessors();
 }

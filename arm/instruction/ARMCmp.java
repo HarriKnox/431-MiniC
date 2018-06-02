@@ -10,6 +10,9 @@ import arm.value.operand.ARMOperand;
 import arm.value.operand.ARMRegister;
 
 
+import static java.util.Collections.singletonList;
+
+
 public class ARMCmp extends ARMInstruction
 {
    public final ARMRegister left;
@@ -24,9 +27,34 @@ public class ARMCmp extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
-      return "cmp " + this.left.armString() + ", " + this.right.armString();
+      boolean leftValid = this.left.isValid();
+      boolean rightValid = this.right.isValid();
+      
+      if (!spilled || (leftValid && rightValid))
+         return singletonList("cmp " + this.left.armString()
+               + ", " + this.right.armString());
+      
+      
+      String leftString  = leftValid  ? this.left.armString()  : "r9";
+      String rightString = rightValid ? this.right.armString() : "r10";
+      
+      List<String> strings = new LinkedList<>();
+      
+      
+      if (!leftValid)
+         strings.add("ldr r9, [fp, #-"
+               + this.left.getSpillOffset(localCount) + ']');
+      
+      if (!rightValid)
+         strings.add("ldr r10, [fp, #-"
+               + ((ARMRegister)this.right).getSpillOffset(localCount) + ']');
+      
+      
+      strings.add("cmp " + leftString + ", " + rightString);
+      
+      return strings;
    }
    
    

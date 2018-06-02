@@ -10,6 +10,8 @@ import arm.value.operand.ARMRegister;
 
 import static java.util.Arrays.asList;
 
+import static java.util.Collections.singletonList;
+
 
 public class ARMPop extends ARMInstruction
 {
@@ -29,8 +31,16 @@ public class ARMPop extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
+      if (spilled && this.registers.length == 1
+            && !this.registers[0].isValid())
+         return asList(new String[]{
+               "pop {r9}",
+               "str r9, [fp, #-" + this.registers[0].getSpillOffset(localCount)
+                     + ']'});
+      
+      
       StringBuilder sb = new StringBuilder("pop {");
       
       
@@ -43,7 +53,7 @@ public class ARMPop extends ARMInstruction
          sb.append(", ").append(regs.next().armString());
       
       
-      return sb.append("}").toString();
+      return singletonList(sb.append("}").toString());
    }
    
    

@@ -9,6 +9,8 @@ import arm.value.immediate.ARMImmediate;
 import arm.value.operand.ARMRegister;
 
 
+import static java.util.Arrays.asList;
+
 import static java.util.Collections.singletonList;
 
 
@@ -32,10 +34,19 @@ public class ARMMovt extends ARMInstruction
    
    
    @Override
-   public String armString()
+   public List<String> armStrings(boolean spilled, int localCount)
    {
-      return "movt " + this.target.armString()
-            + ", " + this.value.upperARMString();
+      boolean targetValid = this.target.isValid();
+      
+      if (!spilled || targetValid)
+         return singletonList("movt " + this.target.armString()
+               + ", " + this.value.upperARMString());
+      
+      
+      return asList(new String[]{
+            "movt r10, " + this.value.upperARMString(),
+            "ldr r10, [fp, #-" + this.target.getSpillOffset(localCount)
+                  + ']'});
    }
    
    

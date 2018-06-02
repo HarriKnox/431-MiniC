@@ -84,7 +84,7 @@ public class ARMCFGNode
    }
    
    
-   public void writeARM(PrintWriter printer)
+   public void writeARM(PrintWriter printer, boolean spilled, int localCount)
    {
       if (this.uid != -1)
       {
@@ -95,25 +95,16 @@ public class ARMCFGNode
       
       for (ARMInstruction instruction : this.instructions)
       {
-         if (instruction instanceof ARMMov)
+         for (String str : instruction.armStrings(spilled, localCount))
          {
-            ARMMov mov = (ARMMov)instruction;
-            
-            /* Skip mov instruction if the left and right are the same */
-            if ((mov.value instanceof ARMRegister)
-                  && (((ARMRegister)mov.value).getNumber()
-                        == mov.target.getNumber()))
-               continue;
+            printer.print("   ");
+            printer.println(str);
          }
-         
-         
-         printer.print("   ");
-         printer.println(instruction.armString());
       }
       
       
       if (this.link != null)
-         this.link.writeARM(printer);
+         this.link.writeARM(printer, spilled, localCount);
    }
    
    
