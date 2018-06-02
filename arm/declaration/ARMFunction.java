@@ -3,16 +3,32 @@ package arm.declaration;
 
 import java.io.PrintWriter;
 
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import arm.ARMCFGNode;
 import arm.ARMInterferenceEdge;
 
 import arm.value.operand.ARMAddress;
+import arm.value.operand.ARMRegister;
+
+
+import static java.util.Arrays.deepToString;
+
+import static arm.value.operand.ARMRegister.R0;
+import static arm.value.operand.ARMRegister.R1;
+import static arm.value.operand.ARMRegister.R2;
+import static arm.value.operand.ARMRegister.R3;
+import static arm.value.operand.ARMRegister.IP;
+import static arm.value.operand.ARMRegister.SP;
+import static arm.value.operand.ARMRegister.LR;
+import static arm.value.operand.ARMRegister.PC;
 
 
 public class ARMFunction
@@ -21,6 +37,7 @@ public class ARMFunction
    public final List<ARMCFGNode> nodes;
    public final int localCount;
    public final ARMAddress returnValue;
+   private int highestRegisterUsed = 0;
    
    
    public ARMFunction(String name, List<ARMCFGNode> nodes, int localCount,
@@ -47,6 +64,9 @@ public class ARMFunction
       /* Setting up frame */
       printer.println("   push {fp, lr}");
       printer.println("   add fp, sp, #4");
+      
+      
+      printExtraPushPop(printer, this.highestRegisterUsed, true);
       
       
       /* Allocate stack for locals (if needed) */
@@ -79,6 +99,9 @@ public class ARMFunction
       }
       
       
+      printExtraPushPop(printer, this.highestRegisterUsed, false);
+      
+      
       /* ARM return */
       printer.println("   pop {fp, pc}");
       
@@ -88,6 +111,31 @@ public class ARMFunction
       printer.println(this.name);
       
       printer.println();
+   }
+   
+   
+   private static void printExtraPushPop(
+         PrintWriter printer,
+         int highest, boolean isPush)
+   {
+      if (highest < 4)
+         return;
+      
+      if (highest > 12)
+         highest = 12;
+      
+      printer.print("   ");
+      printer.print(isPush ? "push" : "pop");
+      printer.print(" {r4");
+      
+      
+      for (int i = 5; i <= highest; i++)
+      {
+         printer.print(", r");
+         printer.print(i);
+      }
+      
+      printer.println('}');
    }
    
    
@@ -116,19 +164,124 @@ public class ARMFunction
       
       
       /* Interference Phase */
-      Set<ARMInterferenceEdge> interferenceGraph = new LinkedHashSet<>();
+      Map<ARMRegister, Set<ARMRegister>> interferences = new LinkedHashMap<>();
       
       for (ARMCFGNode node : revNodes)
-         for (ARMInterferenceEdge interference : node.getInterferences())
-            interferenceGraph.add(interference);
-      
-      
-      for (ARMInterferenceEdge edge : interferenceGraph)
       {
-         System.out.print(edge.left.armString());
-         System.out.print(", ");
-         System.out.println(edge.right.armString());
+         for (ARMInterferenceEdge interf : node.getInterferences())
+         {
+            addInterference(interf.left , interf.right, interferences);
+            addInterference(interf.right, interf.left , interferences);
+         }
       }
+      
+      
+      /* Graph Coloring Phase */
+      interferences.remove(R0);
+      interferences.remove(R1);
+      interferences.remove(R2);
+      interferences.remove(R3);
+      interferences.remove(IP);
+      
+      
+      Deque<Map.Entry<ARMRegister, Set<ARMRegister>>> stack
+            = new LinkedList<>();
+      
+      while (!interferences.isEmpty())
+         stack.push(getRegister(interferences));
+      
+      
+      while (!stack.isEmpty())
+      {
+         Map.Entry<ARMRegister, Set<ARMRegister>> top = stack.pop();
+         
+         int number = getLowestNumber(top.getValue());
+         
+         if (number > this.highestRegisterUsed)
+            this.highestRegisterUsed = number;
+         
+         top.getKey().setNumber(number);
+      }
+   }
+   
+   
+   private static int getLowestNumber(Set<ARMRegister> regs)
+   {
+      for (int i = 0; ; i++)
+      {
+         boolean ok = true;
+         
+         for (ARMRegister reg : regs)
+         {
+            if (reg.getNumber() == i)
+            {
+               ok = false;
+               break;
+            }
+         }
+         
+         if (ok)
+            return i;
+      }
+   }
+   
+   
+   private static Map.Entry<ARMRegister, Set<ARMRegister>> getRegister(
+         Map<ARMRegister, Set<ARMRegister>> interferences)
+   {
+      Map.Entry<ARMRegister, Set<ARMRegister>> minEntry
+            = interferences.entrySet().iterator().next();
+      
+      int minSize = minEntry.getValue().size();
+      
+      
+      /* Get register with fewest interferences */
+      for (Map.Entry<ARMRegister, Set<ARMRegister>> entry
+            : interferences.entrySet())
+      {
+         int entrySize = entry.getValue().size();
+         
+         if (entrySize < minSize)
+         {
+            minEntry = entry;
+            minSize = entrySize;
+         }
+      }
+      
+      
+      /* Remove key from interference graph */
+      ARMRegister key = minEntry.getKey();
+      
+      interferences.remove(key);
+      
+      for (ARMRegister other : minEntry.getValue())
+         if (other != R0 && other != R1 && other != R2 && other != R3 && other != IP)
+            interferences.get(other).remove(key);
+      
+      
+      return minEntry;
+   }
+   
+   
+   private static void addInterference(ARMRegister left, ARMRegister right,
+         Map<ARMRegister, Set<ARMRegister>> interferences)
+   {
+      /* Return if the left register is an uneditable special register */
+      if (left == SP || left == LR || left == PC)
+         return;
+      
+      
+      /* If left is OK, even if right is not, add entry */
+      if (!interferences.containsKey(left))
+         interferences.put(left, new LinkedHashSet<>());
+      
+      
+      /* Return if the right register is an uneditable special register */
+      if (right == SP || right == LR || right == PC)
+         return;
+      
+      
+      interferences.get(left).add(right);
    }
    
    

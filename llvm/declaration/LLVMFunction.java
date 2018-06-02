@@ -163,7 +163,11 @@ public class LLVMFunction
          armNodes.add(node.buildARM());
       
       
-      return new ARMFunction(this.name, armNodes, this.locals.size(),
-            this.returnValue.buildARM(null));
+      ARMFunction armFunction = new ARMFunction(this.name, armNodes,
+            this.locals.size(), this.returnValue.buildARM(null));
+      
+      armFunction.allocateRegisters();
+      
+      return armFunction;
    }
 }

@@ -68,12 +68,19 @@ public class ARMRegister extends ARMOperand
    }
    
    
-   private int getNumber()
+   public int getNumber()
    {
-      if (this.number == -1)
-         this.number = count++;
-      
       return this.number;
+   }
+   
+   
+   public void setNumber(int number)
+   {
+      if (this.number != -1)
+         return;
+      
+      this.number = number;
+      this.virtual = false;
    }
    
    
@@ -84,16 +91,30 @@ public class ARMRegister extends ARMOperand
          return "%v" + this.getNumber();
       
       
-      switch (this.number)
-      {
-         case 11: return "fp";
-         case 12: return "ip";
-         case 13: return "sp";
-         case 14: return "lr";
-         case 15: return "pc";
-      }
+      if (this == FP)
+         return "fp";
+      
+      if (this == IP)
+         return "ip";
+      
+      if (this == SP)
+         return "sp";
+      
+      if (this == LR)
+         return "lr";
+      
+      if (this == PC)
+         return "pc";
+      
       
       return 'r' + Integer.toString(this.number);
+   }
+   
+   
+   @Override
+   public String toString()
+   {
+      return this.armString();
    }
    
    

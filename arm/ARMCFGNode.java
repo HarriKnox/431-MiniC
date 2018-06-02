@@ -181,7 +181,7 @@ public class ARMCFGNode
       List<ARMInterferenceEdge> interferences = new LinkedList<>();
       
       
-      for (ARMInstruction instruction : this.instructions)
+      for (ARMInstruction instruction : revInstructions)
       {
          List<ARMRegister> targets = instruction.getTargets();
          List<ARMRegister> sources = instruction.getSources();

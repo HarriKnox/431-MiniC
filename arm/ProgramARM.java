@@ -64,7 +64,6 @@ public class ProgramARM
       printer.println(':');
       printer.println("   .asciz \"%d\"");
       
-      
-      this.functions.allocate();
+      printer.flush();
    }
 }
