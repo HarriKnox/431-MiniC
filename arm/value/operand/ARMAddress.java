@@ -23,9 +23,6 @@ public class ARMAddress extends ARMOperand
    @Override
    public String armString()
    {
-      if (this.offset == 0)
-         return this.source.armString();
-      
       return this.source.armString() + ", #" + Integer.toString(this.offset);
    }
    
