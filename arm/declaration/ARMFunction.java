@@ -121,8 +121,8 @@ public class ARMFunction
       if (highest < 4)
          return;
       
-      if (highest > 12)
-         highest = 12;
+      if (highest > 10)
+         highest = 10;
       
       printer.print("   ");
       printer.print(isPush ? "push" : "pop");
