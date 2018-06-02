@@ -23,6 +23,7 @@ import static arm.value.operand.ARMRegister.R0;
 import static arm.value.operand.ARMRegister.R1;
 import static arm.value.operand.ARMRegister.R2;
 import static arm.value.operand.ARMRegister.R3;
+import static arm.value.operand.ARMRegister.FP;
 import static arm.value.operand.ARMRegister.IP;
 import static arm.value.operand.ARMRegister.SP;
 import static arm.value.operand.ARMRegister.LR;
@@ -297,8 +298,8 @@ public class ARMFunction
    private static void addInterference(ARMRegister left, ARMRegister right,
          Map<ARMRegister, Set<ARMRegister>> interferences)
    {
-      /* Return if the left register is an uneditable special register */
-      if (left == SP || left == LR || left == PC)
+      /* Return if the left register is a special-purpose register */
+      if (left == FP || left == IP || left == SP || left == LR || left == PC)
          return;
       
       
@@ -307,8 +308,9 @@ public class ARMFunction
          interferences.put(left, new LinkedHashSet<>());
       
       
-      /* Return if the right register is an uneditable special register */
-      if (right == SP || right == LR || right == PC)
+      /* Return if the right register is a special-purpose register */
+      if (right == FP || right == IP || right == SP
+            || right == LR || right == PC)
          return;
       
       
