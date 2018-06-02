@@ -1,14 +1,13 @@
 package arm;
 
 
-import java.io.PrintWriter;
-
 import java.util.Arrays;
 
 import arm.declaration.ARMFunctions;
 import arm.declaration.ARMGlobals;
 
 import common.Options;
+import common.Printer;
 
 
 import static arm.value.immediate.ARMGlobal.PRINT_FORMAT;
@@ -29,41 +28,37 @@ public class ProgramARM
    }
    
    
-   public void writeARM(Options opts, PrintWriter printer)
+   public void writeARM(Options opts, Printer printr)
    {
-      printer.println(".arch armv7-a");
-      printer.println(".text");
+      printr.println(".arch armv7-a").println(".text");
       
-      this.globals.writeARM(printer);
+      this.globals.writeARM(printr);
       
-      printer.println(".global __aeabi_idiv");
-      printer.println();
-      
-      printer.println();
-      this.functions.writeARM(printer);
+      printr.println(".global __aeabi_idiv").println().println();
       
       
-      printer.println();
-      printer.println(".section .rodata");
-      printer.println();
+      this.functions.writeARM(printr);
       
-      printer.println(".align 2");
-      printer.print(PRINTLN_FORMAT.name);
-      printer.println(':');
-      printer.println("   .asciz \"%d\\n\"");
-      printer.println();
       
-      printer.println(".align 2");
-      printer.print(PRINT_FORMAT.name);
-      printer.println(':');
-      printer.println("   .asciz \"%d \"");
-      printer.println();
+      printr.println()
+            .println(".section .rodata")
+            .println()
       
-      printer.println(".align 2");
-      printer.print(SCANF_FORMAT.name);
-      printer.println(':');
-      printer.println("   .asciz \"%d\"");
+            .println(".align 2")
+            .print(PRINTLN_FORMAT.name)
+            .println(':')
+            .println("   .asciz \"%d\\n\"")
+            .println()
       
-      printer.flush();
+            .println(".align 2")
+            .print(PRINT_FORMAT.name)
+            .println(':')
+            .println("   .asciz \"%d \"")
+            .println()
+      
+            .println(".align 2")
+            .print(SCANF_FORMAT.name)
+            .println(':')
+            .println("   .asciz \"%d\"")
    }
 }

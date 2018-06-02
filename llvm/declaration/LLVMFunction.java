@@ -1,13 +1,12 @@
 package llvm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import common.Options;
+import common.Printer;
 
 import llvm.LLVMCFGNode;
 
@@ -56,63 +55,51 @@ public class LLVMFunction
    }
    
    
-   public void writeLLVM(PrintWriter printer)
+   public void writeLLVM(Printer printr)
    {
-      printer.println(this.signature());
-      printer.println('{');
+      printr.println(this.signature()).println('{');
       
       
       for (LLVMLocal local : this.locals)
-      {
-         printer.print("   ");
-         printer.print(local.llvmString());
-         printer.print(" = alloca ");
-         printer.println(local.type.llvmString());
-      }
+         printr.print("   ")
+               .print(local.llvmString())
+               .print(" = alloca ")
+               .println(local.type.llvmString());
       
       
       for (LLVMParameter param : this.parameters)
-      {
-         printer.print("   ");
-         printer.println(new LLVMStore(param.llvmLocal, param).llvmString());
-      }
+         printr.print("   ")
+               .println(new LLVMStore(param.llvmLocal, param).llvmString());
       
       
       LLVMCFGNode firstNode = nodes.get(0);
       
       if ((firstNode != null) && (firstNode.getUID() != -1))
-      {
-         printer.print("   br label %");
-         printer.println(firstNode.llvmString());
-      }
+         printr.print("   br label %").println(firstNode.llvmString());
       
       
       for (LLVMCFGNode node : this.nodes)
-         node.writeLLVM(printer);
+         node.writeLLVM(printr);
       
       
       if (this.returnValue.type instanceof LLVMVoidType)
-      {
-         printer.println("   ret void");
-      }
+         printr.println("   ret void");
       
       else
-      {
-         printer.print("   ");
-         printer.print(this.retvalRegister());
-         printer.print(" = load ");
-         printer.print(this.type.llvmString());
-         printer.print("* ");
-         printer.println(this.returnValue.llvmString());
+         printr.print("   ")
+               .print(this.retvalRegister())
+               .print(" = load ")
+               .print(this.type.llvmString())
+               .print("* ")
+               .println(this.returnValue.llvmString())
          
-         printer.print("   ret ");
-         printer.print(this.type.llvmString());
-         printer.print(' ');
-         printer.println(this.retvalRegister());
-      }
+               .print("   ret ")
+               .print(this.type.llvmString())
+               .print(' ')
+               .println(this.retvalRegister());
       
       
-      printer.println('}');
+      printr.println('}');
    }
    
    

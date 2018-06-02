@@ -1,11 +1,11 @@
 package arm.link;
 
 
-import java.io.PrintWriter;
-
 import java.util.List;
 
 import arm.ARMCFGNode;
+
+import common.Printer;
 
 
 import static java.util.Collections.singletonList;
@@ -25,10 +25,9 @@ public class ARMJump extends ARMLink
    
    
    @Override
-   public void writeARM(PrintWriter printer, boolean spilled, int localCount)
+   public void writeARM(Printer printr, boolean spilled, int localCount)
    {
-      printer.print("   b ");
-      printer.println(this.target.armString());
+      printr.print("   b ").println(this.target.armString());
    }
    
    

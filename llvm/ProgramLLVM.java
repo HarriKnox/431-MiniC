@@ -1,8 +1,6 @@
 package llvm;
 
 
-import java.io.PrintWriter;
-
 import java.util.Arrays;
 
 import llvm.declaration.LLVMFunctions;
@@ -12,6 +10,7 @@ import llvm.declaration.LLVMStructs;
 import llvm.value.operand.constant.LLVMStdio;
 
 import common.Options;
+import common.Printer;
 
 import arm.ProgramARM;
 
@@ -42,33 +41,30 @@ public class ProgramLLVM
    }
    
    
-   public void writeLLVM(Options opts, PrintWriter printer)
+   public void writeLLVM(Options opts, Printer printr)
    {
-      printer.println("target triple = \"x86_64-unknown-linux-gnu\"");
-      printer.println();
+      printr.println("target triple = \"x86_64-unknown-linux-gnu\"").println();
       
       
-      this.llvmStructs.writeLLVM(printer);
-      this.llvmGlobals.writeLLVM(printer);
-      this.llvmFunctions.writeLLVM(printer);
+      this.llvmStructs.writeLLVM(printr);
+      this.llvmGlobals.writeLLVM(printr);
+      this.llvmFunctions.writeLLVM(printr);
       
       
-      printer.println("declare i8* @malloc(i32)");
-      printer.println("declare void @free(i8*)");
-      printer.println("declare i32 @printf(i8*, ...)");
-      printer.println("declare i32 @scanf(i8*, ...)");
+      printr.println("declare i8* @malloc(i32)")
+            .println("declare void @free(i8*)")
+            .println("declare i32 @printf(i8*, ...)")
+            .println("declare i32 @scanf(i8*, ...)")
       
-      printer.println();
+            .println();
       
       
       for (LLVMStdio stdio : Arrays.asList(new LLVMStdio[]{
             PRINTLN_FORMAT, PRINT_FORMAT, SCANF_FORMAT}))
-      {
-         printer.print(stdio.name);
-         printer.print(" = private unnamed_addr constant [4 x i8] ");
-         printer.print(stdio.initialization);
-         printer.println(", align 1");
-      }
+         printr.print(stdio.name)
+               .print(" = private unnamed_addr constant [4 x i8] ")
+               .print(stdio.initialization)
+               .println(", align 1");
    }
    
    

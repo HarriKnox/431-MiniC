@@ -11,6 +11,7 @@ import arm.ProgramARM;
 import ast.ProgramAST;
 
 import common.Options;
+import common.Printer;
 
 import llvm.ProgramLLVM;
 
@@ -78,7 +79,7 @@ public class Main
          }
       }
       
-      llvm.writeLLVM(opts, printer);
+      llvm.writeLLVM(opts, new Printer(printer));
       
       printer.close();
    }
@@ -108,7 +109,7 @@ public class Main
       }
       
       
-      llvm.writeLLVM(opts, printer);
+      llvm.writeLLVM(opts, new Printer(printer));
       printer.close();
       
       
@@ -170,7 +171,7 @@ public class Main
          }
       }
       
-      arm.writeARM(opts, printer);
+      arm.writeARM(opts, new Printer(printer));
       
       printer.close();
    }

@@ -1,8 +1,6 @@
 package llvm;
 
 
-import java.io.PrintWriter;
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,6 +17,8 @@ import llvm.link.LLVMLink;
 import llvm.value.operand.LLVMOperand;
 
 import arm.ARMCFGNode;
+
+import common.Printer;
 
 
 public class LLVMCFGNode
@@ -351,24 +351,18 @@ public class LLVMCFGNode
    }
    
    
-   public void writeLLVM(PrintWriter printer)
+   public void writeLLVM(Printer printr)
    {
       if (this.uid != -1)
-      {
-         printer.print(this.llvmString());
-         printer.println(':');
-      }
+         printr.print(this.llvmString()).println(':');
       
       
       for (LLVMInstruction instruction : this.instructions)
-      {
-         printer.print("   ");
-         printer.println(instruction.llvmString());
-      }
+         printr.print("   ").println(instruction.llvmString());
       
       
       if (this.link != null)
-         this.link.writeLLVM(printer);
+         this.link.writeLLVM(printr);
    }
    
    

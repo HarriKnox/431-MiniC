@@ -1,11 +1,10 @@
 package llvm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.List;
 
 import common.Options;
+import common.Printer;
 
 
 public class LLVMStructs
@@ -19,12 +18,12 @@ public class LLVMStructs
    }
    
    
-   public void writeLLVM(PrintWriter printer)
+   public void writeLLVM(Printer printr)
    {
       for (LLVMStruct struct : this.structs)
-         printer.println(struct.llvmString());
+         printr.println(struct.llvmString());
       
       if (!this.structs.isEmpty())
-         printer.println();
+         printr.println();
    }
 }

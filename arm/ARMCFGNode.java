@@ -1,8 +1,6 @@
 package arm;
 
 
-import java.io.PrintWriter;
-
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -19,6 +17,7 @@ import arm.link.ARMLink;
 
 import arm.value.operand.ARMRegister;
 
+import common.Printer;
 
 public class ARMCFGNode
 {
@@ -84,27 +83,21 @@ public class ARMCFGNode
    }
    
    
-   public void writeARM(PrintWriter printer, boolean spilled, int localCount)
+   public void writeARM(Printer printr, boolean spilled, int localCount)
    {
       if (this.uid != -1)
       {
-         printer.print(this.armString());
-         printer.println(':');
+         printr.print(this.armString()).println(':');
       }
       
       
       for (ARMInstruction instruction : this.instructions)
-      {
          for (String str : instruction.armStrings(spilled, localCount))
-         {
-            printer.print("   ");
-            printer.println(str);
-         }
-      }
+            printr.print("   ").println(str);
       
       
       if (this.link != null)
-         this.link.writeARM(printer, spilled, localCount);
+         this.link.writeARM(printr, spilled, localCount);
    }
    
    

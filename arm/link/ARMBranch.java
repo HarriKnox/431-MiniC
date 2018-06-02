@@ -1,8 +1,6 @@
 package arm.link;
 
 
-import java.io.PrintWriter;
-
 import java.util.List;
 
 import arm.ARMCFGNode;
@@ -11,6 +9,8 @@ import arm.instruction.ARMCmp;
 
 import arm.value.operand.ARMConstant;
 import arm.value.operand.ARMRegister;
+
+import common.Printer;
 
 
 import static java.util.Arrays.asList;
@@ -35,21 +35,18 @@ public class ARMBranch extends ARMLink
    
    
    @Override
-   public void writeARM(PrintWriter printer, boolean spilled, int localCount)
+   public void writeARM(Printer printr, boolean spilled, int localCount)
    {
       for (String str
             : new ARMCmp(this.guard, new ARMConstant(1))
                   .armStrings(spilled, localCount))
-      {
-         printer.print("   ");
-         printer.println(str);
-      }
+         printr.print("   ").println(str);
       
-      printer.print("   beq ");
-      printer.println(this.thenNode.armString());
+      printr.print("   beq ")
+            .println(this.thenNode.armString())
       
-      printer.print("   b ");
-      printer.println(this.elseNode.armString());
+            .print("   b ")
+            .println(this.elseNode.armString());
    }
    
    

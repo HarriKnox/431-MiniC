@@ -1,9 +1,9 @@
 package arm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.List;
+
+import common.Printer;
 
 
 public class ARMGlobals
@@ -17,11 +17,11 @@ public class ARMGlobals
    }
    
    
-   public void writeARM(PrintWriter printer)
+   public void writeARM(Printer printr)
    {
       for (String global : this.globals)
-         printer.format("   .comm %s, 4, 4%n", global);
+         printr.print("   .comm ").print(global).println(", 4, 4");
       
-      printer.println();
+      printr.println();
    }
 }

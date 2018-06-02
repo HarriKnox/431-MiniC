@@ -1,12 +1,11 @@
 package llvm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.LinkedList;
 import java.util.List;
 
 import common.Options;
+import common.Printer;
 
 import arm.declaration.ARMFunction;
 import arm.declaration.ARMFunctions;
@@ -23,12 +22,12 @@ public class LLVMFunctions
    }
    
    
-   public void writeLLVM(PrintWriter printer)
+   public void writeLLVM(Printer printr)
    {
       for (LLVMFunction function : this.functions)
       {
-         function.writeLLVM(printer);
-         printer.println();
+         function.writeLLVM(printr);
+         printr.println();
       }
    }
    

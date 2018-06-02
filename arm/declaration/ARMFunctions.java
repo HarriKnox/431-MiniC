@@ -1,9 +1,9 @@
 package arm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.List;
+
+import common.Printer;
 
 
 public class ARMFunctions
@@ -17,9 +17,9 @@ public class ARMFunctions
    }
    
    
-   public void writeARM(PrintWriter printer)
+   public void writeARM(Printer printr)
    {
       for (ARMFunction function : this.functions)
-         function.writeARM(printer);
+         function.writeARM(printr);
    }
 }

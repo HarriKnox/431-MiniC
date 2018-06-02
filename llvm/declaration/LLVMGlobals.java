@@ -1,12 +1,11 @@
 package llvm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.LinkedList;
 import java.util.List;
 
 import common.Options;
+import common.Printer;
 
 import llvm.value.variable.LLVMGlobal;
 
@@ -25,13 +24,13 @@ public class LLVMGlobals
    }
    
    
-   public void writeLLVM(PrintWriter printer)
+   public void writeLLVM(Printer printr)
    {
       for (LLVMGlobal global : this.globals)
-         printer.println(this.llvmString(global));
+         printr.println(this.llvmString(global));
       
       if (!this.globals.isEmpty())
-         printer.println();
+         printr.println();
    }
    
    

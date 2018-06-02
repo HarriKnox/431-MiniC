@@ -1,8 +1,6 @@
 package arm.declaration;
 
 
-import java.io.PrintWriter;
-
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -17,6 +15,8 @@ import arm.ARMInterferenceEdge;
 
 import arm.value.operand.ARMAddress;
 import arm.value.operand.ARMRegister;
+
+import common.Printer;
 
 
 import static arm.value.operand.ARMRegister.R0;
@@ -52,101 +52,88 @@ public class ARMFunction
    }
    
    
-   public void writeARM(PrintWriter printer)
+   public void writeARM(Printer printr)
    {
       int stackSize = ((this.highestRegisterUsed > 10)
             ? (this.localCount + this.highestRegisterUsed - 8)
             : this.localCount) * 4;
       
-      printer.println(".align 2");
+      printr.println(".align 2")
       
-      printer.print(".global ");
-      printer.println(this.name);
-      
-      printer.print(this.name);
-      printer.println(':');
+            .print(".global ")
+            .println(this.name)
+            
+            .print(this.name)
+            .println(':')
       
       
       /* Setting up frame */
-      printer.println("   push {fp, lr}");
-      printer.println("   add fp, sp, #4");
+            .println("   push {fp, lr}")
+            .println("   add fp, sp, #4");
       
       
-      printExtraPushPop(printer, this.highestRegisterUsed, true);
+      printExtraPushPop(printr, this.highestRegisterUsed, true);
       
       
       /* Allocate stack for locals (if needed) */
       if (this.localCount > 0)
-      {
-         printer.print("   sub sp, #");
-         printer.println(stackSize);
-      }
+         printr.print("   sub sp, #").println(stackSize);
       
       
       /* Move parameters to stack-pointer-relative addresses */
       for (int i = 0; i < paramCount && i < 4; i++)
-      {
-         printer.print("   str r");
-         printer.print(i);
-         printer.print(", [fp, #-");
-         printer.print((i * 4) + 8);
-         printer.println(']');
-      }
+         printr.print("   str r")
+               .print(i)
+               .print(", [fp, #-")
+               .print((i * 4) + 8)
+               .println(']');
       
       for (int i = 4; i < paramCount; i++)
-      {
-         printer.print("   ldr r0, [fp, #");
-         printer.print((i - 3) * 4);
-         printer.println(']');
+         printr.print("   ldr r0, [fp, #")
+               .print((i - 3) * 4)
+               .println(']')
          
-         printer.print("   str r0, [fp, #-");
-         printer.print((i * 4) + 8);
-         printer.println(']');
-      }
+               .print("   str r0, [fp, #-")
+               .print((i * 4) + 8)
+               .println(']');
       
       
       /* Write all node instructions */
       for (ARMCFGNode node : this.nodes)
-         node.writeARM(printer,
+         node.writeARM(printr,
                this.highestRegisterUsed > 10,
                this.localCount);
       
       
       /* Load return value into r0 */
       if (this.returnValue != null)
-      {
-         printer.print("   ldr r0, [");
-         printer.print(this.returnValue.armString());
-         printer.println(']');
-      }
+         printr.print("   ldr r0, [")
+               .print(this.returnValue.armString())
+               .println(']');
       
       
       /* Pop off all of stack at once */
       if (this.localCount > 0)
-      {
-         printer.print("   add sp, #");
-         printer.println(stackSize);
-      }
+         printr.print("   add sp, #").println(stackSize);
       
       
-      printExtraPushPop(printer, this.highestRegisterUsed, false);
+      printExtraPushPop(printr, this.highestRegisterUsed, false);
       
       
       /* ARM return */
-      printer.println("   pop {fp, pc}");
+      printr.println("   pop {fp, pc}")
       
-      printer.print(".size ");
-      printer.print(this.name);
-      printer.print(", .-");
-      printer.println(this.name);
+            .print(".size ")
+            .print(this.name)
+            .print(", .-")
+            .println(this.name)
       
-      printer.println();
+            .println();
    }
    
    
    private static void printExtraPushPop(
-         PrintWriter printer,
-         int highest, boolean isPush)
+         Printer printr, int highest, boolean isPush)
    {
       if (highest < 4)
          return;
@@ -154,18 +141,13 @@ public class ARMFunction
       if (highest > 10)
          highest = 10;
       
-      printer.print("   ");
-      printer.print(isPush ? "push" : "pop");
-      printer.print(" {r4");
+      printr.print("   ").print(isPush ? "push" : "pop").print(" {r4");
       
       
       for (int i = 5; i <= highest; i++)
-      {
-         printer.print(", r");
-         printer.print(i);
-      }
+         printr.print(", r").print(i);
       
-      printer.println('}');
+      printr.println('}');
    }
    
    
