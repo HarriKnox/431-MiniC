@@ -59,6 +59,6 @@ public class ProgramARM
             .println(".align 2")
             .print(SCANF_FORMAT.name)
             .println(':')
-            .println("   .asciz \"%d\"")
+            .println("   .asciz \"%d\"");
    }
 }
