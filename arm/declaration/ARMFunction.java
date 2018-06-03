@@ -72,12 +72,12 @@ public class ARMFunction
             .println("   add fp, sp, #4");
       
       
-      printExtraPushPop(printr, this.highestRegisterUsed, true);
-      
-      
       /* Allocate stack for locals (if needed) */
       if (this.localCount > 0)
          printr.print("   sub sp, #").println(stackSize);
+      
+      
+      printExtraPushPop(printr, this.highestRegisterUsed, true);
       
       
       /* Move parameters to stack-pointer-relative addresses */
@@ -112,12 +112,12 @@ public class ARMFunction
                .println(']');
       
       
+      printExtraPushPop(printr, this.highestRegisterUsed, false);
+      
+      
       /* Pop off all of stack at once */
       if (this.localCount > 0)
          printr.print("   add sp, #").println(stackSize);
-      
-      
-      printExtraPushPop(printr, this.highestRegisterUsed, false);
       
       
       /* ARM return */
