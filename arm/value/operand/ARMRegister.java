@@ -5,12 +5,10 @@ public class ARMRegister extends ARMOperand
 {
    private int number;
    
-   private static int count = 0;
-   
    
    public ARMRegister()
    {
-      this(-1);
+      this(0);
    }
    
    
@@ -74,9 +72,6 @@ public class ARMRegister extends ARMOperand
    
    public void setNumber(int number)
    {
-      if (this.number != -1)
-         return;
-      
       this.number = number;
    }
    
