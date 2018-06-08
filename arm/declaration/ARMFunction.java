@@ -283,7 +283,7 @@ public class ARMFunction
       interferences.remove(key);
       
       for (ARMRegister other : minEntry.getValue())
-         if (other != R0 && other != R1 && other != R2 && other != R3 && other != IP)
+         if (other != R0 && other != R1 && other != R2 && other != R3)
             interferences.get(other).remove(key);
       
       
