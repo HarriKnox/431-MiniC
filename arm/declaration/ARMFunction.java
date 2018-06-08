@@ -77,7 +77,7 @@ public class ARMFunction
          printr.print("   sub sp, #").println(stackSize);
       
       
-      printExtraPushPop(printr, this.highestRegisterUsed, true);
+      printExtraPush(printr, this.highestRegisterUsed);
       
       
       /* Move parameters to stack-pointer-relative addresses */
@@ -112,7 +112,7 @@ public class ARMFunction
                .println(']');
       
       
-      printExtraPushPop(printr, this.highestRegisterUsed, false);
+      printExtraPop(printr, this.highestRegisterUsed);
       
       
       /* Pop off all of stack at once */
@@ -132,16 +132,32 @@ public class ARMFunction
    }
    
    
-   private static void printExtraPushPop(
-         Printer printr, int highest, boolean isPush)
+   private static void printExtraPush(Printer printr, int highest)
    {
       if (highest < 4)
          return;
       
+      printr.print("   push {r4");
+      
+      printClobberedRegisters(printr, highest);
+   }
+   
+   
+   private static void printExtraPop(Printer printr, int highest)
+   {
+      if (highest < 4)
+         return;
+      
+      printr.print("   pop {r4");
+      
+      printClobberedRegisters(printr, highest);
+   }
+   
+   
+   private static void printClobberedRegisters(Printer printr, int highest)
+   {
       if (highest > 10)
          highest = 10;
-      
-      printr.print("   ").print(isPush ? "push" : "pop").print(" {r4");
       
       
       for (int i = 5; i <= highest; i++)
