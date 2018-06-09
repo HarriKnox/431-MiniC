@@ -20,6 +20,8 @@ import llvm.value.operand.LLVMOperand;
 
 import llvm.value.operand.register.LLVMPhi;
 
+import llvm.value.variable.LLVMLocal;
+
 import arm.ARMCFGNode;
 
 import common.Printer;
@@ -34,7 +36,7 @@ public class LLVMCFGNode
    public final boolean unreachable;
    
    /* For SSA */
-   private final Map<String, LLVMOperand> currentDefs = new HashMap<>();
+   private final Map<LLVMLocal, LLVMOperand> currentDefs = new HashMap<>();
    private boolean sealed;
    private final List<LLVMPhi> phis = new LinkedList<>();
    
@@ -341,22 +343,22 @@ public class LLVMCFGNode
    }
    
    
-   public void writeVariable(String variable, LLVMValue value)
+   public void writeVariable(LLVMLocal variable, LLVMOperand value)
    {
       this.currentDefs.put(variable, value);
    }
    
    
-   public LLVMOperand readVariable(String variable)
+   public LLVMOperand readVariable(LLVMLocal variable)
    {
-      if (this.currentDefs.contains(variable))
+      if (this.currentDefs.containsKey(variable))
          return this.currentDefs.get(variable);
       
       return this.readVariableFromPredecessors(variable);
    }
    
    
-   private readVariableFromPredecessors(String variable)
+   private LLVMOperand readVariableFromPredecessors(LLVMLocal variable)
    {
       LLVMOperand val;
       
