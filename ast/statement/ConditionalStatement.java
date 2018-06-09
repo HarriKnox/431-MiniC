@@ -10,6 +10,7 @@ import ast.declaration.Function;
 import ast.expression.Expression;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -39,10 +40,12 @@ public class ConditionalStatement extends Statement
    }
    
    
-   public LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   @Override
+   public LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMOperand llvmGuard = this.guard.buildLLVM(program, current, node);
+      LLVMOperand llvmGuard = this.guard.buildLLVM(
+            program, current, opts, node);
       
       
       if ((llvmGuard != null)
@@ -57,10 +60,10 @@ public class ConditionalStatement extends Statement
       
       
       LLVMCFGNode thenLast = this.thenBlock.buildLLVM(
-            program, current, thenNode, exit);
+            program, current, opts, thenNode, exit);
       
       LLVMCFGNode elseLast = this.elseBlock.buildLLVM(
-            program, current, elseNode, exit);
+            program, current, opts, elseNode, exit);
       
       
       /*

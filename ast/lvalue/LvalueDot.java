@@ -9,6 +9,7 @@ import ast.declaration.Function;
 import ast.declaration.Variable;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -36,10 +37,12 @@ public class LvalueDot extends Lvalue
    }
    
    
-   public LLVMVariable buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   @Override
+   public LLVMVariable buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
-      LLVMVariable leftValue = this.left.buildLLVM(program, current, node);
+      LLVMVariable leftValue = this.left.buildLLVM(
+            program, current, opts, node);
       
       
       /* null indicates something went wrong deeper in the tree */

@@ -8,6 +8,8 @@ import ast.TokenedElement;
 
 import ast.declaration.Function;
 
+import common.Options;
+
 import llvm.LLVMCFGNode;
 
 
@@ -19,6 +21,6 @@ public abstract class Statement extends TokenedElement
    }
    
    
-   public abstract LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit);
+   public abstract LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit);
 }

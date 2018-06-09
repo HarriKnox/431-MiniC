@@ -10,6 +10,7 @@ import ast.declaration.Function;
 import ast.expression.Expression;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -34,10 +35,10 @@ public abstract class UnaryExpression extends Expression
    
    
    @Override
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
-      LLVMOperand value = this.operand.buildLLVM(program, current, node);
+      LLVMOperand value = this.operand.buildLLVM(program, current, opts, node);
       
       
       if (value == null)

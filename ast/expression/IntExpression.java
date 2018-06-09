@@ -8,6 +8,7 @@ import ast.ProgramAST;
 import ast.declaration.Function;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -44,8 +45,8 @@ public class IntExpression extends Expression
    
    
    @Override
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       String val = this.negative ? ('-' + this.value) : this.value;
       int num;

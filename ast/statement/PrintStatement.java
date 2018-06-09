@@ -10,6 +10,7 @@ import ast.declaration.Function;
 import ast.expression.Expression;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -36,10 +37,11 @@ public class PrintStatement extends Statement
    
    
    @Override
-   public LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   public LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit)
    {
-      LLVMOperand value = this.expression.buildLLVM(program, current, node);
+      LLVMOperand value = this.expression.buildLLVM(
+            program, current, opts, node);
       
       
       if (value == null)

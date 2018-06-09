@@ -10,6 +10,7 @@ import ast.declaration.Variable;
 import ast.declaration.Variables;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -38,8 +39,8 @@ public class IdentifierExpression extends Expression
    
    
    @Override
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       LLVMVariable source = findVariable(program.globals, current);
       

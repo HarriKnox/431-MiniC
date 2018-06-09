@@ -10,6 +10,7 @@ import ast.ProgramAST;
 import ast.declaration.Function;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -33,8 +34,9 @@ public class BlockStatement extends Statement
    }
    
    
-   public LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   @Override
+   public LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit)
    {
       for (Statement statement : this.statements)
       {
@@ -44,7 +46,7 @@ public class BlockStatement extends Statement
             break;
          }
          
-         node = statement.buildLLVM(program, current, node, exit);
+         node = statement.buildLLVM(program, current, opts, node, exit);
       }
       
       return node;

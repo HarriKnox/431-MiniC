@@ -12,6 +12,7 @@ import ast.expression.Expression;
 import ast.lvalue.Lvalue;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -39,8 +40,9 @@ public class AssignmentStatement extends Statement
    }
    
    
-   public LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   @Override
+   public LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit)
    {
       LLVMVariable llvmTarget;
       LLVMOperand llvmSource;
@@ -48,13 +50,13 @@ public class AssignmentStatement extends Statement
       
       if (this.target.height >= this.source.height)
       {
-         llvmTarget = this.target.buildLLVM(program, current, node);
-         llvmSource = this.source.buildLLVM(program, current, node);
+         llvmTarget = this.target.buildLLVM(program, current, opts, node);
+         llvmSource = this.source.buildLLVM(program, current, opts, node);
       }
       else
       {
-         llvmSource = this.source.buildLLVM(program, current, node);
-         llvmTarget = this.target.buildLLVM(program, current, node);
+         llvmSource = this.source.buildLLVM(program, current, opts, node);
+         llvmTarget = this.target.buildLLVM(program, current, opts, node);
       }
       
       

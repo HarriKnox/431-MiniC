@@ -8,6 +8,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
+import common.Options;
+
 import llvm.LLVMCFGNode;
 
 import llvm.value.operand.LLVMOperand;
@@ -26,6 +28,6 @@ public abstract class Expression extends TokenedElement
    }
    
    
-   public abstract LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node);
+   public abstract LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node);
 }

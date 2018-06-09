@@ -8,6 +8,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
+import common.Options;
+
 import llvm.LLVMCFGNode;
 
 import llvm.value.variable.LLVMVariable;
@@ -29,6 +31,6 @@ public abstract class Lvalue extends TokenedElement
    }
    
    
-   public abstract LLVMVariable buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node);
+   public abstract LLVMVariable buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node);
 }

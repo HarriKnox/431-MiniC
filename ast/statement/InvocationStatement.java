@@ -12,6 +12,8 @@ import ast.declaration.Function;
 
 import ast.expression.InvocationExpression;
 
+import common.Options;
+
 import llvm.LLVMCFGNode;
 
 import llvm.instruction.LLVMCallVoid;
@@ -33,8 +35,8 @@ public class InvocationStatement extends Statement
    
    
    @Override
-   public LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   public LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit)
    {
       Function function = this.invocation.getFunction(program);
       
@@ -43,7 +45,7 @@ public class InvocationStatement extends Statement
       
       
       List<LLVMOperand> args = this.invocation.gatherArguments(
-            function, program, current, node);
+            function, program, current, opts, node);
       
       if (args == null)
          return node;

@@ -10,6 +10,7 @@ import ast.declaration.Function;
 import ast.expression.Expression;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -37,21 +38,22 @@ public abstract class BinaryExpression extends Expression
    }
    
    
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   @Override
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       LLVMOperand llvmLeft, llvmRight;
       
       
       if (this.left.height >= this.right.height)
       {
-         llvmLeft = this.left.buildLLVM(program, current, node);
-         llvmRight = this.right.buildLLVM(program, current, node);
+         llvmLeft = this.left.buildLLVM(program, current, opts, node);
+         llvmRight = this.right.buildLLVM(program, current, opts, node);
       }
       else
       {
-         llvmRight = this.right.buildLLVM(program, current, node);
-         llvmLeft = this.left.buildLLVM(program, current, node);
+         llvmRight = this.right.buildLLVM(program, current, opts, node);
+         llvmLeft = this.left.buildLLVM(program, current, opts, node);
       }
       
       

@@ -14,6 +14,7 @@ import ast.declaration.Function;
 import ast.type.Type;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -57,8 +58,8 @@ public class InvocationExpression extends Expression
    
    
    @Override
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       Function function = this.getFunction(program);
       
@@ -67,7 +68,7 @@ public class InvocationExpression extends Expression
       
       
       List<LLVMOperand> args = this.gatherArguments(
-            function, program, current, node);
+            function, program, current, opts, node);
       
       if (args == null)
          return null;
@@ -97,7 +98,7 @@ public class InvocationExpression extends Expression
    
    
    public List<LLVMOperand> gatherArguments(Function function,
-         ProgramAST program, Function current, LLVMCFGNode node)
+         ProgramAST program, Function current, Options opts, LLVMCFGNode node)
    {
       int arglen = this.arguments.size();
       
@@ -122,7 +123,7 @@ public class InvocationExpression extends Expression
       {
          LLVMOperand llvmArg = argerator
                .next()
-               .buildLLVM(program, current, node);
+               .buildLLVM(program, current, opts, node);
          
          LLVMType paramType = typerator.next().llvmType();
          

@@ -11,6 +11,7 @@ import ast.declaration.Struct;
 import ast.type.StructType;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -33,8 +34,8 @@ public class NewExpression extends Expression
    
    
    @Override
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       Struct struct = program.structs.getStruct(this.id);
       

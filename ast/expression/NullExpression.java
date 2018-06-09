@@ -7,6 +7,8 @@ import ast.ProgramAST;
 
 import ast.declaration.Function;
 
+import common.Options;
+
 import llvm.LLVMCFGNode;
 
 import llvm.value.operand.LLVMOperand;
@@ -23,8 +25,8 @@ public class NullExpression extends Expression
    
    
    @Override
-   public LLVMOperand buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   public LLVMOperand buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       return new LLVMNull();
    }

@@ -10,6 +10,7 @@ import ast.declaration.Variable;
 import ast.declaration.Variables;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -29,8 +30,9 @@ public class LvalueId extends Lvalue
    }
    
    
-   public LLVMVariable buildLLVM(
-         ProgramAST program, Function current, LLVMCFGNode node)
+   @Override
+   public LLVMVariable buildLLVM(ProgramAST program,
+         Function current, Options opts, LLVMCFGNode node)
    {
       LLVMVariable source = findVariable(program.globals, current);
       

@@ -132,7 +132,7 @@ public class Function extends TokenedElement
       LLVMCFGNode entry = new LLVMCFGNode(false);
       LLVMCFGNode exit = new LLVMCFGNode(false);
       
-      buildCFG(program, entry, exit);
+      buildCFG(program, opts, entry, exit);
       
       
       if (!opts.dirtyCFG)
@@ -143,7 +143,7 @@ public class Function extends TokenedElement
    }
    
    
-   private void buildCFG(ProgramAST program,
+   private void buildCFG(ProgramAST program, Options opts,
          LLVMCFGNode entry, LLVMCFGNode exit)
    {
       LLVMCFGNode first = new LLVMCFGNode(false);
@@ -152,7 +152,7 @@ public class Function extends TokenedElement
       
       
       /* Build the CFG and complain if it doesn't return */
-      LLVMCFGNode last = this.body.buildLLVM(program, this, first, exit);
+      LLVMCFGNode last = this.body.buildLLVM(program, this, opts, first, exit);
       
       
       if (!last.unreachable)

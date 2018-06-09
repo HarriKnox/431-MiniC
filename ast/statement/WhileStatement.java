@@ -10,6 +10,7 @@ import ast.declaration.Function;
 import ast.expression.Expression;
 
 import common.ErrorPrinter;
+import common.Options;
 
 import llvm.LLVMCFGNode;
 
@@ -33,15 +34,16 @@ public class WhileStatement extends Statement
    }
    
    
-   public LLVMCFGNode buildLLVM(ProgramAST program,
-         Function current, LLVMCFGNode node, LLVMCFGNode exit)
+   @Override
+   public LLVMCFGNode buildLLVM(ProgramAST program, Function current,
+         Options opts, LLVMCFGNode node, LLVMCFGNode exit)
    {
       LLVMCFGNode guardNode = new LLVMCFGNode(false);
       
       node.jump(guardNode);
       
       LLVMOperand llvmGuard = this.guard.buildLLVM(
-            program, current, guardNode);
+            program, current, opts, guardNode);
       
       
       if ((llvmGuard != null)
@@ -56,7 +58,7 @@ public class WhileStatement extends Statement
       
       
       LLVMCFGNode bodyLast = this.body.buildLLVM(
-            program, current, bodyNode, exit);
+            program, current, opts, bodyNode, exit);
       
       
       bodyLast.loopback(guardNode);
