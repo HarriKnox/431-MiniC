@@ -10,6 +10,10 @@ import llvm.type.LLVMType;
 
 import llvm.value.operand.LLVMOperand;
 
+import arm.ARMCFGNode;
+
+import arm.value.operand.ARMRegister;
+
 
 public class LLVMPhi extends LLVMRegister
 {
@@ -40,5 +44,18 @@ public class LLVMPhi extends LLVMRegister
          this.uid = count++;
       
       return this.uid;
+   }
+   
+   
+   public void addSource(LLVMCFGNode node, LLVMOperand value)
+   {
+      this.sources.put(node, value);
+   }
+   
+   
+   @Override
+   public ARMRegister buildARM(ARMCFGNode node)
+   {
+      return null;
    }
 }
