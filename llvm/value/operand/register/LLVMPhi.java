@@ -6,7 +6,7 @@ import java.util.Map;
 
 import llvm.LLVMCFGNode;
 
-import llvm.type.LLVMType;
+import llvm.value.variable.LLVMLocal;
 
 import llvm.value.operand.LLVMOperand;
 
@@ -19,15 +19,19 @@ public class LLVMPhi extends LLVMRegister
 {
    public final Map<LLVMCFGNode, LLVMOperand> sources = new HashMap<>();
    
+   public final LLVMLocal variable;
+   
    
    private int uid = -1;
    
    private static int count = 0;
    
    
-   public LLVMPhi(LLVMType type)
+   public LLVMPhi(LLVMLocal variable)
    {
-      super(type);
+      super(variable.type);
+      
+      this.variable = variable;
    }
    
    
