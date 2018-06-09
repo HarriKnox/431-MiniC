@@ -22,12 +22,6 @@ import llvm.LLVMCFGNode;
 
 import llvm.declaration.LLVMFunction;
 
-import llvm.instruction.LLVMStore;
-import llvm.instruction.LLVMInstruction;
-
-import llvm.instruction.targeted.LLVMTargetedInstruction;
-import llvm.instruction.targeted.LLVMLoad;
-
 import llvm.type.LLVMType;
 
 import llvm.value.operand.register.LLVMParameter;
