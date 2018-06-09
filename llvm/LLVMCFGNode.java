@@ -1,10 +1,12 @@
 package llvm;
 
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -15,6 +17,8 @@ import llvm.link.LLVMJump;
 import llvm.link.LLVMLink;
 
 import llvm.value.operand.LLVMOperand;
+
+import llvm.value.operand.register.LLVMPhi;
 
 import arm.ARMCFGNode;
 
@@ -28,6 +32,11 @@ public class LLVMCFGNode
    public LLVMCFGNode loopback = null;
    public LLVMLink link = null;
    public final boolean unreachable;
+   
+   /* For SSA */
+   private final Map<String, LLVMOperand> currentDefs = new HashMap<>();
+   private boolean sealed;
+   private final List<LLVMPhi> phis = new LinkedList<>();
    
    
    private ARMCFGNode armNode = null;
@@ -328,6 +337,33 @@ public class LLVMCFGNode
          
          if (to != null)
             this.predecessors.add(to);
+      }
+   }
+   
+   
+   public void writeVariable(String variable, LLVMValue value)
+   {
+      this.currentDefs.put(variable, value);
+   }
+   
+   
+   public LLVMOperand readVariable(String variable)
+   {
+      if (this.currentDefs.contains(variable))
+         return this.currentDefs.get(variable);
+      
+      return this.readVariableFromPredecessors(variable);
+   }
+   
+   
+   private readVariableFromPredecessors(String variable)
+   {
+      LLVMOperand val;
+      
+      
+      if (!this.sealed)
+      {
+         val = new LLVMPhi();
       }
    }
    
