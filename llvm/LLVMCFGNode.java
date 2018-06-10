@@ -450,30 +450,8 @@ public class LLVMCFGNode
                   .print(phi.type.llvmString());
             
             
-            Iterator<LLVMCFGNode> prederator = this.predecessors.iterator();
+            this.printPhiList(printr, phi);
             
-            if (prederator.hasNext())
-            {
-               LLVMCFGNode pred = prederator.next();
-               
-               printr.print('[')
-                     .print(phi.getSource(pred).llvmString())
-                     .print(", %")
-                     .print(pred.llvmString())
-                     .print(']');
-            }
-            
-            
-            while (prederator.hasNext())
-            {
-               LLVMCFGNode pred = prederator.next();
-               
-               printr.print(", [")
-                     .print(phi.getSource(pred).llvmString())
-                     .print(", %")
-                     .print(pred.llvmString())
-                     .print(']');
-            }
             
             printr.println();
          }
@@ -486,6 +464,35 @@ public class LLVMCFGNode
       
       if (this.link != null)
          this.link.writeLLVM(printr);
+   }
+   
+   
+   public void printPhiList(Printer printr, LLVMPhi phi)
+   {
+      Iterator<LLVMCFGNode> prederator = this.predecessors.iterator();
+      
+      if (prederator.hasNext())
+      {
+         LLVMCFGNode pred = prederator.next();
+         
+         printr.print('[')
+               .print(phi.getSource(pred).llvmString())
+               .print(", %")
+               .print(pred.llvmString())
+               .print(']');
+      }
+      
+      
+      while (prederator.hasNext())
+      {
+         LLVMCFGNode pred = prederator.next();
+         
+         printr.print(", [")
+               .print(phi.getSource(pred).llvmString())
+               .print(", %")
+               .print(pred.llvmString())
+               .print(']');
+      }
    }
    
    
