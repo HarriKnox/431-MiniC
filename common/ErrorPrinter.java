@@ -35,10 +35,18 @@ public class ErrorPrinter
    }
    
    
+   public static void undefined(Token token, String type, String thing)
+   {
+      printLine(token, type + ' ' + thing
+            + " may not have been defined on all paths");
+   }
+   
+   
    public static void noField(Token token, String struct, String field)
    {
       printLine(token, "struct " + struct + " does not have field " + field);
    }
+   
    
    public static void badIndex(Token token, String got)
    {

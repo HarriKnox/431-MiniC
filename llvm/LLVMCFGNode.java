@@ -366,13 +366,23 @@ public class LLVMCFGNode
       
       
       if (!this.sealed || (predCount >= 2))
+      {
          val = createPhi(variable);
+      }
       
       else if (predCount == 0)
-         val = variable.type.defaultValue();
+      {
+         val = null;
+         ErrorPrinter.undefined(
+               this.token,
+               variable.type.astString(),
+               variable.identifier);
+      }
       
       else /* if (predCount == 1) */
+      {
          val = this.predecessors.get(0).readVariable(variable);
+      }
       
       
       this.writeVariable(variable, val);
@@ -388,17 +398,26 @@ public class LLVMCFGNode
       
       
       if (this.sealed)
-         this.addPhiOperands(phi);
+         return this.addPhiOperands(phi);
       
       
       return phi;
    }
    
    
-   private void addPhiOperands(LLVMPhi phi)
+   private LLVMPhi addPhiOperands(LLVMPhi phi)
    {
       for (LLVMCFGNode pred : this.predecessors)
-         phi.addSource(pred, pred.readVariable(phi.variable));
+      {
+         LLVMOperand var = pred.readVariable(phi.variable);
+         
+         if (var == null)
+            return null;
+         
+         phi.addSource(pred, var);
+      }
+      
+      return phi;
    }
    
    
