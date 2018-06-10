@@ -22,11 +22,11 @@ public class LLVMFunctions
    }
    
    
-   public void writeLLVM(Printer printr)
+   public void writeLLVM(Printer printr, Options opts)
    {
       for (LLVMFunction function : this.functions)
       {
-         function.writeLLVM(printr);
+         function.writeLLVM(printr, opts);
          printr.println();
       }
    }

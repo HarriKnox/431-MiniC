@@ -55,31 +55,33 @@ public class LLVMFunction
    }
    
    
-   public void writeLLVM(Printer printr)
+   public void writeLLVM(Printer printr, Options opts)
    {
       printr.println(this.signature()).println('{');
       
       
-      for (LLVMLocal local : this.locals)
-         printr.print("   ")
-               .print(local.llvmString())
-               .print(" = alloca ")
-               .println(local.type.llvmString());
-      
-      
-      for (LLVMParameter param : this.parameters)
-         printr.print("   ")
-               .println(new LLVMStore(param.llvmLocal, param).llvmString());
-      
-      
-      LLVMCFGNode firstNode = nodes.get(0);
-      
-      if ((firstNode != null) && (firstNode.getUID() != -1))
-         printr.print("   br label %").println(firstNode.llvmString());
+      if (opts.stack)
+      {
+         for (LLVMLocal local : this.locals)
+            printr.print("   ")
+                  .print(local.llvmString())
+                  .print(" = alloca ")
+                  .println(local.type.llvmString());
+         
+         
+         for (LLVMParameter param : this.parameters)
+            printr.print("   ")
+                  .println(new LLVMStore(param.llvmLocal, param).llvmString());
+         
+         LLVMCFGNode firstNode = this.nodes.get(0);
+         
+         if ((firstNode != null) && (firstNode.getUID() != -1))
+            printr.print("   br label %").println(firstNode.llvmString());
+      }
       
       
       for (LLVMCFGNode node : this.nodes)
-         node.writeLLVM(printr);
+         node.writeLLVM(printr, opts);
       
       
       if (this.returnValue.type instanceof LLVMVoidType)

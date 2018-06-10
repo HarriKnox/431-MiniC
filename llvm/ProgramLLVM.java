@@ -48,7 +48,7 @@ public class ProgramLLVM
       
       this.llvmStructs.writeLLVM(printr);
       this.llvmGlobals.writeLLVM(printr);
-      this.llvmFunctions.writeLLVM(printr);
+      this.llvmFunctions.writeLLVM(printr, opts);
       
       
       printr.println("declare i8* @malloc(i32)")

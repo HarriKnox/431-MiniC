@@ -25,6 +25,7 @@ import llvm.value.variable.LLVMLocal;
 import arm.ARMCFGNode;
 
 import common.Printer;
+import common.Options;
 
 
 public class LLVMCFGNode
@@ -423,10 +424,49 @@ public class LLVMCFGNode
    }
    
    
-   public void writeLLVM(Printer printr)
+   public void writeLLVM(Printer printr, Options opts)
    {
       if (this.uid != -1)
          printr.print(this.llvmString()).println(':');
+      
+      if (!opts.stack)
+      {
+         for (LLVMPhi phi : this.phis)
+         {
+            printr.print("   ")
+                  .print(phi.llvmString())
+                  .print(" = phi ")
+                  .print(phi.type.llvmString());
+            
+            
+            Iterator<LLVMCFGNode> prederator = this.predecessors.iterator();
+            
+            if (prederator.hasNext())
+            {
+               LLVMCFGNode pred = prederator.next();
+               
+               printr.print('[')
+                     .print(phi.getSource(pred).llvmString())
+                     .print(", %")
+                     .print(pred.llvmString())
+                     .print(']');
+            }
+            
+            
+            while (prederator.hasNext())
+            {
+               LLVMCFGNode pred = prederator.next();
+               
+               printr.print(", [")
+                     .print(phi.getSource(pred).llvmString())
+                     .print(", %")
+                     .print(pred.llvmString())
+                     .print(']');
+            }
+            
+            printr.println();
+         }
+      }
       
       
       for (LLVMInstruction instruction : this.instructions)
