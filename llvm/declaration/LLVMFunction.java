@@ -85,20 +85,45 @@ public class LLVMFunction
       
       
       if (this.returnValue.type instanceof LLVMVoidType)
+      {
          printr.println("   ret void");
+      }
       
       else
+      {
          printr.print("   ")
                .print(this.retvalRegister())
-               .print(" = load ")
-               .print(this.type.llvmString())
-               .print("* ")
-               .println(this.returnValue.llvmString())
+               .print(" = ");
          
-               .print("   ret ")
+         
+         if (opts.stack)
+         {
+            printr.print("load ")
+                  .print(this.type.llvmString())
+                  .print("* ")
+                  .println(this.returnValue.llvmString())
+         }
+         
+         else
+         {
+            printr.print("phi ")
+                  .print(this.type.llvmString());
+            
+            
+            /* Print phi list for exit node */
+            this.nodes.get(this.nodes.size() - 1)
+                  .printPhiList(printr, new LLVMPhi(this.returnValue));
+            
+            
+            printr.println();
+         }
+         
+         
+         printr.print("   ret ")
                .print(this.type.llvmString())
                .print(' ')
                .println(this.retvalRegister());
+      }
       
       
       printr.println('}');
