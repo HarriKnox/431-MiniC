@@ -279,6 +279,11 @@ public class LLVMCFGNode
                /* Bind the phi values to their sources from the parent */
                for (LLVMPhi phi : node.phis)
                   phi.bind(pred.readVariable(phi.variable));
+               /* TODO: add node.phis to pred.phis */
+               
+               
+               /* Add updates to SSA Local->Register Map */
+               pred.currentDefs.putAll(node.currentDefs);
                
                
                /* Update successor(s)'s predecessor list */
