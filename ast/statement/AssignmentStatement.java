@@ -22,6 +22,7 @@ import llvm.value.operand.LLVMOperand;
 
 import llvm.value.operand.constant.LLVMNull;
 
+import llvm.value.variable.LLVMLocal;
 import llvm.value.variable.LLVMVariable;
 
 
@@ -74,8 +75,19 @@ public class AssignmentStatement extends Statement
          llvmSource = new LLVMNull(llvmTarget.type);
       
       
-      LLVMStore store = new LLVMStore(llvmTarget, llvmSource);
+      if ((llvmTarget instanceof LLVMLocal) && !opts.stack)
+      {
+         node.writeVariable((LLVMLocal)llvmTarget, llvmSource);
+      }
       
-      return node.add(store);
+      else
+      {
+         LLVMStore store = new LLVMStore(llvmTarget, llvmSource);
+         
+         node.add(store);
+      }
+      
+      
+      return node;
    }
 }
