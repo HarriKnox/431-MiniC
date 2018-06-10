@@ -447,7 +447,8 @@ public class LLVMCFGNode
             printr.print("   ")
                   .print(phi.llvmString())
                   .print(" = phi ")
-                  .print(phi.type.llvmString());
+                  .print(phi.type.llvmString())
+                  .print(' ');
             
             
             this.printPhiList(printr, phi);
@@ -476,7 +477,7 @@ public class LLVMCFGNode
          LLVMCFGNode pred = prederator.next();
          
          printr.print('[')
-               .print(phi.getSource(pred).llvmString())
+               .print(pred.readVariable(phi.variable).llvmString())
                .print(", %")
                .print(pred.llvmString())
                .print(']');
@@ -488,7 +489,7 @@ public class LLVMCFGNode
          LLVMCFGNode pred = prederator.next();
          
          printr.print(", [")
-               .print(phi.getSource(pred).llvmString())
+               .print(pred.readVariable(phi.variable).llvmString())
                .print(", %")
                .print(pred.llvmString())
                .print(']');

@@ -108,7 +108,8 @@ public class LLVMFunction
          else
          {
             printr.print("phi ")
-                  .print(this.type.llvmString());
+                  .print(this.type.llvmString())
+                  .print(' ');
             
             
             /* Print phi list for exit node */
