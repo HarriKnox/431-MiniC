@@ -12,7 +12,7 @@ import arm.value.operand.ARMRegister;
 
 public abstract class LLVMRegister extends LLVMOperand
 {
-   private LLVMRegister binding = null;
+   private LLVMOperand binding = null;
    
    
    public LLVMRegister(LLVMType type)
@@ -21,7 +21,7 @@ public abstract class LLVMRegister extends LLVMOperand
    }
    
    
-   public void bind(LLVMRegister binding)
+   public void bind(LLVMOperand binding)
    {
       this.binding = binding;
    }
