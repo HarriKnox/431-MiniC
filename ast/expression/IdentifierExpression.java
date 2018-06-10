@@ -52,6 +52,10 @@ public class IdentifierExpression extends Expression
       }
       
       
+      if ((source instanceof LLVMLocal) && !opts.stack)
+         return node.readVariable((LLVMLocal)source);
+      
+      
       LLVMLoad load = new LLVMLoad(source);
       
       node.add(load);
