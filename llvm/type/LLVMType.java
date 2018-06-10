@@ -2,6 +2,7 @@ package llvm.type;
 
 
 import llvm.value.operand.constant.LLVMConstant;
+import llvm.value.operand.constant.LLVMNull;
 
 
 public abstract class LLVMType
@@ -15,6 +16,6 @@ public abstract class LLVMType
    
    public LLVMConstant defaultValue()
    {
-      return null;
+      return new LLVMNull();
    }
 }
