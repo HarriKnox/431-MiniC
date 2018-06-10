@@ -3,7 +3,7 @@ package llvm.value.variable;
 
 import llvm.type.LLVMType;
 
-import llvm.value.operand.register.LLVMVirtual;
+import llvm.value.operand.register.LLVMRegister;
 
 import arm.ARMCFGNode;
 
@@ -12,7 +12,7 @@ import arm.value.operand.ARMAddress;
 
 public class LLVMField extends LLVMVariable
 {
-   public final LLVMVirtual base;
+   public final LLVMRegister base;
    public final int index;
    
    
@@ -21,7 +21,7 @@ public class LLVMField extends LLVMVariable
    private static int count = 0;
    
    
-   public LLVMField(LLVMType type, LLVMVirtual base, int index)
+   public LLVMField(LLVMType type, LLVMRegister base, int index)
    {
       super(type);
       
