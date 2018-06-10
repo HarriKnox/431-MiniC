@@ -40,8 +40,7 @@ public class Function extends TokenedElement
    
    public final List<Type> parameterTypes;
    
-
-
+   
    public Function(Token token, String name, Type type,
          Variables params, Variables locals, Statement body)
    {

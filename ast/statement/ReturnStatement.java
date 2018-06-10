@@ -62,11 +62,19 @@ public class ReturnStatement extends Statement
                value = new LLVMNull(current.type.llvmType());
             
             
-            LLVMStore store = new LLVMStore(
-                  current.returnValue.llvmLocal(),
-                  value);
+            if (!opts.stack)
+            {
+               node.writeVariable(current.returnValue.llvmLocal(), value);
+            }
             
-            node.add(store);
+            else
+            {
+               LLVMStore store = new LLVMStore(
+                     current.returnValue.llvmLocal(),
+                     value);
+               
+               node.add(store);
+            }
          }
       }
       
