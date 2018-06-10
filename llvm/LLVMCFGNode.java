@@ -262,15 +262,26 @@ public class LLVMCFGNode
          visited.add(node);
          
          
+         /* If there is exactly one total predecessor that is not a loopback */
          if (node.predecessors.size() == 1 && node.loopback == null)
          {
             LLVMCFGNode pred = node.predecessors.get(0);
             
+            
+            /* If the predecessor's link is a jump */
             if (pred.link instanceof LLVMJump)
             {
+               /* Move instructions up and replace the link */
                pred.instructions.addAll(node.instructions);
                pred.link = node.link;
                
+               
+               /* Bind the phi values to their sources from the parent */
+               for (LLVMPhi phi : node.phis)
+                  phi.bind(pred.readVariable(phi.variable));
+               
+               
+               /* Update successor(s)'s predecessor list */
                if (node.link instanceof LLVMJump)
                {
                   ((LLVMJump)node.link).target.replacePredecessor(node, pred);
