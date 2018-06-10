@@ -40,6 +40,9 @@ public class WhileStatement extends Statement
    {
       LLVMCFGNode guardNode = new LLVMCFGNode(false);
       
+      guardNode.sealed = false;
+      
+      
       node.jump(guardNode);
       
       LLVMOperand llvmGuard = this.guard.buildLLVM(
@@ -62,6 +65,8 @@ public class WhileStatement extends Statement
       
       
       bodyLast.loopback(guardNode);
+      
+      guardNode.sealed = true;
       
       
       return elseNode;
