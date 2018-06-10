@@ -91,26 +91,53 @@ public class LLVMCFGNode
    
    public void recursivisit(List<LLVMCFGNode> nodes, Options opts)
    {
+      /* Return if we already visited this node */
       if (nodes.contains(this))
          return;
       
       
+      /* Visit predecessors first */
       for (LLVMCFGNode parent : this.predecessors)
          parent.recursivisit(nodes, opts);
       
       
-      if (!nodes.contains(this))
-      {
-         if (!nodes.isEmpty() || this.loopback != null
-               || (!opts.stack && (this.link instanceof LLVMBranch)))
-            this.setUID();
-         
-         nodes.add(this);
-      }
+      /* Visit this node */
+      this.visit(nodes, opts);
       
       
+      /* Visit the loopback after visiting this node */
       if (this.loopback != null)
          this.loopback.recursivisit(nodes, opts);
+   }
+   
+   
+   private void visit(List<LLVMCFGNode> nodes, Options opts)
+   {
+      /* Don't revisit if we already visited this node in a loop */
+      if (nodes.contains(this))
+         return;
+      
+      
+      /*
+       * Don't set the node's ID if
+       *  - the node is the first node, and
+       *  - the node has no predecessors (including loopback), and
+       *  - either:
+       *     - we're using stack-based variable storage
+       *     - the node has zero or one successor
+       *
+       * If any of those fail, set the ID. Setting the ID is used for printing
+       * the label to the node in LLVM.
+       */
+      if (!nodes.isEmpty() || this.loopback != null
+            || (!opts.stack && (this.link instanceof LLVMBranch)))
+         this.setUID();
+      
+      
+      
+      
+      
+      nodes.add(this);
    }
    
    
