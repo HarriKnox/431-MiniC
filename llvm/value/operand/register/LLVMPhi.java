@@ -22,6 +22,9 @@ public class LLVMPhi extends LLVMRegister
    public final LLVMLocal variable;
    
    
+   private String name = null;
+   
+   
    private int uid = -1;
    
    private static int count = 0;
@@ -35,10 +38,20 @@ public class LLVMPhi extends LLVMRegister
    }
    
    
+   public LLVMPhi(LLVMLocal variable, String name)
+   {
+      this(variable);
+      
+      this.name = name;
+   }
+   
+   
    @Override
    public String regLLVMString()
    {
-      return "%p" + Integer.toString(this.getUID());
+      return '%' + ((this.name == null)
+            ? ('p' + Integer.toString(this.getUID()))
+            : this.name);
    }
    
    
