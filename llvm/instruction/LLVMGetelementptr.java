@@ -5,7 +5,7 @@ import llvm.value.LLVMValue;
 
 import llvm.type.LLVMType;
 
-import llvm.value.operand.register.LLVMVirtual;
+import llvm.value.operand.register.LLVMRegister;
 
 import llvm.value.variable.LLVMField;
 
@@ -19,11 +19,11 @@ import arm.value.operand.ARMConstant;
 public class LLVMGetelementptr extends LLVMInstruction
 {
    public final LLVMField target;
-   public final LLVMVirtual source;
+   public final LLVMRegister source;
    public final int index;
    
    
-   public LLVMGetelementptr(LLVMVirtual source, LLVMType resultType, int index)
+   public LLVMGetelementptr(LLVMRegister source, LLVMType resultType, int index)
    {
       this.target = new LLVMField(resultType, source, index);
       this.source = source;
