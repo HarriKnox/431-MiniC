@@ -369,7 +369,7 @@ public class LLVMCFGNode
          val = createPhi(variable);
       
       else if (predCount == 0)
-         val = null;
+         val = variable.type.defaultValue();
       
       else /* if (predCount == 1) */
          val = this.predecessors.get(0).readVariable(variable);
