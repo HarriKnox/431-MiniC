@@ -143,7 +143,7 @@ public class Function extends TokenedElement
          exit = LLVMCFGNode.cleanCFG(exit);
       
       
-      return recursivisit(exit);
+      return recursivisit(exit, opts);
    }
    
    
@@ -169,11 +169,11 @@ public class Function extends TokenedElement
    }
    
    
-   private List<LLVMCFGNode> recursivisit(LLVMCFGNode exit)
+   private List<LLVMCFGNode> recursivisit(LLVMCFGNode exit, Options opts)
    {
       List<LLVMCFGNode> nodes = new LinkedList<>();
       
-      exit.recursivisit(nodes);
+      exit.recursivisit(nodes, opts);
       
       
       return nodes;

@@ -89,19 +89,20 @@ public class LLVMCFGNode
    }
    
    
-   public void recursivisit(List<LLVMCFGNode> nodes)
+   public void recursivisit(List<LLVMCFGNode> nodes, Options opts)
    {
       if (nodes.contains(this))
          return;
       
       
       for (LLVMCFGNode parent : this.predecessors)
-         parent.recursivisit(nodes);
+         parent.recursivisit(nodes, opts);
       
       
       if (!nodes.contains(this))
       {
-         if (!nodes.isEmpty() || this.loopback != null)
+         if (!nodes.isEmpty() || this.loopback != null
+               || (!opts.stack && (this.link instanceof LLVMBranch)))
             this.setUID();
          
          nodes.add(this);
@@ -109,7 +110,7 @@ public class LLVMCFGNode
       
       
       if (this.loopback != null)
-         this.loopback.recursivisit(nodes);
+         this.loopback.recursivisit(nodes, opts);
    }
    
    
