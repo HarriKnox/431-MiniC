@@ -35,6 +35,7 @@ public class LLVMCFGNode
    public LLVMLink link = null;
    public final boolean unreachable;
    
+   
    /* For SSA */
    private final Map<LLVMLocal, LLVMOperand> currentDefs = new HashMap<>();
    private boolean sealed = true; /* Most nodes will be sealed */
@@ -366,23 +367,13 @@ public class LLVMCFGNode
       
       
       if (!this.sealed || (predCount >= 2))
-      {
          val = createPhi(variable);
-      }
       
       else if (predCount == 0)
-      {
-         val = null;
-         ErrorPrinter.undefined(
-               this.token,
-               variable.type.astString(),
-               variable.identifier);
-      }
+         val = variable.type.defaultValue();
       
       else /* if (predCount == 1) */
-      {
          val = this.predecessors.get(0).readVariable(variable);
-      }
       
       
       this.writeVariable(variable, val);
@@ -398,26 +389,17 @@ public class LLVMCFGNode
       
       
       if (this.sealed)
-         return this.addPhiOperands(phi);
+         this.addPhiOperands(phi);
       
       
       return phi;
    }
    
    
-   private LLVMPhi addPhiOperands(LLVMPhi phi)
+   private void addPhiOperands(LLVMPhi phi)
    {
       for (LLVMCFGNode pred : this.predecessors)
-      {
-         LLVMOperand var = pred.readVariable(phi.variable);
-         
-         if (var == null)
-            return null;
-         
-         phi.addSource(pred, var);
-      }
-      
-      return phi;
+         phi.addSource(pred, pred.readVariable(phi.variable));
    }
    
    
