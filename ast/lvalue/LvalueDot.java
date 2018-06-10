@@ -19,6 +19,12 @@ import llvm.instruction.targeted.LLVMLoad;
 
 import llvm.type.LLVMStructType;
 
+import llvm.value.operand.LLVMOperand;
+
+import llvm.value.operand.register.LLVMRegister;
+import llvm.value.operand.register.LLVMVirtual;
+
+import llvm.value.variable.LLVMLocal;
 import llvm.value.variable.LLVMVariable;
 
 
@@ -73,14 +79,46 @@ public class LvalueDot extends Lvalue
       }
       
       
-      LLVMLoad load = new LLVMLoad(leftValue);
+      LLVMRegister source;
+      
+      if ((leftValue instanceof LLVMLocal) && !opts.stack)
+      {
+         /* `left` was an LvalueId, so it will return a memory/stack address */
+         LLVMOperand val = node.readVariable((LLVMLocal)leftValue);
+         
+         
+         /*
+          * The variable was most either recently defined to be null, or hasn't
+          * been initialized yet and is implicitely null, or something else
+          * really weird happened. Any way, it is likely to segfault.
+          */
+         if (!(val instanceof LLVMRegister))
+         {
+            ErrorPrinter.likelySegfault(this.token,
+                  ((LLVMLocal)leftValue).identifier);
+            
+            return null;
+         }
+         
+         source = (LLVMRegister)val;
+      }
+      
+      else
+      {
+         LLVMLoad load = new LLVMLoad(leftValue);
+         
+         source = load.target;
+         
+         node.add(load);
+      }
+      
       
       LLVMGetelementptr getelementptr = new LLVMGetelementptr(
-            load.target,
+            source,
             field.type.llvmType(),
             field.index);
       
-      node.add(load).add(getelementptr);
+      node.add(getelementptr);
       
       
       return getelementptr.target;
