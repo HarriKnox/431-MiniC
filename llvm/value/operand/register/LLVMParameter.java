@@ -45,14 +45,14 @@ public class LLVMParameter extends LLVMRegister
    
    
    @Override
-   public String llvmString()
+   public String regLLVMString()
    {
       return '%' + this.function + ".param." + this.id;
    }
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public ARMRegister regBuildARM(ARMCFGNode node)
    {
       if (this.index <= 3)
          return ARMRegister.getReal(this.index);

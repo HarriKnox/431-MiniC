@@ -24,14 +24,14 @@ public class LLVMVirtual extends LLVMRegister
    
    
    @Override
-   public String llvmString()
+   public String regLLVMString()
    {
       return "%v" + Integer.toString(this.getUID());
    }
    
    
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public ARMRegister regBuildARM(ARMCFGNode node)
    {
       if (this.armReg == null)
          this.armReg = new ARMRegister();

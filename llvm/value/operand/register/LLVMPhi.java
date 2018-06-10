@@ -36,7 +36,7 @@ public class LLVMPhi extends LLVMRegister
    
    
    @Override
-   public String llvmString()
+   public String regLLVMString()
    {
       return "%p" + Integer.toString(this.getUID());
    }
@@ -57,8 +57,14 @@ public class LLVMPhi extends LLVMRegister
    }
    
    
+   public LLVMOperand getSource(LLVMCFGNode node)
+   {
+      return this.sources.get(node);
+   }
+   
+   
    @Override
-   public ARMRegister buildARM(ARMCFGNode node)
+   public ARMRegister regBuildARM(ARMCFGNode node)
    {
       return null;
    }
