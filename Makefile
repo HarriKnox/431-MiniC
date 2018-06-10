@@ -19,7 +19,7 @@ all : ../out ../out/Main.class
 
 
 ../out/Main.class : $(JAVA_FILES)
-	$(JAVAC) -cp $(CLASSPATH) -d ../out Main.java -Xlint:unchecked
+	$(JAVAC) -cp $(CLASSPATH) -d ../out Main.java -Xlint:unchecked -Xdiags:verbose
 
 
 antlr :
