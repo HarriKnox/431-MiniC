@@ -35,10 +35,10 @@ public class ErrorPrinter
    }
    
    
-   public static void undefined(Token token, String type, String thing)
+   public static void likelySegfault(Token token, String thing)
    {
-      printLine(token, type + ' ' + thing
-            + " may not have been defined on all paths");
+      printLine(token, thing
+            + " might be null and is likely to cause a segfault");
    }
    
    
