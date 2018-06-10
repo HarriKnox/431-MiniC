@@ -387,11 +387,6 @@ public class LLVMCFGNode
       
       this.phis.add(phi);
       
-      
-      if (this.sealed)
-         this.addPhiOperands(phi);
-      
-      
       return phi;
    }
    
@@ -400,15 +395,6 @@ public class LLVMCFGNode
    {
       for (LLVMCFGNode pred : this.predecessors)
          phi.addSource(pred, pred.readVariable(phi.variable));
-   }
-   
-   
-   public void sealNode()
-   {
-      this.sealed = true;
-      
-      for (LLVMPhi phi : this.phis)
-         this.addPhiOperands(phi);
    }
    
    
