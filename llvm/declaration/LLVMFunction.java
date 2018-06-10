@@ -16,6 +16,7 @@ import llvm.type.LLVMType;
 import llvm.type.LLVMVoidType;
 
 import llvm.value.operand.register.LLVMParameter;
+import llvm.value.operand.register.LLVMPhi;
 
 import llvm.value.variable.LLVMLocal;
 
@@ -101,7 +102,7 @@ public class LLVMFunction
             printr.print("load ")
                   .print(this.type.llvmString())
                   .print("* ")
-                  .println(this.returnValue.llvmString())
+                  .println(this.returnValue.llvmString());
          }
          
          else
