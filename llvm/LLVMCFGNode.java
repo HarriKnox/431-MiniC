@@ -39,7 +39,7 @@ public class LLVMCFGNode
    
    /* For SSA */
    private final Map<LLVMLocal, LLVMOperand> currentDefs = new HashMap<>();
-   private boolean sealed = true; /* Most nodes will be sealed */
+   public boolean sealed = true; /* Most nodes will be sealed */
    private final List<LLVMPhi> phis = new LinkedList<>();
    
    
