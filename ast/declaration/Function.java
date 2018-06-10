@@ -132,6 +132,11 @@ public class Function extends TokenedElement
       LLVMCFGNode entry = new LLVMCFGNode(false);
       LLVMCFGNode exit = new LLVMCFGNode(false);
       
+      
+      for (Variable param : this.parameters.variables)
+         entry.writeVariable(param.llvmLocal(), param.llvmParameter());
+      
+      
       buildCFG(program, opts, entry, exit);
       
       
