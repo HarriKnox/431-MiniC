@@ -1,6 +1,9 @@
 package llvm.type;
 
 
+import llvm.value.operand.constant.LLVMConstant;
+
+
 public abstract class LLVMType
 {
    public abstract boolean equivalent(LLVMType type);
@@ -10,8 +13,8 @@ public abstract class LLVMType
    public abstract String llvmString();
    
    
-   public String defaultValue()
+   public LLVMConstant defaultValue()
    {
-      return "";
+      return null;
    }
 }

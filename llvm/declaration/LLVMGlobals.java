@@ -40,7 +40,7 @@ public class LLVMGlobals
             .append(" = common global ")
             .append(global.type.llvmString())
             .append(' ')
-            .append(global.type.defaultValue())
+            .append(global.type.defaultValue().llvmString())
             .append(", align 4")
             .toString();
    }

@@ -1,6 +1,10 @@
 package llvm.type;
 
 
+import llvm.value.operand.constant.LLVMBool;
+import llvm.value.operand.constant.LLVMConstant;
+
+
 public class LLVMBoolType extends LLVMType
 {
    @Override
@@ -25,8 +29,8 @@ public class LLVMBoolType extends LLVMType
    
    
    @Override
-   public String defaultValue()
+   public LLVMConstant defaultValue()
    {
-      return "false";
+      return new LLVMBool(false);
    }
 }

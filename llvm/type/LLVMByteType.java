@@ -1,6 +1,10 @@
 package llvm.type;
 
 
+import llvm.value.operand.constant.LLVMConstant;
+import llvm.value.operand.constant.LLVMInt;
+
+
 public class LLVMByteType extends LLVMType
 {
    @Override
@@ -25,8 +29,8 @@ public class LLVMByteType extends LLVMType
    
    
    @Override
-   public String defaultValue()
+   public LLVMConstant defaultValue()
    {
-      return "0";
+      return new LLVMInt(0);
    }
 }

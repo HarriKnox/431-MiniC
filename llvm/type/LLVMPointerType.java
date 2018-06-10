@@ -1,6 +1,9 @@
 package llvm.type;
 
 
+import llvm.value.operand.constant.LLVMConstant;
+
+
 public class LLVMPointerType extends LLVMType
 {
    public final LLVMType type;
@@ -35,7 +38,7 @@ public class LLVMPointerType extends LLVMType
    
    
    @Override
-   public String defaultValue()
+   public LLVMConstant defaultValue()
    {
       return this.type.defaultValue();
    }

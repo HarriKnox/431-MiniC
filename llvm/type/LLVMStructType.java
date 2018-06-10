@@ -1,6 +1,10 @@
 package llvm.type;
 
 
+import llvm.value.operand.constant.LLVMConstant;
+import llvm.value.operand.constant.LLVMNull;
+
+
 public class LLVMStructType extends LLVMType
 {
    public final String name;
@@ -36,8 +40,8 @@ public class LLVMStructType extends LLVMType
    
    
    @Override
-   public String defaultValue()
+   public LLVMConstant defaultValue()
    {
-      return "null";
+      return new LLVMNull(this);
    }
 }
