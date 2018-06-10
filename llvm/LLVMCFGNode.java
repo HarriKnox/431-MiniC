@@ -449,19 +449,7 @@ public class LLVMCFGNode
       if (!opts.stack)
       {
          for (LLVMPhi phi : this.phis)
-         {
-            printr.print("   ")
-                  .print(phi.llvmString())
-                  .print(" = phi ")
-                  .print(phi.type.llvmString())
-                  .print(' ');
-            
-            
-            this.printPhiList(printr, phi);
-            
-            
-            printr.println();
-         }
+            phi.writeLLVM(printr, opts);
       }
       
       
@@ -471,35 +459,6 @@ public class LLVMCFGNode
       
       if (this.link != null)
          this.link.writeLLVM(printr);
-   }
-   
-   
-   public void printPhiList(Printer printr, LLVMPhi phi)
-   {
-      Iterator<LLVMCFGNode> prederator = this.predecessors.iterator();
-      
-      if (prederator.hasNext())
-      {
-         LLVMCFGNode pred = prederator.next();
-         
-         printr.print('[')
-               .print(pred.readVariable(phi.variable).llvmString())
-               .print(", %")
-               .print(pred.llvmString())
-               .print(']');
-      }
-      
-      
-      while (prederator.hasNext())
-      {
-         LLVMCFGNode pred = prederator.next();
-         
-         printr.print(", [")
-               .print(pred.readVariable(phi.variable).llvmString())
-               .print(", %")
-               .print(pred.llvmString())
-               .print(']');
-      }
    }
    
    

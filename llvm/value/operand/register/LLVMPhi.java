@@ -2,6 +2,7 @@ package llvm.value.operand.register;
 
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import llvm.LLVMCFGNode;
@@ -13,6 +14,9 @@ import llvm.value.operand.LLVMOperand;
 import arm.ARMCFGNode;
 
 import arm.value.operand.ARMRegister;
+
+import common.Printer;
+import common.Options;
 
 
 public class LLVMPhi extends LLVMRegister
@@ -61,6 +65,46 @@ public class LLVMPhi extends LLVMRegister
          this.uid = count++;
       
       return this.uid;
+   }
+   
+   
+   public void writeLLVM(Printer printr, Options opts)
+   {
+      printr.print("   ")
+            .print(this.regLLVMString())
+            .print(" = phi ")
+            .print(this.type.llvmString())
+            .print(' ');
+      
+      
+      Iterator<Map.Entry<LLVMCFGNode, LLVMOperand>> sourcerator
+            = this.sources.entrySet().iterator();
+      
+      
+      if (sourcerator.hasNext())
+         printSource(printr, sourcerator.next());
+      
+      
+      while (sourcerator.hasNext())
+      {
+         printr.print(", ");
+         
+         printSource(printr, sourcerator.next());
+      }
+      
+      
+      printr.println();
+   }
+   
+   
+   private static void printSource(Printer printr,
+         Map.Entry<LLVMCFGNode, LLVMOperand> source)
+   {
+      printr.print('[')
+            .print(source.getValue().llvmString())
+            .print(", %")
+            .print(source.getKey().llvmString())
+            .print(']');
    }
    
    
