@@ -134,11 +134,12 @@ public class LLVMCFGNode
        * that this node is the first node, so there won't be any other
        * predecessors aside from a loopback predecessor.
        */
-      if (!(nodes.isEmpty() && (this.loopback == null)
+      /*if (!(nodes.isEmpty() && (this.loopback == null)
             && (opts.stack
                   || (this.link == null)
                   || ((this.link instanceof LLVMJump)
-                        && ((LLVMJump)this.link).target.loopback != null))))
+                        && ((LLVMJump)this.link).target.loopback != null))))*/
+      if (!nodes.isEmpty() || (this.loopback != null) || !opts.stack)
          this.setUID();
       
       
