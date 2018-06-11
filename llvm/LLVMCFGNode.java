@@ -29,6 +29,10 @@ import common.Printer;
 import common.Options;
 
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+
+
 public class LLVMCFGNode
 {
    public final List<LLVMInstruction> instructions = new LinkedList<>();
@@ -529,6 +533,20 @@ public class LLVMCFGNode
       
       
       return armNode;
+   }
+   
+   
+   private List<LLVMCFGNode> getSuccessors()
+   {
+      if (this.link == null)
+         return new LinkedList<>();
+      
+      if (this.link instanceof LLVMJump)
+         return singletonList(((LLVMJump)this.link).target);
+      
+      return asList(new LLVMCFGNode[]{
+            ((LLVMBranch)this.link).thenNode,
+            ((LLVMBranch)this.link).elseNode});
    }
    
    
