@@ -518,7 +518,7 @@ public class LLVMCFGNode
    }
    
    
-   public ARMCFGNode buildARM()
+   public ARMCFGNode buildARM(Options opts)
    {
       for (LLVMInstruction instruction : this.instructions)
          instruction.buildARM(armNode);

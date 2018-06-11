@@ -32,12 +32,12 @@ public class LLVMFunctions
    }
    
    
-   public ARMFunctions buildARM()
+   public ARMFunctions buildARM(Options opts)
    {
       List<ARMFunction> armFunctions = new LinkedList<>();
       
       for (LLVMFunction function : this.functions)
-         armFunctions.add(function.buildARM());
+         armFunctions.add(function.buildARM(opts));
       
       
       return new ARMFunctions(armFunctions);

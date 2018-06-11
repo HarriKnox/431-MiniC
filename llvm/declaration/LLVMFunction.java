@@ -152,7 +152,7 @@ public class LLVMFunction
    }
    
    
-   public ARMFunction buildARM()
+   public ARMFunction buildARM(Options opts)
    {
       List<ARMCFGNode> armNodes = new ArrayList<>(this.nodes.size());
       
@@ -164,7 +164,7 @@ public class LLVMFunction
       
       /* Second pass to put instructions (and links) into nodes */
       for (LLVMCFGNode node : this.nodes)
-         armNodes.add(node.buildARM());
+         armNodes.add(node.buildARM(opts));
       
       
       ARMFunction armFunction = new ARMFunction(this.name, armNodes,
