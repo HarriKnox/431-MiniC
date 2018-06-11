@@ -25,6 +25,8 @@ import llvm.value.variable.LLVMLocal;
 
 import arm.ARMCFGNode;
 
+import arm.instruction.mov.ARMMov;
+
 import common.Printer;
 import common.Options;
 
@@ -524,10 +526,36 @@ public class LLVMCFGNode
    
    public ARMCFGNode buildARM(Options opts)
    {
+      /* Write all phis from across-boundary temps to virtual registers */
+      for (LLVMPhi phi : this.phis)
+         this.armNode.instructions.add(
+               new ARMMov(
+                     phi.buildARM(this.armNode),
+                     phi.getTempARM()));
+      
+      
+      /* Write instructions */
       for (LLVMInstruction instruction : this.instructions)
-         instruction.buildARM(armNode);
+         instruction.buildARM(this.armNode);
       
       
+      /* Put values for phis into temp registers */
+      Set<LLVMPhi> phisPhorSuccessors = new LinkedHashSet<>();
+      
+      for (LLVMCFGNode successor : this.getSuccessors())
+         for (LLVMPhi sPhis : successor.phis)
+            phisPhorSuccessors.add(sPhis);
+      
+      for (LLVMPhi phi : phisPhorSuccessors)
+      {
+         this.armNode.instructions.add(
+               new ARMMov(
+                     phi.getTempARM(),
+                     this.readVariable(phi.variable).buildARM(this.armNode)));
+      }
+      
+      
+      /* Get the link */
       if (this.link != null)
          this.link.buildARM(this.armNode);
       
