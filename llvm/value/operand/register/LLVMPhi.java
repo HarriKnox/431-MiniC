@@ -30,6 +30,9 @@ public class LLVMPhi extends LLVMRegister
    
    private String name = null;
    
+   private ARMRegister armReg = null;
+   private ARMRegister armRegTemp = null;
+   
    
    private int uid = -1;
    
@@ -152,6 +155,18 @@ public class LLVMPhi extends LLVMRegister
    @Override
    public ARMRegister regBuildARM(ARMCFGNode node)
    {
-      return null;
+      if (this.armReg == null)
+         this.armReg = new ARMRegister();
+      
+      return this.armReg;
+   }
+   
+   
+   public ARMRegister getTempARM()
+   {
+      if (this.armRegTemp == null)
+         this.armRegTemp = new ARMRegister();
+      
+      return this.armRegTemp;
    }
 }
