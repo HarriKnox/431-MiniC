@@ -88,22 +88,25 @@ public class ARMFunction
       printExtraPush(printr, this.highestRegisterUsed);
       
       
-      /* Move parameters to stack-pointer-relative addresses */
-      for (int i = 0; i < paramCount && i < 4; i++)
-         printr.print("   str r")
-               .print(i)
-               .print(", [fp, #-")
-               .print((i * 4) + 8)
-               .println(']');
-      
-      for (int i = 4; i < paramCount; i++)
-         printr.print("   ldr r0, [fp, #")
-               .print((i - 3) * 4)
-               .println(']')
+      if (opts.stack)
+      {
+         /* Move parameters to stack-pointer-relative addresses */
+         for (int i = 0; i < paramCount && i < 4; i++)
+            printr.print("   str r")
+                  .print(i)
+                  .print(", [fp, #-")
+                  .print((i * 4) + 8)
+                  .println(']');
          
-               .print("   str r0, [fp, #-")
-               .print((i * 4) + 8)
-               .println(']');
+         for (int i = 4; i < paramCount; i++)
+            printr.print("   ldr r0, [fp, #")
+                  .print((i - 3) * 4)
+                  .println(']')
+            
+                  .print("   str r0, [fp, #-")
+                  .print((i * 4) + 8)
+                  .println(']');
+      }
       
       
       /* Write all node instructions */
@@ -114,7 +117,7 @@ public class ARMFunction
       
       
       /* Load return value into r0 */
-      if (this.returnValue != null)
+      if (this.returnValue != null && opts.stack)
          printr.print("   ldr r0, [")
                .print(this.returnValue.armString())
                .println(']');
@@ -124,7 +127,7 @@ public class ARMFunction
       
       
       /* Pop off all of stack at once */
-      if (this.localCount > 0)
+      if (stackSize > 0)
          printr.print("   add sp, #").println(stackSize);
       
       
