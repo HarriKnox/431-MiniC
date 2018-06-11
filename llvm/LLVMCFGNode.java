@@ -146,6 +146,13 @@ public class LLVMCFGNode
          this.addPhiOperands(phi);
       
       
+      Iterator<LLVMPhi> phiterator = this.phis.iterator();
+      
+      while (phiterator.hasNext())
+         if (phiterator.next().handleTrivial())
+            phiterator.remove();
+      
+      
       nodes.add(this);
    }
    

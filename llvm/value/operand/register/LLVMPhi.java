@@ -2,8 +2,10 @@ package llvm.value.operand.register;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import llvm.LLVMCFGNode;
 
@@ -117,6 +119,33 @@ public class LLVMPhi extends LLVMRegister
    public LLVMOperand getSource(LLVMCFGNode node)
    {
       return this.sources.get(node);
+   }
+   
+   
+   public boolean handleTrivial()
+   {
+      Set<LLVMOperand> values = new HashSet<>();
+      
+      
+      /* Get a set of all unique source values for this phi */
+      for (LLVMOperand sourceValue : this.sources.values())
+         values.add(sourceValue);
+      
+      
+      /* If this is in the list (loop), remove it */
+      if (values.contains(this))
+         values.remove(this);
+      
+      
+      /* If there's one source value left, this is trivial and is that value */
+      if (values.size() == 1)
+      {
+         this.bind(values.toArray(new LLVMOperand[0])[0]);
+         return true;
+      }
+      
+      
+      return false;
    }
    
    
