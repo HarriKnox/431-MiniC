@@ -243,12 +243,13 @@ public class LLVMCFGNode
             {
                LLVMCFGNode target = ((LLVMJump)node.link).target;
                
-               visited.add(target);
-               
                
                if (node.instructions.isEmpty()
-                     && (node.predecessors.size() == 1))
+                     && (node.predecessors.size() == 1)
+                     && !visited.contains(target))
                   node.predecessors.get(0).replaceLink(node, target);
+               
+               visited.add(target);
             }
             
             continue;
