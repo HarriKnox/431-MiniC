@@ -142,7 +142,8 @@ public class LLVMCFGNode
          this.setUID();
       
       
-      
+      for (LLVMPhi phi : this.phis)
+         this.addPhiOperands(phi);
       
       
       nodes.add(this);
@@ -446,8 +447,13 @@ public class LLVMCFGNode
    
    private void addPhiOperands(LLVMPhi phi)
    {
+      LLVMLocal variable = phi.variable;
+      
       for (LLVMCFGNode pred : this.predecessors)
-         phi.addSource(pred, pred.readVariable(phi.variable));
+         phi.addSource(pred, pred.readVariable(variable));
+      
+      if (this.loopback != null)
+         phi.addSource(this.loopback, this.loopback.readVariable(variable));
    }
    
    
