@@ -23,11 +23,17 @@ import arm.ARMCFGNode;
 
 import arm.declaration.ARMFunction;
 
+import arm.instruction.ARMInstruction;
+
 import arm.instruction.binary.ARMSub;
 
+import arm.instruction.mov.ARMMov;
+
 import arm.value.operand.ARMConstant;
+import arm.value.operand.ARMRegister;
 
 
+import static arm.value.operand.ARMRegister.R0;
 import static arm.value.operand.ARMRegister.FP;
 import static arm.value.operand.ARMRegister.SP;
 
@@ -162,9 +168,53 @@ public class LLVMFunction
          node.setupARMNode();
       
       
+      /* Put parameter saving instructions in a new first node */
+      int paramLen = this.parameters.size();
+      
+      if (!opts.stack && (paramLen > 0))
+      {
+         ARMCFGNode allocaNode = new ARMCFGNode();
+         
+         List<ARMInstruction> instructions = allocaNode.instructions;
+         
+         
+         /* Move r0-r3 into virtual registers for flexibility */
+         for (int i = 0; i < 4 && i < paramLen; i++)
+         {
+            LLVMParameter param = this.parameters.get(i);
+            ARMRegister temp = new ARMRegister();
+            
+            instructions.add(new ARMMov(temp, param.buildARM(allocaNode)));
+            
+            param.setARMRegister(temp);
+         }
+         
+         
+         allocaNode.jump(this.nodes.get(0).armNode());
+         
+         armNodes.add(0, allocaNode);
+      }
+      
+      
       /* Second pass to put instructions (and links) into nodes */
       for (LLVMCFGNode node : this.nodes)
          armNodes.add(node.buildARM(opts));
+      
+      
+      /* Move return value into r0 */
+      if (!opts.stack)
+      {
+         LLVMCFGNode lastLLVMNode = nodes.get(nodes.size() - 1);
+         ARMCFGNode lastARMNode = armNodes.get(armNodes.size() - 1);
+         
+         lastARMNode
+               .instructions
+               .add(new ARMMov(
+                     R0,
+                     lastLLVMNode
+                           .readVariable(this.returnValue)
+                           .buildARM(lastARMNode)));
+      }
       
       
       ARMFunction armFunction = new ARMFunction(this.name, armNodes,
