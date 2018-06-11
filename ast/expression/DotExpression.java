@@ -21,7 +21,7 @@ import llvm.type.LLVMStructType;
 
 import llvm.value.operand.LLVMOperand;
 
-import llvm.value.operand.register.LLVMVirtual;
+import llvm.value.operand.register.LLVMRegister;
 
 
 public class DotExpression extends Expression
@@ -80,7 +80,7 @@ public class DotExpression extends Expression
              * This cast will work because only virtual registers can be used
              * in a dot expression AND have type LLVMStructType.
              */
-            (LLVMVirtual)leftValue,
+            (LLVMRegister)leftValue,
             field.type.llvmType(),
             field.index);
       
