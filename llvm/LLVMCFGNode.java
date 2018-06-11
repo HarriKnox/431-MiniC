@@ -101,8 +101,9 @@ public class LLVMCFGNode
          parent.recursivisit(nodes, opts);
       
       
-      /* Visit this node */
-      this.visit(nodes, opts);
+      /* Visit this node, but not if we've already visited it in a loop */
+      if (!nodes.contains(this))
+         this.visit(nodes, opts);
       
       
       /* Visit the loopback after visiting this node */
@@ -113,11 +114,6 @@ public class LLVMCFGNode
    
    private void visit(List<LLVMCFGNode> nodes, Options opts)
    {
-      /* Don't revisit if we already visited this node in a loop */
-      if (nodes.contains(this))
-         return;
-      
-      
       /*
        * Don't set the node's ID if
        *  - the node is the first node, and
