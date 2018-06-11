@@ -25,6 +25,7 @@ import llvm.declaration.LLVMFunction;
 import llvm.type.LLVMType;
 
 import llvm.value.operand.register.LLVMParameter;
+import llvm.value.operand.register.LLVMPhi;
 
 import llvm.value.variable.LLVMLocal;
 
@@ -166,6 +167,11 @@ public class Function extends TokenedElement
          
          last.jump(exit);
       }
+      
+      
+      /* Make sure the exit node knows where its return value comes from */
+      if (!(this.type instanceof VoidType))
+         exit.readVariable(this.returnValue.llvmLocal());
    }
    
    
