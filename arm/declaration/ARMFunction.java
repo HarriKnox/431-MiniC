@@ -16,6 +16,7 @@ import arm.ARMInterferenceEdge;
 import arm.value.operand.ARMAddress;
 import arm.value.operand.ARMRegister;
 
+import common.Options;
 import common.Printer;
 
 
@@ -52,7 +53,7 @@ public class ARMFunction
    }
    
    
-   public void writeARM(Printer printr)
+   public void writeARM(Printer printr, Options opts)
    {
       int stackSize = ((this.highestRegisterUsed > 10)
             ? (this.localCount + this.highestRegisterUsed - 8)

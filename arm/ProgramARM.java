@@ -37,7 +37,7 @@ public class ProgramARM
       printr.println(".global __aeabi_idiv").println().println();
       
       
-      this.functions.writeARM(printr);
+      this.functions.writeARM(printr, opts);
       
       
       printr.println()

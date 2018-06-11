@@ -3,6 +3,7 @@ package arm.declaration;
 
 import java.util.List;
 
+import common.Options;
 import common.Printer;
 
 
@@ -17,9 +18,9 @@ public class ARMFunctions
    }
    
    
-   public void writeARM(Printer printr)
+   public void writeARM(Printer printr, Options opts)
    {
       for (ARMFunction function : this.functions)
-         function.writeARM(printr);
+         function.writeARM(printr, opts);
    }
 }
