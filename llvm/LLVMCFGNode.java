@@ -258,7 +258,8 @@ public class LLVMCFGNode
          
          if ((node.instructions.isEmpty())
                && (node.link instanceof LLVMJump)
-               && !((LLVMJump)node.link).loop)
+               && !((LLVMJump)node.link).loop
+               && node.currentDefs.isEmpty())
          {
             if (node.predecessors.isEmpty())
                ((LLVMJump)node.link).target.replacePredecessor(node, null);
