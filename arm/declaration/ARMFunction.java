@@ -55,9 +55,16 @@ public class ARMFunction
    
    public void writeARM(Printer printr, Options opts)
    {
-      int stackSize = ((this.highestRegisterUsed > 10)
-            ? (this.localCount + this.highestRegisterUsed - 8)
-            : this.localCount) * 4;
+      /* If register based, don't use stack */
+      int stackSize = opts.stack ? this.localCount : 0;
+      
+      /* Add spill space */
+      stackSize += (this.highestRegisterUsed > 10)
+            ? (this.highestRegisterUsed - 8)
+            : 0;
+      
+      stackSize *= 4;
+      
       
       printr.println(".align 2")
       
@@ -74,7 +81,7 @@ public class ARMFunction
       
       
       /* Allocate stack for locals (if needed) */
-      if (this.localCount > 0)
+      if (stackSize > 0)
          printr.print("   sub sp, #").println(stackSize);
       
       
