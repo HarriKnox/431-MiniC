@@ -24,6 +24,9 @@ public class LLVMParameter extends LLVMRegister
    public final LLVMLocal llvmLocal;
    
    
+   private ARMRegister armReg = null;
+   
+   
    public LLVMParameter(String function, String identifier,
          LLVMType type, int index, LLVMLocal llvmLocal)
    {
@@ -54,6 +57,10 @@ public class LLVMParameter extends LLVMRegister
    @Override
    public ARMRegister regBuildARM(ARMCFGNode node)
    {
+      if (this.armReg != null)
+         return armReg;
+      
+      
       if (this.index <= 3)
          return ARMRegister.getReal(this.index);
       
@@ -62,6 +69,13 @@ public class LLVMParameter extends LLVMRegister
       
       node.add(load);
       
-      return load.target;
+      return this.armReg = load.target;
+   }
+   
+   
+   public void setARMRegister(ARMRegister reg)
+   {
+      if (this.armReg == null)
+         this.armReg = reg;
    }
 }
