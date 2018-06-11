@@ -181,7 +181,37 @@ public class Function extends TokenedElement
       
       exit.recursivisit(nodes, opts);
       
+      resolveAllPhis(nodes);
       
       return nodes;
+   }
+   
+   
+   private static void resolveAllPhis(List<LLVMCFGNode> nodes)
+   {
+      int incompleteCount;
+      
+      do
+      {
+         incompleteCount = 0;
+         
+         for (LLVMCFGNode node : nodes)
+         {
+            int ic = node.incompletePhis.size();
+            
+            if (ic > 0)
+            {
+               incompleteCount += ic;
+               
+               for (LLVMPhi phi : node.incompletePhis)
+               {
+                  node.addPhiOperands(phi);
+               }
+               
+               node.incompletePhis.clear();
+            }
+         }
+      
+      } while (incompleteCount != 0);
    }
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -41,6 +42,7 @@ public class LLVMCFGNode
    private final Map<LLVMLocal, LLVMOperand> currentDefs = new HashMap<>();
    public boolean sealed = true; /* Most nodes will be sealed */
    private final List<LLVMPhi> phis = new LinkedList<>();
+   public final Set<LLVMPhi> incompletePhis = new LinkedHashSet<>();
    
    
    private ARMCFGNode armNode = null;
@@ -143,8 +145,10 @@ public class LLVMCFGNode
          this.setUID();
       
       
-      for (LLVMPhi phi : this.phis)
+      for (LLVMPhi phi : this.incompletePhis)
          this.addPhiOperands(phi);
+      
+      this.incompletePhis.clear();
       
       
       Iterator<LLVMPhi> phiterator = this.phis.iterator();
@@ -450,12 +454,13 @@ public class LLVMCFGNode
       LLVMPhi phi = new LLVMPhi(variable);
       
       this.phis.add(phi);
+      this.incompletePhis.add(phi);
       
       return phi;
    }
    
    
-   private void addPhiOperands(LLVMPhi phi)
+   public void addPhiOperands(LLVMPhi phi)
    {
       LLVMLocal variable = phi.variable;
       
