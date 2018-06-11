@@ -120,13 +120,25 @@ public class LLVMCFGNode
        *  - the node has no predecessors (including loopback), and
        *  - either:
        *     - we're using stack-based variable storage
-       *     - the node has zero or one successor
+       *     - the node has zero successors
+       *     - the node has one successor that has other predecessors
        *
        * If any of those fail, set the ID. Setting the ID is used for printing
        * the label to the node in LLVM.
+       *
+       * If nodes is empty, then this is the first node because we would have
+       * visited the predecessors and added them to the list before visiting
+       * this.
+       *
+       * When checking that the successor has other predecessors, we establish
+       * that this node is the first node, so there won't be any other
+       * predecessors aside from a loopback predecessor.
        */
-      if (!nodes.isEmpty() || this.loopback != null
-            || (!opts.stack && (this.link instanceof LLVMBranch)))
+      if (!(nodes.isEmpty() && (this.loopback == null)
+            && (opts.stack
+                  || (this.link == null)
+                  || ((this.link instanceof LLVMJump)
+                        && ((LLVMJump)this.link).target.loopback != null))))
          this.setUID();
       
       
