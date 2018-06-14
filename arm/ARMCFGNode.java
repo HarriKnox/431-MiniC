@@ -112,6 +112,15 @@ public class ARMCFGNode
          for (ARMRegister target : instruction.getTargets())
             this.killSet.add(target);
       }
+      
+      
+      if (this.link instanceof ARMBranch)
+      {
+         ARMRegister guard = ((ARMBranch)this.link).guard;
+         
+         if (!this.killSet.contains(guard))
+            this.genSet.add(guard);
+      }
    }
    
    
