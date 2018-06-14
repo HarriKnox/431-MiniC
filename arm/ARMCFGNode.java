@@ -173,10 +173,6 @@ public class ARMCFGNode
    
    public List<ARMInterferenceEdge> getInterferences()
    {
-      /* Reverse instructions to visit backwards */
-      List<ARMInstruction> revInstructions = this.reverseInstructionList();
-      
-      
       /* Create a copy of the live-out set */
       Set<ARMRegister> liveSetCopy = new LinkedHashSet<>();
       
@@ -188,7 +184,7 @@ public class ARMCFGNode
       List<ARMInterferenceEdge> interferences = new LinkedList<>();
       
       
-      for (ARMInstruction instruction : revInstructions)
+      for (ARMInstruction instruction : this.reverseInstructionList())
       {
          List<ARMRegister> targets = instruction.getTargets();
          List<ARMRegister> sources = instruction.getSources();

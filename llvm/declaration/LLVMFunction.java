@@ -192,7 +192,7 @@ public class LLVMFunction
          
          allocaNode.jump(this.nodes.get(0).armNode());
          
-         armNodes.add(0, allocaNode);
+         armNodes.add(allocaNode);
       }
       
       
