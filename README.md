@@ -2,6 +2,7 @@
 
 ## TL;DR
 
+    tar xf minic-src.tar.gz
     cd ./src
 	make
 	./minic $FILE.mini
@@ -10,8 +11,9 @@
 
 ## Building
 
-To build this project, cd into the src directory and run `make`. This will
-compile the compiler and put the class files in an output folder.
+To build this project, extract the tar file, cd into the src directory and run
+`make`. This will compile the compiler and put the class files in an output
+folder.
 
 
 ## Executing
