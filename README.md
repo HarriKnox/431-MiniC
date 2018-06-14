@@ -4,9 +4,9 @@
 
     tar xf minic-src.tar.gz
     cd ./src
-	make
-	./minic $FILE.mini
-	gcc $FILE.s
+    make
+    ./minic $FILE.mini
+    gcc $FILE.s
 
 
 ## Building
